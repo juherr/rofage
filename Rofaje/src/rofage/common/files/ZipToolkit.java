@@ -9,10 +9,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Gives additional functionnalities for zip files
@@ -116,13 +118,62 @@ public abstract class ZipToolkit {
 			e.printStackTrace();
 		} finally {
 			try {
-				dest.flush();
-				dest.close();
-				zis.close();
+				if (dest!=null)	{
+					dest.flush();
+					dest.close();
+				}
+				if (zis!=null) {
+					zis.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		return listExtractedPaths;
+	}
+	
+	/**
+	 * Compress files into a zip file located in destPath
+	 * @param listFiles
+	 * @param destPath
+	 */
+	public static void compress (List<String> listPaths, String destPath) {
+		byte data[] = new byte[BUFFER];
+		
+		ZipOutputStream out = null;
+		try {
+			FileOutputStream dest = new FileOutputStream (destPath);
+			BufferedOutputStream buff = new BufferedOutputStream(dest);
+			out = new ZipOutputStream(buff);
+			out.setMethod(ZipOutputStream.DEFLATED);
+			out.setLevel(9);
+			Iterator<String> iterPaths = listPaths.iterator();
+			while (iterPaths.hasNext()) {
+				String path = iterPaths.next();
+				File file = new File(path);
+				FileInputStream fi = new FileInputStream(file);
+				BufferedInputStream buffi = new BufferedInputStream(fi, BUFFER);
+				ZipEntry entry = new ZipEntry(file.getName());
+				out.putNextEntry(entry);
+				int count;
+				while((count = buffi.read(data, 0, BUFFER)) != -1) {
+				         out.write(data, 0, count);
+				}
+				out.closeEntry();
+			    buffi.close();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

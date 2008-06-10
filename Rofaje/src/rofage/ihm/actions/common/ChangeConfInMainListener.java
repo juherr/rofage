@@ -26,6 +26,14 @@ public class ChangeConfInMainListener implements ItemListener {
 			
 			MainSwingWorker mainSW = new MainSwingWorker(engine);
 			mainSW.execute();
+		} else if (e.getStateChange() == ItemEvent.DESELECTED) {
+			// It is possible we removed a conf
+			// So we have to check if it was the last one to clean up the ui
+			if (engine.getGlobalConf().getMapDatConfigs().size()==0) {
+				engine.getGlobalConf().setSelectedConf(null);
+				MainSwingWorker mainSW = new MainSwingWorker(engine);
+				mainSW.execute();
+			}
 		}
 	}
 

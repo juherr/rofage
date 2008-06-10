@@ -18,6 +18,7 @@ public class Configuration implements Serializable {
 	private String titlePattern = DEFAULT_TITLEPATTERN;
 	private boolean moveUnknownRoms = false;
 	private boolean updateAtStartup = false;
+	private boolean renameInside = false;
 		
 	// Internal configuration data retrieved from the datFile
 	private String confName; // Name of the dat 
@@ -134,6 +135,12 @@ public class Configuration implements Serializable {
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public boolean isRenameInside() {
+		return renameInside;
+	}
+	public void setRenameInside(boolean renameInside) {
+		this.renameInside = renameInside;
 	}
 	
 }

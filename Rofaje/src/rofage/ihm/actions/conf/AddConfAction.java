@@ -59,10 +59,12 @@ public class AddConfAction extends AbstractAction {
 				// We also add this datas in the Jtable of the main window
 				//((GameListTableModel) engine.getMainWindow().getJTable().getModel()).setGameCollectionAndDatas(gameCollection);
 				
-				// We add the additional panes if necessary
-				if (!engine.getConfWindow().isPanesCreated()) {
-					engine.getConfWindow().addAdditionalPanes();
-				}
+				// We show the additional panes (if necessary)
+				engine.getConfWindow().getJTabbedPane().setVisible(true);
+				engine.getConfWindow().getPanelGlobalButtons().setVisible(true);
+				
+				// We also have to show the remove button in any cases
+				engine.getConfWindow().getButtonRemoveConf().setVisible(true);
 				
 				// We select the newly created conf in the combo box
 				engine.getConfWindow().getComboConf().setSelectedItem(datFileName);

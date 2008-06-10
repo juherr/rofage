@@ -25,8 +25,14 @@ public class MainSwingWorker extends SwingWorker<Integer, String> { // <Return t
 	protected Integer doInBackground() throws Exception {
 		GameListTableModel gameListTableModel = (GameListTableModel) engine.getMainWindow().getJTable().getModel();
 		
-		gameListTableModel.setTitlePattern(engine.getGlobalConf().getSelectedConf().getTitlePattern());
-		gameListTableModel.setGameCollectionAndDatas(engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()));
+		String titlePattern = "";
+		String confName = "";
+		if (engine.getGlobalConf().getSelectedConf()!=null) {
+			titlePattern = engine.getGlobalConf().getSelectedConf().getTitlePattern();
+			confName = engine.getGlobalConf().getSelectedConf().getConfName();
+		}
+		gameListTableModel.setTitlePattern(titlePattern);
+		gameListTableModel.setGameCollectionAndDatas(engine.getGameDB().getGameCollections().get(confName));
 		
 		engine.getMainWindow().getJTable().updateUI();
 		return 0;
