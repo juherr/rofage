@@ -25,6 +25,25 @@ public abstract class FileToolkit {
 		}	
 	}
 	
+	/**
+	 * delete a directory and all its contents
+	 * @param directory File
+	 */
+	public static void deleteDirectory (File directory) {
+        if (directory.exists() && directory.isDirectory()) { 
+			File[] files = directory.listFiles(); 
+			for(int i=0; i<files.length; i++) { 
+				if(files[i].isDirectory()) { 
+					deleteDirectory(files[i]); 
+				} 
+				else { 
+					files[i].delete(); 
+				}
+			}
+			directory.delete();
+        }
+	}
+	
 	public static String getCRC32(String filepath) {
 
         try {
@@ -92,7 +111,7 @@ public abstract class FileToolkit {
                 if( !result ) {
 	                // We try to copy
 	                result = true;
-	                result &= copy(source.getName(),destination.getName());
+	                result &= copy(source.getAbsolutePath(),destination.getAbsolutePath());
 	                if(result) result &= source.delete();
                 }
         } else {

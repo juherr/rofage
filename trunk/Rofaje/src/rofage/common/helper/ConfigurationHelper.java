@@ -20,6 +20,7 @@ public abstract class ConfigurationHelper {
 		conf.setRomFolderMove(confWindow.getFieldUnknownRomFolder().getText());
 		conf.setMoveUnknownRoms(confWindow.getCBmoveUnknownRoms().isSelected());
 		conf.setUpdateAtStartup(confWindow.getCBAutoUpdate().isSelected());
+		conf.setRenameInside(confWindow.getCBRenameInside().isSelected());
 		if (confWindow.getFieldTitlePattern().getText().trim().isEmpty()) {
 			confWindow.getFieldTitlePattern().setText(Configuration.DEFAULT_TITLEPATTERN);
 		} else {

@@ -26,6 +26,7 @@ import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.conf.AddConfAction;
 import rofage.ihm.actions.conf.ChangeConfInConfListener;
 import rofage.ihm.actions.conf.OpenFileChooserAction;
+import rofage.ihm.actions.conf.RemoveConfAction;
 import rofage.ihm.actions.conf.SaveConfigurationAction;
 
 public class ConfWindow extends JFrame {
@@ -49,6 +50,7 @@ public class ConfWindow extends JFrame {
 	private JLabel labelUnknownRomFolder = null;
 	private JLabel labelAutoUpdate = null;
 	private JLabel labelTitlePattern = null;
+	private JLabel labelRenameInside = null;
 	
 	private JTextField fieldRomFolder = null;
 	private JTextField fieldUnknownRomFolder = null;
@@ -59,9 +61,11 @@ public class ConfWindow extends JFrame {
 	private JButton buttonSave = null;
 	private JButton buttonCancel = null;
 	private JButton buttonAddConf = null;
+	private JButton buttonRemoveConf = null;
 	
 	private JCheckBox CBmoveUnknownRoms = null;
 	private JCheckBox CBAutoUpdate = null;
+	private JCheckBox CBRenameInside = null;
 	
 	private JTextPane textPaneTitlePattern = null;
 	
@@ -70,7 +74,6 @@ public class ConfWindow extends JFrame {
 	private FileChooserFilter xmlFilter = null;
 	
 	private Engine engine = null;
-	private boolean panesCreated = false;
 
 	/**
 	 * This is the default constructor
@@ -107,37 +110,30 @@ public class ConfWindow extends JFrame {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new BorderLayout());
 			jContentPane.add(getPanelGlobalConf(), BorderLayout.NORTH);
+			jContentPane.add(getJTabbedPane(), BorderLayout.CENTER);
+			jContentPane.add(getPanelGlobalButtons(), BorderLayout.SOUTH);
 			if (engine.getGlobalConf().getMapDatConfigs().size()>0) {
 				// We add aditionnal panes only when at least one DAT has been addded
-				jContentPane.add(getJTabbedPane(), BorderLayout.CENTER);
-				jContentPane.add(getPanelGlobalButtons(), BorderLayout.SOUTH);
-				panesCreated = true;
+				getJTabbedPane().setVisible(true);
+				getPanelGlobalButtons().setVisible(true);
 			}
 		}
 		return jContentPane;
 	}
 	
 	/**
-	 * Adds the panes that has not been created if the global configuration didn't exist.
-	 *
-	 */
-	public void addAdditionalPanes () {
-		jContentPane.add(getJTabbedPane(), BorderLayout.CENTER);
-		jContentPane.add(getPanelGlobalButtons(), BorderLayout.SOUTH);
-	}
-
-	/**
 	 * This method initializes jTabbedPane	
 	 * 	
 	 * @return javax.swing.JTabbedPane	
 	 */
-	private JTabbedPane getJTabbedPane() {
+	public JTabbedPane getJTabbedPane() {
 		if (jTabbedPane == null) {
 			jTabbedPane = new JTabbedPane();
 			jTabbedPane.addTab("Dossiers", getPanelFolder());
 			jTabbedPane.addTab("Titre des roms", getPanelTitlePattern());
 			jTabbedPane.addTab("Mise à jour", getPanelAutoUpdate());
 			jTabbedPane.setSize(500, 300);
+			jTabbedPane.setVisible(false);
 		}
 		return jTabbedPane;
 	}
@@ -176,22 +172,26 @@ public class ConfWindow extends JFrame {
 			panelTitlePattern = new JPanel();
 			Box vBox = Box.createVerticalBox();
 			Box hBox = Box.createHorizontalBox();
+			Box hBox2= Box.createHorizontalBox();
 			hBox.add(getLabelTitlePattern());
 			hBox.add(getFieldTitlePattern());
+			hBox2.add(getCBRenameInside());
+			hBox2.add(getLabelRenameInside());
 			vBox.add(hBox);
 			vBox.add(getTextPaneTitlePattern());
+			vBox.add(hBox2);
 			panelTitlePattern.add(vBox);
 			panelTitlePattern.setVisible(true);
 		}
 		return panelTitlePattern;
 	}
 	
-	private JPanel getPanelGlobalButtons () {
+	public JPanel getPanelGlobalButtons () {
 		if (panelGlobalButtons==null) {
 			panelGlobalButtons = new JPanel();
 			panelGlobalButtons.add(getButtonCancel());
 			panelGlobalButtons.add(getButtonSave());
-			panelGlobalButtons.setVisible(true);
+			panelGlobalButtons.setVisible(false);
 		}
 		return panelGlobalButtons;
 	}
@@ -201,6 +201,10 @@ public class ConfWindow extends JFrame {
 			panelGlobalConf = new JPanel();
 			panelGlobalConf.add(getComboConf());
 			panelGlobalConf.add(getButtonAddConf());
+			panelGlobalConf.add(getButtonRemoveConf());
+			if (engine.getGlobalConf().getMapDatConfigs().size()==0) {
+				getButtonRemoveConf().setVisible(false);
+			}
 			panelGlobalConf.setVisible(true);
 		}
 		return panelGlobalConf;
@@ -271,6 +275,15 @@ public class ConfWindow extends JFrame {
 		return labelTitlePattern;
 	}
 	
+	private JLabel getLabelRenameInside () {
+		if (labelRenameInside==null) {
+			labelRenameInside = new JLabel();
+			labelRenameInside.setText("Renommer à l'intérieur des archives");
+			labelRenameInside.setVisible(true);
+		}
+		return labelRenameInside;
+	}
+	
 	public JTextField getFieldRomFolder() {
 		if (fieldRomFolder==null) {
 			fieldRomFolder = new JTextField();
@@ -278,7 +291,7 @@ public class ConfWindow extends JFrame {
 			fieldRomFolder.setSize(200, 20);
 			fieldRomFolder.setPreferredSize(new Dimension(200,20));
 			
-			if (engine.getGlobalConf().getSelectedConf().getRomFolder()!=null 
+			if (engine.getGlobalConf().getSelectedConf()!=null 
 					&& !engine.getGlobalConf().getSelectedConf().getRomFolder().isEmpty()) {
 				fieldRomFolder.setText(engine.getGlobalConf().getSelectedConf().getRomFolder());
 			}
@@ -292,7 +305,7 @@ public class ConfWindow extends JFrame {
 			fieldUnknownRomFolder.setVisible(true);
 			fieldUnknownRomFolder.setSize(200,20);
 			fieldUnknownRomFolder.setPreferredSize(new Dimension(200,20));
-			if (engine.getGlobalConf().getSelectedConf().getRomFolderMove()!=null 
+			if (engine.getGlobalConf().getSelectedConf()!=null 
 					&& !engine.getGlobalConf().getSelectedConf().getRomFolderMove().isEmpty()) {
 				fieldUnknownRomFolder.setText(engine.getGlobalConf().getSelectedConf().getRomFolderMove());
 			}
@@ -306,7 +319,7 @@ public class ConfWindow extends JFrame {
 			fieldTitlePattern.setVisible(true);
 			fieldTitlePattern.setSize(200,20);
 			fieldTitlePattern.setPreferredSize(new Dimension(200,20));
-			if (engine.getGlobalConf().getSelectedConf().getTitlePattern()!=null 
+			if (engine.getGlobalConf().getSelectedConf()!=null 
 					&& !engine.getGlobalConf().getSelectedConf().getTitlePattern().isEmpty()) {
 				fieldTitlePattern.setText(engine.getGlobalConf().getSelectedConf().getTitlePattern());
 			}
@@ -364,11 +377,23 @@ public class ConfWindow extends JFrame {
 		return buttonAddConf;
 	}
 	
+	public JButton getButtonRemoveConf () {
+		if (buttonRemoveConf==null) {
+			buttonRemoveConf = new JButton();
+			buttonRemoveConf.addActionListener(new RemoveConfAction(engine));
+			buttonRemoveConf.setText("Supprimer");
+			buttonRemoveConf.setVisible(true);
+		}
+		return buttonRemoveConf;
+	}
+	
 	public JCheckBox getCBmoveUnknownRoms() {
 		if (CBmoveUnknownRoms==null) {
 			CBmoveUnknownRoms = new JCheckBox();
 			CBmoveUnknownRoms.setVisible(true);
-			CBmoveUnknownRoms.setSelected(engine.getGlobalConf().getSelectedConf().isMoveUnknownRoms());			
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBmoveUnknownRoms.setSelected(engine.getGlobalConf().getSelectedConf().isMoveUnknownRoms());			
+			}
 		}
 		return CBmoveUnknownRoms;
 	}
@@ -376,10 +401,23 @@ public class ConfWindow extends JFrame {
 	public JCheckBox getCBAutoUpdate() {
 		if (CBAutoUpdate==null) {
 			CBAutoUpdate = new JCheckBox();
-			CBAutoUpdate.setSelected(engine.getGlobalConf().getSelectedConf().isUpdateAtStartup());
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBAutoUpdate.setSelected(engine.getGlobalConf().getSelectedConf().isUpdateAtStartup());	
+			}
 			CBAutoUpdate.setVisible(true);
 		}
 		return CBAutoUpdate;
+	}
+	
+	public JCheckBox getCBRenameInside () {
+		if (CBRenameInside==null) {
+			CBRenameInside = new JCheckBox();
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBRenameInside.setSelected(engine.getGlobalConf().getSelectedConf().isRenameInside());	
+			}
+			CBRenameInside.setVisible(true);
+		}
+		return CBRenameInside;
 	}
 	
 	private JTextPane getTextPaneTitlePattern () {
@@ -406,13 +444,5 @@ public class ConfWindow extends JFrame {
 			comboConf.setVisible(true);
 		}
 		return comboConf;
-	}
-
-	public boolean isPanesCreated() {
-		return panesCreated;
-	}
-
-	public void setPanesCreated(boolean panesCreated) {
-		this.panesCreated = panesCreated;
 	}
 }
