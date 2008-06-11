@@ -110,7 +110,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 		File imageFile = new File(folderPath+game.getImageNb()+suffixe);
 		if (!imageFile.exists()) {
 			// If the file does not exist we download it
-			String urlToImage = URLToolkit.constructImageURL(conf.getImageUrl(), game, true);
+			String urlToImage = URLToolkit.constructImageURL(conf.getImageUrl(), game, firstImage);
 			downloadFile(urlToImage, false, folderPath+game.getReleaseNb()+suffixe);
 		} else {
 			// We check the physical CRC32 against the one contained in the dat file
@@ -122,7 +122,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 				crc32 = game.getImage2crc();
 			}
 			if (!PhysicalCRC32.equalsIgnoreCase(crc32)) {
-				String urlToImage = URLToolkit.constructImageURL(conf.getImageUrl(), game, false);
+				String urlToImage = URLToolkit.constructImageURL(conf.getImageUrl(), game, firstImage);
 				downloadFile(urlToImage, false, folderPath+game.getReleaseNb()+suffixe);
 			}
 		}
