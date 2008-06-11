@@ -27,6 +27,7 @@ import rofage.common.object.Configuration;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.ShowAboutAction;
+import rofage.ihm.actions.common.ShowCleanAction;
 import rofage.ihm.actions.common.ShowConfigurationAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
@@ -65,6 +66,7 @@ public class MainWindow extends JFrame {
 	private JMenuItem menuItemConf = null;
 	private JMenuItem menuItemScan = null;
 	private JMenuItem menuItemRename = null;
+	private JMenuItem menuItemClean = null;
 	private JMenu menuConf = null;
 	
 	private ButtonGroup languageGroup = null;
@@ -171,6 +173,7 @@ public class MainWindow extends JFrame {
 			menuConf.add(getMenuItemConf());
 			menuConf.add(getMenuItemScan());
 			menuConf.add(getMenuItemRename());
+			menuConf.add(getMenuItemClean());
 			menuConf.setVisible(true);
 		}
 		return menuConf;
@@ -333,6 +336,16 @@ public class MainWindow extends JFrame {
 			menuItemRename.setVisible(true);
 		}
 		return menuItemRename;
+	}
+	
+	private JMenuItem getMenuItemClean() {
+		if (menuItemClean==null) {
+			menuItemClean = new JMenuItem();
+			menuItemClean.addActionListener(new ShowCleanAction(engine));
+			menuItemClean.setText("Nettoyer");
+			menuItemClean.setVisible(true);
+		}
+		return menuItemClean;
 	}
 	
 	private JRadioButtonMenuItem getLangFR() {

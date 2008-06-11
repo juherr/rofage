@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import rofage.common.clean.CleanSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
@@ -14,6 +15,7 @@ import rofage.common.scan.ScanSwingWorker;
 import rofage.common.update.UpdateSwingWorker;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
+import rofage.ihm.clean.CleanWindow;
 import rofage.ihm.conf.ConfWindow;
 import rofage.ihm.rename.RenameWindow;
 import rofage.ihm.scan.ScanWindow;
@@ -25,6 +27,7 @@ public class Engine {
 	private ScanWindow scanWindow = null;
 	private MainWindow mainWindow = null;
 	private RenameWindow renameWindow = null;
+	private CleanWindow cleanWindow = null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
@@ -32,6 +35,7 @@ public class Engine {
 	private UpdateSwingWorker updateSW = null;
 	private ScanSwingWorker scanSW = null;
 	private RenameSwingWorker renameSW = null;
+	private CleanSwingWorker cleanSW = null;
 	
 	private boolean confSaved = false;
 	
@@ -171,5 +175,24 @@ public class Engine {
 
 	public void setRenameSW(RenameSwingWorker renameSW) {
 		this.renameSW = renameSW;
+	}
+
+	public CleanWindow getCleanWindow() {
+		if (cleanWindow==null) {
+			this.cleanWindow = new CleanWindow(this);
+		}
+		return cleanWindow;
+	}
+
+	public void setCleanWindow(CleanWindow cleanWindow) {
+		this.cleanWindow = cleanWindow;
+	}
+
+	public CleanSwingWorker getCleanSW() {
+		return cleanSW;
+	}
+
+	public void setCleanSW(CleanSwingWorker cleanSW) {
+		this.cleanSW = cleanSW;
 	}
 }

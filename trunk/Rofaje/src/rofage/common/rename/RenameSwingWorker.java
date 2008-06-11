@@ -134,6 +134,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 					gameFile.delete();
 				}
 				
+				game.setContainerPath(destPath);
 				game.setGoodName(true);
 				publish (oldFileName+" => "+ newFileName);
 				nbFilesRenamed++;
