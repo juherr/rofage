@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents the global configuration of the app
@@ -16,6 +17,10 @@ public class GlobalConfiguration implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1483214775475585969L;
+	public final static List<String> allowedCompressedExtensions = new ArrayList<String>();
+	public final static String GLOBAL_CONFIG_FILE_NAME = "globalConf";
+	
+	private Locale selectedLocale = Locale.getDefault();
 	/**
 	 * mapDatConfigs is a map of (datName, Configuration)
 	 * @see Configuration
@@ -23,8 +28,6 @@ public class GlobalConfiguration implements Serializable {
 	private HashMap<String, Configuration> mapDatConfigs = null;
 	private Configuration selectedConf = null;
 	
-	public final static List<String> allowedCompressedExtensions = new ArrayList<String>();
-	public final static String GLOBAL_CONFIG_FILE_NAME = "globalConf";
 	
 	static {
 		allowedCompressedExtensions.add(".zip");
@@ -44,6 +47,14 @@ public class GlobalConfiguration implements Serializable {
 
 	public void setSelectedConf(Configuration selectedConf) {
 		this.selectedConf = selectedConf;
+	}
+
+	public Locale getSelectedLocale() {
+		return selectedLocale;
+	}
+
+	public void setSelectedLocale(Locale selectedLocale) {
+		this.selectedLocale = selectedLocale;
 	}
 
 }

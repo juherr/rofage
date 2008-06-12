@@ -15,6 +15,8 @@ import java.util.zip.CheckedInputStream;
 
 import javax.swing.JOptionPane;
 
+import rofage.ihm.Messages;
+
 public abstract class FileToolkit {
 	
 	public static void checkAndCreateFolder (String path) {

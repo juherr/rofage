@@ -6,8 +6,9 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
 import rofage.ihm.MainWindow;
+import rofage.ihm.Messages;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class ShowAboutAction extends AbstractAction {
 
 	MainWindow mainWindow = null;
@@ -16,7 +17,7 @@ public class ShowAboutAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(mainWindow, "Rofage v0.01\nDéveloppé par Pierre Chastagner\n\nMerci à t4ils pour son soutien :)\n\nVous pouvez envoyer vos questions ou vos bugs à schyzo99@hotmail.com");
+		JOptionPane.showMessageDialog(mainWindow, Messages.getString("ShowAboutAction.1")); //$NON-NLS-1$
 	}
 
 }

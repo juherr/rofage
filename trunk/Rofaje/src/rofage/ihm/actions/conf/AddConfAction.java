@@ -12,8 +12,9 @@ import rofage.common.helper.ConfigurationHelper;
 import rofage.common.helper.GameDBHelper;
 import rofage.common.object.Configuration;
 import rofage.common.parser.DatParser;
+import rofage.ihm.Messages;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class AddConfAction extends AbstractAction {
 
 	private Engine engine;
@@ -25,7 +26,7 @@ public class AddConfAction extends AbstractAction {
 	public void actionPerformed(ActionEvent arg0) {
 		// Before we try to load a new file, we have to save the current options
 		if (engine.getGlobalConf().getSelectedConf()!=null) {
-			int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), "Voulez-vous sauvegarder vos paramètres pour ce DAT avant d'en rajouter un ?", "Sauvegarde des paramètres", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), Messages.getString("AddConfAction.1"), Messages.getString("AddConfAction.2"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			if (res==JOptionPane.YES_OPTION) {
 				// We have to save the configuration for this dat
 				ConfigurationHelper.saveCurrentConfigurationInEngine(engine);
@@ -43,7 +44,7 @@ public class AddConfAction extends AbstractAction {
 			String datFileName = datParser.getDatName();
 			
 			if (engine.getGlobalConf().getMapDatConfigs().containsKey(datFileName)) {
-				JOptionPane.showMessageDialog(engine.getConfWindow(), "Ce fichier dat est déjà configuré.\n\nVous pouvez modifier sa configuration directement.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("AddConfAction.4"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				// We update the selected conf of the engine
 				Configuration newConfig = ConfigurationHelper.createConfFromDatParser(engine, datParser);

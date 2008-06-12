@@ -9,8 +9,9 @@ import javax.swing.JOptionPane;
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
+import rofage.ihm.Messages;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class RemoveConfAction extends AbstractAction {
 
 	private Engine engine;
@@ -24,7 +25,7 @@ public class RemoveConfAction extends AbstractAction {
 		String confName = (String)engine.getConfWindow().getComboConf().getSelectedItem();
 		
 		// We ask if we delete the image folder
-		int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), "Voulez-vous effacer les images liées ?", "Suppression", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), Messages.getString("RemoveConfAction.1"), Messages.getString("RemoveConfAction.2"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 		
 		if (res==JOptionPane.YES_OPTION) {
 			// We have to delete the folder

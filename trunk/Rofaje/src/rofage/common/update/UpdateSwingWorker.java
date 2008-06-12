@@ -27,6 +27,7 @@ import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.parser.DatParser;
 import rofage.common.url.URLToolkit;
+import rofage.ihm.Messages;
 
 public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return type, Type published>
 	private Engine engine;
@@ -46,7 +47,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				if("progress".equals(evt.getPropertyName())) {
+				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
 					getEngine().getUpdateWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
@@ -79,7 +80,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 	private void updateImages(Configuration conf) {
 		// First of all we check whether the image folder exists
 		setProgress(0);
-		publish ("Analyse des images");
+		publish (Messages.getString("UpdateSwingWorker.1")); //$NON-NLS-1$
 		FileToolkit.checkAndCreateFolder(Consts.HOME_FOLDER+File.separator+conf.getImageFolder());
 		
 		// Now for each game in the game collection we check if the image files exist
@@ -103,9 +104,9 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 		String suffixe;
 		String crc32;
 		if (firstImage) {
-			suffixe = "a.png";
+			suffixe = "a.png"; //$NON-NLS-1$
 		} else {
-			suffixe = "b.png";
+			suffixe = "b.png"; //$NON-NLS-1$
 		}
 		File imageFile = new File(folderPath+game.getImageNb()+suffixe);
 		if (!imageFile.exists()) {
@@ -138,17 +139,17 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 		
 		// Is this a newer version than the one we have ?
 		if (latestVersionNb>conf.getVersion()) {
-			publish ("Une nouvelle version du DAT "+conf.getConfName()+" est disponible (version "+latestVersionNb+")");
-			publish ("Tentative de téléchargement du DAT");
+			publish (Messages.getString("UpdateSwingWorker.4")+conf.getConfName()+Messages.getString("UpdateSwingWorker.5")+latestVersionNb+")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			publish (Messages.getString("UpdateSwingWorker.7")); //$NON-NLS-1$
 			downloadFile(conf.getNewDatUrl(), false, conf.getFileName());
 			
 			// The file should now be uncompressed
 			List<String> extractedFiles = ZipToolkit.uncompressFile(Consts.HOME_FOLDER+File.separator+conf.getFileName(), null);
 			if (extractedFiles.size()>1) {
-				publish ("Le fichier téléchargé contenait plus d'un fichier... Erreur fatale ! :(");
+				publish (Messages.getString("UpdateSwingWorker.8")); //$NON-NLS-1$
 				throw new RuntimeException();
 			}
-			publish("Nouvelle version du DAT téléchargée");
+			publish(Messages.getString("UpdateSwingWorker.9")); //$NON-NLS-1$
 			
 			// Now we have to load this dat instead of the former one
 			// So we have to renew the configuration !
@@ -159,7 +160,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 			GameDBHelper.createGameCollectionInEngine(engine, newConfig.getConfName(), datParser);
 			return true;
 		} else {
-			publish ("Le DAT "+conf.getConfName()+" est à jour (version "+conf.getVersion()+")");
+			publish (Messages.getString("UpdateSwingWorker.10")+conf.getConfName()+Messages.getString("UpdateSwingWorker.11")+conf.getVersion()+")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			return false;
 		}		
 	}
@@ -194,7 +195,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 	private Integer downloadFile (String webAddress, boolean useCache, String outputPath) {
 		try {
 			setProgress(0);
-			publish ("Téléchargement du fichier "+outputPath);
+			publish (Messages.getString("UpdateSwingWorker.13")+outputPath); //$NON-NLS-1$
 			URL url = new URL(webAddress); 
 			// On ouvre la connexion sur la page
 			URLConnection connection = url.openConnection();
@@ -224,8 +225,8 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 
 			//Si on n'est pas arrivé à la fin du fichier, on lance une exception
 			if(deplacement != length){
-				throw new IOException("Le fichier n'a pas été lu en entier (seulement " 
-					+ deplacement + " sur " + length + ")");
+				throw new IOException(Messages.getString("UpdateSwingWorker.14")  //$NON-NLS-1$
+					+ deplacement + Messages.getString("UpdateSwingWorker.15") + length + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			
 			//On crée un stream sortant vers la destination
@@ -253,7 +254,7 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 	 * @return
 	 */
 	private Integer getLatestVersionNb (Configuration conf) {
-		publish ("Recherche de nouveau DAT pour "+conf.getConfName());
+		publish (Messages.getString("UpdateSwingWorker.17")+conf.getConfName()); //$NON-NLS-1$
 		try {
 			URL url = new URL (conf.getNewVersionUrl());
 			URLConnection urlConnection = url.openConnection();
