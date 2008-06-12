@@ -108,9 +108,8 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 	 * 
 	 * @param file
 	 * @param releaseNb
-	 * @param renameFile boolean which indicates whether we TRY to rename the file
 	 */
-	private void updateGameDatasFromScan (File file, int releaseNb, boolean renameFile) {
+	private void updateGameDatasFromScan (File file, int releaseNb) {
 		// First we get the game
 		Game currGame = gameCollection.get(releaseNb);
 		currGame.setGotRom(true);
@@ -154,6 +153,9 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 					// The name is bad an we haven't renamed the file
 					currGame.setGoodName(false);
 				}
+			} else {
+				// This is not a rom, we move the file
+				moveRom(new File(containerPath));
 			}
 		}
 	}
@@ -165,7 +167,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 	 * @param fileCRC crc of the file to scan. This is passed to speed up the scan, no mutliple calculation of the CRC
 	 * @return Integer which indicates whether a game has been found (releaseNb) null otherwise
 	 */
-	private Integer scanFile (File file, boolean moveFile, boolean renameFile, String fileCRC) {
+	private Integer scanFile (File file, String fileCRC) {
 		// The global crc value must 
 		Integer relNb = null;
 		String extension = FileToolkit.getFileExtension(file.getName());
@@ -176,13 +178,11 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 			if (releaseNb==null) releaseNb = cRCRomDB.get(fileCRC);
 			if (releaseNb!=null) {
 				// It's a game, we have to update its data
-				updateGameDatasFromScan(file, Integer.parseInt(releaseNb), renameFile);
+				updateGameDatasFromScan(file, Integer.parseInt(releaseNb));
 				relNb = Integer.parseInt(releaseNb);
 			} else {
 				// it's not a game we may habe to move the file
-				if (moveFile) {
-					moveRom(file);
-				}
+				moveRom(file);
 			}
 		}
 		return relNb;
@@ -208,6 +208,9 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 				ZipEntry zipEntry = iterZipEntries.next();
 				scanZipEntry(zipEntry, zipFile.getName(), zipFile.getAbsolutePath());
 			}
+		} else {
+			// This cannot be a rom file we move it if necessary
+			moveRom(zipFile);
 		}
 	}
 	
@@ -229,7 +232,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 				if (selConf.getAllowedExtensions().contains(extension.toLowerCase()) 
 						|| selConf.getAllowedExtensions().contains(extension.toUpperCase())) {
 					String fileCRC = FileToolkit.getCRC32(curFile.getAbsolutePath());
-					scanFile(curFile, true, true, fileCRC);
+					scanFile(curFile, fileCRC);
 				} else {
 					// We check if it's a supported compressed file
 					if (GlobalConfiguration.allowedCompressedExtensions.contains(extension.toLowerCase()) ||
