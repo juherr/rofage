@@ -11,6 +11,7 @@ import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.ihm.GameListTableModel;
+import rofage.ihm.Messages;
 
 public class GameListSelectionListener implements ListSelectionListener {
 	private Engine engine = null;
@@ -27,19 +28,19 @@ public class GameListSelectionListener implements ListSelectionListener {
 			Game game = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
 			
 			// We update the images
-			engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"a.png");
-			engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"b.png");
+			engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"a.png"); //$NON-NLS-1$
+			engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"b.png"); //$NON-NLS-1$
 			
 			// We update the game infos
 			StringBuffer str = new StringBuffer();
-			str.append(game.getTitle()).append("\n\n");
-			str.append("Release : ").append(game.getReleaseNb()).append("\n");
-			str.append("Taille de la rom : ").append(game.getRomSize()).append("\n");
-			str.append("CRC : ").append(game.getCrc()).append("\n");
-			str.append("Origine : ").append(GameDisplayHelper.getLocation(game)).append("\n");
-			str.append("Langue(s) : ").append(GameDisplayHelper.getLanguage(game)).append("\n");
-			str.append("Editeur : ").append(game.getPublisher()).append("\n");
-			str.append("Groupe : ").append(game.getSourceRom()).append("\n");
+			str.append(game.getTitle()).append("\n\n"); //$NON-NLS-1$
+			str.append(Messages.getString("GameListSelectionListener.3")).append(game.getReleaseNb()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.5")).append(game.getRomSize()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.2")).append(game.getCrc()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.9")).append(GameDisplayHelper.getLocation(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.11")).append(GameDisplayHelper.getLanguage(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.13")).append(game.getPublisher()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			str.append(Messages.getString("GameListSelectionListener.15")).append(game.getSourceRom()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
 			
 			engine.getMainWindow().getJTextPane().setText(str.toString());
 			

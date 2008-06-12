@@ -12,11 +12,11 @@ import rofage.common.Consts;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Game;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class GameListTableModel extends AbstractTableModel implements TableModel {
 	TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game>();
 	List<Game> tableDatas = new ArrayList<Game>(gameCollection.values());
-	String[] columnNames = {"L", "R", "Titre"};
+	String[] columnNames = {"L", "R", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	String titlePattern;
 	
 	public GameListTableModel (String titlePattern) {
@@ -44,16 +44,16 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 		Game game = tableDatas.get(row);
 		if (col==0) {
 			// Location
-			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png"));
+			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png")); //$NON-NLS-1$ //$NON-NLS-2$
 		} else if (col==1) {
 			if (game.isGotRom()) {
 				if (game.isGoodName()) {
-					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
+					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")); //$NON-NLS-1$
 				} else {
-					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png"));
+					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")); //$NON-NLS-1$
 				}
 			}
-			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png"));
+			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$
 		} if (col==2) {
 			return GameDisplayHelper.buildTitle(game, titlePattern);
 		}

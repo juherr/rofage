@@ -22,6 +22,7 @@ import javax.swing.JTextPane;
 
 import rofage.common.Engine;
 import rofage.common.object.Configuration;
+import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.conf.AddConfAction;
 import rofage.ihm.actions.conf.ChangeConfInConfListener;
@@ -81,7 +82,7 @@ public class ConfWindow extends JFrame {
 	public ConfWindow(Engine engine) {
 		super();
 		this.engine = engine; 
-		xmlFilter = new FileChooserFilter(new String[]{".xml"}, "Fichiers XML (*.xml)");
+		xmlFilter = new FileChooserFilter(new String[]{".xml"}, Messages.getString("ConfWindow.1")); //$NON-NLS-1$ //$NON-NLS-2$
 		initialize();
 	}
 
@@ -93,7 +94,7 @@ public class ConfWindow extends JFrame {
 	private void initialize() {
 		this.setSize(500, 300);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Configuration");
+		this.setTitle(Messages.getString("ConfWindow.2")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
@@ -129,9 +130,9 @@ public class ConfWindow extends JFrame {
 	public JTabbedPane getJTabbedPane() {
 		if (jTabbedPane == null) {
 			jTabbedPane = new JTabbedPane();
-			jTabbedPane.addTab("Dossiers", getPanelFolder());
-			jTabbedPane.addTab("Titre des roms", getPanelTitlePattern());
-			jTabbedPane.addTab("Mise à jour", getPanelAutoUpdate());
+			jTabbedPane.addTab(Messages.getString("ConfWindow.3"), getPanelFolder()); //$NON-NLS-1$
+			jTabbedPane.addTab(Messages.getString("ConfWindow.4"), getPanelTitlePattern()); //$NON-NLS-1$
+			jTabbedPane.addTab(Messages.getString("ConfWindow.5"), getPanelAutoUpdate()); //$NON-NLS-1$
 			jTabbedPane.setSize(500, 300);
 			jTabbedPane.setVisible(false);
 		}
@@ -243,7 +244,7 @@ public class ConfWindow extends JFrame {
 		if (labelRomFolder==null) {
 			labelRomFolder = new JLabel();
 			labelRomFolder.setVisible(true);
-			labelRomFolder.setText("Répertoire des roms");
+			labelRomFolder.setText(Messages.getString("ConfWindow.6")); //$NON-NLS-1$
 		}
 		return labelRomFolder;
 	}
@@ -252,7 +253,7 @@ public class ConfWindow extends JFrame {
 		if (labelUnknownRomFolder==null) {
 			labelUnknownRomFolder = new JLabel();
 			labelUnknownRomFolder.setVisible(true);
-			labelUnknownRomFolder.setText("vers");
+			labelUnknownRomFolder.setText(Messages.getString("ConfWindow.7")); //$NON-NLS-1$
 		}
 		return labelUnknownRomFolder;
 	}
@@ -260,7 +261,7 @@ public class ConfWindow extends JFrame {
 	private JLabel getLabelAutoUpdate () {
 		if (labelAutoUpdate==null) {
 			labelAutoUpdate = new JLabel();
-			labelAutoUpdate.setText("Mettre à jour automatiquement le dat et les images");
+			labelAutoUpdate.setText(Messages.getString("ConfWindow.8")); //$NON-NLS-1$
 			labelAutoUpdate.setVisible(true);
 		}
 		return labelAutoUpdate;
@@ -269,7 +270,7 @@ public class ConfWindow extends JFrame {
 	private JLabel getLabelTitlePattern () {
 		if (labelTitlePattern==null) {
 			labelTitlePattern = new JLabel();
-			labelTitlePattern.setText("Pattern d'écriture des roms");
+			labelTitlePattern.setText(Messages.getString("ConfWindow.9")); //$NON-NLS-1$
 			labelTitlePattern.setVisible(true);
 		}
 		return labelTitlePattern;
@@ -278,7 +279,7 @@ public class ConfWindow extends JFrame {
 	private JLabel getLabelRenameInside () {
 		if (labelRenameInside==null) {
 			labelRenameInside = new JLabel();
-			labelRenameInside.setText("Renommer à l'intérieur des archives");
+			labelRenameInside.setText(Messages.getString("ConfWindow.10")); //$NON-NLS-1$
 			labelRenameInside.setVisible(true);
 		}
 		return labelRenameInside;
@@ -331,7 +332,7 @@ public class ConfWindow extends JFrame {
 		if (buttonOpenRomFolder==null) {
 			buttonOpenRomFolder = new JButton();
 			buttonOpenRomFolder.addActionListener(new OpenFileChooserAction(engine));
-			buttonOpenRomFolder.setText("Ouvrir...");
+			buttonOpenRomFolder.setText(Messages.getString("ConfWindow.11")); //$NON-NLS-1$
 			buttonOpenRomFolder.setVisible(true);
 		}
 		return buttonOpenRomFolder;
@@ -341,7 +342,7 @@ public class ConfWindow extends JFrame {
 		if (buttonOpenUnknownRomFolder==null) {
 			buttonOpenUnknownRomFolder = new JButton();
 			buttonOpenUnknownRomFolder.addActionListener(new OpenFileChooserAction(engine));
-			buttonOpenUnknownRomFolder.setText("Ouvrir...");
+			buttonOpenUnknownRomFolder.setText(Messages.getString("ConfWindow.12")); //$NON-NLS-1$
 			buttonOpenUnknownRomFolder.setVisible(true);
 		}
 		return buttonOpenUnknownRomFolder;
@@ -351,7 +352,7 @@ public class ConfWindow extends JFrame {
 		if (buttonSave==null) {
 			buttonSave = new JButton();
 			buttonSave.addActionListener(new SaveConfigurationAction (engine));
-			buttonSave.setText("Sauver");
+			buttonSave.setText(Messages.getString("ConfWindow.13")); //$NON-NLS-1$
 			buttonSave.setVisible(true);
 		}
 		return buttonSave;
@@ -361,7 +362,7 @@ public class ConfWindow extends JFrame {
 		if (buttonCancel==null) {
 			buttonCancel = new JButton();
 			buttonCancel.addActionListener(new HideAction(this));
-			buttonCancel.setText("Annuler");
+			buttonCancel.setText(Messages.getString("ConfWindow.14")); //$NON-NLS-1$
 			buttonCancel.setVisible(true);
 		}
 		return buttonCancel;
@@ -371,7 +372,7 @@ public class ConfWindow extends JFrame {
 		if (buttonAddConf==null) {
 			buttonAddConf = new JButton();
 			buttonAddConf.addActionListener(new AddConfAction(engine));
-			buttonAddConf.setText("Ajouter");
+			buttonAddConf.setText(Messages.getString("ConfWindow.15")); //$NON-NLS-1$
 			buttonAddConf.setVisible(true);
 		}
 		return buttonAddConf;
@@ -381,7 +382,7 @@ public class ConfWindow extends JFrame {
 		if (buttonRemoveConf==null) {
 			buttonRemoveConf = new JButton();
 			buttonRemoveConf.addActionListener(new RemoveConfAction(engine));
-			buttonRemoveConf.setText("Supprimer");
+			buttonRemoveConf.setText(Messages.getString("ConfWindow.16")); //$NON-NLS-1$
 			buttonRemoveConf.setVisible(true);
 		}
 		return buttonRemoveConf;
@@ -423,10 +424,10 @@ public class ConfWindow extends JFrame {
 	private JTextPane getTextPaneTitlePattern () {
 		if (textPaneTitlePattern==null) {
 			textPaneTitlePattern = new JTextPane();
-			textPaneTitlePattern.setText("%n N° de la release\t%t titre\t\t%s Taille de la rom\n%l Location\t\t%p Editeur\t\t%S source\n%L langues\t\t%c CRC\t\t%M Multi\n%C Code Pays");
+			textPaneTitlePattern.setText(Messages.getString("ConfWindow.17")); //$NON-NLS-1$
 			textPaneTitlePattern.setBackground(null);
 			textPaneTitlePattern.setMargin(new Insets(20,0,0,0));
-			textPaneTitlePattern.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(0)), "Patterns disponibles"));
+			textPaneTitlePattern.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(0)), Messages.getString("ConfWindow.18"))); //$NON-NLS-1$
 			textPaneTitlePattern.setVisible(true);
 		}
 		return textPaneTitlePattern;

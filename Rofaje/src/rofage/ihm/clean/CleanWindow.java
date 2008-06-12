@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 import rofage.common.Engine;
+import rofage.ihm.Messages;
 import rofage.ihm.actions.clean.CleanAction;
 import rofage.ihm.actions.clean.StopCleanAction;
 import rofage.ihm.actions.common.HideAction;
@@ -139,10 +140,10 @@ public class CleanWindow extends JFrame {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setAction(new CleanAction(engine));
-			jButton.setText("Nettoyer");
-			jButton.setName("jButton");
+			jButton.setText(Messages.getString("CleanWindow.0")); //$NON-NLS-1$
+			jButton.setName("jButton"); //$NON-NLS-1$
 			jButton.setPreferredSize(new Dimension(100, 23));
-			jButton.setFont(new Font("Dialog", Font.PLAIN, 10));
+			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 		}
 		return jButton;
 	}
@@ -156,10 +157,10 @@ public class CleanWindow extends JFrame {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setAction(new HideAction(this));
-			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10));
-			jButton1.setName("jButton1");
+			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
+			jButton1.setName("jButton1"); //$NON-NLS-1$
 			jButton1.setPreferredSize(new Dimension(100, 23));
-			jButton1.setText("Cacher");
+			jButton1.setText(Messages.getString("CleanWindow.5")); //$NON-NLS-1$
 		}
 		return jButton1;
 	}
@@ -173,10 +174,10 @@ public class CleanWindow extends JFrame {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
 			buttonStop.setAction(new StopCleanAction(engine));
-			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10));
-			buttonStop.setName("buttonStop");
+			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
+			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));
-			buttonStop.setText("Stopper");
+			buttonStop.setText(Messages.getString("CleanWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
 		}
 		return buttonStop;

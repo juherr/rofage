@@ -3,6 +3,7 @@ package rofage.common;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.JOptionPane;
 
@@ -86,7 +87,9 @@ public class Engine {
 	 * It tries to load the configuration, if unsucessful, it creates it
 	 */
 	private void startupConf () {
+		// TODO changer tous les appels des messages avec la locale de la config
 		globalConf = SerializationHelper.loadGlobalConfiguration();
+
 		if (globalConf==null) {
 			// We need to create the configuration
 			JOptionPane.showMessageDialog(null, Messages.getString("Engine.0"), Messages.getString("Engine.1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import rofage.common.Engine;
 import rofage.common.helper.ConfigurationHelper;
 import rofage.common.object.Configuration;
+import rofage.ihm.Messages;
 import rofage.ihm.conf.ConfWindow;
 
 public class ChangeConfInConfListener implements ItemListener {
@@ -39,7 +40,7 @@ public class ChangeConfInConfListener implements ItemListener {
 			engine.getConfWindow().update(engine.getConfWindow().getGraphics());
 		}else if(e.getStateChange() == ItemEvent.DESELECTED) {
 			if (!engine.isConfSaved()) {
-				int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), "Voulez-vous sauvegarder la configuration actuelle avant d'en changer ?", "Sauvegarder la configuration", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				int res = JOptionPane.showConfirmDialog(engine.getConfWindow(), Messages.getString("ChangeConfInConfListener.0"), Messages.getString("ChangeConfInConfListener.1"), JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				if (res==JOptionPane.YES_OPTION) {
 					// We save the conf
 					ConfigurationHelper.saveCurrentConfigurationInEngine(engine);

@@ -25,6 +25,7 @@ import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
+import rofage.ihm.actions.common.ChangeLanguageListener;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowCleanAction;
@@ -69,8 +70,9 @@ public class MainWindow extends JFrame {
 	private JMenuItem menuItemClean = null;
 	private JMenu menuConf = null;
 	
-	private ButtonGroup languageGroup = null;
+	private ButtonGroup languageGroup = null;  //  @jve:decl-index=0:
 	private JRadioButtonMenuItem langFR = null;
+	private JRadioButtonMenuItem langEN = null;
 	
 	private JComboBox comboConf = null;
 		
@@ -98,7 +100,7 @@ public class MainWindow extends JFrame {
 		this.setPreferredSize(new Dimension(800, 600));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle("RoFage v0.01");
+		this.setTitle(Messages.getString("MainWindow.0")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 	}
@@ -142,11 +144,13 @@ public class MainWindow extends JFrame {
 	private JMenu getJMenu() {
 		if (jMenu == null) {
 			jMenu = new JMenu();
-			jMenu.setText("Langue");
+			jMenu.setText(Messages.getString("MainWindow.1")); //$NON-NLS-1$
 			// We create the group	
 			jMenu.add(getLangFR());
+			jMenu.add(getLangEN());
 			languageGroup = new ButtonGroup();
 			languageGroup.add(getLangFR());
+			languageGroup.add(getLangEN());
 		}
 		return jMenu;
 	}
@@ -159,7 +163,7 @@ public class MainWindow extends JFrame {
 	private JMenu getJMenu1() {
 		if (jMenu1 == null) {
 			jMenu1 = new JMenu();
-			jMenu1.setText("?");
+			jMenu1.setText("?"); //$NON-NLS-1$
 			jMenu1.add(getJMenuItem1());
 			jMenu1.add(getJMenuItem());
 		}
@@ -169,7 +173,7 @@ public class MainWindow extends JFrame {
 	private JMenu getMenuConf () {
 		if (menuConf==null) {
 			menuConf = new JMenu();
-			menuConf.setText("Fichier");
+			menuConf.setText(Messages.getString("MainWindow.3")); //$NON-NLS-1$
 			menuConf.add(getMenuItemConf());
 			menuConf.add(getMenuItemScan());
 			menuConf.add(getMenuItemRename());
@@ -188,7 +192,7 @@ public class MainWindow extends JFrame {
 		if (jMenuItem == null) {
 			jMenuItem = new JMenuItem();
 			jMenuItem.addActionListener(new ShowAboutAction(this));
-			jMenuItem.setText("A Propos");
+			jMenuItem.setText(Messages.getString("MainWindow.4")); //$NON-NLS-1$
 			jMenuItem.setVisible(true);
 		}
 		return jMenuItem;
@@ -257,7 +261,7 @@ public class MainWindow extends JFrame {
 	public JTextPane getJTextPane() {
 		if (jTextPane == null) {
 			jTextPane = new JTextPane();
-			jTextPane.setText("Infos");
+			jTextPane.setText(Messages.getString("MainWindow.5")); //$NON-NLS-1$
 			jTextPane.setBackground(SystemColor.windowBorder);
 			jTextPane.setVisible(true);
 			jTextPane.setSize(new Dimension(460, 230));
@@ -302,7 +306,7 @@ public class MainWindow extends JFrame {
 		if (jMenuItem1 == null) {
 			jMenuItem1 = new JMenuItem();
 			jMenuItem1.addActionListener(new ShowUpdateAction(engine));
-			jMenuItem1.setText("Mise à jour");
+			jMenuItem1.setText(Messages.getString("MainWindow.6")); //$NON-NLS-1$
 			jMenuItem1.setVisible(true);
 		}
 		return jMenuItem1;
@@ -312,7 +316,7 @@ public class MainWindow extends JFrame {
 		if (menuItemConf==null) {
 			menuItemConf = new JMenuItem();
 			menuItemConf.addActionListener(new ShowConfigurationAction(engine));
-			menuItemConf.setText("Configuration");
+			menuItemConf.setText(Messages.getString("MainWindow.7")); //$NON-NLS-1$
 			menuItemConf.setVisible(true);
 		}
 		return menuItemConf;
@@ -322,7 +326,7 @@ public class MainWindow extends JFrame {
 		if (menuItemScan==null) {
 			menuItemScan = new JMenuItem();
 			menuItemScan.addActionListener(new ShowScanAction(engine));
-			menuItemScan.setText("Scan");
+			menuItemScan.setText(Messages.getString("MainWindow.8")); //$NON-NLS-1$
 			menuItemScan.setVisible(true);
 		}
 		return menuItemScan;
@@ -332,7 +336,7 @@ public class MainWindow extends JFrame {
 		if (menuItemRename==null) {
 			menuItemRename = new JMenuItem();
 			menuItemRename.addActionListener(new ShowRenameAction(engine));
-			menuItemRename.setText("Renommer");
+			menuItemRename.setText(Messages.getString("MainWindow.9")); //$NON-NLS-1$
 			menuItemRename.setVisible(true);
 		}
 		return menuItemRename;
@@ -342,20 +346,31 @@ public class MainWindow extends JFrame {
 		if (menuItemClean==null) {
 			menuItemClean = new JMenuItem();
 			menuItemClean.addActionListener(new ShowCleanAction(engine));
-			menuItemClean.setText("Nettoyer");
+			menuItemClean.setText(Messages.getString("MainWindow.10")); //$NON-NLS-1$
 			menuItemClean.setVisible(true);
 		}
 		return menuItemClean;
 	}
 	
-	private JRadioButtonMenuItem getLangFR() {
+	public JRadioButtonMenuItem getLangFR() {
 		if (langFR == null) {
 			langFR = new JRadioButtonMenuItem();
-			langFR.setText("Français");
+			langFR.setText(Messages.getString("MainWindow.11")); //$NON-NLS-1$
 			langFR.setSelected(true);
+			langFR.addItemListener(new ChangeLanguageListener(engine));
 			langFR.setVisible(true);
 		}
 		return langFR;
+	}
+	
+	public JRadioButtonMenuItem getLangEN() {
+		if (langEN == null) {
+			langEN = new JRadioButtonMenuItem();
+			langEN.setText(Messages.getString("MainWindow.12"));
+			langEN.addItemListener(new ChangeLanguageListener(engine));
+			langEN.setVisible(true);
+		}
+		return langEN;
 	}
 	
 	public JComboBox getComboConf () {
@@ -376,5 +391,10 @@ public class MainWindow extends JFrame {
 			comboConf.setVisible(true);
 		}
 		return comboConf;
+	}
+	
+	public void changeLanguage () {
+		// TODO changer le texte à la volée
+		getJMenu1().setText("File from");
 	}
 }

@@ -18,6 +18,7 @@ import rofage.common.files.ZipToolkit;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.ihm.Messages;
 
 public class RenameSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopAction;
@@ -34,7 +35,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				if("progress".equals(evt.getPropertyName())) {
+				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
 					getEngine().getRenameWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
@@ -45,16 +46,16 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
 		setProgress(0);
-		publish("Préparation du renommage...");
+		publish(Messages.getString("RenameSwingWorker.1")); //$NON-NLS-1$
 		
 		generateRenameList();
 		
-		publish (listGamesToRename.size()+" roms à renommer.");
+		publish (listGamesToRename.size()+Messages.getString("RenameSwingWorker.2")); //$NON-NLS-1$
 		
 		renameGamesInList();
 		
 		setProgress(100);
-		publish ("Renommage Terminé !");
+		publish (Messages.getString("RenameSwingWorker.3")); //$NON-NLS-1$
 		
 		// We update the UI
 		engine.getMainWindow().getJTable().updateUI();
@@ -104,7 +105,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 			
 			// We check whether the file still exists !
 			if (!gameFile.exists()) {
-				publish ("Le fichier "+gameFile.getAbsolutePath()+" n'existe plus !");
+				publish (Messages.getString("RenameSwingWorker.4")+gameFile.getAbsolutePath()+Messages.getString("RenameSwingWorker.5")); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				// Let's rename it
 				String oldFileName = gameFile.getName();
@@ -136,7 +137,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 				
 				game.setContainerPath(destPath);
 				game.setGoodName(true);
-				publish (oldFileName+" => "+ newFileName);
+				publish (oldFileName+" => "+ newFileName); //$NON-NLS-1$
 				nbFilesRenamed++;
 				setProgress(nbFilesRenamed*100/totalFiles);
 			}
@@ -165,7 +166,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 		Iterator<String> iterZipEntriesPaths = zipEntriesPaths.iterator();
 		boolean gameFound = false;
 
-		String fileExt = "";
+		String fileExt = ""; //$NON-NLS-1$
 		while (iterZipEntriesPaths.hasNext() && !gameFound) {
 			String path = iterZipEntriesPaths.next();
 			fileExt = FileToolkit.getFileExtension(path);
@@ -183,7 +184,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 		// We add the renamed file (the file which has been renamed has been deleted from this list)
 		zipEntriesPaths.add(Consts.TMP_FOLDER+File.separator+newFileName+fileExt);
 		
-		ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+newFileName+".zip");
+		ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+newFileName+".zip"); //$NON-NLS-1$
 		
 		// We cleanup the tmp folder
 		iterZipEntriesPaths = zipEntriesPaths.iterator();
@@ -191,7 +192,7 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 			String path = iterZipEntriesPaths.next();
 			(new File(path)).delete();
 		}
-		File archive = new File(Consts.TMP_FOLDER+File.separator+newFileName+".zip");
+		File archive = new File(Consts.TMP_FOLDER+File.separator+newFileName+".zip"); //$NON-NLS-1$
 		return archive;
 	}
 	

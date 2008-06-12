@@ -22,6 +22,7 @@ import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.object.GlobalConfiguration;
+import rofage.ihm.Messages;
 
 public class ScanSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopScan;
@@ -41,7 +42,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				if("progress".equals(evt.getPropertyName())) {
+				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
 					getEngine().getScanWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
@@ -52,10 +53,10 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
 		setProgress(0);
-		publish("Scan des dossiers... Cela peut prendre du temps !");
+		publish(Messages.getString("ScanSwingWorker.1")); //$NON-NLS-1$
 		scanFolders();
 		setProgress(100);
-		publish ("Scan Terminé !");
+		publish (Messages.getString("ScanSwingWorker.2")); //$NON-NLS-1$
 		
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
@@ -227,7 +228,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 			if (curFile.isDirectory()) {
 				subDirectories.add(curFile);
 			} else {
-				publish ("Scan de "+curFile.getName());
+				publish (Messages.getString("ScanSwingWorker.3")+curFile.getName()); //$NON-NLS-1$
 				String extension = FileToolkit.getFileExtension(curFile.getName());
 				if (selConf.getAllowedExtensions().contains(extension.toLowerCase()) 
 						|| selConf.getAllowedExtensions().contains(extension.toUpperCase())) {
@@ -261,12 +262,12 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 		File topDirectory = new File(selConf.getRomFolder());
 		
 		if (!topDirectory.isDirectory()) {
-			JOptionPane.showMessageDialog(engine.getScanWindow(), "Le répertoire n'est pas valide!", "Erreur", JOptionPane.ERROR_MESSAGE);
-			publish ("Abandon... Répertoire invalide!");
+			JOptionPane.showMessageDialog(engine.getScanWindow(), Messages.getString("ScanSwingWorker.4"), Messages.getString("ScanSwingWorker.5"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+			publish (Messages.getString("ScanSwingWorker.6")); //$NON-NLS-1$
 		} else {
 			// We count the total number of files
 			int nbFiles = FileToolkit.getFileNb(topDirectory);
-			publish("Préparation du scan... "+nbFiles+" fichiers à scanner");
+			publish(Messages.getString("ScanSwingWorker.7")+nbFiles+Messages.getString("ScanSwingWorker.8")); //$NON-NLS-1$ //$NON-NLS-2$
 			// We have to put all value to false (gotRom, goodName)
 			// They will be reset during the scan
 			Iterator<Game> iterGames = gameCollection.values().iterator();

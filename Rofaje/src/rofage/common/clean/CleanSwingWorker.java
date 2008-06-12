@@ -19,6 +19,7 @@ import rofage.common.files.FileToolkit;
 import rofage.common.files.ZipToolkit;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.ihm.Messages;
 
 public class CleanSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopAction;
@@ -35,7 +36,7 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				if("progress".equals(evt.getPropertyName())) {
+				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
 					getEngine().getCleanWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
@@ -46,16 +47,16 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
 		setProgress(0);
-		publish("Préparation du nettoyage...");
+		publish(Messages.getString("CleanSwingWorker.1")); //$NON-NLS-1$
 		
 		generateCleanList();
 		
-		publish (listArchivesToCleanUp.size()+" archives à nettoyer.");
+		publish (listArchivesToCleanUp.size()+Messages.getString("CleanSwingWorker.2")); //$NON-NLS-1$
 		
 		cleanUpArchivesInList();
 		
 		setProgress(100);
-		publish ("Nettoyage Terminé !");
+		publish (Messages.getString("CleanSwingWorker.3")); //$NON-NLS-1$
 		
 		// We update the UI
 		engine.getMainWindow().getJTable().updateUI();
@@ -83,7 +84,7 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 		while (iterGames.hasNext()) {
 			Game game = iterGames.next();
 			if (game.isGotRom() 
-					&& game.getContainerPath().endsWith(".zip")) {
+					&& game.getContainerPath().endsWith(".zip")) { //$NON-NLS-1$
 				// We look into each archive to see if there are more than one file
 				try {
 					ZipFile zipFile = new ZipFile(game.getContainerPath());
@@ -113,7 +114,7 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 			
 			// We check whether the file still exists !
 			if (!gameFile.exists()) {
-				publish ("Le fichier "+gameFile.getAbsolutePath()+" n'existe plus !");
+				publish (Messages.getString("CleanSwingWorker.5")+gameFile.getAbsolutePath()+Messages.getString("CleanSwingWorker.6")); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				String destPath;
 				
@@ -128,8 +129,8 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 				}
 				
 				// We pack back the rom
-				ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip");
-				File newArchive = new File (Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip");
+				ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip"); //$NON-NLS-1$
+				File newArchive = new File (Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip"); //$NON-NLS-1$
 				
 				// We cleanup the tmp folder
 				iterPath = zipEntriesPaths.iterator();
@@ -145,7 +146,7 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 				// We move the new archive to the rom folder
 				FileToolkit.moveFile(newArchive, destPath);
 				
-				publish (destPath+" nettoyé");
+				publish (destPath+Messages.getString("CleanSwingWorker.9")); //$NON-NLS-1$
 				
 				nbFilesRenamed++;
 				setProgress(nbFilesRenamed*100/totalFiles);
