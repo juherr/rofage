@@ -29,11 +29,11 @@ public class FilterGameCollectionAction extends AbstractAction {
 		
 		MainWindow w = engine.getMainWindow();
 		// Let's get the form entries
-		String title = w.getFieldTitle().getText();
+		String title = w.getFieldTitle().getText().toUpperCase();
 		String romSize = ((GenericDropDownEntry) w.getComboRomSize().getSelectedItem()).getValue();
 		String location = ((GenericDropDownEntry) w.getComboLocation().getSelectedItem()).getValue();
-		String publisher = w.getFieldPublisher().getText();
-		String source = w.getFieldSource().getText();
+		String publisher = w.getFieldPublisher().getText().toUpperCase();
+		String source = w.getFieldSource().getText().toUpperCase();
 		String language = ((GenericDropDownEntry) w.getComboLanguage().getSelectedItem()).getValue();
 		boolean showOwned = w.getCBOwned().isSelected();
 		boolean showBadNamed = w.getCBBadName().isSelected();
@@ -53,17 +53,17 @@ public class FilterGameCollectionAction extends AbstractAction {
 			Game game = iterGames.next();
 			boolean mayAdd = true;
 			if (testTitle) {
-				if (!game.getTitle().contains(title)) {
+				if (!game.getTitle().toUpperCase().contains(title)) {
 					mayAdd = false;
 				}
 			}
 			if (testPublisher) {
-				if (!game.getPublisher().contains(publisher)) {
+				if (!game.getPublisher().toUpperCase().contains(publisher)) {
 					mayAdd = false;
 				}
 			}
 			if (testSource) {
-				if (!game.getSourceRom().contains(source)) {
+				if (!game.getSourceRom().toUpperCase().contains(source)) {
 					mayAdd = false;
 				}
 			}
