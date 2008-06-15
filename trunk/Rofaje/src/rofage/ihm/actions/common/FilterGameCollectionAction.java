@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import javax.swing.AbstractAction;
 
+import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Game;
@@ -73,7 +74,7 @@ public class FilterGameCollectionAction extends AbstractAction {
 				}
 			}
 			if (testLanguage) {
-				if (!GameDisplayHelper.getLanguage(game).contains(language)) {
+				if (!GameDisplayHelper.getLanguage(game).contains(Consts.LANG_NAMES.get(Integer.parseInt(language)))) {
 					mayAdd = false;
 				}
 			}
