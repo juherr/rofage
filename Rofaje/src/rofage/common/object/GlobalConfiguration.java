@@ -20,7 +20,7 @@ public class GlobalConfiguration implements Serializable {
 	public final static List<String> allowedCompressedExtensions = new ArrayList<String>();
 	public final static String GLOBAL_CONFIG_FILE_NAME = "globalConf";
 	
-	private Locale selectedLocale = Locale.getDefault();
+	private Locale selectedLocale = Locale.ENGLISH;
 	/**
 	 * mapDatConfigs is a map of (datName, Configuration)
 	 * @see Configuration

@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.SystemColor;
 import java.util.Iterator;
+import java.util.Locale;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -100,7 +101,7 @@ public class MainWindow extends JFrame {
 		this.setPreferredSize(new Dimension(800, 600));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("MainWindow.0")); //$NON-NLS-1$
+		this.setTitle(Messages.getString("Title") +" "+ Messages.getString("Version")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 	}
@@ -356,7 +357,7 @@ public class MainWindow extends JFrame {
 		if (langFR == null) {
 			langFR = new JRadioButtonMenuItem();
 			langFR.setText(Messages.getString("MainWindow.11")); //$NON-NLS-1$
-			langFR.setSelected(true);
+			if (engine.getGlobalConf().getSelectedLocale()==Locale.FRENCH) langFR.setSelected(true);
 			langFR.addItemListener(new ChangeLanguageListener(engine));
 			langFR.setVisible(true);
 		}
@@ -367,6 +368,7 @@ public class MainWindow extends JFrame {
 		if (langEN == null) {
 			langEN = new JRadioButtonMenuItem();
 			langEN.setText(Messages.getString("MainWindow.12"));
+			if (engine.getGlobalConf().getSelectedLocale()==Locale.ENGLISH) langEN.setSelected(true);
 			langEN.addItemListener(new ChangeLanguageListener(engine));
 			langEN.setVisible(true);
 		}

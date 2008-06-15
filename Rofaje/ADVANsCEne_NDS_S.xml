@@ -3,7 +3,7 @@
 	<configuration>
 		<datName>ADVANsCEne Nintendo DS Scene</datName>
 		<imFolder>ADVANsCEne Nintendo DS Collection</imFolder>
-		<datVersion>0916</datVersion>
+		<datVersion>0921</datVersion>
 		<system>Nintendo DS</system>
 		<screenshotsWidth>214</screenshotsWidth>
 		<screenshotsHeight>384</screenshotsHeight>
@@ -42228,6 +42228,132 @@
 			</files>
 			<im1CRC>19EB2FA3</im1CRC>
 			<im2CRC>0D8B14DF</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2407</imageNumber>
+			<releaseNumber>2344</releaseNumber>
+			<title>99 no Namida</title>
+			<saveType>Eeprom - 512 kbit</saveType>
+			<romSize>33554432</romSize>
+			<publisher>Bandai Namco Games</publisher>
+			<location>7</location>
+			<sourceRom>Independent</sourceRom>
+			<language>256</language>
+			<files>
+				<romCRC extension=".nds">C4DE9489</romCRC>
+			</files>
+			<im1CRC>121B69AA</im1CRC>
+			<im2CRC>3137205A</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2408</imageNumber>
+			<releaseNumber>2345</releaseNumber>
+			<title>DS Yamamura Misa Suspense - Kyoto Satujin Jinken File</title>
+			<saveType>Eeprom - 512 kbit</saveType>
+			<romSize>33554432</romSize>
+			<publisher>Tecmo</publisher>
+			<location>7</location>
+			<sourceRom>Independent</sourceRom>
+			<language>256</language>
+			<files>
+				<romCRC extension=".nds">58688C0E</romCRC>
+			</files>
+			<im1CRC>716F0120</im1CRC>
+			<im2CRC>D986CD81</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2409</imageNumber>
+			<releaseNumber>2346</releaseNumber>
+			<title>K3 en het Ijsprinsesje</title>
+			<saveType>Eeprom - 4 kbit</saveType>
+			<romSize>16777216</romSize>
+			<publisher>Easy Interactive</publisher>
+			<location>8</location>
+			<sourceRom>Did It</sourceRom>
+			<language>16</language>
+			<files>
+				<romCRC extension=".nds">7044D8D4</romCRC>
+			</files>
+			<im1CRC>A4188B54</im1CRC>
+			<im2CRC>AFC0394A</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2410</imageNumber>
+			<releaseNumber>2347</releaseNumber>
+			<title>USA Today Crossword Challenge</title>
+			<saveType>Eeprom - 4 kbit</saveType>
+			<romSize>8388608</romSize>
+			<publisher>Destineer</publisher>
+			<location>1</location>
+			<sourceRom>Independent</sourceRom>
+			<language>4098</language>
+			<files>
+				<romCRC extension=".nds">898322BA</romCRC>
+			</files>
+			<im1CRC>80A9E909</im1CRC>
+			<im2CRC>05883BB2</im2CRC>
+			<comment>Repack from USA_Today_Crossword_Challenge_USA_NDS-XAN</comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2411</imageNumber>
+			<releaseNumber>2348</releaseNumber>
+			<title>Hiiro no Kakera DS</title>
+			<saveType>Eeprom - 64 kbit</saveType>
+			<romSize>268435456</romSize>
+			<publisher>Idea Factory</publisher>
+			<location>7</location>
+			<sourceRom>Independent</sourceRom>
+			<language>256</language>
+			<files>
+				<romCRC extension=".nds">30378177</romCRC>
+			</files>
+			<im1CRC>05D590CC</im1CRC>
+			<im2CRC>883E459D</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2412</imageNumber>
+			<releaseNumber>2349</releaseNumber>
+			<title>Nanatsuiro Drops DS - Touch de Hajimaru Hatsukoi Monogatari</title>
+			<saveType>TBC</saveType>
+			<romSize>67108864</romSize>
+			<publisher>Media Works</publisher>
+			<location>7</location>
+			<sourceRom>Independent</sourceRom>
+			<language>256</language>
+			<files>
+				<romCRC extension=".nds">05BE6912</romCRC>
+			</files>
+			<im1CRC>E65C2063</im1CRC>
+			<im2CRC>37E46BC0</im2CRC>
+			<comment></comment>
+			<duplicateID>0</duplicateID>
+		</game>
+		<game>
+			<imageNumber>2413</imageNumber>
+			<releaseNumber>2350</releaseNumber>
+			<title>New International Track &amp; Field</title>
+			<saveType>Eeprom - 512 kbit</saveType>
+			<romSize>67108864</romSize>
+			<publisher>Konami</publisher>
+			<location>0</location>
+			<sourceRom>EXiMiUS</sourceRom>
+			<language>4291</language>
+			<files>
+				<romCRC extension=".nds">347CDD62</romCRC>
+			</files>
+			<im1CRC>80EDC45A</im1CRC>
+			<im2CRC>3A843072</im2CRC>
 			<comment></comment>
 			<duplicateID>0</duplicateID>
 		</game>
