@@ -14,7 +14,7 @@ public class ChangeLanguageListener implements ItemListener {
 	public ChangeLanguageListener (Engine engine) {
 		this.engine = engine;
 	}
-
+	
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			// We change the locale of the JVM
@@ -23,9 +23,10 @@ public class ChangeLanguageListener implements ItemListener {
 			} else if (engine.getMainWindow().getLangFR().isSelected()) {
 				engine.getGlobalConf().setSelectedLocale(Locale.FRENCH);
 			}
-			
+			Locale.setDefault(engine.getGlobalConf().getSelectedLocale());
 			SerializationHelper.saveGlobalConfiguration(engine.getGlobalConf());
-			// TODO We reboot the app
+			
+			engine.changeLanguage();
 									
 		}
 	}

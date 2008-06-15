@@ -56,7 +56,37 @@ public class Engine {
 		// Let's see whether we should launch an update
 		startupUpdate();
 	}
+	
+	public void changeLanguage() {
+		if (mainWindow!=null) {
+			mainWindow.dispose();
+			mainWindow = null;
+		}
+		if (updateWindow!=null) {
+			updateWindow.dispose();
+			updateWindow = null;
+		}
+		if (confWindow!=null) {
+			confWindow.dispose();
+			confWindow = null;
+		}
+		if (scanWindow!=null) {
+			scanWindow.dispose();
+			scanWindow = null;
+		}
+		if (renameWindow!=null) {
+			renameWindow.dispose();
+			renameWindow = null;
+		}
+		if (cleanWindow!=null) {
+			cleanWindow.dispose();
+			cleanWindow = null;
+		}
+		Consts.reloadConsts();
+		getMainWindow().setVisible(true);
 		
+	}
+	
 	/**
 	 * Checks whether an update should be launched
 	 *
@@ -89,15 +119,21 @@ public class Engine {
 	private void startupConf () {
 		// TODO changer tous les appels des messages avec la locale de la config
 		globalConf = SerializationHelper.loadGlobalConfiguration();
-
+		
 		if (globalConf==null) {
 			// We need to create the configuration
 			JOptionPane.showMessageDialog(null, Messages.getString("Engine.0"), Messages.getString("Engine.1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			// We create the global configuration object
 			globalConf = new GlobalConfiguration();
+			Locale.setDefault(globalConf.getSelectedLocale());
 			// Then we show the configuration window so it gets populated
 			getConfWindow().setVisible(true);
+		} else {
+			Locale.setDefault(globalConf.getSelectedLocale());
 		}
+		// We have to reload the Consts class to update the static values with the good locale
+		Consts.reloadConsts();
+		
 	}
 	
 
