@@ -17,7 +17,7 @@ public class ShowAboutAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(mainWindow, Messages.getString("Title")+Messages.getString("Version")+Messages.getString("ShowAboutAction.2")); //$NON-NLS-1$
+		JOptionPane.showMessageDialog(mainWindow, Messages.getString("AppTitle")+" "+Messages.getString("Version")+Messages.getString("ShowAboutAction.2")); //$NON-NLS-1$
 	}
 
 }

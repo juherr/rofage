@@ -1,32 +1,49 @@
 package rofage.ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.SystemColor;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
+import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
+import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
+import rofage.common.object.Game;
+import rofage.common.object.GenericDropDownEntry;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
 import rofage.ihm.actions.common.ChangeLanguageListener;
+import rofage.ihm.actions.common.FilterGameCollectionAction;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowCleanAction;
@@ -61,6 +78,7 @@ public class MainWindow extends JFrame {
 	private JPanelImage jPanelImage1 = null;
 	private JPanelImage jPanelImage2 = null;
 	private JPanel jPanelImages = null;
+	private JPanel panelFilter = null;
 
 	private JScrollPane jScrollPane = null;
 
@@ -76,6 +94,26 @@ public class MainWindow extends JFrame {
 	private JRadioButtonMenuItem langEN = null;
 	
 	private JComboBox comboConf = null;
+	private JComboBox comboRomSize = null;
+	private JComboBox comboLocation = null;
+	private JComboBox comboLanguage = null;
+	
+	private JCheckBox CBOwned = null;
+	private JCheckBox CBBadNamed = null;
+	private JCheckBox CBNotOwned = null;
+	
+	private JTextField fieldTitle = null;
+	private JTextField fieldPublisher = null;
+	private JTextField fieldSource = null;
+	
+	private JLabel labelTitle = null;
+	private JLabel labelRomSize = null;
+	private JLabel labelLocation = null;
+	private JLabel labelPublisher = null;
+	private JLabel labelSource = null;
+	private JLabel labelLanguage = null;
+	
+	private JButton buttonFilter = null;
 		
 	private Engine engine;
 	
@@ -96,12 +134,12 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(800, 600);
+		this.setSize(1024, 768);
 		this.setJMenuBar(getJJMenuBar());
-		this.setPreferredSize(new Dimension(800, 600));
+		this.setPreferredSize(new Dimension(1024, 768));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("Title") +" "+ Messages.getString("Version")); //$NON-NLS-1$
+		this.setTitle(Messages.getString("AppTitle") +" "+ Messages.getString("Version")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 	}
@@ -209,6 +247,7 @@ public class MainWindow extends JFrame {
 			jSplitPane = new JSplitPane();
 			jSplitPane.setLeftComponent(getJScrollPane());
 			jSplitPane.setRightComponent(getJPanel());
+			jSplitPane.setDividerLocation(250);
 		}
 		return jSplitPane;
 	}
@@ -248,7 +287,10 @@ public class MainWindow extends JFrame {
 		if (jPanel == null) {
 			jPanel = new JPanel();
 			jPanel.setLayout(new BorderLayout());
-			jPanel.add(getJTextPane(), BorderLayout.CENTER);
+			Box hBox = Box.createHorizontalBox();
+			hBox.add(getJTextPane());
+			hBox.add(getPanelFilter());
+			jPanel.add(hBox, BorderLayout.SOUTH);
 			jPanel.add(getJPanelImages(), BorderLayout.NORTH);
 		}
 		return jPanel;
@@ -262,10 +304,10 @@ public class MainWindow extends JFrame {
 	public JTextPane getJTextPane() {
 		if (jTextPane == null) {
 			jTextPane = new JTextPane();
-			jTextPane.setText(Messages.getString("MainWindow.5")); //$NON-NLS-1$
-			jTextPane.setBackground(SystemColor.windowBorder);
+			jTextPane.setBorder(BorderFactory.createTitledBorder(Messages.getString("MainWindow.5")));
 			jTextPane.setVisible(true);
-			jTextPane.setSize(new Dimension(460, 230));
+			jTextPane.setSize(new Dimension(150, 230));
+			jTextPane.setPreferredSize(new Dimension(150,230));
 		}
 		return jTextPane;
 	}
@@ -280,6 +322,39 @@ public class MainWindow extends JFrame {
 			jPanelImages.setMinimumSize(new Dimension(530, 10));
 		}
 		return jPanelImages;
+	}
+	
+	public JPanel getPanelFilter() {
+		if (panelFilter == null) {
+			panelFilter = new JPanel();
+			panelFilter.setLayout(new FlowLayout());
+			panelFilter.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(0)), Messages.getString("FiltersTitle")));
+			Box vBox = Box.createVerticalBox();
+			vBox.add(getLabelTitle());
+			vBox.add(getFieldTitle());
+			vBox.add(getLabelRomSize());
+			vBox.add(getComboRomSize());
+			vBox.add(getLabelLocation());
+			vBox.add(getComboLocation());
+			vBox.add(getLabelPublisher());
+			vBox.add(getFieldPublisher());
+			vBox.add(getLabelSource());
+			vBox.add(getFieldSource());
+			vBox.add(getLabelLanguage());
+			vBox.add(getComboLanguage());
+			Box vBox2 = Box.createVerticalBox();
+			vBox2.add(getCBOwned());
+			vBox2.add(getCBBadName());
+			vBox2.add(getCBNotOwned());
+			vBox2.add(getButtonFilter());
+			Box hBox = Box.createHorizontalBox();
+			hBox.add(vBox);
+			hBox.add(new JSeparator(JSeparator.VERTICAL));
+			hBox.add(vBox2);
+			panelFilter.add(hBox);
+			panelFilter.setVisible(true);
+		}
+		return panelFilter;
 	}
 	
 	public JPanelImage getJPanelImage1() {
@@ -375,6 +450,30 @@ public class MainWindow extends JFrame {
 		return langEN;
 	}
 	
+	public JTextField getFieldTitle () {
+		if (fieldTitle==null) {
+			fieldTitle = new JTextField();
+			fieldTitle.setVisible(true);
+		}
+		return fieldTitle;
+	}
+	
+	public JTextField getFieldPublisher () {
+		if (fieldPublisher==null) {
+			fieldPublisher = new JTextField();
+			fieldPublisher.setVisible(true);
+		}
+		return fieldPublisher;
+	}
+	
+	public JTextField getFieldSource () {
+		if (fieldSource==null) {
+			fieldSource = new JTextField();
+			fieldSource.setVisible(true);
+		}
+		return fieldSource;
+	}
+	
 	public JComboBox getComboConf () {
 		if (comboConf==null) {
 			comboConf = new JComboBox();
@@ -395,8 +494,165 @@ public class MainWindow extends JFrame {
 		return comboConf;
 	}
 	
-	public void changeLanguage () {
-		// TODO changer le texte à la volée
-		getJMenu1().setText("File from");
+	public JComboBox getComboRomSize () {
+		if (comboRomSize==null) {
+			comboRomSize = new JComboBox();
+			// We add the items into the list (we have to retrieve any possible game size)
+			Iterator<Game> iterGames = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()).values().iterator();
+			// We have to sort the items before showing them
+			TreeSet<Integer> treeSizes = new TreeSet<Integer>();
+						
+			while (iterGames.hasNext()) {
+				Game game = iterGames.next();
+				int size = Integer.parseInt(game.getRomSize());
+				if (!treeSizes.contains(size)) {
+					treeSizes.add(size);
+				}
+			}
+			// Now we display the treeset
+			comboRomSize.addItem(new GenericDropDownEntry("",""));
+			Iterator<Integer> iterSizes = treeSizes.iterator();
+			while (iterSizes.hasNext()) {
+				int size = iterSizes.next();
+				comboRomSize.addItem(new GenericDropDownEntry(String.valueOf(size), String.valueOf(size/(1024*1024)+ " MB")));
+			}
+			comboRomSize.setVisible(true);
+		}
+		return comboRomSize;
+	}
+	
+	public JComboBox getComboLocation () {
+		if (comboLocation==null) {
+			comboLocation = new JComboBox();
+			// We add the items into the list (we have to retrieve any possible game location)
+			comboLocation.addItem(new GenericDropDownEntry("",""));
+			Iterator<Game> iterGames = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()).values().iterator();
+			List<String> list = new ArrayList<String>(); 
+			while (iterGames.hasNext()) {
+				Game game = iterGames.next();
+				if (!list.contains(game.getLocation())) {
+					list.add(game.getLocation());
+					String locationText = GameDisplayHelper.getLocation(game);
+					comboLocation.addItem(new GenericDropDownEntry(game.getLocation(), locationText));
+				}
+			}
+			comboLocation.setVisible(true);
+		}
+		return comboLocation;
+	}
+	
+	public JComboBox getComboLanguage () {
+		if (comboLanguage==null) {
+			comboLanguage = new JComboBox();
+			
+			// We sort the item in natural order for the ui
+			TreeMap<String, String> langSet = new TreeMap<String, String>();
+			for (int i=0; i<Consts.LANG_NAMES.size(); i++) {
+				langSet.put(Consts.LANG_NAMES.get(i), String.valueOf(i));
+			}
+			
+			comboLanguage.addItem(new GenericDropDownEntry("",""));
+			Iterator<Entry<String, String>> iterLang = langSet.entrySet().iterator();
+			while (iterLang.hasNext()) {
+				Entry<String, String> entry = iterLang.next();
+				comboLanguage.addItem(new GenericDropDownEntry(entry.getValue(), entry.getKey()));
+			}
+			comboLanguage.setVisible(true);
+		}
+		return comboLanguage;
+	}
+	
+	public JCheckBox getCBBadName () {
+		if (CBBadNamed==null) {
+			CBBadNamed = new JCheckBox();
+			CBBadNamed.setText(Messages.getString("BadNamed"));
+			CBBadNamed.setSelected(true);
+			CBBadNamed.setVisible(true);
+		}
+		return CBBadNamed;
+	}
+	
+	public JCheckBox getCBOwned () {
+		if (CBOwned==null) {
+			CBOwned = new JCheckBox();
+			CBOwned.setText(Messages.getString("Owned"));
+			CBOwned.setSelected(true);
+			CBOwned.setVisible(true);
+		}
+		return CBOwned;
+	}
+	
+	public JCheckBox getCBNotOwned () {
+		if (CBNotOwned==null) {
+			CBNotOwned = new JCheckBox();
+			CBNotOwned.setText(Messages.getString("NotOwned"));
+			CBNotOwned.setSelected(true);
+			CBNotOwned.setVisible(true);
+		}
+		return CBNotOwned;
+	}
+
+	private JLabel getLabelLanguage() {
+		if (labelLanguage==null) {
+			labelLanguage = new JLabel();
+			labelLanguage.setText(Messages.getString("Language"));
+			labelLanguage.setVisible(true);
+		}
+		return labelLanguage;
+	}
+
+	private JLabel getLabelLocation() {
+		if (labelLocation==null) {
+			labelLocation = new JLabel();
+			labelLocation.setText(Messages.getString("Location"));
+			labelLocation.setVisible(true);
+		}
+		return labelLocation;
+	}
+
+	private JLabel getLabelPublisher() {
+		if (labelPublisher==null) {
+			labelPublisher = new JLabel();
+			labelPublisher.setText(Messages.getString("Publisher"));
+			labelPublisher.setVisible(true);
+		}
+		return labelPublisher;
+	}
+
+	private JLabel getLabelRomSize() {
+		if (labelRomSize==null) {
+			labelRomSize = new JLabel();
+			labelRomSize.setText(Messages.getString("RomSize"));
+			labelRomSize.setVisible(true);
+		}
+		return labelRomSize;
+	}
+
+	private JLabel getLabelSource() {
+		if (labelSource==null) {
+			labelSource = new JLabel();
+			labelSource.setText(Messages.getString("Source"));
+			labelSource.setVisible(true);
+		}
+		return labelSource;
+	}
+
+	private JLabel getLabelTitle() {
+		if (labelTitle==null) {
+			labelTitle = new JLabel();
+			labelTitle.setText(Messages.getString("Title"));
+			labelTitle.setVisible(true);
+		}
+		return labelTitle;
+	}
+	
+	private JButton getButtonFilter() {
+		if (buttonFilter==null) {
+			buttonFilter = new JButton();
+			buttonFilter.setText(Messages.getString("Filter"));
+			buttonFilter.addActionListener(new FilterGameCollectionAction(engine));
+			buttonFilter.setVisible(true);
+		}
+		return buttonFilter;
 	}
 }

@@ -60,7 +60,7 @@ public class CleanWindow extends JFrame {
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Nettoyage des archives"); //$NON-NLS-1$
+		this.setTitle(Messages.getString("CleanWindow.1"));
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
