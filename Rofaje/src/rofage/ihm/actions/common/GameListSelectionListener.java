@@ -54,13 +54,20 @@ public class GameListSelectionListener implements ListSelectionListener {
 			// We update the game infos
 			StringBuffer str = new StringBuffer();
 			str.append(game.getTitle()).append("\n\n"); //$NON-NLS-1$
-			str.append(Messages.getString("GameListSelectionListener.3")).append(game.getReleaseNb()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.5")).append(game.getRomSize()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.2")).append(game.getCrc()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.9")).append(GameDisplayHelper.getLocation(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.11")).append(GameDisplayHelper.getLanguage(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.13")).append(game.getPublisher()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
-			str.append(Messages.getString("GameListSelectionListener.15")).append(game.getSourceRom()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getReleaseNb()!=null && !game.getReleaseNb().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.3")).append(game.getReleaseNb()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getRomSize()!=null && !game.getRomSize().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.5")).append(game.getRomSize()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getCrc()!=null && !game.getCrc().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.2")).append(game.getCrc()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getLocation()!=null && !game.getLocation().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.9")).append(GameDisplayHelper.getLocation(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getLanguage()!=null && !game.getLanguage().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.11")).append(GameDisplayHelper.getLanguage(game)).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getPublisher()!=null && !game.getPublisher().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.13")).append(game.getPublisher()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
+			if (game.getSourceRom()!=null && !game.getSourceRom().isEmpty())
+				str.append(Messages.getString("GameListSelectionListener.15")).append(game.getSourceRom()).append("\n"); //$NON-NLS-1$ //$NON-NLS-2$
 			
 			engine.getMainWindow().getJTextPane().setText(str.toString());
 			
