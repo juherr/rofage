@@ -38,9 +38,9 @@ import rofage.common.MainSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
 import rofage.ihm.actions.common.ChangeLanguageListener;
-import rofage.ihm.actions.common.ExtendedMenuListener;
 import rofage.ihm.actions.common.FilterGameCollectionAction;
 import rofage.ihm.actions.common.GameListSelectionListener;
+import rofage.ihm.actions.common.PopupListener;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowCleanAction;
 import rofage.ihm.actions.common.ShowConfigurationAction;
@@ -61,7 +61,10 @@ public class MainWindow extends JFrame {
 	private JMenu jMenu = null;
 
 	private JMenu jMenu1 = null;
+	
 	private JPopupMenu popMenu = null;
+	private JMenuItem popMenuItemExport = null;
+	private JMenuItem popMenuItemExportTo = null;
 	
 	private JMenuItem jMenuItem = null;
 	
@@ -218,8 +221,8 @@ public class MainWindow extends JFrame {
 	public JPopupMenu getPopMenu() {
 		if (popMenu == null) {
 			popMenu = new JPopupMenu();
-			popMenu.add(getJMenuItem1());
-			popMenu.add(getJMenuItem());
+			popMenu.add(getPopMenuItemExport());
+			popMenu.add(getPopMenuItemExportTo());
 		}
 		return popMenu;
 	}
@@ -279,7 +282,7 @@ public class MainWindow extends JFrame {
 			} else {
 				jTable = new GameListTable(Configuration.DEFAULT_TITLEPATTERN);
 			}
-			jTable.addMouseListener(new ExtendedMenuListener(engine));
+			jTable.addMouseListener(new PopupListener(engine));
 			ListSelectionModel listSelectionModel = jTable.getSelectionModel();
 			listSelectionModel.addListSelectionListener(new GameListSelectionListener(engine));
 		}
@@ -420,6 +423,24 @@ public class MainWindow extends JFrame {
 			jMenuItem1.setVisible(true);
 		}
 		return jMenuItem1;
+	}
+	
+	private JMenuItem getPopMenuItemExport() {
+		if (popMenuItemExport == null) {
+			popMenuItemExport = new JMenuItem();
+			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
+			popMenuItemExport.setText(Messages.getString("Export")); //$NON-NLS-1$
+		}
+		return popMenuItemExport;
+	}
+	
+	private JMenuItem getPopMenuItemExportTo() {
+		if (popMenuItemExportTo == null) {
+			popMenuItemExportTo = new JMenuItem();
+			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
+			popMenuItemExportTo.setText(Messages.getString("ExportTo")); //$NON-NLS-1$
+		}
+		return popMenuItemExportTo;
 	}
 	
 	private JMenuItem getMenuItemConf() {
