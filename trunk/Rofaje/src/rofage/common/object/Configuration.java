@@ -19,15 +19,12 @@ public class Configuration implements Serializable {
 	private boolean moveUnknownRoms = false;
 	private boolean updateAtStartup = false;
 	private boolean renameInside = false;
+	private boolean inAppUpdate = false;
 		
 	// Internal configuration data retrieved from the datFile
 	private String confName; // Name of the dat 
 	private String imageFolder = null; // Folder name where images are locally stored
 	private int version; // Version of the file
-	private int screenShotsWidthA; 
-	private int screenShotsHeightA;
-	private int screenShotsWidthB; 
-	private int screenShotsHeightB;
 	private String newDatUrl; // URL to download the latest version
 	private String imageUrl; // Base URL to download images
 	private String newVersionUrl; // URL to check the latest version
@@ -94,30 +91,6 @@ public class Configuration implements Serializable {
 	public void setNewDatUrl(String newDatUrl) {
 		this.newDatUrl = newDatUrl;
 	}
-	public int getScreenShotsHeightA() {
-		return screenShotsHeightA;
-	}
-	public void setScreenShotsHeightA(int screenShotsHeightA) {
-		this.screenShotsHeightA = screenShotsHeightA;
-	}
-	public int getScreenShotsHeightB() {
-		return screenShotsHeightB;
-	}
-	public void setScreenShotsHeightB(int screenShotsHeightB) {
-		this.screenShotsHeightB = screenShotsHeightB;
-	}
-	public int getScreenShotsWidthA() {
-		return screenShotsWidthA;
-	}
-	public void setScreenShotsWidthA(int screenShotsWidthA) {
-		this.screenShotsWidthA = screenShotsWidthA;
-	}
-	public int getScreenShotsWidthB() {
-		return screenShotsWidthB;
-	}
-	public void setScreenShotsWidthB(int screenShotsWidthB) {
-		this.screenShotsWidthB = screenShotsWidthB;
-	}
 	public String getNewVersionUrl() {
 		return newVersionUrl;
 	}
@@ -141,6 +114,12 @@ public class Configuration implements Serializable {
 	}
 	public void setRenameInside(boolean renameInside) {
 		this.renameInside = renameInside;
+	}
+	public boolean isInAppUpdate() {
+		return inAppUpdate;
+	}
+	public void setInAppUpdate(boolean inAppUpdate) {
+		this.inAppUpdate = inAppUpdate;
 	}
 	
 }

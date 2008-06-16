@@ -2,6 +2,7 @@ package rofage.ihm.conf;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -9,6 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -49,7 +51,6 @@ public class ConfWindow extends JFrame {
 	
 	private JLabel labelRomFolder = null;
 	private JLabel labelUnknownRomFolder = null;
-	private JLabel labelAutoUpdate = null;
 	private JLabel labelTitlePattern = null;
 	private JLabel labelRenameInside = null;
 	
@@ -67,6 +68,7 @@ public class ConfWindow extends JFrame {
 	private JCheckBox CBmoveUnknownRoms = null;
 	private JCheckBox CBAutoUpdate = null;
 	private JCheckBox CBRenameInside = null;
+	private JCheckBox CBInAppUpdate = null;
 	
 	private JTextPane textPaneTitlePattern = null;
 	
@@ -214,8 +216,10 @@ public class ConfWindow extends JFrame {
 	private JPanel getPanelAutoUpdate() {
 		if (panelAutoUpdate==null) {
 			panelAutoUpdate = new JPanel();
+			panelAutoUpdate.setLayout(new BoxLayout(panelAutoUpdate, BoxLayout.PAGE_AXIS));
+			panelAutoUpdate.setAlignmentX(Component.LEFT_ALIGNMENT);
 			panelAutoUpdate.add(getCBAutoUpdate());
-			panelAutoUpdate.add(getLabelAutoUpdate());
+			panelAutoUpdate.add(getCBInAppUpdate());
 			panelAutoUpdate.setVisible(true);
 		}
 		return panelAutoUpdate;
@@ -256,15 +260,6 @@ public class ConfWindow extends JFrame {
 			labelUnknownRomFolder.setText(Messages.getString("ConfWindow.7")); //$NON-NLS-1$
 		}
 		return labelUnknownRomFolder;
-	}
-	
-	private JLabel getLabelAutoUpdate () {
-		if (labelAutoUpdate==null) {
-			labelAutoUpdate = new JLabel();
-			labelAutoUpdate.setText(Messages.getString("ConfWindow.8")); //$NON-NLS-1$
-			labelAutoUpdate.setVisible(true);
-		}
-		return labelAutoUpdate;
 	}
 	
 	private JLabel getLabelTitlePattern () {
@@ -405,6 +400,7 @@ public class ConfWindow extends JFrame {
 			if (engine.getGlobalConf().getSelectedConf()!=null) {
 				CBAutoUpdate.setSelected(engine.getGlobalConf().getSelectedConf().isUpdateAtStartup());	
 			}
+			CBAutoUpdate.setText(Messages.getString("ConfWindow.8"));
 			CBAutoUpdate.setVisible(true);
 		}
 		return CBAutoUpdate;
@@ -419,6 +415,18 @@ public class ConfWindow extends JFrame {
 			CBRenameInside.setVisible(true);
 		}
 		return CBRenameInside;
+	}
+	
+	public JCheckBox getCBInAppUpdate () {
+		if (CBInAppUpdate==null) {
+			CBInAppUpdate = new JCheckBox();
+			CBInAppUpdate.setText(Messages.getString("InAppUpdate"));
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBInAppUpdate.setSelected(engine.getGlobalConf().getSelectedConf().isInAppUpdate());	
+			}
+			CBInAppUpdate.setVisible(true);
+		}
+		return CBInAppUpdate;
 	}
 	
 	private JTextPane getTextPaneTitlePattern () {

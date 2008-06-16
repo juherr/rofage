@@ -37,7 +37,12 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	}
 
 	public Game getGameAt (int row) {
-		return tableDatas.get(row);
+		if (row!=-1) {
+			return tableDatas.get(row);
+		} else {
+			// we build a dummy game since no game is selected
+			return new Game();
+		}
 	}
 	
 	public Object getValueAt(int row, int col) {

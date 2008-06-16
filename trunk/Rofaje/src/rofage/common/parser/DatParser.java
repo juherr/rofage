@@ -101,41 +101,53 @@ public class DatParser {
 	}
 	
 	public int getScreenshotsHeightA () {
-		Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-		return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_HEIGHT));
+		if (guiNode!=null) {
+			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
+			return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_HEIGHT));
+		}
+		return 0;
 	}
 	
 	public int getScreenshotsWidthA () {
-		Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-		return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_WIDTH));
+		if (guiNode!=null) {
+			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
+			return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_WIDTH));
+		}
+		return 0;
 	}
 	
 	public int getScreenshotsHeightB () {
-		Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-		
-		// We have to manually construct the list to avoid unchecked warnings
-		List<Element> listImageNodes = new ArrayList<Element>();
-		Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
-		while (iterImageNodes.hasNext()) {
-			listImageNodes.add((Element) iterImageNodes.next());
+		if (guiNode!=null) {
+			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
+			
+			// We have to manually construct the list to avoid unchecked warnings
+			List<Element> listImageNodes = new ArrayList<Element>();
+			Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
+			while (iterImageNodes.hasNext()) {
+				listImageNodes.add((Element) iterImageNodes.next());
+			}
+			
+			// Then we get the height attribute of the last image node
+			return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_HEIGHT));
 		}
-		
-		// Then we get the height attribute of the last image node
-		return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_HEIGHT));
+		return 0;
 	}
 	
 	public int getScreenshotsWidthB () {
-		Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-		
-		// We have to manually construct the list to avoid unchecked warnings
-		List<Element> listImageNodes = new ArrayList<Element>();
-		Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
-		while (iterImageNodes.hasNext()) {
-			listImageNodes.add((Element) iterImageNodes.next());
-		}
-		
-		// Then we get the height attribute of the last image node
-		return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_WIDTH));
+		if (guiNode!=null) {
+			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
+			
+			// We have to manually construct the list to avoid unchecked warnings
+			List<Element> listImageNodes = new ArrayList<Element>();
+			Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
+			while (iterImageNodes.hasNext()) {
+				listImageNodes.add((Element) iterImageNodes.next());
+			}
+			
+			// Then we get the height attribute of the last image node
+			return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_WIDTH));
+		} 
+		return 0;
 	}
 	
 	public int getVersion () {
