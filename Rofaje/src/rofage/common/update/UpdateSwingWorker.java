@@ -19,6 +19,7 @@ import javax.swing.SwingWorker;
 
 import rofage.common.Consts;
 import rofage.common.Engine;
+import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
 import rofage.common.files.ZipToolkit;
 import rofage.common.helper.ConfigurationHelper;
@@ -158,6 +159,12 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 			
 			// We also have to renew the gameDB for this configuration
 			GameDBHelper.createGameCollectionInEngine(engine, newConfig.getConfName(), datParser);
+			
+			// We have to save the configuration & the gameDB
+			// In case the scan worker is not performed afterwards
+			// Otherwise, the old values will still be used 
+			SerializationHelper.saveGameDB(engine.getGameDB());
+			SerializationHelper.saveGlobalConfiguration(engine.getGlobalConf());
 			return true;
 		} else {
 			publish (Messages.getString("UpdateSwingWorker.10")+conf.getConfName()+Messages.getString("UpdateSwingWorker.11")+conf.getVersion()+")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
