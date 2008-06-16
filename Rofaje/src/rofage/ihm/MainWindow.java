@@ -22,6 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
@@ -37,6 +38,7 @@ import rofage.common.MainSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
 import rofage.ihm.actions.common.ChangeLanguageListener;
+import rofage.ihm.actions.common.ExtendedMenuListener;
 import rofage.ihm.actions.common.FilterGameCollectionAction;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.ShowAboutAction;
@@ -59,9 +61,10 @@ public class MainWindow extends JFrame {
 	private JMenu jMenu = null;
 
 	private JMenu jMenu1 = null;
-
+	private JPopupMenu popMenu = null;
+	
 	private JMenuItem jMenuItem = null;
-
+	
 	private JSplitPane jSplitPane = null;
 
 	private GameListTable jTable = null;
@@ -212,6 +215,15 @@ public class MainWindow extends JFrame {
 		return jMenu1;
 	}
 	
+	public JPopupMenu getPopMenu() {
+		if (popMenu == null) {
+			popMenu = new JPopupMenu();
+			popMenu.add(getJMenuItem1());
+			popMenu.add(getJMenuItem());
+		}
+		return popMenu;
+	}
+	
 	private JMenu getMenuConf () {
 		if (menuConf==null) {
 			menuConf = new JMenu();
@@ -267,6 +279,7 @@ public class MainWindow extends JFrame {
 			} else {
 				jTable = new GameListTable(Configuration.DEFAULT_TITLEPATTERN);
 			}
+			jTable.addMouseListener(new ExtendedMenuListener(engine));
 			ListSelectionModel listSelectionModel = jTable.getSelectionModel();
 			listSelectionModel.addListSelectionListener(new GameListSelectionListener(engine));
 		}
