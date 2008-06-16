@@ -47,7 +47,8 @@ public class SaveConfigurationAction extends AbstractAction {
 		// Conditions are : 
 		// 1- rom folder has changed
 		// 2- title pattern has changed
-		if ((!newConf.getRomFolder().equals(oldRomFolder) 
+		if (oldRomFolder!=null &&
+				(!newConf.getRomFolder().equals(oldRomFolder) 
 				&& !newConf.getRomFolder().trim().isEmpty())
 			|| (!oldTitlePattern.equals(newConf.getTitlePattern()))) {
 			ScanSwingWorker scanSW = new ScanSwingWorker(engine);

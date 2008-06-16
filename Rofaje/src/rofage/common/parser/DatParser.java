@@ -28,7 +28,7 @@ public class DatParser {
 	private final static String XML_NODE_IMAGENB			= "imageNumber";
 	private final static String XML_NODE_RELEASENB		= "releaseNumber";
 	private final static String XML_NODE_TITLE			= "title";
-	private final static String XML_NODE_ROMSIZE			= "value";
+	private final static String XML_NODE_ROMSIZE			= "romSize";
 	private final static String XML_NODE_PUBLISHER		= "publisher";
 	private final static String XML_NODE_LOCATION		= "location";
 	private final static String XML_NODE_SOURCEROM		= "sourceRom";

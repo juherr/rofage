@@ -28,7 +28,7 @@ public class Game implements Serializable {
 	private boolean goodName = false;
 	
 	/** fullPath to the file containing the rom. It can either be the rom itself or a zip file */
-	private String containerPath = "";
+	private String containerPath;
 	
 	public String getCrc() {
 		return crc;

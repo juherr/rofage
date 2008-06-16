@@ -42,20 +42,22 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	
 	public Object getValueAt(int row, int col) {
 		Game game = tableDatas.get(row);
-		if (col==0) {
-			// Location
-			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png")); //$NON-NLS-1$ //$NON-NLS-2$
-		} else if (col==1) {
-			if (game.isGotRom()) {
-				if (game.isGoodName()) {
-					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")); //$NON-NLS-1$
-				} else {
-					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")); //$NON-NLS-1$
+		if (game!=null) {
+			if (col==0) {
+				// Location
+				return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png")); //$NON-NLS-1$ //$NON-NLS-2$
+			} else if (col==1) {
+				if (game.isGotRom()) {
+					if (game.isGoodName()) {
+						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")); //$NON-NLS-1$
+					} else {
+						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")); //$NON-NLS-1$
+					}
 				}
+				return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$
+			} if (col==2) {
+				return GameDisplayHelper.buildTitle(game, titlePattern);
 			}
-			return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$
-		} if (col==2) {
-			return GameDisplayHelper.buildTitle(game, titlePattern);
 		}
 		return 0;
 	}
