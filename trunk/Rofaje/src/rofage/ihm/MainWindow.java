@@ -5,13 +5,8 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -34,13 +29,9 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
-import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
-import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
-import rofage.common.object.Game;
-import rofage.common.object.GenericDropDownEntry;
 import rofage.ihm.actions.common.ChangeConfInMainListener;
 import rofage.ihm.actions.common.ChangeLanguageListener;
 import rofage.ihm.actions.common.FilterGameCollectionAction;
@@ -51,6 +42,7 @@ import rofage.ihm.actions.common.ShowConfigurationAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
 import rofage.ihm.actions.common.ShowUpdateAction;
+import rofage.ihm.helper.ComboFilterHelper;
 import rofage.ihm.images.JPanelImage;
 
 public class MainWindow extends JFrame {
@@ -498,24 +490,7 @@ public class MainWindow extends JFrame {
 		if (comboRomSize==null) {
 			comboRomSize = new JComboBox();
 			// We add the items into the list (we have to retrieve any possible game size)
-			Iterator<Game> iterGames = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()).values().iterator();
-			// We have to sort the items before showing them
-			TreeSet<Integer> treeSizes = new TreeSet<Integer>();
-						
-			while (iterGames.hasNext()) {
-				Game game = iterGames.next();
-				int size = Integer.parseInt(game.getRomSize());
-				if (!treeSizes.contains(size)) {
-					treeSizes.add(size);
-				}
-			}
-			// Now we display the treeset
-			comboRomSize.addItem(new GenericDropDownEntry("",""));
-			Iterator<Integer> iterSizes = treeSizes.iterator();
-			while (iterSizes.hasNext()) {
-				int size = iterSizes.next();
-				comboRomSize.addItem(new GenericDropDownEntry(String.valueOf(size), String.valueOf(size/(1024*1024)+ " MB")));
-			}
+			ComboFilterHelper.setFilterSize(engine, comboRomSize);
 			comboRomSize.setVisible(true);
 		}
 		return comboRomSize;
@@ -524,18 +499,7 @@ public class MainWindow extends JFrame {
 	public JComboBox getComboLocation () {
 		if (comboLocation==null) {
 			comboLocation = new JComboBox();
-			// We add the items into the list (we have to retrieve any possible game location)
-			comboLocation.addItem(new GenericDropDownEntry("",""));
-			Iterator<Game> iterGames = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()).values().iterator();
-			List<String> list = new ArrayList<String>(); 
-			while (iterGames.hasNext()) {
-				Game game = iterGames.next();
-				if (!list.contains(game.getLocation())) {
-					list.add(game.getLocation());
-					String locationText = GameDisplayHelper.getLocation(game);
-					comboLocation.addItem(new GenericDropDownEntry(game.getLocation(), locationText));
-				}
-			}
+			ComboFilterHelper.setFilterLocation(engine, comboLocation);
 			comboLocation.setVisible(true);
 		}
 		return comboLocation;
@@ -544,19 +508,7 @@ public class MainWindow extends JFrame {
 	public JComboBox getComboLanguage () {
 		if (comboLanguage==null) {
 			comboLanguage = new JComboBox();
-			
-			// We sort the item in natural order for the ui
-			TreeMap<String, String> langSet = new TreeMap<String, String>();
-			for (int i=0; i<Consts.LANG_NAMES.size(); i++) {
-				langSet.put(Consts.LANG_NAMES.get(i), String.valueOf(i));
-			}
-			
-			comboLanguage.addItem(new GenericDropDownEntry("",""));
-			Iterator<Entry<String, String>> iterLang = langSet.entrySet().iterator();
-			while (iterLang.hasNext()) {
-				Entry<String, String> entry = iterLang.next();
-				comboLanguage.addItem(new GenericDropDownEntry(entry.getValue(), entry.getKey()));
-			}
+			ComboFilterHelper.setFilterLanguage(comboLanguage);
 			comboLanguage.setVisible(true);
 		}
 		return comboLanguage;

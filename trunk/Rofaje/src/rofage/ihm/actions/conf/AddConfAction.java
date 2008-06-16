@@ -49,13 +49,13 @@ public class AddConfAction extends AbstractAction {
 				// We update the selected conf of the engine
 				Configuration newConfig = ConfigurationHelper.createConfFromDatParser(engine, datParser);
 				engine.getGlobalConf().setSelectedConf(newConfig);
+
+//				 We also have to create the related gameDB for this configuration
+				GameDBHelper.createGameCollectionInEngine(engine, datFileName, datParser);				
 				// We add this conf in the combo
 				engine.getConfWindow().getComboConf().addItem(datFileName);
 				// We add this conf in the combo in the main window
 				engine.getMainWindow().getComboConf().addItem(datFileName);
-				
-				// We also have to create the related gameDB for this configuration
-				GameDBHelper.createGameCollectionInEngine(engine, datFileName, datParser);
 				
 				// We also add this datas in the Jtable of the main window
 				//((GameListTableModel) engine.getMainWindow().getJTable().getModel()).setGameCollectionAndDatas(gameCollection);

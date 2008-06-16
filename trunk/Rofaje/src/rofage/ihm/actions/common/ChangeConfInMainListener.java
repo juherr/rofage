@@ -6,6 +6,7 @@ import java.awt.event.ItemListener;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
 import rofage.common.object.Configuration;
+import rofage.ihm.helper.ComboFilterHelper;
 
 public class ChangeConfInMainListener implements ItemListener {
 	
@@ -26,6 +27,11 @@ public class ChangeConfInMainListener implements ItemListener {
 			
 			MainSwingWorker mainSW = new MainSwingWorker(engine);
 			mainSW.execute();
+			
+			// We also have to reinit the filters values
+			ComboFilterHelper.setFilterLanguage(engine.getMainWindow().getComboLanguage());
+			ComboFilterHelper.setFilterLocation(engine, engine.getMainWindow().getComboLocation());
+			ComboFilterHelper.setFilterSize(engine, engine.getMainWindow().getComboRomSize());
 		} else if (e.getStateChange() == ItemEvent.DESELECTED) {
 			// It is possible we removed a conf
 			// So we have to check if it was the last one to clean up the ui
