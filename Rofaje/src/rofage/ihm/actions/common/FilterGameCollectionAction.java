@@ -24,6 +24,7 @@ public class FilterGameCollectionAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
+		engine.getMainWindow().getJTable().clearSelection();
 		// We get the value of the form to filter the game Collection
 		TreeMap<Integer, Game> gameCollection = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName());
 		TreeMap<Integer, Game> filteredGameCollection = new TreeMap<Integer, Game>();

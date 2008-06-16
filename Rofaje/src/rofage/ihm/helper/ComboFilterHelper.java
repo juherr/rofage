@@ -1,8 +1,6 @@
 package rofage.ihm.helper;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
@@ -44,16 +42,24 @@ public abstract class ComboFilterHelper {
 		combo.removeAllItems();
 //		 We add the items into the list (we have to retrieve any possible game location)
 		if (engine.getGlobalConf().getSelectedConf()!=null) {
-			combo.addItem(new GenericDropDownEntry("",""));
 			Iterator<Game> iterGames = engine.getGameDB().getGameCollections().get(engine.getGlobalConf().getSelectedConf().getConfName()).values().iterator();
-			List<String> list = new ArrayList<String>(); 
+//			 We have to sort the items before showing them
+			TreeMap<String, String> treeLocations = new TreeMap<String, String>();
+						
 			while (iterGames.hasNext()) {
 				Game game = iterGames.next();
-				if (!list.contains(game.getLocation())) {
-					list.add(game.getLocation());
-					String locationText = GameDisplayHelper.getLocation(game);
-					combo.addItem(new GenericDropDownEntry(game.getLocation(), locationText));
+				String location = game.getLocation();
+				if (!treeLocations.containsValue(location)) {
+					treeLocations.put(GameDisplayHelper.getLocation(game), location);
 				}
+			}
+			
+			// Now we display the treeset
+			combo.addItem(new GenericDropDownEntry("",""));
+			Iterator<Entry<String, String>> iterLocations = treeLocations.entrySet().iterator();
+			while (iterLocations.hasNext()) {
+				Entry<String, String> entry = iterLocations.next();
+				combo.addItem(new GenericDropDownEntry(entry.getValue(), entry.getKey()));
 			}
 		}
 	}

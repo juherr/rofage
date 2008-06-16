@@ -14,15 +14,15 @@ public class Game implements Serializable {
 	private static final long serialVersionUID = 472389048397070141L;
 	private String imageNb;
 	private String releaseNb;
-	private String title;
-	private String romSize;
-	private String location;
-	private String publisher;
-	private String sourceRom;
-	private String language;
-	private String crc;
-	private String image1crc;
-	private String image2crc;
+	private String title = "";
+	private String romSize = "";
+	private String location = "";
+	private String publisher = "";
+	private String sourceRom = "";
+	private String language = "";
+	private String crc = "";
+	private String image1crc = "";
+	private String image2crc = "";
 	
 	private boolean gotRom = false;
 	private boolean goodName = false;

@@ -22,6 +22,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -110,6 +111,8 @@ public class MainWindow extends JFrame {
 	private JLabel labelStatusIconOwned = null;
 	private JLabel labelStatusIconBadNamed = null;
 	private JLabel labelStatusIconNotOwned = null;
+	
+	private JProgressBar progressBarImage = null;
 	
 	
 	private JButton buttonFilter = null;
@@ -305,6 +308,9 @@ public class MainWindow extends JFrame {
 			panelStatusBar.add(getLabelStatusIconBadNamed());
 			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
 			panelStatusBar.add(getLabelStatusIconOwned());
+			panelStatusBar.add(Box.createHorizontalGlue());
+			panelStatusBar.add(getProgressBarImage());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(10,20)));
 			panelStatusBar.setPreferredSize(new Dimension(1024,20));
 			panelStatusBar.setVisible(true);
 		}
@@ -649,6 +655,17 @@ public class MainWindow extends JFrame {
 			labelTitle.setVisible(true);
 		}
 		return labelTitle;
+	}
+	
+	public JProgressBar getProgressBarImage() {
+		if (progressBarImage==null) {
+			progressBarImage = new JProgressBar();
+			progressBarImage.setName("progressBar"); //$NON-NLS-1$
+			progressBarImage.setPreferredSize(new Dimension(20, 20));
+			progressBarImage.setStringPainted(true);
+			progressBarImage.setVisible(true);
+		}
+		return progressBarImage;
 	}
 	
 	private JButton getButtonFilter() {

@@ -21,15 +21,15 @@ public abstract class GameDisplayHelper {
 	 */
 	public static String buildTitle (Game game, String pattern) {
 		pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getReleaseNb()));
-		pattern = pattern.replace("%t", game.getTitle());
-		pattern = pattern.replace("%s", game.getRomSize());
-		pattern = pattern.replace("%l", getLocation(game));
-		pattern = pattern.replace("%p", game.getPublisher());
-		pattern = pattern.replace("%S", game.getSourceRom());
-		pattern = pattern.replace("%L", getLanguage(game));
-		pattern = pattern.replace("%c", game.getCrc());
-		pattern = pattern.replace("%M", getMulti(game));
-		pattern = pattern.replace("%C", getCountryCode(game));
+		if (game.getTitle()!=null) pattern = pattern.replace("%t", game.getTitle());
+		if (game.getRomSize()!=null) pattern = pattern.replace("%s", game.getRomSize());
+		if (game.getLocation()!=null) pattern = pattern.replace("%l", getLocation(game));
+		if (game.getPublisher()!=null) pattern = pattern.replace("%p", game.getPublisher());
+		if (game.getSourceRom()!=null) pattern = pattern.replace("%S", game.getSourceRom());
+		if (game.getLanguage()!=null) pattern = pattern.replace("%L", getLanguage(game));
+		if (game.getCrc()!=null) pattern = pattern.replace("%c", game.getCrc());
+		if (game.getLanguage()!=null) pattern = pattern.replace("%M", getMulti(game));
+		if (game.getLocation()!=null) pattern = pattern.replace("%C", getCountryCode(game));
 		
 		return pattern.trim();
 	}
@@ -71,19 +71,23 @@ public abstract class GameDisplayHelper {
 	 * @return
 	 */
 	public static String getLanguage (Game game) {
-		String languageInBits = Integer.toBinaryString(Integer.parseInt(game.getLanguage()));
-		StringBuffer str = new StringBuffer();
-		int nbLanguage = 0;
-		for (int i=0; i<languageInBits.length(); i++) {
-			if (languageInBits.charAt(i)=='1') {
-				if (nbLanguage>=1) {
-					str.append(" / ");
+		if (!game.getLanguage().isEmpty()) {
+			String languageInBits = Integer.toBinaryString(Integer.parseInt(game.getLanguage()));
+			StringBuffer str = new StringBuffer();
+			int nbLanguage = 0;
+			for (int i=0; i<languageInBits.length(); i++) {
+				if (languageInBits.charAt(i)=='1') {
+					if (nbLanguage>=1) {
+						str.append(" / ");
+					}
+					str.append(Consts.LANG_NAMES.get(languageInBits.length()-1-i));
+					nbLanguage++;
 				}
-				str.append(Consts.LANG_NAMES.get(languageInBits.length()-1-i));
-				nbLanguage++;
 			}
+			return str.toString();
+		} else {
+			return "";
 		}
-		return str.toString();
 	}
 	
 	/**

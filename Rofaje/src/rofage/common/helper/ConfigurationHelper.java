@@ -26,6 +26,7 @@ public abstract class ConfigurationHelper {
 		} else {
 			conf.setTitlePattern(confWindow.getFieldTitlePattern().getText().trim());
 		}
+		conf.setInAppUpdate(confWindow.getCBInAppUpdate().isSelected());
 				
 		// We save this conf into the global conf
 		engine.getGlobalConf().getMapDatConfigs().put(conf.getConfName(), conf);
@@ -41,10 +42,6 @@ public abstract class ConfigurationHelper {
 		conf.setImageUrl(datParser.getImageUrl());
 		conf.setNewDatUrl(datParser.getNewDatUrl());
 		conf.setNewVersionUrl(datParser.getNewDatVersionUrl());
-		conf.setScreenShotsHeightA(datParser.getScreenshotsHeightA());
-		conf.setScreenShotsWidthA(datParser.getScreenshotsWidthA());
-		conf.setScreenShotsHeightB(datParser.getScreenshotsHeightB());
-		conf.setScreenShotsWidthB(datParser.getScreenshotsWidthB());
 		conf.setVersion(datParser.getVersion());
 		conf.setAllowedExtensions(datParser.getAllowedExtensions());
 		conf.setFileName(datParser.getFileName());
