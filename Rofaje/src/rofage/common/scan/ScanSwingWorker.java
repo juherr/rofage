@@ -23,6 +23,7 @@ import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.object.GlobalConfiguration;
 import rofage.ihm.Messages;
+import rofage.ihm.helper.StatusBarHelper;
 
 public class ScanSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopScan;
@@ -63,6 +64,9 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 		
 		// We update the ui
 		engine.getMainWindow().getJTable().updateUI();
+		
+		// We also update the status bar
+		StatusBarHelper.updateStatusBar(gameCollection, engine);
 		
 		// The stop button may habe been disabled by an other process,
 		// We enable it again

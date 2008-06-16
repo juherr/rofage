@@ -19,6 +19,7 @@ import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.ihm.Messages;
+import rofage.ihm.helper.StatusBarHelper;
 
 public class RenameSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopAction;
@@ -59,6 +60,8 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 		
 		// We update the UI
 		engine.getMainWindow().getJTable().updateUI();
+		
+		StatusBarHelper.updateStatusBar(gameCollection, engine);
 		
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
