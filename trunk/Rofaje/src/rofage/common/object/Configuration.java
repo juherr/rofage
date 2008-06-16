@@ -13,8 +13,8 @@ public class Configuration implements Serializable {
 	private static final long serialVersionUID = -7122119084096321060L;
 	public static final String DEFAULT_TITLEPATTERN = "%n-%t";
 	
-	private String romFolder;
-	private String romFolderMove;
+	private String romFolder = "";
+	private String romFolderMove = "";
 	private String titlePattern = DEFAULT_TITLEPATTERN;
 	private boolean moveUnknownRoms = false;
 	private boolean updateAtStartup = false;

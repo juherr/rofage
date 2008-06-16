@@ -10,7 +10,9 @@ import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -71,6 +73,7 @@ public class MainWindow extends JFrame {
 	private JPanelImage jPanelImage2 = null;
 	private JPanel jPanelImages = null;
 	private JPanel panelFilter = null;
+	private JPanel panelStatusBar = null;
 
 	private JScrollPane jScrollPane = null;
 
@@ -104,6 +107,10 @@ public class MainWindow extends JFrame {
 	private JLabel labelPublisher = null;
 	private JLabel labelSource = null;
 	private JLabel labelLanguage = null;
+	private JLabel labelStatusIconOwned = null;
+	private JLabel labelStatusIconBadNamed = null;
+	private JLabel labelStatusIconNotOwned = null;
+	
 	
 	private JButton buttonFilter = null;
 		
@@ -146,6 +153,7 @@ public class MainWindow extends JFrame {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new BorderLayout());
 			jContentPane.add(getJSplitPane(), BorderLayout.CENTER);
+			jContentPane.add(getPanelStatusBar(), BorderLayout.SOUTH);
 		}
 		return jContentPane;
 	}
@@ -286,6 +294,21 @@ public class MainWindow extends JFrame {
 			jPanel.add(getJPanelImages(), BorderLayout.NORTH);
 		}
 		return jPanel;
+	}
+	
+	public JPanel getPanelStatusBar () {
+		if (panelStatusBar==null) {
+			panelStatusBar = new JPanel();
+			panelStatusBar.setLayout(new BoxLayout(panelStatusBar, BoxLayout.LINE_AXIS));
+			panelStatusBar.add(getLabelStatusIconNotOwned());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(getLabelStatusIconBadNamed());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(getLabelStatusIconOwned());
+			panelStatusBar.setPreferredSize(new Dimension(1024,20));
+			panelStatusBar.setVisible(true);
+		}
+		return panelStatusBar;
 	}
 
 	/**
@@ -551,6 +574,36 @@ public class MainWindow extends JFrame {
 			labelLanguage.setVisible(true);
 		}
 		return labelLanguage;
+	}
+	
+	public JLabel getLabelStatusIconNotOwned() {
+		if (labelStatusIconNotOwned==null) {
+			labelStatusIconNotOwned = new JLabel();
+			labelStatusIconNotOwned.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")));
+			labelStatusIconNotOwned.setText("0");
+			labelStatusIconNotOwned.setVisible(true);
+		}
+		return labelStatusIconNotOwned;
+	}
+	
+	public JLabel getLabelStatusIconOwned() {
+		if (labelStatusIconOwned==null) {
+			labelStatusIconOwned = new JLabel();
+			labelStatusIconOwned.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")));
+			labelStatusIconOwned.setText("0");
+			labelStatusIconOwned.setVisible(true);
+		}
+		return labelStatusIconOwned;
+	}
+	
+	public JLabel getLabelStatusIconBadNamed() {
+		if (labelStatusIconBadNamed==null) {
+			labelStatusIconBadNamed = new JLabel();
+			labelStatusIconBadNamed.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")));
+			labelStatusIconBadNamed.setText("0");
+			labelStatusIconBadNamed.setVisible(true);
+		}
+		return labelStatusIconBadNamed;
 	}
 
 	private JLabel getLabelLocation() {
