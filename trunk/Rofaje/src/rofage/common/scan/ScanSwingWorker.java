@@ -139,7 +139,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 		if (selConf.getAllowedExtensions().contains(extension.toLowerCase()) 
 				|| selConf.getAllowedExtensions().contains(extension.toUpperCase())) {
 
-			String zipEntryCRC = Long.toHexString(zipEntry.getCrc());
+			String zipEntryCRC = FileToolkit.convertLongCRCToStringCRC(zipEntry.getCrc());
 			String releaseNb = cRCRomDB.get(zipEntryCRC.toUpperCase());
 			if (releaseNb==null) releaseNb = cRCRomDB.get(zipEntryCRC.toLowerCase());
 			if (releaseNb!=null) {

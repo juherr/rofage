@@ -61,19 +61,23 @@ public abstract class FileToolkit {
             byte[] buf = new byte[128];
             while(cis.read(buf) >= 0) {
             }
-            // The CRC String must have 8 digits
-            String crc32 = Long.toHexString(cis.getChecksum().getValue()).toUpperCase();
-            while (crc32.length()<8) {
-            	crc32 = "0".concat(crc32);
-            }
             
-            return crc32; 
+            return convertLongCRCToStringCRC(cis.getChecksum().getValue()); 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "error";  //$NON-NLS-1$
     }
+	
+	public static String convertLongCRCToStringCRC (long longCRC) {
+//		 The CRC String must have 8 digits
+        String crc32 = Long.toHexString(longCRC).toUpperCase();
+        while (crc32.length()<8) {
+        	crc32 = "0".concat(crc32);
+        }
+        return crc32;
+	}
 	
 	/**
 	 * returns the number of file (and not directory) contained in this directory
