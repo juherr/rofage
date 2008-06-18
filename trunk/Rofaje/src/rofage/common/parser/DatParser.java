@@ -37,19 +37,18 @@ public class DatParser {
 	private final static String XML_NODE_ROMCRC			= "romCRC";
 	private final static String XML_NODE_IMAGE1CRC		= "im1CRC";
 	private final static String XML_NODE_IMAGE2CRC		= "im2CRC";
-	private final static String XML_NODE_GUI				= "gui";
-	private final static String XML_NODE_IMAGES			= "images";
-	private final static String XML_NODE_IMAGE			= "image";
+	private final static String XML_NODE_ICONCRC		= "icoCRC";
+	private final static String XML_NODE_GENRE			= "genre";
+	private final static String XML_NODE_INTERNALNAME	= "internalname";
+	private final static String XML_NODE_SERIAL			= "serial";
+	private final static String XML_NODE_WIFI			= "wifi";
 	private final static String XML_NODE_CANOPEN		= "canOpen";
 	private final static String XML_NODE_EXTENSION		= "extension";
 	
 	private final static String XML_ATTR_FILENAME		= "fileName";
-	private final static String XML_ATTR_WIDTH			= "width";
-	private final static String XML_ATTR_HEIGHT			= "height";
 	
 	Element racine;
 	Element confNode;
-	Element guiNode;
 	Element gamesNode;
 	Element newDatNode;
 	Element canOpenNode;
@@ -68,7 +67,6 @@ public class DatParser {
 			Document document = sxb.build(new File(fullPath));
 			racine = document.getRootElement();
 			confNode = racine.getChild(XML_NODE_CONFIGURATION);
-			guiNode = racine.getChild(XML_NODE_GUI);
 			gamesNode = racine.getChild(XML_NODE_GAMES);
 			newDatNode = confNode.getChild(XML_NODE_NEWDAT);
 			canOpenNode = confNode.getChild(XML_NODE_CANOPEN);
@@ -98,56 +96,6 @@ public class DatParser {
 			// We replace it by the conf name
 			return getDatName();
 		}
-	}
-	
-	public int getScreenshotsHeightA () {
-		if (guiNode!=null) {
-			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-			return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_HEIGHT));
-		}
-		return 0;
-	}
-	
-	public int getScreenshotsWidthA () {
-		if (guiNode!=null) {
-			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-			return Integer.parseInt(imagesNode.getChild(XML_NODE_IMAGE).getAttributeValue(XML_ATTR_WIDTH));
-		}
-		return 0;
-	}
-	
-	public int getScreenshotsHeightB () {
-		if (guiNode!=null) {
-			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-			
-			// We have to manually construct the list to avoid unchecked warnings
-			List<Element> listImageNodes = new ArrayList<Element>();
-			Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
-			while (iterImageNodes.hasNext()) {
-				listImageNodes.add((Element) iterImageNodes.next());
-			}
-			
-			// Then we get the height attribute of the last image node
-			return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_HEIGHT));
-		}
-		return 0;
-	}
-	
-	public int getScreenshotsWidthB () {
-		if (guiNode!=null) {
-			Element imagesNode = guiNode.getChild(XML_NODE_IMAGES);
-			
-			// We have to manually construct the list to avoid unchecked warnings
-			List<Element> listImageNodes = new ArrayList<Element>();
-			Iterator iterImageNodes = imagesNode.getChildren(XML_NODE_IMAGE).iterator();
-			while (iterImageNodes.hasNext()) {
-				listImageNodes.add((Element) iterImageNodes.next());
-			}
-			
-			// Then we get the height attribute of the last image node
-			return Integer.parseInt(listImageNodes.get(listImageNodes.size()-1).getAttributeValue(XML_ATTR_WIDTH));
-		} 
-		return 0;
 	}
 	
 	public int getVersion () {
@@ -216,6 +164,13 @@ public class DatParser {
 			game.setRomSize(gameNode.getChildText(DatParser.XML_NODE_ROMSIZE));
 			game.setSourceRom(gameNode.getChildText(DatParser.XML_NODE_SOURCEROM));
 			game.setTitle(gameNode.getChildText(DatParser.XML_NODE_TITLE));
+			game.setIcoCrc(gameNode.getChildText(DatParser.XML_NODE_ICONCRC));
+			game.setGenre(gameNode.getChildText(XML_NODE_GENRE));
+			game.setInternalName(gameNode.getChildText(XML_NODE_INTERNALNAME));
+			game.setSerial(gameNode.getChildText(XML_NODE_SERIAL));
+			if ("Yes".equals(gameNode.getChildText(XML_NODE_WIFI))) {
+				game.setWifi(true);
+			}
 			
 			gameCollection.put(Integer.parseInt(game.getReleaseNb()), game);
 		}
