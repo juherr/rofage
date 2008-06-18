@@ -116,14 +116,14 @@ public class UpdateSwingWorker extends SwingWorker<Integer, String> { // <Return
 			downloadFile(urlToImage, false, folderPath+game.getReleaseNb()+suffixe);
 		} else {
 			// We check the physical CRC32 against the one contained in the dat file
-			String PhysicalCRC32 = FileToolkit.getCRC32(folderPath+game.getReleaseNb()+suffixe);
+			String physicalCRC32 = FileToolkit.getCRC32(folderPath+game.getReleaseNb()+suffixe);
 			// The CRC is not the same for the first and the 2nd image
 			if (firstImage) {
 				crc32 = game.getImage1crc();
 			} else {
 				crc32 = game.getImage2crc();
 			}
-			if (!PhysicalCRC32.equalsIgnoreCase(crc32)) {
+			if (!physicalCRC32.equalsIgnoreCase(crc32)) {
 				String urlToImage = URLToolkit.constructImageURL(conf.getImageUrl(), game, firstImage);
 				downloadFile(urlToImage, false, folderPath+game.getReleaseNb()+suffixe);
 			}

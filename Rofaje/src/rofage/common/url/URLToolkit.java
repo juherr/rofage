@@ -20,8 +20,8 @@ public abstract class URLToolkit {
 	public static String constructImageURL (String baseUrlImage, Game game, boolean firstOne) {
 		StringBuffer strBuff = new StringBuffer();
 		strBuff.append(baseUrlImage);
-		int releaseNb = Integer.parseInt(game.getReleaseNb());
-		int rangeStart = ((releaseNb-1)/500)*500+1; 
+		int imageNb = Integer.parseInt(game.getImageNb());
+		int rangeStart = ((imageNb-1)/500)*500+1; 
 		int rangeEnd = rangeStart+499;
 		
 		strBuff.append(rangeStart)
