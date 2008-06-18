@@ -23,6 +23,12 @@ public class Game implements Serializable {
 	private String crc = "";
 	private String image1crc = "";
 	private String image2crc = "";
+	private String icoCrc = "";
+	private String genre = "";
+	private String internalName = "";
+	private String serial = "";
+	private boolean wifi = false;
+	
 	
 	private boolean gotRom = false;
 	private boolean goodName = false;
@@ -117,5 +123,35 @@ public class Game implements Serializable {
 	}
 	public void setContainerPath(String containerPath) {
 		this.containerPath = containerPath;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getIcoCrc() {
+		return icoCrc;
+	}
+	public void setIcoCrc(String icoCrc) {
+		this.icoCrc = icoCrc;
+	}
+	public String getInternalName() {
+		return internalName;
+	}
+	public void setInternalName(String internalName) {
+		this.internalName = internalName;
+	}
+	public String getSerial() {
+		return serial;
+	}
+	public void setSerial(String serial) {
+		this.serial = serial;
+	}
+	public boolean isWifi() {
+		return wifi;
+	}
+	public void setWifi(boolean wifi) {
+		this.wifi = wifi;
 	}
 }
