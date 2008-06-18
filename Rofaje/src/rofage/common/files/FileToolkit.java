@@ -61,8 +61,13 @@ public abstract class FileToolkit {
             byte[] buf = new byte[128];
             while(cis.read(buf) >= 0) {
             }
-
-            return Long.toHexString(cis.getChecksum().getValue()).toUpperCase();
+            // The CRC String must have 8 digits
+            String crc32 = Long.toHexString(cis.getChecksum().getValue()).toUpperCase();
+            while (crc32.length()<8) {
+            	crc32 = "0".concat(crc32);
+            }
+            
+            return crc32; 
 
         } catch (IOException e) {
             e.printStackTrace();
