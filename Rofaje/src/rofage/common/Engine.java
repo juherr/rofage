@@ -107,7 +107,8 @@ public class Engine {
 		if (listConfToUpdate.size()>0) {
 			// We create the UpdateSW
 			getUpdateWindow().setVisible(true);
-			updateSW = new UpdateSwingWorker(this, listConfToUpdate);
+			updateSW = new UpdateSwingWorker(this, listConfToUpdate, getUpdateWindow().getJProgressBar(),
+					getUpdateWindow().getJTextArea());
 			updateSW.execute();
 		}
 	}
@@ -117,7 +118,6 @@ public class Engine {
 	 * It tries to load the configuration, if unsucessful, it creates it
 	 */
 	private void startupConf () {
-		// TODO changer tous les appels des messages avec la locale de la config
 		globalConf = SerializationHelper.loadGlobalConfiguration();
 		
 		if (globalConf==null) {

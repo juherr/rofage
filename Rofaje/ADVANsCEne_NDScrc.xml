@@ -2,7 +2,7 @@
 <dat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="datas.xsd">
 	<configuration>
 		<datName>ADVANsCEne Nintendo DS Collection</datName>
-		<datVersion>1074</datVersion>
+		<datVersion>1077</datVersion>
 		<system>Nintendo DS</system>
 		<screenshotsWidth>256</screenshotsWidth>
 		<screenshotsHeight>384</screenshotsHeight>
@@ -51582,7 +51582,7 @@
 			<wifi>Yes</wifi>
 			<filename>6rz-ards.zip</filename>
 			<dirname>Arkanoid_DS_JPN_NDS-6rz</dirname>
-			<duplicateid>0</duplicateid>
+			<duplicateid>578</duplicateid>
 			<comment>1780</comment>
 		</game>
 		<game>
@@ -59030,7 +59030,7 @@
 			<wifi>Yes</wifi>
 			<filename>6rz-siej.zip</filename>
 			<dirname>Space_Invaders_Extreme_JPN_NDS-6rz</dirname>
-			<duplicateid>0</duplicateid>
+			<duplicateid>579</duplicateid>
 			<comment>2042</comment>
 		</game>
 		<game>
@@ -59541,7 +59541,7 @@
 			<imageNumber>2116</imageNumber>
 			<releaseNumber>2116</releaseNumber>
 			<title>Akagawa Jirou Mystery - Yasoukyoku</title>
-			<saveType>TBC</saveType>
+			<saveType>Eeprom - 64 kbit</saveType>
 			<romSize>134217728</romSize>
 			<publisher>Marvelous</publisher>
 			<location>7</location>
@@ -62005,7 +62005,7 @@
 			<imageNumber>2204</imageNumber>
 			<releaseNumber>2204</releaseNumber>
 			<title>DS Bimoji Training</title>
-			<saveType>TBC</saveType>
+			<saveType>Flash - 4 Mbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Nintendo</publisher>
 			<location>7</location>
@@ -62453,7 +62453,7 @@
 			<imageNumber>2220</imageNumber>
 			<releaseNumber>2220</releaseNumber>
 			<title>Pokemon Ranger - Batonnage</title>
-			<saveType>TBC</saveType>
+			<saveType>Flash - 2 Mbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Nintendo</publisher>
 			<location>7</location>
@@ -62509,7 +62509,7 @@
 			<imageNumber>2222</imageNumber>
 			<releaseNumber>2222</releaseNumber>
 			<title>Hayate no Gotoku! Ojousama Produce Daisakusen Boku Iro ni Somare! Oyashiki-Hen</title>
-			<saveType>TBC</saveType>
+			<saveType>Eeprom - 512 kbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Konami</publisher>
 			<location>7</location>
@@ -62817,7 +62817,7 @@
 			<imageNumber>2233</imageNumber>
 			<releaseNumber>2233</releaseNumber>
 			<title>Bakousou Dekotora Densetsu Black</title>
-			<saveType>TBC</saveType>
+			<saveType>Eeprom - 512 kbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Spike</publisher>
 			<location>7</location>
@@ -63013,7 +63013,7 @@
 			<imageNumber>2240</imageNumber>
 			<releaseNumber>2240</releaseNumber>
 			<title>Hayate no Gotoku! Ojousama Produce Daisakusen Boku Iro ni Somare! Gakkou-Hen</title>
-			<saveType>TBC</saveType>
+			<saveType>Eeprom - 512 kbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Konami</publisher>
 			<location>7</location>
@@ -67017,7 +67017,7 @@
 			<imageNumber>2383</imageNumber>
 			<releaseNumber>2383</releaseNumber>
 			<title>Hercules no Eikou - Tamashii no Shoumei</title>
-			<saveType>TBC</saveType>
+			<saveType>Flash - 2 Mbit</saveType>
 			<romSize>134217728</romSize>
 			<publisher>Nintendo</publisher>
 			<location>7</location>
@@ -67829,7 +67829,7 @@
 			<imageNumber>2412</imageNumber>
 			<releaseNumber>2412</releaseNumber>
 			<title>Nanatsuiro Drops DS - Touch de Hajimaru Hatsukoi Monogatari</title>
-			<saveType>TBC</saveType>
+			<saveType>Eeprom - 64 kbit</saveType>
 			<romSize>67108864</romSize>
 			<publisher>Media Works</publisher>
 			<location>7</location>
@@ -68356,6 +68356,118 @@
 			<dirname>DS_Gostop_KOR_NDS-iND</dirname>
 			<duplicateid>0</duplicateid>
 			<comment>2367</comment>
+		</game>
+		<game>
+			<imageNumber>2431</imageNumber>
+			<releaseNumber>2431</releaseNumber>
+			<title>Wacky Races - Crash &amp; Dash</title>
+			<saveType>Eeprom - 4 kbit</saveType>
+			<romSize>67108864</romSize>
+			<publisher>Warner Interactive</publisher>
+			<location>1</location>
+			<sourceRom>XenoPhobia</sourceRom>
+			<language>4291</language>
+			<files>
+				<romCRC extension=".nds">B1211B2E</romCRC>
+			</files>
+			<im1CRC>684A7988</im1CRC>
+			<im2CRC>16A0620A</im2CRC>
+			<icoCRC>93CD4FDC</icoCRC>
+			<nfoCRC>AE0E4BBB</nfoCRC>
+			<genre>Racing</genre>
+			<dumpdate>2008-06-18</dumpdate>
+			<internalname>WACKY RACES</internalname>
+			<serial>NTR-YWRE-USA</serial>
+			<version>1.0</version>
+			<wifi>No</wifi>
+			<filename>xpa-waru.rar</filename>
+			<dirname>Wacky_Races_Crash_and_Dash_USA_NDS-XPA</dirname>
+			<duplicateid>0</duplicateid>
+			<comment>2368</comment>
+		</game>
+		<game>
+			<imageNumber>2432</imageNumber>
+			<releaseNumber>2432</releaseNumber>
+			<title>Arkanoid DS</title>
+			<saveType>Eeprom - 64 kbit</saveType>
+			<romSize>67108864</romSize>
+			<publisher>Square Enix</publisher>
+			<location>1</location>
+			<sourceRom>XenoPhobia</sourceRom>
+			<language>4291</language>
+			<files>
+				<romCRC extension=".nds">90F6817D</romCRC>
+			</files>
+			<im1CRC>0C2C791A</im1CRC>
+			<im2CRC>7321C852</im2CRC>
+			<icoCRC>33196A2A</icoCRC>
+			<nfoCRC>49E2E884</nfoCRC>
+			<genre>Action</genre>
+			<dumpdate>2008-06-18</dumpdate>
+			<internalname>ARKANOIDDS</internalname>
+			<serial>NTR-YAAE-USA</serial>
+			<version>1.0</version>
+			<wifi>Yes</wifi>
+			<filename>xpa-arku.rar</filename>
+			<dirname>Arkanoid_DS_USA_NDS-XPA</dirname>
+			<duplicateid>578</duplicateid>
+			<comment>2369</comment>
+		</game>
+		<game>
+			<imageNumber>2433</imageNumber>
+			<releaseNumber>2433</releaseNumber>
+			<title>Space Invaders Extreme</title>
+			<saveType>Eeprom - 64 kbit</saveType>
+			<romSize>67108864</romSize>
+			<publisher>Square Enix</publisher>
+			<location>1</location>
+			<sourceRom>Independent</sourceRom>
+			<language>4291</language>
+			<files>
+				<romCRC extension=".nds">CD45C61F</romCRC>
+			</files>
+			<im1CRC>9A04C390</im1CRC>
+			<im2CRC>65D7DFFE</im2CRC>
+			<icoCRC>4E3D8322</icoCRC>
+			<nfoCRC>3D21402D</nfoCRC>
+			<genre>Action</genre>
+			<dumpdate>2008-06-19</dumpdate>
+			<internalname>SIEXTREME</internalname>
+			<serial>NTR-YXXE-USA</serial>
+			<version>1.0</version>
+			<wifi>Yes</wifi>
+			<filename>ind-sieu.rar</filename>
+			<dirname>Space_Invaders_Extreme_USA_NDS-iND</dirname>
+			<duplicateid>579</duplicateid>
+			<comment>2370</comment>
+		</game>
+		<game>
+			<imageNumber>2434</imageNumber>
+			<releaseNumber>2434</releaseNumber>
+			<title>La Guida in Cucina - Che si Mangia Oggi</title>
+			<saveType>Flash - 2 Mbit</saveType>
+			<romSize>268435456</romSize>
+			<publisher>Nintendo</publisher>
+			<location>6</location>
+			<sourceRom>EXiMiUS</sourceRom>
+			<language>128</language>
+			<files>
+				<romCRC extension=".nds">5F1B95C3</romCRC>
+			</files>
+			<im1CRC>E04B4106</im1CRC>
+			<im2CRC>C4E67D81</im2CRC>
+			<icoCRC>44DB4F65</icoCRC>
+			<nfoCRC>E458090A</nfoCRC>
+			<genre>Cooking</genre>
+			<dumpdate>2008-06-19</dumpdate>
+			<internalname>RYOURI NAVII</internalname>
+			<serial>NTR-CNVI-ITA</serial>
+			<version>1.0</version>
+			<wifi>No</wifi>
+			<filename>xms-gici.rar</filename>
+			<dirname>La_Guida_in_Cucina_iTA_NDS-EXiMiUS</dirname>
+			<duplicateid>0</duplicateid>
+			<comment>2371</comment>
 		</game>
 	</games>
 </dat>

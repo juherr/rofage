@@ -1,5 +1,6 @@
 package rofage.ihm;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -9,19 +10,23 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import rofage.common.Consts;
+import rofage.common.Engine;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Game;
+import rofage.common.url.URLToolkit;
 
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class GameListTableModel extends AbstractTableModel implements TableModel {
-	TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game>();
-	List<Game> tableDatas = new ArrayList<Game>(gameCollection.values());
-	String[] columnNames = {"L", "R", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-	String titlePattern;
+	private TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game>();
+	private List<Game> tableDatas = new ArrayList<Game>(gameCollection.values());
+	private String[] columnNames = {"L", "R", "I", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private String titlePattern;
+	private Engine engine;
 	
-	public GameListTableModel (String titlePattern) {
+	public GameListTableModel (String titlePattern, Engine engine) {
 		super();
-		this.titlePattern = titlePattern; 
+		this.titlePattern = titlePattern;
+		this.engine = engine;
 	}
 	
 	public String getColumnName (int col) {
@@ -60,7 +65,13 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 					}
 				}
 				return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$
-			} if (col==2) {
+			} else if (col==2) {
+				// We show the icon if available
+				String iconName = GameDisplayHelper.constructFileName(game, URLToolkit.TYPE_ICON);
+				String folderPath = Consts.HOME_FOLDER+File.separator+engine.getGlobalConf().getSelectedConf().getImageFolder()+File.separator+Consts.ICO_FOLDER+File.separator;
+				File iconeFile = new File (folderPath+iconName);
+				if (iconeFile.exists()) return new ImageIcon(folderPath+iconName);
+			} else if (col==3) {
 				return GameDisplayHelper.buildTitle(game, titlePattern);
 			}
 		}
@@ -68,7 +79,7 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	}
 	
 	public Class<?> getColumnClass(int col) {
-		if (col==0 || col==1) return ImageIcon.class;
+		if (col==0 || col==1 || col==2) return ImageIcon.class;
 		else return String.class;
     }
 

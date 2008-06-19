@@ -26,7 +26,8 @@ public class UpdateAction extends AbstractAction {
 	public void actionPerformed(ActionEvent arg0) {
 		// We update all configurations
 		List<Configuration> listConfigs = new ArrayList<Configuration>(engine.getGlobalConf().getMapDatConfigs().values());
-		engine.setUpdateSW(new UpdateSwingWorker(engine, listConfigs));
+		engine.setUpdateSW(new UpdateSwingWorker(engine, listConfigs, 
+				engine.getUpdateWindow().getJProgressBar(), engine.getUpdateWindow().getJTextArea()));
 		engine.getUpdateSW().execute();
 	}
 

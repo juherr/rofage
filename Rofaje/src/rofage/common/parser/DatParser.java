@@ -20,15 +20,16 @@ public class DatParser {
 	private final static String XML_NODE_IMFOLDER		= "imFolder";
 	private final static String XML_NODE_NEWDATURL		= "datURL";
 	private final static String XML_NODE_IMAGEURL		= "imURL";
+	private final static String XML_NODE_ICONURL		= "icURL";
 	private final static String XML_NODE_DATVERSIONURL	= "datVersionURL";
 	private final static String XML_NODE_CONFIGURATION	= "configuration";
 	private final static String XML_NODE_NEWDAT			= "newDat";
 	private final static String XML_NODE_GAMES			= "games";
 	private final static String XML_NODE_GAME			= "game";
-	private final static String XML_NODE_IMAGENB			= "imageNumber";
+	private final static String XML_NODE_IMAGENB		= "imageNumber";
 	private final static String XML_NODE_RELEASENB		= "releaseNumber";
 	private final static String XML_NODE_TITLE			= "title";
-	private final static String XML_NODE_ROMSIZE			= "romSize";
+	private final static String XML_NODE_ROMSIZE		= "romSize";
 	private final static String XML_NODE_PUBLISHER		= "publisher";
 	private final static String XML_NODE_LOCATION		= "location";
 	private final static String XML_NODE_SOURCEROM		= "sourceRom";
@@ -108,6 +109,10 @@ public class DatParser {
 	
 	public String getImageUrl () {
 		return newDatNode.getChildText(XML_NODE_IMAGEURL);
+	}
+	
+	public String getIcoUrl () {
+		return newDatNode.getChildText(XML_NODE_ICONURL);
 	}
 	
 	public String getNewDatVersionUrl () {
