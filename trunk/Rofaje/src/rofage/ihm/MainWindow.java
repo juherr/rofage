@@ -63,8 +63,8 @@ public class MainWindow extends JFrame {
 	private JMenu jMenu1 = null;
 	
 	private JPopupMenu popMenu = null;
-	private JMenuItem popMenuItemExport = null;
-	private JMenuItem popMenuItemExportTo = null;
+	private JMenu popMenuItemExport = null;
+	private JMenuItem popMenuItemExportToFolder = null;
 	
 	private JMenuItem jMenuItem = null;
 	
@@ -222,7 +222,6 @@ public class MainWindow extends JFrame {
 		if (popMenu == null) {
 			popMenu = new JPopupMenu();
 			popMenu.add(getPopMenuItemExport());
-			popMenu.add(getPopMenuItemExportTo());
 		}
 		return popMenu;
 	}
@@ -425,22 +424,23 @@ public class MainWindow extends JFrame {
 		return jMenuItem1;
 	}
 	
-	private JMenuItem getPopMenuItemExport() {
+	private JMenu getPopMenuItemExport() {
 		if (popMenuItemExport == null) {
-			popMenuItemExport = new JMenuItem();
+			popMenuItemExport = new JMenu();
 			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
+			popMenuItemExport.add(getPopMenuItemExportToFolder());
 			popMenuItemExport.setText(Messages.getString("Export")); //$NON-NLS-1$
 		}
 		return popMenuItemExport;
 	}
 	
-	private JMenuItem getPopMenuItemExportTo() {
-		if (popMenuItemExportTo == null) {
-			popMenuItemExportTo = new JMenuItem();
+	private JMenuItem getPopMenuItemExportToFolder() {
+		if (popMenuItemExportToFolder == null) {
+			popMenuItemExportToFolder = new JMenuItem();
 			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
-			popMenuItemExportTo.setText(Messages.getString("ExportTo")); //$NON-NLS-1$
+			popMenuItemExportToFolder.setText(Messages.getString("ExportToFolder")); //$NON-NLS-1$
 		}
-		return popMenuItemExportTo;
+		return popMenuItemExportToFolder;
 	}
 	
 	private JMenuItem getMenuItemConf() {
