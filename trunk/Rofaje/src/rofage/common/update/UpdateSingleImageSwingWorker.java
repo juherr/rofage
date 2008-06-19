@@ -57,10 +57,6 @@ public class UpdateSingleImageSwingWorker extends DownloadSwingWorker {
 		checkAndDownloadFile(folder, fileName, 
 				game, type, baseUrl);
 		
-		if (type==URLToolkit.TYPE_ICON) {
-			System.out.println("update");
-			
-		}
 		// We update the window if we haven't changed the game selected !
 		int index = engine.getMainWindow().getJTable().getSelectedRow();
 		Game selGame = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
