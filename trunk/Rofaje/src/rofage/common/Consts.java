@@ -14,6 +14,7 @@ import rofage.ihm.Messages;
 public abstract class Consts {
 	public final static String HOME_FOLDER 				= System.getProperty("user.dir"); //$NON-NLS-1$
 	public final static String TMP_FOLDER				= System.getProperty("java.io.tmpdir");
+	public final static String ICO_FOLDER				= "icons";
 	
 	public static HashMap<String,String> COUNTRY_NAMES 		= new HashMap<String,String>();
 	public final static HashMap<String,String> FLAG_NAMES			= new HashMap<String,String>();

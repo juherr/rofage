@@ -20,6 +20,7 @@ public class Configuration implements Serializable {
 	private boolean updateAtStartup = false;
 	private boolean renameInside = false;
 	private boolean inAppUpdate = false;
+	
 		
 	// Internal configuration data retrieved from the datFile
 	private String confName; // Name of the dat 
@@ -29,6 +30,8 @@ public class Configuration implements Serializable {
 	private String imageUrl; // Base URL to download images
 	private String newVersionUrl; // URL to check the latest version
 	private String fileName; // Filename of the dat file
+	private String icoUrl; // URL to download the icons
+	
 	private List<String> allowedExtensions;
 
 	public String getRomFolder() {
@@ -120,6 +123,12 @@ public class Configuration implements Serializable {
 	}
 	public void setInAppUpdate(boolean inAppUpdate) {
 		this.inAppUpdate = inAppUpdate;
+	}
+	public String getIcoUrl() {
+		return icoUrl;
+	}
+	public void setIcoUrl(String icoUrl) {
+		this.icoUrl = icoUrl;
 	}
 	
 }

@@ -45,6 +45,7 @@ public abstract class ConfigurationHelper {
 		conf.setVersion(datParser.getVersion());
 		conf.setAllowedExtensions(datParser.getAllowedExtensions());
 		conf.setFileName(datParser.getFileName());
+		conf.setIcoUrl(datParser.getIcoUrl());
 	}
 	
 	/**

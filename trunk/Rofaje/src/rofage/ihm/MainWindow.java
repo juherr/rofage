@@ -277,13 +277,14 @@ public class MainWindow extends JFrame {
 	public JTable getJTable() {
 		if (jTable == null) {
 			if (engine.getGlobalConf().getSelectedConf()!=null) {
-				jTable = new GameListTable(engine.getGlobalConf().getSelectedConf().getTitlePattern());
+				jTable = new GameListTable(engine.getGlobalConf().getSelectedConf().getTitlePattern(), engine);
 			} else {
-				jTable = new GameListTable(Configuration.DEFAULT_TITLEPATTERN);
+				jTable = new GameListTable(Configuration.DEFAULT_TITLEPATTERN, engine);
 			}
 			jTable.addMouseListener(new PopupListener(engine));
 			ListSelectionModel listSelectionModel = jTable.getSelectionModel();
 			listSelectionModel.addListSelectionListener(new GameListSelectionListener(engine));
+			jTable.setShowVerticalLines(false);
 		}
 		return jTable;
 	}

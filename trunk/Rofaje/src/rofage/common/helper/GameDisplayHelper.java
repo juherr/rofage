@@ -2,9 +2,37 @@ package rofage.common.helper;
 
 import rofage.common.Consts;
 import rofage.common.object.Game;
+import rofage.common.url.URLToolkit;
 
 public abstract class GameDisplayHelper {
 
+	/**
+	 * Constructs a filename depending on the game and the type of the file
+	 * @param game
+	 * @param type
+	 * @return
+	 */
+	public static String constructFileName (Game game, int type) {
+		StringBuffer str = new StringBuffer(game.getReleaseNb());
+		switch (type) {
+			case URLToolkit.TYPE_ICON : 
+				// The icon name has 4 digits
+				while (str.length()<4) {
+					str.insert(0, "0");
+				}
+				break;
+			case URLToolkit.TYPE_IMAGE_1 :
+				str.append("a");
+				break;
+			case URLToolkit.TYPE_IMAGE_2 :
+				str.append("b");
+				break;
+		}
+		str.append(".png");
+		
+		return str.toString();
+	}
+	
 	/**
 	 * builds the title with the given Pattern
 	 * %n N° de la release

@@ -11,6 +11,7 @@ import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.update.UpdateSingleImageSwingWorker;
+import rofage.common.url.URLToolkit;
 import rofage.ihm.GameListTableModel;
 import rofage.ihm.Messages;
 
@@ -25,6 +26,7 @@ public class GameListSelectionListener implements ListSelectionListener {
 		// We get the game
 		Configuration conf = engine.getGlobalConf().getSelectedConf();
 		if (!e.getValueIsAdjusting()) {
+			e.getSource();
 			int index = engine.getMainWindow().getJTable().getSelectedRow();
 			Game game = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
 			
@@ -34,17 +36,27 @@ public class GameListSelectionListener implements ListSelectionListener {
 				String folderPath = Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator;
 				File image1 = new File (folderPath+game.getReleaseNb()+"a.png");
 				File image2 = new File (folderPath+game.getReleaseNb()+"b.png");
+				File icon = new File (folderPath+Consts.ICO_FOLDER+File.separator+GameDisplayHelper.constructFileName(game, URLToolkit.TYPE_ICON));
 				
 				if (!image1.exists()) {
 					// We download this image
-					UpdateSingleImageSwingWorker sw = new UpdateSingleImageSwingWorker(engine, game, true);
+					UpdateSingleImageSwingWorker sw = new UpdateSingleImageSwingWorker(engine, game, URLToolkit.TYPE_IMAGE_1, engine.getMainWindow().getProgressBarImage());
 					sw.execute();
 				}
 				if (!image2.exists()) {
 					// We download this image
-					UpdateSingleImageSwingWorker sw = new UpdateSingleImageSwingWorker(engine, game, false);
+					UpdateSingleImageSwingWorker sw = new UpdateSingleImageSwingWorker(engine, game, URLToolkit.TYPE_IMAGE_2, engine.getMainWindow().getProgressBarImage());
 					sw.execute();
 				}
+				if (!icon.exists()) {
+//					 We download this image
+					if (conf.getIcoUrl()!=null && !conf.getIcoUrl().isEmpty()) {
+						UpdateSingleImageSwingWorker sw = new UpdateSingleImageSwingWorker(engine, game, URLToolkit.TYPE_ICON, engine.getMainWindow().getProgressBarImage());
+						sw.execute();
+					}
+				}
+				
+				
 			}
 			
 			// We update the images
