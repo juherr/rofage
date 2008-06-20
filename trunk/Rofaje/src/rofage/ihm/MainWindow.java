@@ -99,10 +99,12 @@ public class MainWindow extends JFrame {
 	private JComboBox comboRomSize = null;
 	private JComboBox comboLocation = null;
 	private JComboBox comboLanguage = null;
+	private JComboBox comboGenre = null;
 	
 	private JCheckBox CBOwned = null;
 	private JCheckBox CBBadNamed = null;
 	private JCheckBox CBNotOwned = null;
+	private JCheckBox CBWifi = null;
 	
 	private JTextField fieldTitle = null;
 	private JTextField fieldPublisher = null;
@@ -114,6 +116,7 @@ public class MainWindow extends JFrame {
 	private JLabel labelPublisher = null;
 	private JLabel labelSource = null;
 	private JLabel labelLanguage = null;
+	private JLabel labelGenre = null;
 	private JLabel labelStatusIconOwned = null;
 	private JLabel labelStatusIconBadNamed = null;
 	private JLabel labelStatusIconNotOwned = null;
@@ -379,10 +382,13 @@ public class MainWindow extends JFrame {
 			vBox.add(getFieldSource());
 			vBox.add(getLabelLanguage());
 			vBox.add(getComboLanguage());
+			vBox.add(getLabelGenre());
+			vBox.add(getComboGenre());
 			Box vBox2 = Box.createVerticalBox();
 			vBox2.add(getCBOwned());
 			vBox2.add(getCBBadName());
 			vBox2.add(getCBNotOwned());
+			vBox2.add(getCBWifi());
 			vBox2.add(getButtonFilter());
 			Box hBox = Box.createHorizontalBox();
 			hBox.add(vBox);
@@ -578,6 +584,15 @@ public class MainWindow extends JFrame {
 		return comboLanguage;
 	}
 	
+	public JComboBox getComboGenre () {
+		if (comboGenre==null) {
+			comboGenre = new JComboBox();
+			ComboFilterHelper.setFilterGenre(engine, comboGenre);
+			comboGenre.setVisible(true);
+		}
+		return comboGenre;
+	}
+	
 	public JCheckBox getCBBadName () {
 		if (CBBadNamed==null) {
 			CBBadNamed = new JCheckBox();
@@ -607,6 +622,16 @@ public class MainWindow extends JFrame {
 		}
 		return CBNotOwned;
 	}
+	
+	public JCheckBox getCBWifi () {
+		if (CBWifi==null) {
+			CBWifi = new JCheckBox();
+			CBWifi.setText(Messages.getString("ShowWifi"));
+			CBWifi.setSelected(true);
+			CBWifi.setVisible(true);
+		}
+		return CBWifi;
+	}
 
 	private JLabel getLabelLanguage() {
 		if (labelLanguage==null) {
@@ -615,6 +640,15 @@ public class MainWindow extends JFrame {
 			labelLanguage.setVisible(true);
 		}
 		return labelLanguage;
+	}
+	
+	private JLabel getLabelGenre() {
+		if (labelGenre==null) {
+			labelGenre = new JLabel();
+			labelGenre.setText(Messages.getString("Genre"));
+			labelGenre.setVisible(true);
+		}
+		return labelGenre;
 	}
 	
 	public JLabel getLabelStatusIconNotOwned() {

@@ -31,15 +31,17 @@ public class FilterGameCollectionAction extends AbstractAction {
 		
 		MainWindow w = engine.getMainWindow();
 		// Let's get the form entries
-		String title = w.getFieldTitle().getText().toUpperCase();
-		String romSize = ((GenericDropDownEntry) w.getComboRomSize().getSelectedItem()).getValue();
-		String location = ((GenericDropDownEntry) w.getComboLocation().getSelectedItem()).getValue();
-		String publisher = w.getFieldPublisher().getText().toUpperCase();
-		String source = w.getFieldSource().getText().toUpperCase();
-		String language = ((GenericDropDownEntry) w.getComboLanguage().getSelectedItem()).getValue();
-		boolean showOwned = w.getCBOwned().isSelected();
+		String title 		= w.getFieldTitle().getText().toUpperCase();
+		String romSize 		= ((GenericDropDownEntry) w.getComboRomSize().getSelectedItem()).getValue();
+		String location 	= ((GenericDropDownEntry) w.getComboLocation().getSelectedItem()).getValue();
+		String publisher 	= w.getFieldPublisher().getText().toUpperCase();
+		String source 		= w.getFieldSource().getText().toUpperCase();
+		String language 	= ((GenericDropDownEntry) w.getComboLanguage().getSelectedItem()).getValue();
+		String genre 		= ((GenericDropDownEntry) w.getComboGenre().getSelectedItem()).getValue();
+		boolean showOwned 	= w.getCBOwned().isSelected();
 		boolean showBadNamed = w.getCBBadName().isSelected();
 		boolean showNotOwned = w.getCBNotOwned().isSelected();
+		boolean showWifi	= w.getCBWifi().isSelected();
 		
 		// Let's see what we have to test
 		boolean testTitle = title!=null && !title.trim().isEmpty();
@@ -48,6 +50,7 @@ public class FilterGameCollectionAction extends AbstractAction {
 		boolean testRomSize = !romSize.isEmpty();
 		boolean testLocation = !location.isEmpty();
 		boolean testLanguage = !language.isEmpty();
+		boolean testGenre = !genre.isEmpty();
 		
 		// Now we parse the game collection to filter the entries
 		Iterator<Game> iterGames = gameCollection.values().iterator();
@@ -81,6 +84,17 @@ public class FilterGameCollectionAction extends AbstractAction {
 			}
 			if (testLocation) {
 				if (!game.getLocation().equals(location)) {
+					mayAdd = false;
+				}
+			}
+			if (testGenre) {
+				if (!game.getGenre().equals(genre)) {
+					mayAdd = false;
+				}
+			}
+			
+			if (!showWifi) {
+				if (!game.isWifi()) {
 					mayAdd = false;
 				}
 			}
