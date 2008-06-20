@@ -42,6 +42,7 @@ public class FilterGameCollectionAction extends AbstractAction {
 		boolean showBadNamed = w.getCBBadName().isSelected();
 		boolean showNotOwned = w.getCBNotOwned().isSelected();
 		boolean showWifi	= w.getCBWifi().isSelected();
+		boolean showDemo 	= w.getCBDemo().isSelected();
 		
 		// Let's see what we have to test
 		boolean testTitle = title!=null && !title.trim().isEmpty();
@@ -92,9 +93,13 @@ public class FilterGameCollectionAction extends AbstractAction {
 					mayAdd = false;
 				}
 			}
-			
 			if (!showWifi) {
 				if (!game.isWifi()) {
+					mayAdd = false;
+				}
+			}
+			if (!showDemo) {
+				if (game.getGenre().equals("Demo")) {
 					mayAdd = false;
 				}
 			}
