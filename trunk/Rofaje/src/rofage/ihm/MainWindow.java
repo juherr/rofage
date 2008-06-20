@@ -105,6 +105,7 @@ public class MainWindow extends JFrame {
 	private JCheckBox CBBadNamed = null;
 	private JCheckBox CBNotOwned = null;
 	private JCheckBox CBWifi = null;
+	private JCheckBox CBDemo = null;
 	
 	private JTextField fieldTitle = null;
 	private JTextField fieldPublisher = null;
@@ -385,6 +386,7 @@ public class MainWindow extends JFrame {
 			vBox.add(getLabelGenre());
 			vBox.add(getComboGenre());
 			Box vBox2 = Box.createVerticalBox();
+			vBox2.add(getCBDemo());
 			vBox2.add(getCBOwned());
 			vBox2.add(getCBBadName());
 			vBox2.add(getCBNotOwned());
@@ -631,6 +633,16 @@ public class MainWindow extends JFrame {
 			CBWifi.setVisible(true);
 		}
 		return CBWifi;
+	}
+	
+	public JCheckBox getCBDemo () {
+		if (CBDemo==null) {
+			CBDemo = new JCheckBox();
+			CBDemo.setText(Messages.getString("Demo"));
+			CBDemo.setSelected(true);
+			CBDemo.setVisible(true);
+		}
+		return CBDemo;
 	}
 
 	private JLabel getLabelLanguage() {
