@@ -37,6 +37,7 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	public ScanSwingWorker (Engine engine) {
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.gameCollection = engine.getGameDB().getGameCollections().get(selConf.getConfName());
+		this.engine = engine;
 		
 		// We generate the cRCRomDB for this conf
 		generateCRCDB();

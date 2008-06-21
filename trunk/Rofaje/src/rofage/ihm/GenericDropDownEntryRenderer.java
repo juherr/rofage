@@ -25,8 +25,10 @@ public class GenericDropDownEntryRenderer implements ListCellRenderer {
 						boolean cellHasFocus )	{
 		
 		JLabel label = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		label.setText( ((GenericDropDownEntry)value).getText() );
-		label.setIcon( ((GenericDropDownEntry)value).getIcon() );
+		if (value!=null) {
+			label.setText( ((GenericDropDownEntry)value).getText() );
+			label.setIcon( ((GenericDropDownEntry)value).getIcon() );
+		}
 				
 		return label;
 	}
