@@ -2,6 +2,15 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/jdom.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://www.jdom.org/docs/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/truezip-6.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/media/MyDatas/dev/javadoc/truezip/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -28,6 +28,7 @@ public class Game implements Serializable {
 	private String internalName = "";
 	private String serial = "";
 	private boolean wifi = false;
+	private boolean scannedFromSerial = false;
 	
 	
 	private boolean gotRom = false;
@@ -35,6 +36,8 @@ public class Game implements Serializable {
 	
 	/** fullPath to the file containing the rom. It can either be the rom itself or a zip file */
 	private String containerPath;
+	/** This is the fullPath to the entry. It uses the TrueZip format */
+	private String entryFullPath = null;
 	
 	public String getCrc() {
 		return crc;
@@ -153,5 +156,17 @@ public class Game implements Serializable {
 	}
 	public void setWifi(boolean wifi) {
 		this.wifi = wifi;
+	}
+	public boolean isScannedFromSerial() {
+		return scannedFromSerial;
+	}
+	public void setScannedFromSerial(boolean scannedFromSerial) {
+		this.scannedFromSerial = scannedFromSerial;
+	}
+	public String getEntryFullPath() {
+		return entryFullPath;
+	}
+	public void setEntryFullPath(String entryFullPath) {
+		this.entryFullPath = entryFullPath;
 	}
 }

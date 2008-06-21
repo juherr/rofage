@@ -2,7 +2,6 @@ package rofage.common.rename;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,16 +9,15 @@ import java.util.TreeMap;
 
 import javax.swing.SwingWorker;
 
-import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
-import rofage.common.files.ZipToolkit;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.ihm.Messages;
 import rofage.ihm.helper.StatusBarHelper;
+import de.schlichtherle.io.File;
 
 public class RenameSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopAction;
@@ -114,89 +112,32 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 				String oldFileName = gameFile.getName();
 				String newFileName = GameDisplayHelper.buildTitle(game, selConf.getTitlePattern());
 				String destPath = gameFile.getParent()+File.separator+newFileName+FileToolkit.getFileExtension(oldFileName);
+				// If we have to update inside the archive, we will have to update this value
+				String newEntryFullPath = null;
 				// We have two choices, the file can either be an archive or the rom itself
-				// If it's the rom, we just have to rename the file
-				// Otherwise, we have to unpack the archive, 
-				// find the rom file,
-				// rename it
-				// repack the rom with the other files of the archive
-				// delete the extracted files
-				// Rename the parcked file
-				// And, finally, delete the old file
 				
-				// We also have to see whether the user wishs to rename inside the rom
-				if (selConf.getAllowedExtensions().contains(FileToolkit.getFileExtension(oldFileName)) 
-						|| !selConf.isRenameInside()) {
-					// This is a rom file, we just rename it
-					FileToolkit.moveFile(gameFile, destPath);
-				} else {
-					// This is a compressed file, it's a bit more complicated... and longer !
-					File newArchive = renameInsideCompressedFile(gameFile, newFileName);
-					// We move back the archive
-					FileToolkit.moveFile(newArchive, destPath);
-					// We delete the old archive
-					gameFile.delete();
+				// First we have to check if we need to rename inside the archive
+				if (gameFile.isArchive() && selConf.isRenameInside()) {
+					// We get the related entry
+					File entry = new File (game.getEntryFullPath());
+					String newEnclPath = newFileName+FileToolkit.getFileExtension(entry.getName());
+					entry.renameTo(new File(entry.getEnclArchive().getAbsolutePath()+File.separator+newEnclPath));
+					newEntryFullPath = destPath+File.separator+newEnclPath;
 				}
 				
+				// We rename the file. It can either be an archive or a rom file
+				FileToolkit.moveFile(gameFile, destPath);
+				
+				// We update the game object values
 				game.setContainerPath(destPath);
+				game.setEntryFullPath(newEntryFullPath);
 				game.setGoodName(true);
-				publish (oldFileName+" => "+ newFileName); //$NON-NLS-1$
+				
+				publish (oldFileName+" => "+ newFileName+FileToolkit.getFileExtension(oldFileName)); //$NON-NLS-1$
 				nbFilesRenamed++;
 				setProgress(nbFilesRenamed*100/totalFiles);
 			}
 		}
-	}
-	
-	 /**
-	  * renaming routine for a compress file
-	  * If it's the rom, we just have to rename the file
-	  * Otherwise, we have to unpack the archive,
-	  * find the rom file,
-	  * rename it
-	  * repack the rom with the other files of the archive
-	  * delete the extracted files
-	  * Rename the packed file
-	  * And, finally, delete the old file
-	  * @param gameFile File pointing to the archive containing the rom
-	  * @param newFileName name we have to rename the file / rom to
-	  * @return File pointing to the newly created archive
-	  */
-	private File renameInsideCompressedFile (File gameFile, String newFileName) {
-		// We unpack the full archive
-		List<String> zipEntriesPaths = ZipToolkit.uncompressFile(gameFile.getAbsolutePath(), Consts.TMP_FOLDER);
-		
-		// We look for the rom
-		Iterator<String> iterZipEntriesPaths = zipEntriesPaths.iterator();
-		boolean gameFound = false;
-
-		String fileExt = ""; //$NON-NLS-1$
-		while (iterZipEntriesPaths.hasNext() && !gameFound) {
-			String path = iterZipEntriesPaths.next();
-			fileExt = FileToolkit.getFileExtension(path);
-			if (selConf.getAllowedExtensions().contains(fileExt)) {
-				// We found the rom
-				gameFound = true;
-				// We remove this entry from the zipEntry list
-				iterZipEntriesPaths.remove();
-				// We rename this entry
-				FileToolkit.moveFile(new File(path), Consts.TMP_FOLDER+File.separator+newFileName+fileExt);
-			}
-		}
-		
-		// Now we have to recompress the files
-		// We add the renamed file (the file which has been renamed has been deleted from this list)
-		zipEntriesPaths.add(Consts.TMP_FOLDER+File.separator+newFileName+fileExt);
-		
-		ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+newFileName+".zip"); //$NON-NLS-1$
-		
-		// We cleanup the tmp folder
-		iterZipEntriesPaths = zipEntriesPaths.iterator();
-		while (iterZipEntriesPaths.hasNext()) {
-			String path = iterZipEntriesPaths.next();
-			(new File(path)).delete();
-		}
-		File archive = new File(Consts.TMP_FOLDER+File.separator+newFileName+".zip"); //$NON-NLS-1$
-		return archive;
 	}
 	
 	public boolean isStopAction() {

@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -144,7 +143,6 @@ public class UpdateWindow extends JFrame {
 			jButton.setName("jButton"); //$NON-NLS-1$
 			jButton.setPreferredSize(new Dimension(100, 23));
 			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
-			jButton.setIcon(new ImageIcon());
 		}
 		return jButton;
 	}
