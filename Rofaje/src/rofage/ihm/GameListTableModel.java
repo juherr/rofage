@@ -19,7 +19,7 @@ import rofage.common.url.URLToolkit;
 public class GameListTableModel extends AbstractTableModel implements TableModel {
 	private TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game>();
 	private List<Game> tableDatas = new ArrayList<Game>(gameCollection.values());
-	private String[] columnNames = {"L", "R", "I", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private String[] columnNames = {"L", "R", "I", "C", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	private String titlePattern;
 	private Engine engine;
 	
@@ -72,6 +72,16 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 				File iconeFile = new File (folderPath+iconName);
 				if (iconeFile.exists()) return new ImageIcon(folderPath+iconName);
 			} else if (col==3) {
+				if (!game.isGotRom()) {
+					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$					
+				} else {
+					if (game.isScannedFromSerial()) {
+						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_notclean.png"));
+					} else {
+						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_clean.png"));
+					}
+				}
+			} else if (col==4) {
 				return GameDisplayHelper.buildTitle(game, titlePattern);
 			}
 		}
@@ -79,7 +89,7 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	}
 	
 	public Class<?> getColumnClass(int col) {
-		if (col==0 || col==1 || col==2) return ImageIcon.class;
+		if (col==0 || col==1 || col==2 || col==3) return ImageIcon.class;
 		else return String.class;
     }
 

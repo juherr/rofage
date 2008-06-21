@@ -125,6 +125,8 @@ public class MainWindow extends JFrame {
 	private JLabel labelStatusIconOwned = null;
 	private JLabel labelStatusIconBadNamed = null;
 	private JLabel labelStatusIconNotOwned = null;
+	private JLabel labelStatusIconClean = null;
+	private JLabel labelStatusIconNotClean = null;
 	
 	private JProgressBar progressBarImage = null;
 	
@@ -332,10 +334,19 @@ public class MainWindow extends JFrame {
 			panelStatusBar.add(getLabelStatusIconBadNamed());
 			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
 			panelStatusBar.add(getLabelStatusIconOwned());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(new JSeparator(JSeparator.VERTICAL));
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(getLabelStatusIconClean());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(getLabelStatusIconNotClean());
+			panelStatusBar.add(Box.createRigidArea(new Dimension(20,20)));
+			panelStatusBar.add(new JSeparator(JSeparator.VERTICAL));
+			// We add the progress bar
 			panelStatusBar.add(Box.createHorizontalGlue());
 			panelStatusBar.add(getProgressBarImage());
 			panelStatusBar.add(Box.createRigidArea(new Dimension(10,20)));
-			panelStatusBar.setPreferredSize(new Dimension(1024,20));
+			//panelStatusBar.setPreferredSize(new Dimension(1024,20));
 			panelStatusBar.setVisible(true);
 		}
 		return panelStatusBar;
@@ -676,6 +687,28 @@ public class MainWindow extends JFrame {
 		}
 		return labelStatusIconNotOwned;
 	}
+	
+	public JLabel getLabelStatusIconClean() {
+		if (labelStatusIconClean==null) {
+			labelStatusIconClean = new JLabel();
+			labelStatusIconClean.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_clean.png")));
+			labelStatusIconClean.setText("0");
+			labelStatusIconClean.setVisible(true);
+		}
+		return labelStatusIconClean;
+	}
+	
+	public JLabel getLabelStatusIconNotClean() {
+		if (labelStatusIconNotClean==null) {
+			labelStatusIconNotClean = new JLabel();
+			labelStatusIconNotClean.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_notclean.png")));
+			labelStatusIconNotClean.setText("0");
+			labelStatusIconNotClean.setVisible(true);
+		}
+		return labelStatusIconNotClean;
+	}
+	
+	
 	
 	public JLabel getLabelStatusIconOwned() {
 		if (labelStatusIconOwned==null) {
