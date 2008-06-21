@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import rofage.common.clean.CleanSwingWorker;
+import rofage.common.export.ExportSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
@@ -18,26 +19,29 @@ import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
 import rofage.ihm.clean.CleanWindow;
 import rofage.ihm.conf.ConfWindow;
+import rofage.ihm.export.ExportWindow;
 import rofage.ihm.rename.RenameWindow;
 import rofage.ihm.scan.ScanWindow;
 import rofage.ihm.update.UpdateWindow;
 
 public class Engine {
-	private UpdateWindow updateWindow = null;
-	private ConfWindow confWindow = null;
-	private ScanWindow scanWindow = null;
-	private MainWindow mainWindow = null;
-	private RenameWindow renameWindow = null;
-	private CleanWindow cleanWindow = null;
+	private UpdateWindow updateWindow 	= null;
+	private ConfWindow confWindow 		= null;
+	private ScanWindow scanWindow 		= null;
+	private MainWindow mainWindow 		= null;
+	private RenameWindow renameWindow 	= null;
+	private CleanWindow cleanWindow 	= null;
+	private ExportWindow exportWindow 	= null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
 	
-	private UpdateSwingWorker updateSW = null;
-	private ScanSwingWorker scanSW = null;
-	private RenameSwingWorker renameSW = null;
-	private CleanSwingWorker cleanSW = null;
-	
+	private UpdateSwingWorker updateSW 	= null;
+	private ScanSwingWorker scanSW 		= null;
+	private RenameSwingWorker renameSW 	= null;
+	private CleanSwingWorker cleanSW 	= null;
+	private ExportSwingWorker exportSW 	= null;
+		
 	private boolean confSaved = false;
 	
 	public Engine () {
@@ -233,5 +237,20 @@ public class Engine {
 
 	public void setCleanSW(CleanSwingWorker cleanSW) {
 		this.cleanSW = cleanSW;
+	}
+
+	public ExportSwingWorker getExportSW() {
+		return exportSW;
+	}
+
+	public void setExportSW(ExportSwingWorker exportSW) {
+		this.exportSW = exportSW;
+	}
+
+	public ExportWindow getExportWindow() {
+		if (exportWindow==null) {
+			exportWindow = new ExportWindow(this);
+		}
+		return exportWindow;
 	}
 }

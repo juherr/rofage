@@ -14,18 +14,17 @@ import java.util.List;
 
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
-import javax.swing.SwingWorker;
 
 import rofage.common.Engine;
 import rofage.common.files.FileToolkit;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.common.swingworker.StoppableSwingWorker;
 import rofage.common.url.URLToolkit;
 import rofage.ihm.Messages;
 
-public abstract class DownloadSwingWorker extends SwingWorker<Integer, String> { // <Return type, Type published>
-	protected Engine engine;
-	protected boolean stopUpdate = false;
+public abstract class DownloadSwingWorker extends StoppableSwingWorker<Integer, String> { // <Return type, Type published>
+	
 	/** JprogressBar used to show the progression */
 	private JProgressBar jProgressBar;
 	/** JTextArea where the publish text will be displayed */
@@ -165,18 +164,6 @@ public abstract class DownloadSwingWorker extends SwingWorker<Integer, String> {
 			e.printStackTrace();
 		}
 		return new Integer(0); // Indicates it was fine ! 
-	}
-
-	public boolean isStopUpdate() {
-		return stopUpdate;
-	}
-
-	public void setStopUpdate(boolean stopUpdate) {
-		this.stopUpdate = stopUpdate;
-	}
-
-	public Engine getEngine() {
-		return engine;
 	}
 
 	public JProgressBar getJProgressBar() {

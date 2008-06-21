@@ -16,8 +16,8 @@ import javax.swing.WindowConstants;
 import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
+import rofage.ihm.actions.common.StopAction;
 import rofage.ihm.actions.rename.RenameAction;
-import rofage.ihm.actions.rename.StopRenameAction;
 
 public class RenameWindow extends JFrame {
 	
@@ -60,7 +60,7 @@ public class RenameWindow extends JFrame {
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Renommage des roms"); //$NON-NLS-1$
+		this.setTitle(Messages.getString("RenameWindowTitle"));
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -173,7 +173,7 @@ public class RenameWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopRenameAction(engine));
+			buttonStop.setAction(new StopAction(engine.getRenameSW()));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

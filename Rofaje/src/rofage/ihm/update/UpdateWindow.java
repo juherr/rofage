@@ -16,7 +16,7 @@ import javax.swing.WindowConstants;
 import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
-import rofage.ihm.actions.update.StopUpdateAction;
+import rofage.ihm.actions.common.StopAction;
 import rofage.ihm.actions.update.UpdateAction;
 
 public class UpdateWindow extends JFrame {
@@ -172,7 +172,7 @@ public class UpdateWindow extends JFrame {
 	private JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopUpdateAction(engine));
+			buttonStop.setAction(new StopAction(engine.getUpdateSW()));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

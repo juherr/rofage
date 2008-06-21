@@ -16,8 +16,8 @@ import javax.swing.WindowConstants;
 import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
+import rofage.ihm.actions.common.StopAction;
 import rofage.ihm.actions.scan.ScanAction;
-import rofage.ihm.actions.scan.StopScanAction;
 
 public class ScanWindow extends JFrame {
 	
@@ -173,7 +173,7 @@ public class ScanWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopScanAction(engine));
+			buttonStop.setAction(new StopAction(engine.getScanSW()));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

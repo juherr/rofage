@@ -1,4 +1,4 @@
-package rofage.ihm.clean;
+package rofage.ihm.export;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,11 +15,10 @@ import javax.swing.WindowConstants;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
-import rofage.ihm.actions.clean.CleanAction;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.common.StopAction;
 
-public class CleanWindow extends JFrame {
+public class ExportWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +30,6 @@ public class CleanWindow extends JFrame {
 
 	private JPanel jPanel = null;
 
-	private JButton jButton = null;
-
 	private JButton jButton1 = null;
 	private JButton buttonStop = null;
 
@@ -43,7 +40,7 @@ public class CleanWindow extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public CleanWindow(Engine engine) {
+	public ExportWindow(Engine engine) {
 		super();
 		this.engine = engine;
 		initialize();
@@ -56,11 +53,11 @@ public class CleanWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(500, 300);
-		this.setName("cleanWindow"); //$NON-NLS-1$
+		this.setName("exportWindow"); //$NON-NLS-1$
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("CleanWindow.1"));
+		this.setTitle(Messages.getString("ExportWindowTitle")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -124,28 +121,10 @@ public class CleanWindow extends JFrame {
 			jPanel = new JPanel();
 			jPanel.setLayout(new FlowLayout());
 			jPanel.setPreferredSize(new Dimension(100, 50));
-			jPanel.add(getJButton(), null);
 			jPanel.add(getJButton1(), null);
 			jPanel.add(getButtonStop(), null);
 		}
 		return jPanel;
-	}
-
-	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	private JButton getJButton() {
-		if (jButton == null) {
-			jButton = new JButton();
-			jButton.setAction(new CleanAction(engine));
-			jButton.setText(Messages.getString("CleanWindow.0")); //$NON-NLS-1$
-			jButton.setName("jButton"); //$NON-NLS-1$
-			jButton.setPreferredSize(new Dimension(100, 23));
-			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
-		}
-		return jButton;
 	}
 
 	/**
@@ -160,7 +139,7 @@ public class CleanWindow extends JFrame {
 			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			jButton1.setName("jButton1"); //$NON-NLS-1$
 			jButton1.setPreferredSize(new Dimension(100, 23));
-			jButton1.setText(Messages.getString("CleanWindow.5")); //$NON-NLS-1$
+			jButton1.setText(Messages.getString("RenameWindow.5")); //$NON-NLS-1$
 		}
 		return jButton1;
 	}
@@ -173,11 +152,11 @@ public class CleanWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine.getCleanSW()));
+			buttonStop.setAction(new StopAction(engine.getExportSW()));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));
-			buttonStop.setText(Messages.getString("CleanWindow.8")); //$NON-NLS-1$
+			buttonStop.setText(Messages.getString("RenameWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
 		}
 		return buttonStop;

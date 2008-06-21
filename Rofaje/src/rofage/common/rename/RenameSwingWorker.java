@@ -7,21 +7,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
-import javax.swing.SwingWorker;
-
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.common.swingworker.StoppableSwingWorker;
 import rofage.ihm.Messages;
 import rofage.ihm.helper.StatusBarHelper;
+import de.schlichtherle.io.ArchiveException;
 import de.schlichtherle.io.File;
 
-public class RenameSwingWorker extends SwingWorker<Integer, String> {
-	private boolean stopAction;
-	private Engine engine;
+public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 	private Configuration selConf;
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
 	private List<Game> listGamesToRename;
@@ -132,6 +130,11 @@ public class RenameSwingWorker extends SwingWorker<Integer, String> {
 				game.setContainerPath(destPath);
 				game.setEntryFullPath(newEntryFullPath);
 				game.setGoodName(true);
+				try {
+					File.umount();
+				} catch (ArchiveException e) {
+					e.printStackTrace();
+				}
 				
 				publish (oldFileName+" => "+ newFileName+FileToolkit.getFileExtension(oldFileName)); //$NON-NLS-1$
 				nbFilesRenamed++;
