@@ -173,7 +173,7 @@ public class ScanWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine.getScanSW()));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_SCAN));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

@@ -172,7 +172,7 @@ public class UpdateWindow extends JFrame {
 	private JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine.getUpdateSW()));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_UPDATE));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

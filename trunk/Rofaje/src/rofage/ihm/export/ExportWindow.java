@@ -152,7 +152,7 @@ public class ExportWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine.getExportSW()));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_EXPORT));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));
