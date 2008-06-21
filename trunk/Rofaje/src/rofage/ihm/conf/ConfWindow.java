@@ -69,6 +69,7 @@ public class ConfWindow extends JFrame {
 	private JCheckBox CBAutoUpdate = null;
 	private JCheckBox CBRenameInside = null;
 	private JCheckBox CBInAppUpdate = null;
+	private JCheckBox CBInternalName = null;
 	
 	private JTextPane textPaneTitlePattern = null;
 	
@@ -164,6 +165,7 @@ public class ConfWindow extends JFrame {
 			panelFolder.add(boxLabelsFolders);
 			panelFolder.add(boxFieldsFolders);
 			panelFolder.add(boxOpenButtons);
+			panelFolder.add(getCBInternalName());
 			
 			
 		}
@@ -392,6 +394,18 @@ public class ConfWindow extends JFrame {
 			}
 		}
 		return CBmoveUnknownRoms;
+	}
+	
+	public JCheckBox getCBInternalName() {
+		if (CBInternalName==null) {
+			CBInternalName = new JCheckBox();
+			CBInternalName.setVisible(true);
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBInternalName.setSelected(engine.getGlobalConf().getSelectedConf().isInternalName());			
+			}
+			CBInternalName.setText(Messages.getString("UseInternalNameScan"));
+		}
+		return CBInternalName;
 	}
 	
 	public JCheckBox getCBAutoUpdate() {

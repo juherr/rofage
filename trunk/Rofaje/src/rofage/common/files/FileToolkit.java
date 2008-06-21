@@ -1,13 +1,9 @@
 package rofage.common.files;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.zip.CRC32;
@@ -15,9 +11,16 @@ import java.util.zip.CheckedInputStream;
 
 import javax.swing.JOptionPane;
 
+import rofage.common.object.Configuration;
+import rofage.common.object.GlobalConfiguration;
 import rofage.ihm.Messages;
+import de.schlichtherle.io.File;
+import de.schlichtherle.io.FileInputStream;
 
 public abstract class FileToolkit {
+	
+	public final static int FILTER_ROMS_ARCHIVES 	= 1;
+	public final static int FILTER_ROMS				= 2;
 	
 	public static void checkAndCreateFolder (String path) {
 		File folderImages = new File (path);
@@ -33,7 +36,7 @@ public abstract class FileToolkit {
 	 */
 	public static void deleteDirectory (File directory) {
         if (directory.exists() && directory.isDirectory()) { 
-			File[] files = directory.listFiles(); 
+			File[] files = (File[])directory.listFiles(); 
 			for(int i=0; i<files.length; i++) { 
 				if(files[i].isDirectory()) { 
 					deleteDirectory(files[i]); 
@@ -84,12 +87,19 @@ public abstract class FileToolkit {
 	 * this method also looks inside subdirectories
 	 * @return
 	 */
-	public static int getFileNb(File topDirectory) {
+	public static int getFileNb(File topDirectory, FileFilter fileFilter) {
 		int nbFile=0;
 		if (!topDirectory.isDirectory()) return 0; // We ensure it's a directory
 		
-		List<File> fileList = Arrays.asList(topDirectory.listFiles());
-		Iterator<File> iterFiles = fileList.iterator();
+		File[] tabFiles = (File[])topDirectory.listFiles(fileFilter);
+		
+		// We convert the array to a list
+		List<File> listFiles = new ArrayList<File>();
+		for (int i=0; i<tabFiles.length; i++) {
+			listFiles.add(tabFiles[i]);
+		}
+		
+		Iterator<File> iterFiles = listFiles.iterator();
 		List<File> subdirectories = new ArrayList<File>();
 		while (iterFiles.hasNext()) {
 			File curFile = iterFiles.next();
@@ -102,7 +112,7 @@ public abstract class FileToolkit {
 		Iterator<File> iterSubDir = subdirectories.iterator();
 		while (iterSubDir.hasNext()) {
 			File subDir = iterSubDir.next();
-			nbFile += getFileNb(subDir);
+			nbFile += getFileNb(subDir, fileFilter);
 		}
 		return nbFile;
 	}
@@ -117,14 +127,14 @@ public abstract class FileToolkit {
 	public static void moveFile (File source, String destPath) {
 		File destination = new File (destPath);
         if( !destination.exists() ) {
-                // We try with renameTo
-                boolean result = source.renameTo(destination);
-                if( !result ) {
-	                // We try to copy
-	                result = true;
-	                result &= copy(source.getAbsolutePath(),destination.getAbsolutePath());
-	                if(result) result &= source.delete();
-                }
+            // We try with renameTo
+            boolean result = source.renameTo(destination);
+            if( !result ) {
+                // We try to copy
+                result = true;
+                result &= source.copyTo(destination);
+                if(result) source.delete();
+            }
         } else {
                 JOptionPane.showMessageDialog(null, Messages.getString("FileToolkit.1"), Messages.getString("FileToolkit.2"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
         }  
@@ -153,35 +163,32 @@ public abstract class FileToolkit {
 		if (index!=-1) return fileName.substring(0, index);
 		return fileName;
 	}
-
-	public static boolean copy (String path, String destPath) {
-		boolean resultat = false;
-		FileChannel in = null; // canal d'entrée
-		FileChannel out = null; // canal de sortie
-		 
-		try {
-		  // Init
-		  in = new FileInputStream(path).getChannel();
-		  out = new FileOutputStream(destPath).getChannel();
-		 
-		  // Copie depuis le in vers le out
-		  in.transferTo(0, in.size(), out);
-		  resultat = true;
-		} catch (Exception e) {
-		  e.printStackTrace(); // n'importe quelle exception
-		} finally { // finalement on ferme
-		  if(in != null) {
-		  	try {
-			  in.close();
-			} catch (IOException e) {}
-		  }
-		  if(out != null) {
-		  	try {
-			  out.close();
-			} catch (IOException e) {}
-		  }
-		}
-		return resultat;
-	}
 	
+	public static FileFilter getFileFilter(int type, final Configuration conf) {
+		switch (type) {
+			case FILTER_ROMS_ARCHIVES :
+				return new FileFilter() {
+					public boolean accept (java.io.File file) {
+						// We accept directories
+						if (file.isDirectory()) return true;
+						// We accept potential roms
+						String fileExt = FileToolkit.getFileExtension(file.getName()).toLowerCase();
+						if (conf.getAllowedExtensions().contains(fileExt)) return true;
+						// We accept archive files
+						if (GlobalConfiguration.allowedCompressedExtensions.contains(fileExt)) return true;
+						return false;
+					}
+				};
+			case FILTER_ROMS :
+				return new FileFilter() {
+					public boolean accept (java.io.File file) {
+						// We accept potential roms
+						String fileExt = FileToolkit.getFileExtension(file.getName()).toLowerCase();
+						if (conf.getAllowedExtensions().contains(fileExt)) return true;
+						return false;
+					}
+				};
+		}
+		return null;
+	}	
 }

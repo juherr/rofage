@@ -20,6 +20,7 @@ public class Configuration implements Serializable {
 	private boolean updateAtStartup = false;
 	private boolean renameInside = false;
 	private boolean inAppUpdate = false;
+	private boolean internalName = false; // Do we check with the internal name ?
 	
 		
 	// Internal configuration data retrieved from the datFile
@@ -129,6 +130,12 @@ public class Configuration implements Serializable {
 	}
 	public void setIcoUrl(String icoUrl) {
 		this.icoUrl = icoUrl;
+	}
+	public boolean isInternalName() {
+		return internalName;
+	}
+	public void setInternalName(boolean internalName) {
+		this.internalName = internalName;
 	}
 	
 }

@@ -2,24 +2,21 @@ package rofage.common.clean;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.zip.ZipFile;
 
 import javax.swing.SwingWorker;
 
-import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
-import rofage.common.files.ZipToolkit;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.common.object.GlobalConfiguration;
 import rofage.ihm.Messages;
+import de.schlichtherle.io.File;
 
 public class CleanSwingWorker extends SwingWorker<Integer, String> {
 	private boolean stopAction;
@@ -84,15 +81,11 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 		while (iterGames.hasNext()) {
 			Game game = iterGames.next();
 			if (game.isGotRom() 
-					&& game.getContainerPath().endsWith(".zip")) { //$NON-NLS-1$
+					&& GlobalConfiguration.allowedCompressedExtensions.contains(FileToolkit.getFileExtension(game.getContainerPath()).toLowerCase())) { //$NON-NLS-1$
 				// We look into each archive to see if there are more than one file
-				try {
-					ZipFile zipFile = new ZipFile(game.getContainerPath());
-					if (zipFile.size()>1) {
-						listArchivesToCleanUp.add(game);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
+				File zipFile = new File(game.getContainerPath());
+				if (zipFile.exists() && zipFile.list().length>1) {
+					listArchivesToCleanUp.add(game);
 				}
 			}
 		}
@@ -116,37 +109,16 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 			if (!gameFile.exists()) {
 				publish (Messages.getString("CleanSwingWorker.5")+gameFile.getAbsolutePath()+Messages.getString("CleanSwingWorker.6")); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				String destPath;
-				
-				// We unpack the full archive
-				List<String> zipEntriesPaths = ZipToolkit.uncompressFile(gameFile.getAbsolutePath(), Consts.TMP_FOLDER);
-				Iterator<String> iterPath = zipEntriesPaths.iterator();
-				while (iterPath.hasNext()) {
-					String path = iterPath.next();
-					if (!selConf.getAllowedExtensions().contains(FileToolkit.getFileExtension(path))) {
-						iterPath.remove();
+				File[] tabFiles = (File[])gameFile.listFiles();
+				for (int i=0; i<tabFiles.length; i++) {
+					File curFile = tabFiles[i];
+					// If the file isn't a rom we remove it
+					if (!selConf.getAllowedExtensions().contains(FileToolkit.getFileExtension(curFile.getName()).toLowerCase())) {
+						curFile.delete();
 					}
 				}
 				
-				// We pack back the rom
-				ZipToolkit.compress(zipEntriesPaths, Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip"); //$NON-NLS-1$
-				File newArchive = new File (Consts.TMP_FOLDER+File.separator+gameFile.getName()+".zip"); //$NON-NLS-1$
-				
-				// We cleanup the tmp folder
-				iterPath = zipEntriesPaths.iterator();
-				while (iterPath.hasNext()) {
-					String path = iterPath.next();
-					(new File(path)).delete();
-				}
-				
-				// We remove the old archive
-				gameFile.delete();
-				
-				destPath = gameFile.getAbsolutePath();
-				// We move the new archive to the rom folder
-				FileToolkit.moveFile(newArchive, destPath);
-				
-				publish (destPath+Messages.getString("CleanSwingWorker.9")); //$NON-NLS-1$
+				publish (gameFile.getName()+Messages.getString("CleanSwingWorker.9")); //$NON-NLS-1$
 				
 				nbFilesRenamed++;
 				setProgress(nbFilesRenamed*100/totalFiles);

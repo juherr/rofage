@@ -1,10 +1,11 @@
 package rofage.ihm.actions.conf;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+
+import de.schlichtherle.io.File;
 
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
