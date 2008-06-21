@@ -110,6 +110,7 @@ public class MainWindow extends JFrame {
 	private JCheckBox CBNotOwned = null;
 	private JCheckBox CBWifi = null;
 	private JCheckBox CBDemo = null;
+	private JCheckBox CBNotClean = null;
 	
 	private JTextField fieldTitle = null;
 	private JTextField fieldPublisher = null;
@@ -406,6 +407,7 @@ public class MainWindow extends JFrame {
 			vBox2.add(getCBBadName());
 			vBox2.add(getCBNotOwned());
 			vBox2.add(getCBWifi());
+			vBox2.add(getCBNotClean());
 			vBox2.add(getButtonFilter());
 			Box hBox = Box.createHorizontalBox();
 			hBox.add(vBox);
@@ -658,6 +660,16 @@ public class MainWindow extends JFrame {
 			CBDemo.setVisible(true);
 		}
 		return CBDemo;
+	}
+	
+	public JCheckBox getCBNotClean () {
+		if (CBNotClean==null) {
+			CBNotClean = new JCheckBox();
+			CBNotClean.setText(Messages.getString("NotClean"));
+			CBNotClean.setSelected(true);
+			CBNotClean.setVisible(true);
+		}
+		return CBNotClean;
 	}
 
 	private JLabel getLabelLanguage() {
