@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import rofage.common.swingworker.StoppableSwingWorker;
+import rofage.common.Engine;
 
 /**
  * Class to trigger the update
@@ -13,14 +13,33 @@ import rofage.common.swingworker.StoppableSwingWorker;
  */
 @SuppressWarnings("serial")
 public class StopAction extends AbstractAction {
-	private StoppableSwingWorker<?, ?> sw;
+	public final static int SW_UPDATE 	= 1;
+	public final static int SW_SCAN 	= 2;
+	public final static int SW_CLEAN 	= 3;
+	public final static int SW_RENAME 	= 4;
+	public final static int SW_EXPORT 	= 5;
 	
-	public StopAction(StoppableSwingWorker<?, ?> sw) {
-		this.sw = sw;
+	private Engine engine;
+	private int type;
+	
+	public StopAction(Engine engine, int type) {
+		this.type = type;
+		this.engine = engine;
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		sw.setStopAction(true);
+		switch (type) {
+			case SW_CLEAN : engine.getCleanSW().setStopAction(true);
+				break;
+			case SW_EXPORT : engine.getExportSW().setStopAction(true);
+				break;
+			case SW_RENAME : engine.getRenameSW().setStopAction(true);
+				break;
+			case SW_SCAN : engine.getScanSW().setStopAction(true);
+				break;
+			case SW_UPDATE : engine.getUpdateSW().setStopAction(true);
+				break;
+		}
 	}
 
 }
