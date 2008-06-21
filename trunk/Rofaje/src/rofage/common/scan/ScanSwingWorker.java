@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
 
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
@@ -20,6 +19,7 @@ import rofage.common.files.FileToolkit;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.common.swingworker.StoppableSwingWorker;
 import rofage.ihm.Messages;
 import rofage.ihm.helper.StatusBarHelper;
 import de.schlichtherle.io.File;
@@ -27,17 +27,14 @@ import de.schlichtherle.io.FileReader;
 import de.schlichtherle.util.zip.ZipEntry;
 import de.schlichtherle.util.zip.ZipFile;
 
-public class ScanSwingWorker extends SwingWorker<Integer, String> {
-	private boolean stopScan;
-	private Engine engine;
+public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
+
 	private Configuration selConf;
 	private HashMap<String, String> cRCRomDB; // <CRC from the DAT file, releaseNb>
 	private HashMap<String, String> serialRomDB; // <internalName, releaseNb>
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
 	
 	public ScanSwingWorker (Engine engine) {
-		this.engine = engine;
-		this.stopScan = false;
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.gameCollection = engine.getGameDB().getGameCollections().get(selConf.getConfName());
 		
@@ -261,7 +258,7 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 		Iterator<File> iterFiles = listFiles.iterator();
 		
 		List<File> subDirectories = new ArrayList<File>();
-		while (iterFiles.hasNext() && !stopScan) {
+		while (iterFiles.hasNext() && !stopAction) {
 			File curFile = iterFiles.next();
 			
 			// If it's a folder we save it for deeper scanning
@@ -308,18 +305,6 @@ public class ScanSwingWorker extends SwingWorker<Integer, String> {
 			}
 			scanFolderForRoms(nbFiles, 0, topDirectory);
 		}	
-	}
-
-	public boolean isStopScan() {
-		return stopScan;
-	}
-
-	public void setStopScan(boolean stopScan) {
-		this.stopScan = stopScan;
-	}
-
-	public Engine getEngine() {
-		return engine;
 	}
 
 }

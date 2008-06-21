@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -47,6 +48,7 @@ import rofage.ihm.actions.common.ShowConfigurationAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
 import rofage.ihm.actions.common.ShowUpdateAction;
+import rofage.ihm.actions.export.ExportAction;
 import rofage.ihm.helper.ComboFilterHelper;
 import rofage.ihm.images.JPanelImage;
 
@@ -54,6 +56,8 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	private JFileChooser folderChooser = null;
+	
 	private JPanel jContentPane = null;
 
 	private JMenuBar jJMenuBar = null;
@@ -63,7 +67,7 @@ public class MainWindow extends JFrame {
 	private JMenu jMenu1 = null;
 	
 	private JPopupMenu popMenu = null;
-	private JMenu popMenuItemExport = null;
+	private JMenu popMenuExport = null;
 	private JMenuItem popMenuItemExportToFolder = null;
 	
 	private JMenuItem jMenuItem = null;
@@ -225,7 +229,7 @@ public class MainWindow extends JFrame {
 	public JPopupMenu getPopMenu() {
 		if (popMenu == null) {
 			popMenu = new JPopupMenu();
-			popMenu.add(getPopMenuItemExport());
+			popMenu.add(getPopMenuExport());
 		}
 		return popMenu;
 	}
@@ -433,21 +437,21 @@ public class MainWindow extends JFrame {
 		return jMenuItem1;
 	}
 	
-	private JMenu getPopMenuItemExport() {
-		if (popMenuItemExport == null) {
-			popMenuItemExport = new JMenu();
-			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
-			popMenuItemExport.add(getPopMenuItemExportToFolder());
-			popMenuItemExport.setText(Messages.getString("Export")); //$NON-NLS-1$
+	private JMenu getPopMenuExport() {
+		if (popMenuExport == null) {
+			popMenuExport = new JMenu();
+			popMenuExport.add(getPopMenuItemExportToFolder());
+			popMenuExport.setText(Messages.getString("Export")); //$NON-NLS-1$
 		}
-		return popMenuItemExport;
+		return popMenuExport;
 	}
 	
 	private JMenuItem getPopMenuItemExportToFolder() {
 		if (popMenuItemExportToFolder == null) {
 			popMenuItemExportToFolder = new JMenuItem();
-			//popMenuItemExport.addActionListener(new ShowUpdateAction(engine));
+			popMenuItemExportToFolder.addActionListener(new ExportAction(engine));
 			popMenuItemExportToFolder.setText(Messages.getString("ExportToFolder")); //$NON-NLS-1$
+			popMenuItemExportToFolder.setVisible(true);
 		}
 		return popMenuItemExportToFolder;
 	}
@@ -757,5 +761,14 @@ public class MainWindow extends JFrame {
 			buttonFilter.setVisible(true);
 		}
 		return buttonFilter;
+	}
+	
+	public JFileChooser getFolderChooser() {
+		if (folderChooser==null) {
+			folderChooser = new JFileChooser();
+			folderChooser.setVisible(true);
+			folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		}
+		return folderChooser;
 	}
 }

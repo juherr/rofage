@@ -7,20 +7,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
-import javax.swing.SwingWorker;
-
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.object.GlobalConfiguration;
+import rofage.common.swingworker.StoppableSwingWorker;
 import rofage.ihm.Messages;
+import de.schlichtherle.io.ArchiveException;
 import de.schlichtherle.io.File;
 
-public class CleanSwingWorker extends SwingWorker<Integer, String> {
-	private boolean stopAction;
-	private Engine engine;
+public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
+	
 	private Configuration selConf;
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
 	private List<Game> listArchivesToCleanUp;
@@ -78,7 +77,7 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 	private void generateCleanList () {
 		listArchivesToCleanUp = new ArrayList<Game>();
 		Iterator<Game> iterGames = gameCollection.values().iterator();
-		while (iterGames.hasNext()) {
+		while (iterGames.hasNext() && !stopAction) {
 			Game game = iterGames.next();
 			if (game.isGotRom() 
 					&& GlobalConfiguration.allowedCompressedExtensions.contains(FileToolkit.getFileExtension(game.getContainerPath()).toLowerCase())) { //$NON-NLS-1$
@@ -118,6 +117,11 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 					}
 				}
 				
+				try {
+					File.umount();
+				} catch (ArchiveException e) {
+					e.printStackTrace();
+				}
 				publish (gameFile.getName()+Messages.getString("CleanSwingWorker.9")); //$NON-NLS-1$
 				
 				nbFilesRenamed++;
@@ -126,14 +130,6 @@ public class CleanSwingWorker extends SwingWorker<Integer, String> {
 		}
 	}
 	
-	public boolean isStopAction() {
-		return stopAction;
-	}
-
-	public void setStopAction(boolean stopAction) {
-		this.stopAction = stopAction;
-	}
-
 	public Engine getEngine() {
 		return engine;
 	}

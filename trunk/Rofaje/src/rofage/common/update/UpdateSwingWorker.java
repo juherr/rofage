@@ -79,7 +79,7 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 		Collection<Game> colGames = engine.getGameDB().getGameCollections().get(conf.getConfName()).values();
 		Iterator<Game> iterGames = colGames.iterator();
 
-		while (iterGames.hasNext() && !stopUpdate) {
+		while (iterGames.hasNext() && !stopAction) {
 			setProgress(0);
 			Game currentGame = iterGames.next();
 			
@@ -169,15 +169,4 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 		return 0;
 	}
 
-	public boolean isStopUpdate() {
-		return stopUpdate;
-	}
-
-	public void setStopUpdate(boolean stopUpdate) {
-		this.stopUpdate = stopUpdate;
-	}
-
-	public Engine getEngine() {
-		return engine;
-	}
 }

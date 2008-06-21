@@ -10,7 +10,7 @@ public class GameListTable extends JTable {
 	public GameListTable (String titlePattern, Engine engine) {
 		super();
 		setAutoscrolls(true);
-		setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		setVisible(true);
 		setFillsViewportHeight(true);
 		setModel(new GameListTableModel(titlePattern, engine));
