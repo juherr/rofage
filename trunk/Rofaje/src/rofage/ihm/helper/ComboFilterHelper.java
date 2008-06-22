@@ -96,8 +96,10 @@ public abstract class ComboFilterHelper {
 			while (iterGames.hasNext()) {
 				Game game = iterGames.next();
 				String genre = game.getGenre();
-				if (!treeGenre.contains(genre)) {
-					treeGenre.add(genre);
+				if (genre!=null) {
+					if (!treeGenre.contains(genre)) {
+						treeGenre.add(genre);
+					}
 				}
 			}
 			// Now we display the treeset
