@@ -1,7 +1,7 @@
 package rofage.common.files;
 
-import java.io.FileFilter;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,36 +83,37 @@ public abstract class FileToolkit {
 	}
 	
 	/**
-	 * returns the number of file (and not directory) contained in this directory
+	 * returns the number of file contained in this directory based on the filefilter
 	 * this method also looks inside subdirectories
 	 * @return
 	 */
-	public static int getFileNb(File topDirectory, FileFilter fileFilter) {
+	public static int getFileNb(File topDirectory, FilenameFilter filenameFilter) {
 		int nbFile=0;
 		if (!topDirectory.isDirectory()) return 0; // We ensure it's a directory
 		
-		File[] tabFiles = (File[])topDirectory.listFiles(fileFilter);
+		String[] tabFiles = topDirectory.list(filenameFilter);
 		
 		// We convert the array to a list
-		List<File> listFiles = new ArrayList<File>();
+		List<String> listFilePaths = new ArrayList<String>();
 		for (int i=0; i<tabFiles.length; i++) {
-			listFiles.add(tabFiles[i]);
+			listFilePaths.add(tabFiles[i]);
 		}
 		
-		Iterator<File> iterFiles = listFiles.iterator();
-		List<File> subdirectories = new ArrayList<File>();
-		while (iterFiles.hasNext()) {
-			File curFile = iterFiles.next();
-			if (curFile.isDirectory()) {
-				subdirectories.add(curFile);
+		Iterator<String> iterFilePaths = listFilePaths.iterator();
+		List<String> subdirectoriesPath = new ArrayList<String>();
+		while (iterFilePaths.hasNext()) {
+			String curPath = iterFilePaths.next();
+			File file = new File(topDirectory.getAbsolutePath()+File.separator+curPath);
+			if (file.isDirectory()) {
+				subdirectoriesPath.add(topDirectory.getAbsolutePath()+File.separator+curPath);
 			} else {
 				nbFile++;
 			}
 		}
-		Iterator<File> iterSubDir = subdirectories.iterator();
+		Iterator<String> iterSubDir = subdirectoriesPath.iterator();
 		while (iterSubDir.hasNext()) {
-			File subDir = iterSubDir.next();
-			nbFile += getFileNb(subDir, fileFilter);
+			File subDir = new File(iterSubDir.next());
+			nbFile += getFileNb(subDir, filenameFilter);
 		}
 		return nbFile;
 	}
@@ -164,27 +165,26 @@ public abstract class FileToolkit {
 		return fileName;
 	}
 	
-	public static FileFilter getFileFilter(int type, final Configuration conf) {
+	public static FilenameFilter getFileNameFilter(int type, final Configuration conf) {
 		switch (type) {
 			case FILTER_ROMS_ARCHIVES :
-				return new FileFilter() {
-					public boolean accept (java.io.File file) {
-						// We accept directories
-						if (file.isDirectory()) return true;
-						// We accept potential roms
-						String fileExt = FileToolkit.getFileExtension(file.getName()).toLowerCase();
-						if (conf.getAllowedExtensions().contains(fileExt)) return true;
-						// We accept archive files
-						if (GlobalConfiguration.allowedCompressedExtensions.contains(fileExt)) return true;
+				return new FilenameFilter () {
+					public boolean accept(java.io.File dir, String name) {
+						String ext = getFileExtension(name).toLowerCase();
+						if (GlobalConfiguration.allowedCompressedExtensions.contains(ext)
+								|| conf.getAllowedExtensions().contains(ext)) {
+							return true;
+						}
 						return false;
 					}
 				};
 			case FILTER_ROMS :
-				return new FileFilter() {
-					public boolean accept (java.io.File file) {
-						// We accept potential roms
-						String fileExt = FileToolkit.getFileExtension(file.getName()).toLowerCase();
-						if (conf.getAllowedExtensions().contains(fileExt)) return true;
+				return new FilenameFilter () {
+					public boolean accept(java.io.File dir, String name) {
+						String ext = getFileExtension(name).toLowerCase();
+						if (conf.getAllowedExtensions().contains(ext)) {
+							return true;
+						}
 						return false;
 					}
 				};

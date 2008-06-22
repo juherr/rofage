@@ -95,15 +95,16 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		while (iterGame.hasNext()) {
 			Game game = iterGame.next();
 			String serial = game.getSerial();
-			int index1 = serial.indexOf('-');
-			int index2 = serial.lastIndexOf('-');
-			if (index1==-1 || index2==-1) {
-				System.out.println("There is an error in the DAT file for the game "+game.getTitle()+"-(crc:"+game.getCrc()+")\nThe serial :'"+game.getSerial()+"' is not valid!");
-			} else {
-				serial = serial.substring(serial.indexOf('-')+1, serial.lastIndexOf('-'));
-				serialRomDB.put(serial, game.getReleaseNb());
+			if (serial!=null) {
+				int index1 = serial.indexOf('-');
+				int index2 = serial.lastIndexOf('-');
+				if (index1==-1 || index2==-1) {
+					System.out.println("There is an error in the DAT file for the game "+game.getTitle()+"-(crc:"+game.getCrc()+")\nThe serial :'"+game.getSerial()+"' is not valid!");
+				} else {
+					serial = serial.substring(serial.indexOf('-')+1, serial.lastIndexOf('-'));
+					serialRomDB.put(serial, game.getReleaseNb());
+				}
 			}
-			
 		}
 	}
 	
@@ -165,7 +166,6 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	}
 	
 	private String detectFileWithInternalName (File file) {
-		// TODO vérifier que cela marche bien avec les roms patchées (archives et pas archives !) 
 		try {
 			BufferedReader buff = new BufferedReader(new FileReader(file));
 			try  {
@@ -202,14 +202,21 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		if (file.isEntry()) {
 			// It is inside an archive, we could use the already calculate CRC 
 			// This speeds up the scan a LOT !
+			ZipFile zipFile = null;
 			try {
-				// We convert this file to a ZipEntry
-				ZipFile zipFile = new ZipFile(file.getTopLevelArchive().getAbsolutePath());
-				ZipEntry zipEntry = zipFile.getEntry(file.getName());
-				fileCRC = FileToolkit.convertLongCRCToStringCRC(zipEntry.getCrc());
-				// We save the zipEntryName for adding it in the game object
-				// So if we have multiple roms in a single archive, we can know which one it is
-				entryFullPath = file.getAbsolutePath();
+				try {
+					// We convert this file to a ZipEntry
+					zipFile = new ZipFile(file.getTopLevelArchive().getAbsolutePath());
+					ZipEntry zipEntry = zipFile.getEntry(file.getName());
+					fileCRC = FileToolkit.convertLongCRCToStringCRC(zipEntry.getCrc());
+					// We save the zipEntryName for adding it in the game object
+					// So if we have multiple roms in a single archive, we can know which one it is
+					entryFullPath = file.getAbsolutePath();
+				} finally {
+					if (zipFile!=null) {
+						zipFile.close();
+					}
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -245,26 +252,25 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	}
 	
 	private int scanFolderForRoms (int nbFiles, int NbFilesScanned, File topDirectory) {
-//		 We have a directory we can scan
-		//List<File> listFiles = new ArrayList<File> (Arrays.asList(topDirectory.listFiles()));
-		// We have to convert from the java.io.File to the File from truezip
-		File[] tabFiles = (File[])topDirectory.listFiles(FileToolkit.getFileFilter(FileToolkit.FILTER_ROMS_ARCHIVES, selConf));
+		// We have a directory we can scan
+		String[] tabFilenames = topDirectory.list(FileToolkit.getFileNameFilter(FileToolkit.FILTER_ROMS_ARCHIVES, selConf));
 		
 		// We convert the array to a list
-		List<File> listFiles = new ArrayList<File>();
-		for (int i=0; i<tabFiles.length; i++) {
-			listFiles.add(tabFiles[i]);
+		List<String> listFilenames = new ArrayList<String>();
+		for (int i=0; i<tabFilenames.length; i++) {
+			listFilenames.add(tabFilenames[i]);
 		}
+				
+		Iterator<String> iterFilenames = listFilenames.iterator();
 		
-		Iterator<File> iterFiles = listFiles.iterator();
-		
-		List<File> subDirectories = new ArrayList<File>();
-		while (iterFiles.hasNext() && !stopAction) {
-			File curFile = iterFiles.next();
+		List<String> subDirectories = new ArrayList<String>();
+		while (iterFilenames.hasNext() && !stopAction) {
+			String curFilename = iterFilenames.next();
 			
+			File curFile = new File(topDirectory.getAbsolutePath()+File.separator+curFilename);
 			// If it's a folder we save it for deeper scanning
 			if (curFile.isDirectory()) {
-				subDirectories.add(curFile);
+				subDirectories.add(curFile.getAbsolutePath());
 			} else {
 				if (curFile.isEntry()) {
 					publish (Messages.getString("ScanSwingWorker.3")+curFile.getName()+" "+Messages.getString("In")+" "+curFile.getTopLevelArchive().getName()); //$NON-NLS-1$
@@ -276,9 +282,9 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 				setProgress(NbFilesScanned*100/nbFiles);
 			}
 		}
-		Iterator<File> iterSubDir = subDirectories.iterator();
-		while (iterSubDir.hasNext()) {
-			File subDir = iterSubDir.next();
+		Iterator<String> iterSubDirNames = subDirectories.iterator();
+		while (iterSubDirNames.hasNext()) {
+			File subDir = new File(iterSubDirNames.next());
 			NbFilesScanned = scanFolderForRoms(nbFiles, NbFilesScanned, subDir);
 		}
 		
@@ -294,7 +300,8 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 			publish (Messages.getString("ScanSwingWorker.6")); //$NON-NLS-1$
 		} else {
 			// We count the total number of files
-			int nbFiles = FileToolkit.getFileNb(topDirectory, FileToolkit.getFileFilter(FileToolkit.FILTER_ROMS_ARCHIVES, selConf));
+			int nbFiles = FileToolkit.getFileNb(topDirectory, FileToolkit.getFileNameFilter(FileToolkit.FILTER_ROMS_ARCHIVES, selConf));
+			
 			publish(Messages.getString("ScanSwingWorker.7")+nbFiles+Messages.getString("ScanSwingWorker.8")); //$NON-NLS-1$ //$NON-NLS-2$
 			// We have to put all value to false (gotRom, goodName)
 			// They will be reset during the scan
