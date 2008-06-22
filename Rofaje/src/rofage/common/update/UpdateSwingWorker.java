@@ -43,6 +43,8 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 	
 	@Override
 	protected Integer doInBackground() throws Exception {
+		engine.getUpdateWindow().getJButton().setEnabled(false);
+		engine.getUpdateWindow().getButtonStop().setEnabled(true);
 		Iterator<Configuration> iterConfs = listConfToUpdate.iterator();
 		while (iterConfs.hasNext()) {
 			Configuration conf = iterConfs.next();
@@ -54,6 +56,8 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 		}
 
 		engine.getMainWindow().getJTable().updateUI();
+		engine.getUpdateWindow().getJButton().setEnabled(true);
+		engine.getUpdateWindow().getButtonStop().setEnabled(false);
 		return 0;
 	}
 	

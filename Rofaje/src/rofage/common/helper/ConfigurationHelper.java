@@ -28,6 +28,8 @@ public abstract class ConfigurationHelper {
 			conf.setTitlePattern(confWindow.getFieldTitlePattern().getText().trim());
 		}
 		conf.setInAppUpdate(confWindow.getCBInAppUpdate().isSelected());
+		conf.setDeleteSource(confWindow.getCBDeleteSource().isSelected());
+		conf.setCompressValue(confWindow.getCompressSlider().getValue());
 				
 		// We save this conf into the global conf
 		engine.getGlobalConf().getMapDatConfigs().put(conf.getConfName(), conf);

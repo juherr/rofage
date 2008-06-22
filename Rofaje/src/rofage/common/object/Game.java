@@ -15,7 +15,7 @@ public class Game implements Serializable {
 	private String imageNb;
 	private String releaseNb;
 	private String title = "";
-	private String romSize = "";
+	private String romSize = "0";
 	private String location = "";
 	private String publisher = "";
 	private String sourceRom = "";
@@ -27,7 +27,7 @@ public class Game implements Serializable {
 	private String genre = "";
 	private String internalName = "";
 	private String serial = "";
-	private boolean wifi = false;
+	private Boolean wifi = null;
 	private boolean scannedFromSerial = false;
 	
 	
@@ -151,10 +151,7 @@ public class Game implements Serializable {
 	public void setSerial(String serial) {
 		this.serial = serial;
 	}
-	public boolean isWifi() {
-		return wifi;
-	}
-	public void setWifi(boolean wifi) {
+	public void setWifi(Boolean wifi) {
 		this.wifi = wifi;
 	}
 	public boolean isScannedFromSerial() {
@@ -168,5 +165,8 @@ public class Game implements Serializable {
 	}
 	public void setEntryFullPath(String entryFullPath) {
 		this.entryFullPath = entryFullPath;
+	}
+	public Boolean getWifi() {
+		return wifi;
 	}
 }

@@ -173,8 +173,12 @@ public class DatParser {
 			game.setGenre(gameNode.getChildText(XML_NODE_GENRE));
 			game.setInternalName(gameNode.getChildText(XML_NODE_INTERNALNAME));
 			game.setSerial(gameNode.getChildText(XML_NODE_SERIAL));
-			if ("Yes".equals(gameNode.getChildText(XML_NODE_WIFI))) {
-				game.setWifi(true);
+			if (gameNode.getChildText(XML_NODE_WIFI)!=null) {
+				if ("Yes".equals(gameNode.getChildText(XML_NODE_WIFI))) {
+					game.setWifi(true);
+				} else {
+					game.setWifi(false);
+				}
 			}
 			
 			gameCollection.put(Integer.parseInt(game.getReleaseNb()), game);

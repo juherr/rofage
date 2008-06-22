@@ -1,6 +1,5 @@
 package rofage.ihm;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -9,11 +8,10 @@ import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Game;
-import rofage.common.url.URLToolkit;
+import rofage.ihm.helper.IconHelper;
 
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class GameListTableModel extends AbstractTableModel implements TableModel {
@@ -55,32 +53,14 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 		if (game!=null) {
 			if (col==0) {
 				// Location
-				return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png")); //$NON-NLS-1$ //$NON-NLS-2$
+				return IconHelper.getLocationIcon(game);
 			} else if (col==1) {
-				if (game.isGotRom()) {
-					if (game.isGoodName()) {
-						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")); //$NON-NLS-1$
-					} else {
-						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")); //$NON-NLS-1$
-					}
-				}
-				return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$
+				return IconHelper.getGotRomIcon(game);
 			} else if (col==2) {
 				// We show the icon if available
-				String iconName = GameDisplayHelper.constructFileName(game, URLToolkit.TYPE_ICON);
-				String folderPath = Consts.HOME_FOLDER+File.separator+engine.getGlobalConf().getSelectedConf().getImageFolder()+File.separator+Consts.ICO_FOLDER+File.separator;
-				File iconeFile = new File (folderPath+iconName);
-				if (iconeFile.exists()) return new ImageIcon(folderPath+iconName);
+				return IconHelper.getRomIcon(game, engine.getGlobalConf().getSelectedConf());
 			} else if (col==3) {
-				if (!game.isGotRom()) {
-					return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")); //$NON-NLS-1$					
-				} else {
-					if (game.isScannedFromSerial()) {
-						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_notclean.png"));
-					} else {
-						return new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_clean.png"));
-					}
-				}
+				return IconHelper.getCleanDumpIcon(game);
 			} else if (col==4) {
 				return GameDisplayHelper.buildTitle(game, titlePattern);
 			}

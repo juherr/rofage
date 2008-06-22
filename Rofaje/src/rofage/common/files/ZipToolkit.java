@@ -137,7 +137,7 @@ public abstract class ZipToolkit {
 	 * @param listFiles
 	 * @param destPath
 	 */
-	public static void compress (List<String> listPaths, String destPath) {
+	public static void compress (List<String> listPaths, String destPath, int compressionRate) {
 		byte data[] = new byte[BUFFER];
 		
 		ZipOutputStream out = null;
@@ -146,7 +146,7 @@ public abstract class ZipToolkit {
 			BufferedOutputStream buff = new BufferedOutputStream(dest);
 			out = new ZipOutputStream(buff);
 			out.setMethod(ZipOutputStream.DEFLATED);
-			out.setLevel(9);
+			out.setLevel(compressionRate);
 			Iterator<String> iterPaths = listPaths.iterator();
 			while (iterPaths.hasNext()) {
 				String path = iterPaths.next();

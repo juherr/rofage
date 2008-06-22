@@ -21,6 +21,8 @@ public class Configuration implements Serializable {
 	private boolean renameInside = false;
 	private boolean inAppUpdate = false;
 	private boolean internalName = false; // Do we check with the internal name ?
+	private boolean deleteSource = false;
+	private int compressValue = 9;
 	
 		
 	// Internal configuration data retrieved from the datFile
@@ -136,6 +138,18 @@ public class Configuration implements Serializable {
 	}
 	public void setInternalName(boolean internalName) {
 		this.internalName = internalName;
+	}
+	public boolean isDeleteSource() {
+		return deleteSource;
+	}
+	public void setDeleteSource(boolean deleteSource) {
+		this.deleteSource = deleteSource;
+	}
+	public int getCompressValue() {
+		return compressValue;
+	}
+	public void setCompressValue(int compressValue) {
+		this.compressValue = compressValue;
 	}
 	
 }

@@ -28,11 +28,20 @@ public class ChangeConfInConfListener implements ItemListener {
 			
 			// We change the values of the forms
 			ConfWindow confWindow = engine.getConfWindow();
+			// Scan panel
 			confWindow.getFieldRomFolder().setText(newConf.getRomFolder());
 			confWindow.getFieldUnknownRomFolder().setText(newConf.getRomFolderMove());
+			confWindow.getCBInternalName().setSelected(newConf.isInternalName());
 			confWindow.getCBmoveUnknownRoms().setSelected(newConf.isMoveUnknownRoms());
+			// Rom Title panel
 			confWindow.getFieldTitlePattern().setText(newConf.getTitlePattern());
+			confWindow.getCBRenameInside().setSelected(newConf.isRenameInside());
+			// Update panel
 			confWindow.getCBAutoUpdate().setSelected(newConf.isUpdateAtStartup());
+			confWindow.getCBInAppUpdate().setSelected(newConf.isInAppUpdate());
+			// Compression panel
+			confWindow.getCBDeleteSource().setSelected(newConf.isDeleteSource());
+			confWindow.getCompressSlider().setValue(newConf.getCompressValue());
 			
 			engine.getGlobalConf().setSelectedConf(newConf);
 			

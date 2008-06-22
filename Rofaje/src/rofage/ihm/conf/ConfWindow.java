@@ -18,6 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -45,6 +46,7 @@ public class ConfWindow extends JFrame {
 	private JPanel panelAutoUpdate = null;
 	private JPanel panelGlobalButtons = null;
 	private JPanel panelGlobalConf = null;
+	private JPanel panelCompression = null;
 	
 	private JFileChooser folderChooser = null;
 	private JFileChooser xMLChooser = null;
@@ -53,7 +55,7 @@ public class ConfWindow extends JFrame {
 	private JLabel labelUnknownRomFolder = null;
 	private JLabel labelTitlePattern = null;
 	private JLabel labelRenameInside = null;
-	
+		
 	private JTextField fieldRomFolder = null;
 	private JTextField fieldUnknownRomFolder = null;
 	private JTextField fieldTitlePattern = null;
@@ -70,10 +72,13 @@ public class ConfWindow extends JFrame {
 	private JCheckBox CBRenameInside = null;
 	private JCheckBox CBInAppUpdate = null;
 	private JCheckBox CBInternalName = null;
+	private JCheckBox CBDeleteSource = null;
 	
 	private JTextPane textPaneTitlePattern = null;
 	
 	private JComboBox comboConf = null;
+	
+	private JSlider sliderCompress = null;
 	
 	private FileChooserFilter xmlFilter = null;
 	
@@ -136,10 +141,26 @@ public class ConfWindow extends JFrame {
 			jTabbedPane.addTab(Messages.getString("ConfWindow.3"), getPanelFolder()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("ConfWindow.4"), getPanelTitlePattern()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("ConfWindow.5"), getPanelAutoUpdate()); //$NON-NLS-1$
+			jTabbedPane.addTab(Messages.getString("Compression"), getPanelCompression());
 			jTabbedPane.setSize(500, 300);
 			jTabbedPane.setVisible(false);
 		}
 		return jTabbedPane;
+	}
+	
+	private JPanel getPanelCompression () {
+		if (panelCompression==null) {
+			panelCompression = new JPanel();
+			panelCompression.setLayout(new FlowLayout(FlowLayout.LEFT));
+			
+			Box vBox = Box.createVerticalBox();
+			vBox.add(getCompressSlider());
+			vBox.add(getCBDeleteSource());
+			
+			panelCompression.add(vBox);
+			panelCompression.setVisible(true);
+		}
+		return panelCompression;
 	}
 	
 	private JPanel getPanelFolder () {
@@ -396,6 +417,18 @@ public class ConfWindow extends JFrame {
 		return CBmoveUnknownRoms;
 	}
 	
+	public JCheckBox getCBDeleteSource () {
+		if (CBDeleteSource==null) {
+			CBDeleteSource = new JCheckBox();
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				CBDeleteSource.setSelected(engine.getGlobalConf().getSelectedConf().isDeleteSource());			
+			}
+			CBDeleteSource.setText(Messages.getString("DeleteSource"));
+			CBDeleteSource.setVisible(true);
+		}
+		return CBDeleteSource;
+	}
+	
 	public JCheckBox getCBInternalName() {
 		if (CBInternalName==null) {
 			CBInternalName = new JCheckBox();
@@ -467,5 +500,21 @@ public class ConfWindow extends JFrame {
 			comboConf.setVisible(true);
 		}
 		return comboConf;
+	}
+	
+	public JSlider getCompressSlider () {
+		if (sliderCompress==null) {
+			sliderCompress = new JSlider(1, 9, 9);
+			sliderCompress.setBorder(BorderFactory.createTitledBorder(Messages.getString("CompressionRate")));
+			sliderCompress.setMajorTickSpacing(4);
+			sliderCompress.setMinorTickSpacing(1);
+			sliderCompress.setPaintTicks(true);
+			sliderCompress.setPaintLabels(true);
+			if (engine.getGlobalConf().getSelectedConf()!=null) {
+				sliderCompress.setValue(engine.getGlobalConf().getSelectedConf().getCompressValue());
+			}
+			sliderCompress.setVisible(true);
+		}
+		return sliderCompress;
 	}
 }

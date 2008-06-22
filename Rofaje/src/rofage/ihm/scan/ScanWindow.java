@@ -136,7 +136,7 @@ public class ScanWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getJButton() {
+	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setAction(new ScanAction(engine));
@@ -179,6 +179,7 @@ public class ScanWindow extends JFrame {
 			buttonStop.setPreferredSize(new Dimension(100, 23));
 			buttonStop.setText(Messages.getString("ScanWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
+			buttonStop.setEnabled(false);
 		}
 		return buttonStop;
 	}

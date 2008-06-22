@@ -31,7 +31,6 @@ import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import rofage.common.Engine;
@@ -44,10 +43,12 @@ import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.PopupListener;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowCleanAction;
+import rofage.ihm.actions.common.ShowCompressAction;
 import rofage.ihm.actions.common.ShowConfigurationAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
 import rofage.ihm.actions.common.ShowUpdateAction;
+import rofage.ihm.actions.compress.CompressAction;
 import rofage.ihm.actions.export.ExportAction;
 import rofage.ihm.helper.ComboFilterHelper;
 import rofage.ihm.images.JPanelImage;
@@ -69,6 +70,7 @@ public class MainWindow extends JFrame {
 	private JPopupMenu popMenu = null;
 	private JMenu popMenuExport = null;
 	private JMenuItem popMenuItemExportToFolder = null;
+	private JMenuItem popMenuItemCompress = null;
 	
 	private JMenuItem jMenuItem = null;
 	
@@ -78,13 +80,13 @@ public class MainWindow extends JFrame {
 
 	private JPanel jPanel = null;
 
-	private JTextPane jTextPane = null;
-
 	private JPanelImage jPanelImage1 = null;
 	private JPanelImage jPanelImage2 = null;
 	private JPanel jPanelImages = null;
 	private JPanel panelFilter = null;
 	private JPanel panelStatusBar = null;
+	private PanelRomHeader panelRomHeader = null;
+	private PanelGameInfos panelGameInfos = null;
 
 	private JScrollPane jScrollPane = null;
 
@@ -94,6 +96,7 @@ public class MainWindow extends JFrame {
 	private JMenuItem menuItemRename = null;
 	private JMenuItem menuItemClean = null;
 	private JMenu menuConf = null;
+	private JMenuItem menuItemCompress = null;
 	
 	private ButtonGroup languageGroup = null;  //  @jve:decl-index=0:
 	private JRadioButtonMenuItem langFR = null;
@@ -153,9 +156,9 @@ public class MainWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(1024, 768);
+		this.setSize(1024, 800);
 		this.setJMenuBar(getJJMenuBar());
-		this.setPreferredSize(new Dimension(1024, 768));
+		this.setPreferredSize(new Dimension(1024, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("AppTitle") +" "+ Messages.getString("Version")); //$NON-NLS-1$
@@ -172,6 +175,7 @@ public class MainWindow extends JFrame {
 		if (jContentPane == null) {
 			jContentPane = new JPanel();
 			jContentPane.setLayout(new BorderLayout());
+			jContentPane.add(getPanelRomHeader(), BorderLayout.NORTH);
 			jContentPane.add(getJSplitPane(), BorderLayout.CENTER);
 			jContentPane.add(getPanelStatusBar(), BorderLayout.SOUTH);
 		}
@@ -233,6 +237,7 @@ public class MainWindow extends JFrame {
 		if (popMenu == null) {
 			popMenu = new JPopupMenu();
 			popMenu.add(getPopMenuExport());
+			popMenu.add(getPopMenuItemCompress());
 		}
 		return popMenu;
 	}
@@ -245,6 +250,7 @@ public class MainWindow extends JFrame {
 			menuConf.add(getMenuItemScan());
 			menuConf.add(getMenuItemRename());
 			menuConf.add(getMenuItemClean());
+			menuConf.add(getMenuItemCompress());
 			menuConf.setVisible(true);
 		}
 		return menuConf;
@@ -318,7 +324,7 @@ public class MainWindow extends JFrame {
 			jPanel = new JPanel();
 			jPanel.setLayout(new BorderLayout());
 			Box hBox = Box.createHorizontalBox();
-			hBox.add(getJTextPane());
+			hBox.add(getPanelGameInfos());
 			hBox.add(getPanelFilter());
 			jPanel.add(hBox, BorderLayout.SOUTH);
 			jPanel.add(getJPanelImages(), BorderLayout.NORTH);
@@ -351,22 +357,6 @@ public class MainWindow extends JFrame {
 			panelStatusBar.setVisible(true);
 		}
 		return panelStatusBar;
-	}
-
-	/**
-	 * This method initializes jTextPane	
-	 * 	
-	 * @return javax.swing.JTextPane	
-	 */
-	public JTextPane getJTextPane() {
-		if (jTextPane == null) {
-			jTextPane = new JTextPane();
-			jTextPane.setBorder(BorderFactory.createTitledBorder(Messages.getString("MainWindow.5")));
-			jTextPane.setVisible(true);
-			jTextPane.setSize(new Dimension(150, 230));
-			jTextPane.setPreferredSize(new Dimension(150,230));
-		}
-		return jTextPane;
 	}
 
 	public JPanel getJPanelImages() {
@@ -459,6 +449,8 @@ public class MainWindow extends JFrame {
 		return popMenuExport;
 	}
 	
+	
+	
 	private JMenuItem getPopMenuItemExportToFolder() {
 		if (popMenuItemExportToFolder == null) {
 			popMenuItemExportToFolder = new JMenuItem();
@@ -467,6 +459,16 @@ public class MainWindow extends JFrame {
 			popMenuItemExportToFolder.setVisible(true);
 		}
 		return popMenuItemExportToFolder;
+	}
+	
+	private JMenuItem getPopMenuItemCompress() {
+		if (popMenuItemCompress == null) {
+			popMenuItemCompress = new JMenuItem();
+			popMenuItemCompress.addActionListener(new CompressAction(engine));
+			popMenuItemCompress.setText(Messages.getString("MainWindow.14")); //$NON-NLS-1$
+			popMenuItemCompress.setVisible(true);
+		}
+		return popMenuItemCompress;
 	}
 	
 	private JMenuItem getMenuItemConf() {
@@ -497,6 +499,16 @@ public class MainWindow extends JFrame {
 			menuItemRename.setVisible(true);
 		}
 		return menuItemRename;
+	}
+	
+	private JMenuItem getMenuItemCompress() {
+		if (menuItemCompress==null) {
+			menuItemCompress = new JMenuItem();
+			menuItemCompress.addActionListener(new ShowCompressAction(engine));
+			menuItemCompress.setText(Messages.getString("MainWindow.14")); //$NON-NLS-1$
+			menuItemCompress.setVisible(true);
+		}
+		return menuItemCompress;
 	}
 	
 	private JMenuItem getMenuItemClean() {
@@ -815,5 +827,23 @@ public class MainWindow extends JFrame {
 			folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		}
 		return folderChooser;
+	}
+
+	public PanelRomHeader getPanelRomHeader() {
+		if (panelRomHeader==null) {
+			panelRomHeader = new PanelRomHeader();
+			panelRomHeader.setMaximumSize(new Dimension(jContentPane.getWidth(), 50));
+			panelRomHeader.setMinimumSize(new Dimension(jContentPane.getWidth(), 50));
+			panelRomHeader.setVisible(true);
+		}
+		return panelRomHeader;
+	}
+	
+	public PanelGameInfos getPanelGameInfos() {
+		if (panelGameInfos==null) {
+			panelGameInfos = new PanelGameInfos();
+			panelGameInfos.setVisible(true);
+		}
+		return panelGameInfos;
 	}
 }
