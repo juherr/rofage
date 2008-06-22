@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import rofage.common.clean.CleanSwingWorker;
+import rofage.common.compress.CompressSwingWorker;
 import rofage.common.export.ExportSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
@@ -18,6 +19,7 @@ import rofage.common.update.UpdateSwingWorker;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
 import rofage.ihm.clean.CleanWindow;
+import rofage.ihm.compress.CompressWindow;
 import rofage.ihm.conf.ConfWindow;
 import rofage.ihm.export.ExportWindow;
 import rofage.ihm.rename.RenameWindow;
@@ -32,6 +34,7 @@ public class Engine {
 	private RenameWindow renameWindow 	= null;
 	private CleanWindow cleanWindow 	= null;
 	private ExportWindow exportWindow 	= null;
+	private CompressWindow compressWindow = null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
@@ -41,6 +44,7 @@ public class Engine {
 	private RenameSwingWorker renameSW 	= null;
 	private CleanSwingWorker cleanSW 	= null;
 	private ExportSwingWorker exportSW 	= null;
+	private CompressSwingWorker compressSW = null;
 		
 	private boolean confSaved = false;
 	
@@ -252,5 +256,20 @@ public class Engine {
 			exportWindow = new ExportWindow(this);
 		}
 		return exportWindow;
+	}
+
+	public CompressWindow getCompressWindow() {
+		if (compressWindow==null) {
+			compressWindow = new CompressWindow(this);
+		}
+		return compressWindow;
+	}
+
+	public CompressSwingWorker getCompressSW() {
+		return compressSW;
+	}
+
+	public void setCompressSW(CompressSwingWorker compressSW) {
+		this.compressSW = compressSW;
 	}
 }

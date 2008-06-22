@@ -42,6 +42,9 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	@Override
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
+		// We prevent additional run of this SW
+		engine.getCleanWindow().getJButton().setEnabled(false);
+		engine.getCleanWindow().getButtonStop().setEnabled(true);
 		setProgress(0);
 		publish(Messages.getString("CleanSwingWorker.1")); //$NON-NLS-1$
 		
@@ -59,7 +62,8 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
-		
+		engine.getCleanWindow().getJButton().setEnabled(true);
+		engine.getCleanWindow().getButtonStop().setEnabled(false);
 		return 0;
 	}
 	

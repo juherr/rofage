@@ -57,6 +57,8 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	@Override
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
+		engine.getScanWindow().getJButton().setEnabled(false);
+		engine.getScanWindow().getButtonStop().setEnabled(true);
 		setProgress(0);
 		publish(Messages.getString("ScanSwingWorker.1")); //$NON-NLS-1$
 		scanFolders();
@@ -72,9 +74,8 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		// We also update the status bar
 		StatusBarHelper.updateStatusBar(gameCollection, engine);
 		
-		// The stop button may habe been disabled by an other process,
-		// We enable it again
-		engine.getScanWindow().getButtonStop().setEnabled(true);
+		engine.getScanWindow().getJButton().setEnabled(true);
+		engine.getScanWindow().getButtonStop().setEnabled(false);
 		return 0;
 	}
 	

@@ -34,6 +34,7 @@ public class ExportSwingWorker extends StoppableSwingWorker<Integer, String> {
 	@Override
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
+		engine.getExportWindow().getButtonStop().setEnabled(true);
 		setProgress(0);
 		engine.getExportWindow().setVisible(true);
 		publish(Messages.getString(Messages.getString("ExportSwingWorker.0"))); //$NON-NLS-1$
@@ -51,7 +52,7 @@ public class ExportSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		setProgress(100);
 		publish (Messages.getString("ExportSwingWorker.2")); //$NON-NLS-1$
-				
+		engine.getExportWindow().getButtonStop().setEnabled(false);	
 		return 0;
 	}
 	

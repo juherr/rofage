@@ -158,6 +158,7 @@ public class ExportWindow extends JFrame {
 			buttonStop.setPreferredSize(new Dimension(100, 23));
 			buttonStop.setText(Messages.getString("RenameWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
+			buttonStop.setEnabled(false);
 		}
 		return buttonStop;
 	}

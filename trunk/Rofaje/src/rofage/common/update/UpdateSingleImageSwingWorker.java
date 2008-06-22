@@ -12,6 +12,7 @@ import rofage.common.object.Configuration;
 import rofage.common.object.Game;
 import rofage.common.url.URLToolkit;
 import rofage.ihm.GameListTableModel;
+import rofage.ihm.helper.IconHelper;
 
 public class UpdateSingleImageSwingWorker extends DownloadSwingWorker {
 	private int type;
@@ -65,7 +66,10 @@ public class UpdateSingleImageSwingWorker extends DownloadSwingWorker {
 				engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"a.png"); //$NON-NLS-1$
 			} else if (type==URLToolkit.TYPE_IMAGE_2) {
 				engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"b.png"); //$NON-NLS-1$
-			} 
+			}
+			if (type==URLToolkit.TYPE_ICON) {
+				engine.getMainWindow().getPanelRomHeader().getLabelTitle().setIcon(IconHelper.getRomIcon(game, conf));
+			}
 		}
 		engine.getMainWindow().getJTable().updateUI();
 		return 0;

@@ -135,7 +135,7 @@ public class UpdateWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getJButton() {
+	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setAction(new UpdateAction(engine));
@@ -169,7 +169,7 @@ public class UpdateWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getButtonStop() {
+	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
 			buttonStop.setAction(new StopAction(engine, StopAction.SW_UPDATE));
@@ -178,6 +178,7 @@ public class UpdateWindow extends JFrame {
 			buttonStop.setPreferredSize(new Dimension(100, 23));
 			buttonStop.setText(Messages.getString("UpdateWindow.9")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
+			buttonStop.setEnabled(false);
 		}
 		return buttonStop;
 	}

@@ -136,7 +136,7 @@ public class CleanWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getJButton() {
+	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
 			jButton.setAction(new CleanAction(engine));
@@ -153,7 +153,7 @@ public class CleanWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getJButton1() {
+	public JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setAction(new HideAction(this));
@@ -179,6 +179,7 @@ public class CleanWindow extends JFrame {
 			buttonStop.setPreferredSize(new Dimension(100, 23));
 			buttonStop.setText(Messages.getString("CleanWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
+			buttonStop.setEnabled(false);
 		}
 		return buttonStop;
 	}

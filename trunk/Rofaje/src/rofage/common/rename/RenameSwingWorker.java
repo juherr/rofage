@@ -42,6 +42,8 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 	@Override
 	protected Integer doInBackground() throws Exception {
 		// Now we scan folders
+		engine.getRenameWindow().getJButton().setEnabled(false);
+		engine.getRenameWindow().getButtonStop().setEnabled(true);
 		setProgress(0);
 		publish(Messages.getString("RenameSwingWorker.1")); //$NON-NLS-1$
 		
@@ -61,7 +63,8 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
-		
+		engine.getRenameWindow().getJButton().setEnabled(true);
+		engine.getRenameWindow().getButtonStop().setEnabled(false);
 		return 0;
 	}
 	

@@ -95,7 +95,7 @@ public class FilterGameCollectionAction extends AbstractAction {
 				}
 			}
 			if (!showWifi) {
-				if (!game.isWifi()) {
+				if (game.getWifi()!=null && !game.getWifi()) {
 					mayAdd = false;
 				}
 			}
