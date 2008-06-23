@@ -2,6 +2,7 @@ package rofage.ihm.actions.common;
 
 import java.io.File;
 
+import javax.swing.ImageIcon;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -76,8 +77,15 @@ public class GameListSelectionListener implements ListSelectionListener {
 				p.getLabelPublisher().setText(game.getPublisher());
 				p.getLabelGroup().setText(game.getSourceRom());
 				p.getLabelGenre().setText(game.getGenre());
-				p.getCBWifi().setSelected(game.getWifi()==Boolean.TRUE);
-				p.getCBWifi().setVisible(true);
+				if (game.getWifi()==null) {
+					p.getLabelWifi().setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/unknown_wifi24.png")));
+				} else {
+					if (game.getWifi().booleanValue()) {
+						p.getLabelWifi().setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/wifi24.png")));
+					} else {
+						p.getLabelWifi().setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_wifi24.png")));
+					}
+				}
 				p.updateUI();			
 				
 				// We update the rom header panel

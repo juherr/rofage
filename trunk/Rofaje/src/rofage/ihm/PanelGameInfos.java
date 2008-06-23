@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,8 +19,7 @@ public class PanelGameInfos extends JPanel {
 	private JLabel labelPublisher	= null;
 	private JLabel labelGenre 		= null;
 	private JLabel labelGroup 		= null;
-	
-	private JCheckBox cBWifi 	= null;
+	private JLabel labelWifi 	= null;
 	
 	public PanelGameInfos () {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -34,7 +32,7 @@ public class PanelGameInfos extends JPanel {
 		vBox.add(getLabelLanguage());
 		vBox.add(getLabelPublisher());
 		vBox.add(getLabelGenre());
-		vBox.add(getCBWifi());
+		vBox.add(getLabelWifi());
 		
 		this.add(vBox);
 	}
@@ -103,12 +101,12 @@ public class PanelGameInfos extends JPanel {
 		return labelSize;
 	}
 
-	public JCheckBox getCBWifi() {
-		if (cBWifi==null) {
-			cBWifi = new JCheckBox();
-			cBWifi.setText("Wifi");
-			cBWifi.setVisible(false);
+	public JLabel getLabelWifi() {
+		if (labelWifi==null) {
+			labelWifi = new JLabel();
+			labelWifi.setText("Wifi");
+			labelWifi.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/unknown_wifi24.png")));
 		}
-		return cBWifi;
+		return labelWifi;
 	}
 }
