@@ -55,7 +55,7 @@ public class AddConfAction extends AbstractAction {
 				// We add this conf in the combo
 				engine.getConfWindow().getComboConf().addItem(datFileName);
 				// We add this conf in the combo in the main window
-				engine.getMainWindow().getComboConf().addItem(datFileName);
+				engine.getMainWindow().getMainMenuBar().getComboConf().addItem(datFileName);
 				
 				// We also add this datas in the Jtable of the main window
 				//((GameListTableModel) engine.getMainWindow().getJTable().getModel()).setGameCollectionAndDatas(gameCollection);
@@ -69,7 +69,7 @@ public class AddConfAction extends AbstractAction {
 				
 				// We select the newly created conf in the combo box
 				engine.getConfWindow().getComboConf().setSelectedItem(datFileName);
-				engine.getMainWindow().getComboConf().setSelectedItem(datFileName);
+				engine.getMainWindow().getMainMenuBar().getComboConf().setSelectedItem(datFileName);
 				
 				// We update the UI
 				engine.getConfWindow().update(engine.getConfWindow().getGraphics());

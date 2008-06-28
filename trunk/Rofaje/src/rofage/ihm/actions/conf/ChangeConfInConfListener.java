@@ -42,6 +42,11 @@ public class ChangeConfInConfListener implements ItemListener {
 			// Compression panel
 			confWindow.getCBDeleteSource().setSelected(newConf.isDeleteSource());
 			confWindow.getCompressSlider().setValue(newConf.getCompressValue());
+			// Import panel
+			confWindow.getPanelImport().getCBRename().setSelected(newConf.isImportRename());
+			confWindow.getPanelImport().getCBScan().setSelected(newConf.isImportScan());
+			confWindow.getPanelImport().getCBClean().setSelected(newConf.isImportClean());
+
 			
 			engine.getGlobalConf().setSelectedConf(newConf);
 			

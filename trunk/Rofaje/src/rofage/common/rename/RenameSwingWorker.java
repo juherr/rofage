@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
@@ -23,17 +26,25 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 	private Configuration selConf;
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
 	private List<Game> listGamesToRename;
-	
-	public RenameSwingWorker (Engine engine) {
+	private JProgressBar jProgressBar;
+	private JTextArea jTextArea;
+		
+	public RenameSwingWorker (Engine engine, 
+			JProgressBar jProgressBar, 
+			JTextArea jTextArea, 
+			List<Game> listGamesToRename) {
 		this.engine = engine;
 		this.stopAction = false;
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.gameCollection = engine.getGameDB().getGameCollections().get(selConf.getConfName());
+		this.listGamesToRename = listGamesToRename;
+		this.jProgressBar = jProgressBar;
+		this.jTextArea = jTextArea;
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
-					getEngine().getRenameWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
+					getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
 		});
@@ -47,21 +58,24 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 		setProgress(0);
 		publish(Messages.getString("RenameSwingWorker.1")); //$NON-NLS-1$
 		
-		generateRenameList();
+		// If we haven't specified a list of game, we perform a full renaming operation
+		if (listGamesToRename==null) {
+			generateRenameList();
+		}
 		
 		publish (listGamesToRename.size()+Messages.getString("RenameSwingWorker.2")); //$NON-NLS-1$
 		
 		renameGamesInList();
 		
 		setProgress(100);
-		publish (Messages.getString("RenameSwingWorker.3")); //$NON-NLS-1$
 		
 		// We update the UI
 		engine.getMainWindow().getJTable().updateUI();
 		
 		StatusBarHelper.updateStatusBar(gameCollection, engine);
-		
+		publish (Messages.getString("RenameSwingWorker.3")); //$NON-NLS-1$
 		// We save the results
+		publish (Messages.getString("Saving"));
 		SerializationHelper.saveGameDB(engine.getGameDB());
 		engine.getRenameWindow().getJButton().setEnabled(true);
 		engine.getRenameWindow().getButtonStop().setEnabled(false);
@@ -72,7 +86,7 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
     protected void process(List<String> strings) {
         /* Affichage des publications reçues dans le textarea. */
         for(String s : strings)
-        	engine.getRenameWindow().getJTextArea().append(s + '\n');
+        	jTextArea.append(s + '\n');
     }
 	
 	/**
@@ -156,6 +170,10 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 
 	public Engine getEngine() {
 		return engine;
+	}
+
+	public JProgressBar getJProgressBar() {
+		return jProgressBar;
 	}
 
 }

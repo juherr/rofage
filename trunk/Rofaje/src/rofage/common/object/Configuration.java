@@ -23,6 +23,9 @@ public class Configuration implements Serializable {
 	private boolean internalName = false; // Do we check with the internal name ?
 	private boolean deleteSource = false;
 	private int compressValue = 9;
+	private boolean importScan = true;
+	private boolean importRename = false;
+	private boolean importClean = false;
 	
 		
 	// Internal configuration data retrieved from the datFile
@@ -150,6 +153,24 @@ public class Configuration implements Serializable {
 	}
 	public void setCompressValue(int compressValue) {
 		this.compressValue = compressValue;
+	}
+	public boolean isImportScan() {
+		return importScan;
+	}
+	public void setImportScan(boolean importScan) {
+		this.importScan = importScan;
+	}
+	public boolean isImportRename() {
+		return importRename;
+	}
+	public void setImportRename(boolean importRename) {
+		this.importRename = importRename;
+	}
+	public boolean isImportClean() {
+		return importClean;
+	}
+	public void setImportClean(boolean importClean) {
+		this.importClean = importClean;
 	}
 	
 }

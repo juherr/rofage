@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
@@ -27,17 +29,25 @@ import de.schlichtherle.io.FileReader;
 import de.schlichtherle.util.zip.ZipEntry;
 import de.schlichtherle.util.zip.ZipFile;
 
-public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
+public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 
 	private Configuration selConf;
 	private HashMap<String, String> cRCRomDB; // <CRC from the DAT file, releaseNb>
 	private HashMap<String, String> serialRomDB; // <internalName, releaseNb>
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
+	private JProgressBar jProgressBar;
+	private JTextArea jTextArea;
+	private List<String> listFilePaths; // Filepaths of the files to scan, this is used only when we want to scan specific files
+	private List<Game> listFoundGames;
 	
-	public ScanSwingWorker (Engine engine) {
+	public ScanSwingWorker (Engine engine, JProgressBar jProgressBar, JTextArea jTextArea, List<String> filePaths) {
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.gameCollection = engine.getGameDB().getGameCollections().get(selConf.getConfName());
 		this.engine = engine;
+		this.jProgressBar = jProgressBar;
+		this.jTextArea = jTextArea;
+		this.listFilePaths = filePaths;
+		this.listFoundGames = new ArrayList<Game>();
 		
 		// We generate the cRCRomDB for this conf
 		generateCRCDB();
@@ -48,23 +58,47 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
-					getEngine().getScanWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
+					getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
 		});
 	}
 	
 	@Override
-	protected Integer doInBackground() throws Exception {
+    protected void process(List<String> strings) {
+        /* Affichage des publications reçues dans le textarea. */
+        for(String s : strings)
+        	jTextArea.append(s + '\n');
+    }
+	
+	@Override
+	protected List<Game> doInBackground() throws Exception {
 		// Now we scan folders
 		engine.getScanWindow().getJButton().setEnabled(false);
 		engine.getScanWindow().getButtonStop().setEnabled(true);
 		setProgress(0);
 		publish(Messages.getString("ScanSwingWorker.1")); //$NON-NLS-1$
-		scanFolders();
+		if (listFilePaths==null) {
+			// No specific files are set, we scan the whole rom folder
+			scanFolders();
+		} else {
+			// We scan specific files
+			// Now we have to scan those files
+			Iterator<String> iterPaths = listFilePaths.iterator();
+			int nbTotalFiles = listFilePaths.size();
+			int nbFiles = 0;
+			while (iterPaths.hasNext()) {
+				String path = iterPaths.next();
+				scanFile(new File(path));
+				nbFiles++;
+				setProgress(nbFiles*100/nbTotalFiles);
+			}
+			
+		}
 		setProgress(100);
 		publish (Messages.getString("ScanSwingWorker.2")); //$NON-NLS-1$
 		
+		publish (Messages.getString("Saving"));
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
 		
@@ -76,15 +110,9 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		engine.getScanWindow().getJButton().setEnabled(true);
 		engine.getScanWindow().getButtonStop().setEnabled(false);
-		return 0;
+		
+		return listFoundGames;
 	}
-	
-	@Override
-    protected void process(List<String> strings) {
-        /* Affichage des publications reçues dans le textarea. */
-        for(String s : strings)
-        	engine.getScanWindow().getJTextArea().append(s + '\n');
-    }
 	
 	/**
 	 * Builds the internal name list <String:internalName, Integer releaseNb>
@@ -164,6 +192,9 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 			currGame.setGoodName(false);
 		}
 		currGame.setEntryFullPath(entryFullPath);
+		
+		// We add this game into the found Game Tree
+		listFoundGames.add(currGame);
 	}
 	
 	private String detectFileWithInternalName (File file) {
@@ -197,6 +228,11 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	 * @return Integer which indicates whether a game has been found (releaseNb) null otherwise
 	 */
 	private Integer scanFile (File file) {
+		if (file.isEntry()) {
+			publish (Messages.getString("ScanSwingWorker.3")+file.getName()+" "+Messages.getString("In")+" "+file.getTopLevelArchive().getName()); //$NON-NLS-1$
+		} else {
+			publish (Messages.getString("ScanSwingWorker.3")+file.getName()); //$NON-NLS-1$
+		}
 		String fileCRC = "";
 		String entryFullPath = null;
 		// The file given here can be inside an archive !
@@ -273,11 +309,6 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 			if (curFile.isDirectory()) {
 				subDirectories.add(curFile.getAbsolutePath());
 			} else {
-				if (curFile.isEntry()) {
-					publish (Messages.getString("ScanSwingWorker.3")+curFile.getName()+" "+Messages.getString("In")+" "+curFile.getTopLevelArchive().getName()); //$NON-NLS-1$
-				} else {
-					publish (Messages.getString("ScanSwingWorker.3")+curFile.getName()); //$NON-NLS-1$
-				}
 				scanFile(curFile);
 				NbFilesScanned++;
 				setProgress(NbFilesScanned*100/nbFiles);
@@ -293,7 +324,6 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	}
 	
 	private void scanFolders () {
-		// We scan folders for .nds and .zip files
 		File topDirectory = new File(selConf.getRomFolder());
 		
 		if (!topDirectory.isDirectory()) {
@@ -314,6 +344,10 @@ public class ScanSwingWorker extends StoppableSwingWorker<Integer, String> {
 			}
 			scanFolderForRoms(nbFiles, 0, topDirectory);
 		}	
+	}
+
+	public JProgressBar getJProgressBar() {
+		return jProgressBar;
 	}
 
 }

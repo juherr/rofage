@@ -15,6 +15,7 @@ import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
 import rofage.common.rename.RenameSwingWorker;
 import rofage.common.scan.ScanSwingWorker;
+import rofage.common.update.ImportSwingWorker;
 import rofage.common.update.UpdateSwingWorker;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
@@ -22,6 +23,7 @@ import rofage.ihm.clean.CleanWindow;
 import rofage.ihm.compress.CompressWindow;
 import rofage.ihm.conf.ConfWindow;
 import rofage.ihm.export.ExportWindow;
+import rofage.ihm.rename.ImportWindow;
 import rofage.ihm.rename.RenameWindow;
 import rofage.ihm.scan.ScanWindow;
 import rofage.ihm.update.UpdateWindow;
@@ -35,6 +37,7 @@ public class Engine {
 	private CleanWindow cleanWindow 	= null;
 	private ExportWindow exportWindow 	= null;
 	private CompressWindow compressWindow = null;
+	private ImportWindow importWindow 	= null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
@@ -45,6 +48,7 @@ public class Engine {
 	private CleanSwingWorker cleanSW 	= null;
 	private ExportSwingWorker exportSW 	= null;
 	private CompressSwingWorker compressSW = null;
+	private ImportSwingWorker importSW 	= null;
 		
 	private boolean confSaved = false;
 	
@@ -271,5 +275,20 @@ public class Engine {
 
 	public void setCompressSW(CompressSwingWorker compressSW) {
 		this.compressSW = compressSW;
+	}
+
+	public ImportSwingWorker getImportSW() {
+		return importSW;
+	}
+
+	public void setImportSW(ImportSwingWorker importSW) {
+		this.importSW = importSW;
+	}
+
+	public ImportWindow getImportWindow() {
+		if (importWindow==null) {
+			importWindow = new ImportWindow();
+		}
+		return importWindow;
 	}
 }

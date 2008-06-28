@@ -21,7 +21,10 @@ public class ScanAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		engine.setScanSW(new ScanSwingWorker(engine));
+		engine.setScanSW(new ScanSwingWorker(engine, 
+				engine.getScanWindow().getJProgressBar(), 
+				engine.getScanWindow().getJTextArea(), 
+				null));
 		engine.getScanSW().execute();
 	}
 

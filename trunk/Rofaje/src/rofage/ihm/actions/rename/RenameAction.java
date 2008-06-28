@@ -21,7 +21,10 @@ public class RenameAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		engine.setRenameSW(new RenameSwingWorker(engine));
+		engine.setRenameSW(new RenameSwingWorker(engine,
+				engine.getRenameWindow().getJProgressBar(),
+				engine.getRenameWindow().getJTextArea(),
+				null));
 		engine.getRenameSW().execute();
 	}
 

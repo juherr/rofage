@@ -47,6 +47,7 @@ public class ConfWindow extends JFrame {
 	private JPanel panelGlobalButtons = null;
 	private JPanel panelGlobalConf = null;
 	private JPanel panelCompression = null;
+	private PanelImport panelImport = null;
 	
 	private JFileChooser folderChooser = null;
 	private JFileChooser xMLChooser = null;
@@ -142,10 +143,18 @@ public class ConfWindow extends JFrame {
 			jTabbedPane.addTab(Messages.getString("ConfWindow.4"), getPanelTitlePattern()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("ConfWindow.5"), getPanelAutoUpdate()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("Compression"), getPanelCompression());
+			jTabbedPane.addTab("Import", getPanelImport());
 			jTabbedPane.setSize(500, 300);
 			jTabbedPane.setVisible(false);
 		}
 		return jTabbedPane;
+	}
+	
+	public PanelImport getPanelImport () {
+		if (panelImport==null) {
+			panelImport = new PanelImport(engine);
+		}
+		return panelImport;
 	}
 	
 	private JPanel getPanelCompression () {

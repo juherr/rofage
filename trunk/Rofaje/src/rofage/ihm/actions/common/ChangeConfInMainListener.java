@@ -20,7 +20,7 @@ public class ChangeConfInMainListener implements ItemListener {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			// When the user change the item in the combo box 
 			// We have to change the displayed configuration
-			String newConfName = (String)engine.getMainWindow().getComboConf().getSelectedItem();
+			String newConfName = (String)engine.getMainWindow().getMainMenuBar().getComboConf().getSelectedItem();
 			Configuration newConf = engine.getGlobalConf().getMapDatConfigs().get(newConfName);
 						
 			engine.getGlobalConf().setSelectedConf(newConf);

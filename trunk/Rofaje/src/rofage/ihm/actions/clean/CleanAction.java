@@ -21,7 +21,10 @@ public class CleanAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		engine.setCleanSW(new CleanSwingWorker(engine));
+		engine.setCleanSW(new CleanSwingWorker(engine, 
+				engine.getCleanWindow().getJProgressBar(),
+				engine.getCleanWindow().getJTextArea(),
+				null));
 		engine.getCleanSW().execute();
 	}
 
