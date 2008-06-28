@@ -18,9 +18,9 @@ public class ChangeLanguageListener implements ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getStateChange() == ItemEvent.SELECTED) {
 			// We change the locale of the JVM
-			if (engine.getMainWindow().getLangEN().isSelected()) {
+			if (engine.getMainWindow().getMainMenuBar().getMenuConf().getMLanguage().getMItemLnEn().isSelected()) {
 				engine.getGlobalConf().setSelectedLocale(Locale.ENGLISH);
-			} else if (engine.getMainWindow().getLangFR().isSelected()) {
+			} else if (engine.getMainWindow().getMainMenuBar().getMenuConf().getMLanguage().getMItemLnFr().isSelected()) {
 				engine.getGlobalConf().setSelectedLocale(Locale.FRENCH);
 			}
 			Locale.setDefault(engine.getGlobalConf().getSelectedLocale());

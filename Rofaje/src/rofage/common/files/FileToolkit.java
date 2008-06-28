@@ -191,4 +191,27 @@ public abstract class FileToolkit {
 		}
 		return null;
 	}	
+	
+	/**
+	 * List all the file paths included in a directory
+	 * This function does NOT look inside archive
+	 * @param dirPath : path to the directory
+	 * @return
+	 */
+	public static List<String> getAllFilePaths (String path) {
+		List<String> listFilePaths = new ArrayList<String>();
+		File f = new File(path);
+		if (f.exists()) {
+			if (f.isDirectory() && !f.isArchive()) {
+				String[] tabPaths = f.list();
+				for (int i=0; i<tabPaths.length; i++) {
+					listFilePaths.addAll(getAllFilePaths(f.getAbsolutePath()+File.separator+tabPaths[i]));
+				}
+			} else {
+				// It's a regular file we add it to the list
+				listFilePaths.add(path);
+			}
+		}
+		return listFilePaths;
+	}
 }

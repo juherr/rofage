@@ -51,7 +51,10 @@ public class SaveConfigurationAction extends AbstractAction {
 				(!newConf.getRomFolder().equals(oldRomFolder) 
 				&& !newConf.getRomFolder().trim().isEmpty())
 			|| (!oldTitlePattern.equals(newConf.getTitlePattern()))) {
-			ScanSwingWorker scanSW = new ScanSwingWorker(engine);
+			ScanSwingWorker scanSW = new ScanSwingWorker(engine, 
+					engine.getScanWindow().getJProgressBar(), 
+					engine.getScanWindow().getJTextArea(),
+					null);
 			engine.getScanWindow().setVisible(true);
 			scanSW.execute();
 		}

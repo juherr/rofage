@@ -30,6 +30,9 @@ public abstract class ConfigurationHelper {
 		conf.setInAppUpdate(confWindow.getCBInAppUpdate().isSelected());
 		conf.setDeleteSource(confWindow.getCBDeleteSource().isSelected());
 		conf.setCompressValue(confWindow.getCompressSlider().getValue());
+		conf.setImportRename(confWindow.getPanelImport().getCBRename().isSelected());
+		conf.setImportScan(confWindow.getPanelImport().getCBScan().isSelected());
+		conf.setImportClean(confWindow.getPanelImport().getCBClean().isSelected());
 				
 		// We save this conf into the global conf
 		engine.getGlobalConf().getMapDatConfigs().put(conf.getConfName(), conf);

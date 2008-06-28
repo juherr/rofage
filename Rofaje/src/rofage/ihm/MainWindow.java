@@ -2,16 +2,12 @@ package rofage.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.Iterator;
-import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,12 +16,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JProgressBar;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -33,25 +27,19 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import net.iharder.dnd.FileDrop;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
+import rofage.common.dnd.RomListener;
 import rofage.common.object.Configuration;
-import rofage.ihm.actions.common.ChangeConfInMainListener;
-import rofage.ihm.actions.common.ChangeLanguageListener;
 import rofage.ihm.actions.common.FilterGameCollectionAction;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.PopupListener;
-import rofage.ihm.actions.common.ShowAboutAction;
-import rofage.ihm.actions.common.ShowCleanAction;
-import rofage.ihm.actions.common.ShowCompressAction;
-import rofage.ihm.actions.common.ShowConfigurationAction;
-import rofage.ihm.actions.common.ShowRenameAction;
-import rofage.ihm.actions.common.ShowScanAction;
-import rofage.ihm.actions.common.ShowUpdateAction;
 import rofage.ihm.actions.compress.CompressAction;
 import rofage.ihm.actions.export.ExportAction;
 import rofage.ihm.helper.ComboFilterHelper;
 import rofage.ihm.images.JPanelImage;
+import rofage.ihm.menu.MainMenuBar;
 
 public class MainWindow extends JFrame {
 
@@ -61,18 +49,12 @@ public class MainWindow extends JFrame {
 	
 	private JPanel jContentPane = null;
 
-	private JMenuBar jJMenuBar = null;
+	private MainMenuBar mainMenuBar = null;
 
-	private JMenu jMenu = null;
-
-	private JMenu jMenu1 = null;
-	
 	private JPopupMenu popMenu = null;
 	private JMenu popMenuExport = null;
 	private JMenuItem popMenuItemExportToFolder = null;
 	private JMenuItem popMenuItemCompress = null;
-	
-	private JMenuItem jMenuItem = null;
 	
 	private JSplitPane jSplitPane = null;
 
@@ -90,19 +72,6 @@ public class MainWindow extends JFrame {
 
 	private JScrollPane jScrollPane = null;
 
-	private JMenuItem jMenuItem1 = null;
-	private JMenuItem menuItemConf = null;
-	private JMenuItem menuItemScan = null;
-	private JMenuItem menuItemRename = null;
-	private JMenuItem menuItemClean = null;
-	private JMenu menuConf = null;
-	private JMenuItem menuItemCompress = null;
-	
-	private ButtonGroup languageGroup = null;  //  @jve:decl-index=0:
-	private JRadioButtonMenuItem langFR = null;
-	private JRadioButtonMenuItem langEN = null;
-	
-	private JComboBox comboConf = null;
 	private JComboBox comboRomSize = null;
 	private JComboBox comboLocation = null;
 	private JComboBox comboLanguage = null;
@@ -157,13 +126,16 @@ public class MainWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(1024, 800);
-		this.setJMenuBar(getJJMenuBar());
+		this.setJMenuBar(getMainMenuBar());
 		this.setPreferredSize(new Dimension(1024, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("AppTitle") +" "+ Messages.getString("Version")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
+		
+		// We add the drop file support
+		new FileDrop(this, true, new RomListener(engine));
 	}
 
 	/**
@@ -182,57 +154,6 @@ public class MainWindow extends JFrame {
 		return jContentPane;
 	}
 
-	/**
-	 * This method initializes jJMenuBar	
-	 * 	
-	 * @return javax.swing.JMenuBar	
-	 */
-	private JMenuBar getJJMenuBar() {
-		if (jJMenuBar == null) {
-			jJMenuBar = new JMenuBar();
-			jJMenuBar.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-			jJMenuBar.add(getMenuConf());
-			jJMenuBar.add(getJMenu());
-			jJMenuBar.add(getJMenu1());
-			jJMenuBar.add(getComboConf());
-		}
-		return jJMenuBar;
-	}
-
-	/**
-	 * This method initializes jMenu	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getJMenu() {
-		if (jMenu == null) {
-			jMenu = new JMenu();
-			jMenu.setText(Messages.getString("MainWindow.1")); //$NON-NLS-1$
-			// We create the group	
-			jMenu.add(getLangFR());
-			jMenu.add(getLangEN());
-			languageGroup = new ButtonGroup();
-			languageGroup.add(getLangFR());
-			languageGroup.add(getLangEN());
-		}
-		return jMenu;
-	}
-
-	/**
-	 * This method initializes jMenu1	
-	 * 	
-	 * @return javax.swing.JMenu	
-	 */
-	private JMenu getJMenu1() {
-		if (jMenu1 == null) {
-			jMenu1 = new JMenu();
-			jMenu1.setText("?"); //$NON-NLS-1$
-			jMenu1.add(getJMenuItem1());
-			jMenu1.add(getJMenuItem());
-		}
-		return jMenu1;
-	}
-	
 	public JPopupMenu getPopMenu() {
 		if (popMenu == null) {
 			popMenu = new JPopupMenu();
@@ -242,35 +163,6 @@ public class MainWindow extends JFrame {
 		return popMenu;
 	}
 	
-	private JMenu getMenuConf () {
-		if (menuConf==null) {
-			menuConf = new JMenu();
-			menuConf.setText(Messages.getString("MainWindow.3")); //$NON-NLS-1$
-			menuConf.add(getMenuItemConf());
-			menuConf.add(getMenuItemScan());
-			menuConf.add(getMenuItemRename());
-			menuConf.add(getMenuItemClean());
-			menuConf.add(getMenuItemCompress());
-			menuConf.setVisible(true);
-		}
-		return menuConf;
-	}
-
-	/**
-	 * This method initializes jMenuItem	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getJMenuItem() {
-		if (jMenuItem == null) {
-			jMenuItem = new JMenuItem();
-			jMenuItem.addActionListener(new ShowAboutAction(this));
-			jMenuItem.setText(Messages.getString("MainWindow.4")); //$NON-NLS-1$
-			jMenuItem.setVisible(true);
-		}
-		return jMenuItem;
-	}
-
 	/**
 	 * This method initializes jSplitPane	
 	 * 	
@@ -425,20 +317,7 @@ public class MainWindow extends JFrame {
 		return jPanelImage2;
 	}
 
-	/**
-	 * This method initializes jMenuItem1	
-	 * 	
-	 * @return javax.swing.JMenuItem	
-	 */
-	private JMenuItem getJMenuItem1() {
-		if (jMenuItem1 == null) {
-			jMenuItem1 = new JMenuItem();
-			jMenuItem1.addActionListener(new ShowUpdateAction(engine));
-			jMenuItem1.setText(Messages.getString("MainWindow.6")); //$NON-NLS-1$
-			jMenuItem1.setVisible(true);
-		}
-		return jMenuItem1;
-	}
+	
 	
 	private JMenu getPopMenuExport() {
 		if (popMenuExport == null) {
@@ -471,78 +350,6 @@ public class MainWindow extends JFrame {
 		return popMenuItemCompress;
 	}
 	
-	private JMenuItem getMenuItemConf() {
-		if (menuItemConf==null) {
-			menuItemConf = new JMenuItem();
-			menuItemConf.addActionListener(new ShowConfigurationAction(engine));
-			menuItemConf.setText(Messages.getString("MainWindow.7")); //$NON-NLS-1$
-			menuItemConf.setVisible(true);
-		}
-		return menuItemConf;
-	}
-	
-	private JMenuItem getMenuItemScan() {
-		if (menuItemScan==null) {
-			menuItemScan = new JMenuItem();
-			menuItemScan.addActionListener(new ShowScanAction(engine));
-			menuItemScan.setText(Messages.getString("MainWindow.8")); //$NON-NLS-1$
-			menuItemScan.setVisible(true);
-		}
-		return menuItemScan;
-	}
-	
-	private JMenuItem getMenuItemRename() {
-		if (menuItemRename==null) {
-			menuItemRename = new JMenuItem();
-			menuItemRename.addActionListener(new ShowRenameAction(engine));
-			menuItemRename.setText(Messages.getString("MainWindow.9")); //$NON-NLS-1$
-			menuItemRename.setVisible(true);
-		}
-		return menuItemRename;
-	}
-	
-	private JMenuItem getMenuItemCompress() {
-		if (menuItemCompress==null) {
-			menuItemCompress = new JMenuItem();
-			menuItemCompress.addActionListener(new ShowCompressAction(engine));
-			menuItemCompress.setText(Messages.getString("MainWindow.14")); //$NON-NLS-1$
-			menuItemCompress.setVisible(true);
-		}
-		return menuItemCompress;
-	}
-	
-	private JMenuItem getMenuItemClean() {
-		if (menuItemClean==null) {
-			menuItemClean = new JMenuItem();
-			menuItemClean.addActionListener(new ShowCleanAction(engine));
-			menuItemClean.setText(Messages.getString("MainWindow.10")); //$NON-NLS-1$
-			menuItemClean.setVisible(true);
-		}
-		return menuItemClean;
-	}
-	
-	public JRadioButtonMenuItem getLangFR() {
-		if (langFR == null) {
-			langFR = new JRadioButtonMenuItem();
-			langFR.setText(Messages.getString("MainWindow.11")); //$NON-NLS-1$
-			if (engine.getGlobalConf().getSelectedLocale()==Locale.FRENCH) langFR.setSelected(true);
-			langFR.addItemListener(new ChangeLanguageListener(engine));
-			langFR.setVisible(true);
-		}
-		return langFR;
-	}
-	
-	public JRadioButtonMenuItem getLangEN() {
-		if (langEN == null) {
-			langEN = new JRadioButtonMenuItem();
-			langEN.setText(Messages.getString("MainWindow.12"));
-			if (engine.getGlobalConf().getSelectedLocale()==Locale.ENGLISH) langEN.setSelected(true);
-			langEN.addItemListener(new ChangeLanguageListener(engine));
-			langEN.setVisible(true);
-		}
-		return langEN;
-	}
-	
 	public JTextField getFieldTitle () {
 		if (fieldTitle==null) {
 			fieldTitle = new JTextField();
@@ -565,26 +372,6 @@ public class MainWindow extends JFrame {
 			fieldSource.setVisible(true);
 		}
 		return fieldSource;
-	}
-	
-	public JComboBox getComboConf () {
-		if (comboConf==null) {
-			comboConf = new JComboBox();
-			// We add the items into the list
-			Iterator<Configuration> iterConfigs = engine.getGlobalConf().getMapDatConfigs().values().iterator();
-			while (iterConfigs.hasNext()) {
-				String curConfName = iterConfigs.next().getConfName();
-				comboConf.addItem(curConfName);
-			}
-			Configuration selectedConf = engine.getGlobalConf().getSelectedConf();
-			if (selectedConf!=null) {
-				String selectedConfName = selectedConf.getConfName();
-				comboConf.setSelectedItem(selectedConfName);
-			}
-			comboConf.addItemListener(new ChangeConfInMainListener(engine));
-			comboConf.setVisible(true);
-		}
-		return comboConf;
 	}
 	
 	public JComboBox getComboRomSize () {
@@ -845,5 +632,12 @@ public class MainWindow extends JFrame {
 			panelGameInfos.setVisible(true);
 		}
 		return panelGameInfos;
+	}
+
+	public MainMenuBar getMainMenuBar() {
+		if (mainMenuBar==null) {
+			mainMenuBar = new MainMenuBar(engine, this);
+		}
+		return mainMenuBar;
 	}
 }

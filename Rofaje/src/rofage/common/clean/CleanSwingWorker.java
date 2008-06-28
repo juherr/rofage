@@ -3,9 +3,13 @@ package rofage.common.clean;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
+
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
@@ -23,17 +27,25 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	private Configuration selConf;
 	private TreeMap<Integer, Game> gameCollection; // <releaseNb, game>
 	private List<Game> listArchivesToCleanUp;
+	private JProgressBar jProgressBar;
+	private JTextArea jTextArea;
 	
-	public CleanSwingWorker (Engine engine) {
+	public CleanSwingWorker (Engine engine, 
+			JProgressBar jProgressBar,
+			JTextArea jTextArea,
+			List<Game> listArchivesToCleanUp) {
 		this.engine = engine;
 		this.stopAction = false;
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.gameCollection = engine.getGameDB().getGameCollections().get(selConf.getConfName());
+		this.listArchivesToCleanUp = listArchivesToCleanUp;
+		this.jProgressBar = jProgressBar;
+		this.jTextArea = jTextArea;
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
-					getEngine().getCleanWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
+					getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
 		});
@@ -48,7 +60,14 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		setProgress(0);
 		publish(Messages.getString("CleanSwingWorker.1")); //$NON-NLS-1$
 		
-		generateCleanList();
+		// if the list is not defined, it means we perform a full clean up
+		// for this configuration
+		// TODO fix import 
+		if (listArchivesToCleanUp==null) {
+			generateCleanList(gameCollection.values()); // We perform a full clean up
+		} else {
+			generateCleanList(listArchivesToCleanUp);
+		}
 		
 		publish (listArchivesToCleanUp.size()+Messages.getString("CleanSwingWorker.2")); //$NON-NLS-1$
 		
@@ -56,9 +75,6 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		setProgress(100);
 		publish (Messages.getString("CleanSwingWorker.3")); //$NON-NLS-1$
-		
-		// We update the UI
-		engine.getMainWindow().getJTable().updateUI();
 		
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
@@ -71,16 +87,16 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
     protected void process(List<String> strings) {
         /* Affichage des publications reçues dans le textarea. */
         for(String s : strings)
-        	engine.getCleanWindow().getJTextArea().append(s + '\n');
+        	jTextArea.append(s + '\n');
     }
 	
 	/**
-	 * Generates the list of archives to be cleaned up
+	 * Generates the list of archives to be cleaned up from the colGames
 	 *
 	 */
-	private void generateCleanList () {
+	private void generateCleanList (Collection<Game> colGames) {
 		listArchivesToCleanUp = new ArrayList<Game>();
-		Iterator<Game> iterGames = gameCollection.values().iterator();
+		Iterator<Game> iterGames = colGames.iterator();
 		while (iterGames.hasNext() && !stopAction) {
 			Game game = iterGames.next();
 			if (game.isGotRom() 
@@ -136,6 +152,10 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 	
 	public Engine getEngine() {
 		return engine;
+	}
+
+	public JProgressBar getJProgressBar() {
+		return jProgressBar;
 	}
 
 }

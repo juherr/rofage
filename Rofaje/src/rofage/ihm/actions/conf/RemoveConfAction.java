@@ -45,7 +45,7 @@ public class RemoveConfAction extends AbstractAction {
 			engine.getGlobalConf().getMapDatConfigs().remove(confName);
 			// We delete the conf entry from the combos
 			engine.getConfWindow().getComboConf().removeItem(confName);
-			engine.getMainWindow().getComboConf().removeItem(confName);
+			engine.getMainWindow().getMainMenuBar().getComboConf().removeItem(confName);
 			
 			// We delete the related gameDB
 			engine.getGameDB().getGameCollections().remove(confName);
