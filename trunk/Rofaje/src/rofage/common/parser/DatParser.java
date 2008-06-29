@@ -45,6 +45,7 @@ public class DatParser {
 	private final static String XML_NODE_WIFI			= "wifi";
 	private final static String XML_NODE_CANOPEN		= "canOpen";
 	private final static String XML_NODE_EXTENSION		= "extension";
+	private final static String XML_NODE_DUPLICATEID	= "duplicateid";
 	
 	private final static String XML_ATTR_FILENAME		= "fileName";
 	
@@ -180,6 +181,7 @@ public class DatParser {
 					game.setWifi(false);
 				}
 			}
+			game.setDuplicateId(gameNode.getChildText(XML_NODE_DUPLICATEID));
 			
 			gameCollection.put(Integer.parseInt(game.getReleaseNb()), game);
 		}

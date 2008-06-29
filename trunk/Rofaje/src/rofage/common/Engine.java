@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import rofage.common.clean.CleanSwingWorker;
 import rofage.common.compress.CompressSwingWorker;
+import rofage.common.duplicate.DuplicateSwingWorker;
 import rofage.common.export.ExportSwingWorker;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
@@ -22,8 +23,9 @@ import rofage.ihm.Messages;
 import rofage.ihm.clean.CleanWindow;
 import rofage.ihm.compress.CompressWindow;
 import rofage.ihm.conf.ConfWindow;
+import rofage.ihm.duplicate.DuplicateWindow;
 import rofage.ihm.export.ExportWindow;
-import rofage.ihm.rename.ImportWindow;
+import rofage.ihm.importroms.ImportWindow;
 import rofage.ihm.rename.RenameWindow;
 import rofage.ihm.scan.ScanWindow;
 import rofage.ihm.update.UpdateWindow;
@@ -38,6 +40,7 @@ public class Engine {
 	private ExportWindow exportWindow 	= null;
 	private CompressWindow compressWindow = null;
 	private ImportWindow importWindow 	= null;
+	private DuplicateWindow duplicateWindow = null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
@@ -49,6 +52,7 @@ public class Engine {
 	private ExportSwingWorker exportSW 	= null;
 	private CompressSwingWorker compressSW = null;
 	private ImportSwingWorker importSW 	= null;
+	private DuplicateSwingWorker duplicateSW = null;
 		
 	private boolean confSaved = false;
 	
@@ -290,5 +294,20 @@ public class Engine {
 			importWindow = new ImportWindow();
 		}
 		return importWindow;
+	}
+
+	public DuplicateSwingWorker getDuplicateSW() {
+		return duplicateSW;
+	}
+
+	public void setDuplicateSW(DuplicateSwingWorker duplicateSW) {
+		this.duplicateSW = duplicateSW;
+	}
+
+	public DuplicateWindow getDuplicateWindow() {
+		if (duplicateWindow==null) {
+			duplicateWindow = new DuplicateWindow(this);
+		}
+		return duplicateWindow;
 	}
 }

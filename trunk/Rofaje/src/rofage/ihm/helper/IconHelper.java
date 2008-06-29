@@ -12,8 +12,26 @@ import rofage.common.url.URLToolkit;
 
 public abstract class IconHelper {
 	
-	public static ImageIcon getLocationIcon (Game game) {
-		return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(game.getLocation())+".png"));
+	/**
+	 * Returns the icon with the location Code (from the DAT)
+	 * @param location
+	 * @return
+	 */
+	public static ImageIcon getLocationIcon (String location) {
+		if (Consts.FLAG_NAMES.containsKey(location))
+			return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(location)+".png"));
+		return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/xx.png"));
+	}
+	
+	/**
+	 * Returns the icon with the location code (i.e. EU, US etc.)
+	 * @param location
+	 * @return
+	 */
+	public static ImageIcon getLocationIconFromCountryCode (String location) {
+		if (Consts.FLAG_NAMES.containsValue(location))
+			return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/"+location.toLowerCase()+".png"));
+		return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/xx.png"));
 	}
 	
 	public static ImageIcon getGotRomIcon (Game game) {

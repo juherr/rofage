@@ -18,6 +18,7 @@ public class StopAction extends AbstractAction {
 	public final static int SW_CLEAN 	= 3;
 	public final static int SW_RENAME 	= 4;
 	public final static int SW_EXPORT 	= 5;
+	public final static int SW_DUPLICATE= 6;
 	
 	private Engine engine;
 	private int type;
@@ -38,6 +39,8 @@ public class StopAction extends AbstractAction {
 			case SW_SCAN : engine.getScanSW().setStopAction(true);
 				break;
 			case SW_UPDATE : engine.getUpdateSW().setStopAction(true);
+				break;
+			case SW_DUPLICATE : engine.getDuplicateSW().setStopAction(true);
 				break;
 		}
 	}

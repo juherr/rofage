@@ -34,7 +34,11 @@ public class PanelImport extends JPanel {
 		if (CBScan == null) {
 			CBScan = new JCheckBox();
 			CBScan.setText("Scan during import");
-			CBScan.setSelected(selConf.isImportScan());
+			if (selConf!=null) {
+				CBScan.setSelected(selConf.isImportScan());
+			} else {
+				CBScan.setSelected(true);
+			}
 			CBScan.addItemListener(new ImportScanCBListener(this));
 		}
 		return CBScan;
@@ -44,11 +48,13 @@ public class PanelImport extends JPanel {
 		if (CBRename == null) {
 			CBRename = new JCheckBox();
 			CBRename.setText("Rename during import");
-			if (!selConf.isImportScan()) {
-				CBRename.setSelected(false);
-				CBRename.setEnabled(false);
-			} else {
-				CBRename.setSelected(selConf.isImportRename());
+			if (selConf!=null) {
+				if (!selConf.isImportScan()) {
+					CBRename.setSelected(false);
+					CBRename.setEnabled(false);
+				} else {
+					CBRename.setSelected(selConf.isImportRename());
+				}
 			}
 		}
 		return CBRename;
@@ -58,11 +64,13 @@ public class PanelImport extends JPanel {
 		if (CBClean == null) {
 			CBClean = new JCheckBox();
 			CBClean.setText("Clean during import");
-			if (!selConf.isImportScan()) {
-				CBClean.setSelected(false);
-				CBClean.setEnabled(false);
-			} else {
-				CBClean.setSelected(selConf.isImportClean());
+			if (selConf!=null) {
+				if (!selConf.isImportScan()) {
+					CBClean.setSelected(false);
+					CBClean.setEnabled(false);
+				} else {
+					CBClean.setSelected(selConf.isImportClean());
+				}
 			}
 		}
 		return CBClean;
