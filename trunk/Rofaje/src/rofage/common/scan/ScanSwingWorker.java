@@ -96,8 +96,6 @@ public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 			
 		}
 		setProgress(100);
-		publish (Messages.getString("ScanSwingWorker.2")); //$NON-NLS-1$
-		
 		publish (Messages.getString("Saving"));
 		// We save the results
 		SerializationHelper.saveGameDB(engine.getGameDB());
@@ -110,7 +108,7 @@ public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 		
 		engine.getScanWindow().getJButton().setEnabled(true);
 		engine.getScanWindow().getButtonStop().setEnabled(false);
-		
+		publish (Messages.getString("ScanSwingWorker.2")); //$NON-NLS-1$		
 		return listFoundGames;
 	}
 	
