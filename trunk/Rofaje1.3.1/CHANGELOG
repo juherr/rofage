@@ -1,0 +1,56 @@
+RoFage is a rom Manager, like Offline list.
+It's written in Java and aims to be run on any system (windows, linux or mac).
+
+This program runs with Java 1.6 or later
+
+Changelog in 1.3.1 : 
+Added the missing flags
+
+Changelog in 1.3 :
+Added functionality : Import roms from both drag & drop and the menu. Addition of the related panel into the configuration (and window)
+Added functionality : Deletion of duplicate roms with a user's defined order => A new scan MUST be
+performed for this
+
+Bugfix : ( Issue 7 ) The Wifi indicator was not working in the Info Panel (changed from CB to label)
+Bugfix : filtering for wifi was reversed
+Bugfix : publish texts were mixed up
+Changes in class hierarchy
+
+Changelog in 1.2 :
+Added functionality : Compress roms & addition of the related tab in the configuration
+Added functionality : Changed the UI of the rom panel (infos)
+Added functionality : Added the rom header
+Added functionality : Filter unclean roms
+Added functionality : Filter for Demo
+Added functionality : Show potential good roms (trimmed or patched)
+Added functionality : Export multiple files
+Added functionality : Uses the Truezip library instead of the java.util.zip to manage zip files.
+It gives a better maintainability, smaller code, and ease of use
+Swingworkers have been rewritten accordingly
+This update gives better overall performances
+Added functionality : Added icon view in the list
+Added functionality : Added locations and languages : Greece & Russia so the application can handle NDScrc DAT file which contains more info
+Ask for confirmation before deleting a configuration
+Added functionality : Downloading images while browsing
+Added functionality : Location filter is now sorted
+
+
+
+Cleaning of the code
+
+Bugfix : filtering while have a game selected threw exceptions
+Bugfix : Stopping a non running SwingWorker threw exceptions
+Bugfix : Starting an already running SwingWorker corrupted datas
+Bugfix : other minor bugfixes
+Bugfix : Do not try to populate the "genre" dropdown if we do not have any info available
+Bugfix : changing scan method to avoid reaching system limits when scanning folders with a very large amount of files
+Bugfix : Swingworkers were unstoppable !
+Bugfix : Language correction
+Bugfix : Some images were not downloaded because the releaseNb was used instead of the imageNb. So
+at some points the url to images were corrupted.
+For instance, when you have the game #1945 and the image number was 2027 the path was
+XXX/1501-2000/pathToImage instead of XXX/2001-2500/pathToImage
+Bugfix : The CRC32 was miscalculated if it started with at least one 0 (improve rom recognition !!!)
+Bugfix : Error with filtering when no row was selected
+Bugfix : Increased compatibility with malformed dat
+bugfix : an updated config was not save if the update process was not completed
