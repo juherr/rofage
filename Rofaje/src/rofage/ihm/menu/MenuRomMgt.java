@@ -7,6 +7,7 @@ import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.ShowCleanAction;
 import rofage.ihm.actions.common.ShowCompressAction;
+import rofage.ihm.actions.common.ShowDuplicateAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
 import rofage.ihm.actions.importroms.ImportAction;
@@ -21,6 +22,7 @@ public class MenuRomMgt extends JMenu {
 	private JMenuItem mItemClean 	= null;
 	private JMenuItem mItemCompress	= null;
 	private JMenuItem mItemImport	= null;
+	private JMenuItem mItemDuplicate= null;
 
 	public MenuRomMgt (Engine engine) {
 		this.engine = engine;
@@ -31,6 +33,7 @@ public class MenuRomMgt extends JMenu {
 		add(getMItemClean());
 		add(getMItemCompress());
 		add(getMItemImport());
+		add(getMItemDuplicate());
 	}
 
 	public JMenuItem getMItemClean() {
@@ -59,6 +62,14 @@ public class MenuRomMgt extends JMenu {
 			mItemImport.addActionListener(new ImportAction(engine));
 		}
 		return mItemImport;
+	}
+	
+	public JMenuItem getMItemDuplicate() {
+		if (mItemDuplicate==null) {
+			mItemDuplicate = new JMenuItem(Messages.getString("DuplicateWindowTitle"));
+			mItemDuplicate.addActionListener(new ShowDuplicateAction(engine));
+		}
+		return mItemDuplicate;
 	}
 
 	public JMenuItem getMItemRename() {

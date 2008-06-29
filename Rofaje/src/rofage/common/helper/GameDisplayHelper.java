@@ -124,6 +124,15 @@ public abstract class GameDisplayHelper {
 	 * @return
 	 */
 	public static String getLocation (Game game) {
-		return Consts.COUNTRY_NAMES.get(game.getLocation());
+		return getLocation(game.getLocation());
+	}
+	
+	/**
+	 * Returns the location name in an human understanding
+	 * @param locationCode
+	 * @return
+	 */
+	public static String getLocation (String locationCode) {
+		return Consts.COUNTRY_NAMES.get(locationCode);
 	}
 }

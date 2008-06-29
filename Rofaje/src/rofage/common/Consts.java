@@ -2,7 +2,9 @@ package rofage.common;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import rofage.ihm.Messages;
 
@@ -120,6 +122,24 @@ public abstract class Consts {
 		LANG_NAMES.add(Messages.getString("Consts.91")); //$NON-NLS-1$
 		LANG_NAMES.add(Messages.getString("Consts.92"));
 		LANG_NAMES.add(Messages.getString("Consts.93"));
+	}
+	
+	/**
+	 * Returns the name in its common name (human language) with the given code
+	 * @param countryCode
+	 * @return
+	 */
+	public static String getNameFromCountryCode (String countryCode) {
+		// First we get the code as coded in the DAT
+		if (!COUNTRY_CODES.containsValue(countryCode)) return null;
+		Iterator<Entry<String, String>> iterCountryCodes = COUNTRY_CODES.entrySet().iterator();
+		while (iterCountryCodes.hasNext()) {
+			Entry<String, String> entry = iterCountryCodes.next();
+			if (entry.getValue().equalsIgnoreCase(countryCode)) {
+				return COUNTRY_NAMES.get(entry.getKey());
+			}
+		}
+		return null;
 	}
 	
 }

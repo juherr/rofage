@@ -26,6 +26,7 @@ public class Configuration implements Serializable {
 	private boolean importScan = true;
 	private boolean importRename = false;
 	private boolean importClean = false;
+	private List<String> listLocations;
 	
 		
 	// Internal configuration data retrieved from the datFile
@@ -171,6 +172,12 @@ public class Configuration implements Serializable {
 	}
 	public void setImportClean(boolean importClean) {
 		this.importClean = importClean;
+	}
+	public List<String> getListLocations() {
+		return listLocations;
+	}
+	public void setListLocations(List<String> listLocations) {
+		this.listLocations = listLocations;
 	}
 	
 }

@@ -2,6 +2,7 @@ package rofage.common.object;
 
 import javax.swing.ImageIcon;
 
+@SuppressWarnings("serial")
 public class GenericDropDownEntry {
 	private String value;
 	private String text;

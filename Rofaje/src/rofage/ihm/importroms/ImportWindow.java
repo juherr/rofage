@@ -1,4 +1,4 @@
-package rofage.ihm.rename;
+package rofage.ihm.importroms;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

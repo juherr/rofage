@@ -27,6 +27,7 @@ public class Game implements Serializable {
 	private String genre = "";
 	private String internalName = "";
 	private String serial = "";
+	private String duplicateId = "";
 	private Boolean wifi = null;
 	private boolean scannedFromSerial = false;
 	
@@ -168,5 +169,11 @@ public class Game implements Serializable {
 	}
 	public Boolean getWifi() {
 		return wifi;
+	}
+	public String getDuplicateId() {
+		return duplicateId;
+	}
+	public void setDuplicateId(String duplicateId) {
+		this.duplicateId = duplicateId;
 	}
 }

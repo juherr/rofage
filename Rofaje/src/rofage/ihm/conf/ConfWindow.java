@@ -30,6 +30,7 @@ import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.conf.AddConfAction;
 import rofage.ihm.actions.conf.ChangeConfInConfListener;
 import rofage.ihm.actions.conf.OpenFileChooserAction;
+import rofage.ihm.actions.conf.PanelDuplicate;
 import rofage.ihm.actions.conf.RemoveConfAction;
 import rofage.ihm.actions.conf.SaveConfigurationAction;
 
@@ -48,6 +49,7 @@ public class ConfWindow extends JFrame {
 	private JPanel panelGlobalConf = null;
 	private JPanel panelCompression = null;
 	private PanelImport panelImport = null;
+	private PanelDuplicate panelDuplicate = null;
 	
 	private JFileChooser folderChooser = null;
 	private JFileChooser xMLChooser = null;
@@ -101,7 +103,7 @@ public class ConfWindow extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(500, 300);
+		this.setSize(550, 400);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("ConfWindow.2")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
@@ -143,11 +145,19 @@ public class ConfWindow extends JFrame {
 			jTabbedPane.addTab(Messages.getString("ConfWindow.4"), getPanelTitlePattern()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("ConfWindow.5"), getPanelAutoUpdate()); //$NON-NLS-1$
 			jTabbedPane.addTab(Messages.getString("Compression"), getPanelCompression());
-			jTabbedPane.addTab("Import", getPanelImport());
+			jTabbedPane.addTab(Messages.getString("ImportWindowTitle"), getPanelImport());
+			jTabbedPane.addTab(Messages.getString("Duplicate"), getPanelDuplicate());
 			jTabbedPane.setSize(500, 300);
 			jTabbedPane.setVisible(false);
 		}
 		return jTabbedPane;
+	}
+	
+	public PanelDuplicate getPanelDuplicate () {
+		if (panelDuplicate==null) {
+			panelDuplicate = new PanelDuplicate(engine);
+		}
+		return panelDuplicate;
 	}
 	
 	public PanelImport getPanelImport () {
@@ -160,7 +170,7 @@ public class ConfWindow extends JFrame {
 	private JPanel getPanelCompression () {
 		if (panelCompression==null) {
 			panelCompression = new JPanel();
-			panelCompression.setLayout(new FlowLayout(FlowLayout.LEFT));
+			panelCompression.setLayout(new FlowLayout(FlowLayout.CENTER));
 			
 			Box vBox = Box.createVerticalBox();
 			vBox.add(getCompressSlider());

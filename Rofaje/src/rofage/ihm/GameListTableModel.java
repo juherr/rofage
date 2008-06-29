@@ -53,7 +53,7 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 		if (game!=null) {
 			if (col==0) {
 				// Location
-				return IconHelper.getLocationIcon(game);
+				return IconHelper.getLocationIcon(game.getLocation());
 			} else if (col==1) {
 				return IconHelper.getGotRomIcon(game);
 			} else if (col==2) {

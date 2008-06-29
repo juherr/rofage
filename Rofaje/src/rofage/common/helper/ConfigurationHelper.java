@@ -1,7 +1,13 @@
 package rofage.common.helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.ListModel;
+
 import rofage.common.Engine;
 import rofage.common.object.Configuration;
+import rofage.common.object.GenericDropDownEntry;
 import rofage.common.parser.DatParser;
 import rofage.ihm.conf.ConfWindow;
 
@@ -33,6 +39,14 @@ public abstract class ConfigurationHelper {
 		conf.setImportRename(confWindow.getPanelImport().getCBRename().isSelected());
 		conf.setImportScan(confWindow.getPanelImport().getCBScan().isSelected());
 		conf.setImportClean(confWindow.getPanelImport().getCBClean().isSelected());
+		
+		// We save the locations code in order
+		ListModel listModel = confWindow.getPanelDuplicate().getJListLocation().getModel();
+		List<String> listLocations = new ArrayList<String>();
+		for (int i=0; i<listModel.getSize(); i++) {
+			listLocations.add( ( (GenericDropDownEntry)listModel.getElementAt(i)).getValue() );
+		}
+		conf.setListLocations(listLocations);
 				
 		// We save this conf into the global conf
 		engine.getGlobalConf().getMapDatConfigs().put(conf.getConfName(), conf);
