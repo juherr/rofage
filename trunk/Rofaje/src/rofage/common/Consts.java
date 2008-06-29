@@ -62,8 +62,17 @@ public abstract class Consts {
 		FLAG_NAMES.put("6", "it"); //$NON-NLS-1$ //$NON-NLS-2$
 		FLAG_NAMES.put("7", "jp"); //$NON-NLS-1$ //$NON-NLS-2$
 		FLAG_NAMES.put("8", "ne"); //$NON-NLS-1$ //$NON-NLS-2$
+		FLAG_NAMES.put("9", "en");
+		FLAG_NAMES.put("10", "dk");
+		FLAG_NAMES.put("11", "fn");
+		FLAG_NAMES.put("12", "nw");
+		FLAG_NAMES.put("13", "pl");
+		FLAG_NAMES.put("14", "po");
+		FLAG_NAMES.put("15", "sw");
 		FLAG_NAMES.put("19", "au"); //$NON-NLS-1$ //$NON-NLS-2$
-		FLAG_NAMES.put("22", "kr"); //$NON-NLS-1$ //$NON-NLS-2$
+		FLAG_NAMES.put("20", "krn");
+		FLAG_NAMES.put("21", "br");
+		FLAG_NAMES.put("22", "krs"); //$NON-NLS-1$ //$NON-NLS-2$
 		FLAG_NAMES.put("26", "ru"); //$NON-NLS-1$ //$NON-NLS-2$
 		FLAG_NAMES.put("27", "gr"); //$NON-NLS-1$ //$NON-NLS-2$
 		
