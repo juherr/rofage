@@ -63,7 +63,7 @@ public abstract class ComboFilterHelper {
 			Iterator<Entry<String, String>> iterLocations = treeLocations.entrySet().iterator();
 			while (iterLocations.hasNext()) {
 				Entry<String, String> entry = iterLocations.next();
-				ImageIcon icon = new ImageIcon(ComboFilterHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/"+Consts.FLAG_NAMES.get(entry.getValue())+".png"));
+				ImageIcon icon = IconHelper.getLocationIcon(entry.getValue());
 				combo.addItem(new GenericDropDownEntry(entry.getValue(), entry.getKey(), icon));
 			}
 		}
