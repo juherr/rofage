@@ -3,6 +3,16 @@ It's written in Java and aims to be run on any system (windows, linux or mac).
 
 This program runs with Java 1.6 or later
 
+Changelog in 1.3 :
+Added functionality : Import roms from both drag & drop and the menu. Addition of the related panel into the configuration (and window)
+Added functionality : Deletion of duplicate roms with a user's defined order => A new scan MUST be
+performed for this
+
+Bugfix : ( Issue 7 ) The Wifi indicator was not working in the Info Panel (changed from CB to label)
+Bugfix : filtering for wifi was reversed
+Bugfix : publish texts were mixed up
+Changes in class hierarchy
+
 Changelog in 1.2 :
 Added functionality : Compress roms & addition of the related tab in the configuration
 Added functionality : Changed the UI of the rom panel (infos)
