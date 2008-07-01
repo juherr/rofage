@@ -15,6 +15,7 @@ public class PanelImport extends JPanel {
 	private JCheckBox CBScan = null;
 	private JCheckBox CBRename = null;
 	private JCheckBox CBClean = null;
+	private JCheckBox CBCompress = null;
 	
 	private Configuration selConf = null;
 	
@@ -26,6 +27,7 @@ public class PanelImport extends JPanel {
 		vBox.add(getCBScan());
 		vBox.add(getCBRename());
 		vBox.add(getCBClean());
+		vBox.add(getCBCompress());
 		add(vBox);
 		setVisible(true);
 	}
@@ -70,6 +72,22 @@ public class PanelImport extends JPanel {
 					CBClean.setEnabled(false);
 				} else {
 					CBClean.setSelected(selConf.isImportClean());
+				}
+			}
+		}
+		return CBClean;
+	}
+	
+	public JCheckBox getCBCompress() {
+		if (CBCompress == null) {
+			CBCompress = new JCheckBox();
+			CBCompress.setText("Compress during import");
+			if (selConf!=null) {
+				if (!selConf.isImportCompress()) {
+					CBCompress.setSelected(false);
+					CBCompress.setEnabled(false);
+				} else {
+					CBCompress.setSelected(selConf.isImportCompress());
 				}
 			}
 		}

@@ -10,6 +10,7 @@ import rofage.common.Engine;
 import rofage.common.compress.CompressSwingWorker;
 import rofage.common.object.Game;
 import rofage.ihm.GameListTableModel;
+import rofage.ihm.compress.CompressWindow;
 
 /**
  * Class to trigger the update
@@ -25,9 +26,11 @@ public class CompressAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		CompressWindow w = engine.getCompressWindow();
 		if (e.getSource().equals(engine.getCompressWindow().getJButton())) {
 			// We asked for a full recompress
-			engine.setCompressSW(new CompressSwingWorker(engine, null));
+			engine.setCompressSW(new CompressSwingWorker(engine, null, 
+					w.getJTextArea(), w.getJProgressBar()));
 		} else {
 			// We come from the popMenu
 			int [] selRows = engine.getMainWindow().getJTable().getSelectedRows();
@@ -37,7 +40,8 @@ public class CompressAction extends AbstractAction {
 				listGames.add(model.getGameAt(selRows[i]));
 			}
 			engine.getCompressWindow().setVisible(true);
-			engine.setCompressSW(new CompressSwingWorker(engine, listGames));
+			engine.setCompressSW(new CompressSwingWorker(engine, listGames, 
+					w.getJTextArea(), w.getJProgressBar()));
 		}
 		engine.getCompressSW().execute();
 	}

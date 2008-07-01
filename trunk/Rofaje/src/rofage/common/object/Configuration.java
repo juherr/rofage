@@ -26,6 +26,7 @@ public class Configuration implements Serializable {
 	private boolean importScan = true;
 	private boolean importRename = false;
 	private boolean importClean = false;
+	private boolean importCompress = false;
 	private List<String> listLocations;
 	
 		
@@ -178,6 +179,12 @@ public class Configuration implements Serializable {
 	}
 	public void setListLocations(List<String> listLocations) {
 		this.listLocations = listLocations;
+	}
+	public boolean isImportCompress() {
+		return importCompress;
+	}
+	public void setImportCompress(boolean importCompress) {
+		this.importCompress = importCompress;
 	}
 	
 }
