@@ -98,6 +98,22 @@ public class Engine {
 			cleanWindow.dispose();
 			cleanWindow = null;
 		}
+		if (importWindow!=null) {
+			importWindow.dispose();
+			importWindow = null;
+		}
+		if (exportWindow!=null) {
+			exportWindow.dispose();
+			exportWindow = null;
+		}
+		if (duplicateWindow!=null) {
+			duplicateWindow.dispose();
+			duplicateWindow = null;
+		}
+		if (compressWindow!=null) {
+			compressWindow.dispose();
+			compressWindow = null;
+		}
 		Consts.reloadConsts();
 		getMainWindow().setVisible(true);
 		
@@ -138,10 +154,10 @@ public class Engine {
 		
 		if (globalConf==null) {
 			// We need to create the configuration
-			JOptionPane.showMessageDialog(null, Messages.getString("Engine.0"), Messages.getString("Engine.1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			// We create the global configuration object
 			globalConf = new GlobalConfiguration();
 			Locale.setDefault(globalConf.getSelectedLocale());
+			JOptionPane.showMessageDialog(null, Messages.getString("Engine.0"), Messages.getString("Engine.1"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			// Then we show the configuration window so it gets populated
 			getConfWindow().setVisible(true);
 		} else {
