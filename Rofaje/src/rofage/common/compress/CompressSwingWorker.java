@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
+
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 import rofage.common.files.FileToolkit;
@@ -20,18 +23,23 @@ public class CompressSwingWorker extends StoppableSwingWorker<Integer, String> {
 	
 	private Configuration selConf;
 	private List<Game> listGamesToCompress;
+	private JTextArea jTextArea;
+	private JProgressBar jProgressBar;
 	
-	public CompressSwingWorker (Engine engine, List<Game> listGamesToCompress) {
+	public CompressSwingWorker (Engine engine, List<Game> listGamesToCompress,
+			JTextArea jTextArea, JProgressBar jProgressBar) {
 		this.engine = engine;
 		this.stopAction = false;
 		this.selConf = engine.getGlobalConf().getSelectedConf();
 		this.listGamesToCompress = listGamesToCompress;
+		this.jTextArea = jTextArea;
+		this.jProgressBar = jProgressBar;
 		
 		
 		addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
 				if("progress".equals(evt.getPropertyName())) { //$NON-NLS-1$
-					getEngine().getCompressWindow().getJProgressBar().setValue((Integer) evt.getNewValue());
+					getJProgressBar().setValue((Integer) evt.getNewValue());
 				}
             }
 		});
@@ -69,7 +77,7 @@ public class CompressSwingWorker extends StoppableSwingWorker<Integer, String> {
     protected void process(List<String> strings) {
         /* Affichage des publications reçues dans le textarea. */
         for(String s : strings)
-        	engine.getCompressWindow().getJTextArea().append(s + '\n');
+        	jTextArea.append(s + '\n');
     }
 	
 	/**
@@ -135,6 +143,10 @@ public class CompressSwingWorker extends StoppableSwingWorker<Integer, String> {
 	
 	public Engine getEngine() {
 		return engine;
+	}
+
+	public JProgressBar getJProgressBar() {
+		return jProgressBar;
 	}
 
 }

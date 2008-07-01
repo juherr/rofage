@@ -39,6 +39,7 @@ public abstract class ConfigurationHelper {
 		conf.setImportRename(confWindow.getPanelImport().getCBRename().isSelected());
 		conf.setImportScan(confWindow.getPanelImport().getCBScan().isSelected());
 		conf.setImportClean(confWindow.getPanelImport().getCBClean().isSelected());
+		conf.setImportCompress(confWindow.getPanelImport().getCBCompress().isSelected());
 		
 		// We save the locations code in order
 		ListModel listModel = confWindow.getPanelDuplicate().getJListLocation().getModel();

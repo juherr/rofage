@@ -12,6 +12,7 @@ import javax.swing.SwingWorker;
 
 import rofage.common.Engine;
 import rofage.common.clean.CleanSwingWorker;
+import rofage.common.compress.CompressSwingWorker;
 import rofage.common.files.FileToolkit;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
@@ -99,6 +100,13 @@ public class ImportSwingWorker extends SwingWorker<Integer, String> {
 						listFoundGames));
 				engine.getCleanSW().execute();
 				engine.getCleanSW().get();
+			}
+			
+			if (selConf.isImportCompress()) {
+				engine.setCompressSW(new CompressSwingWorker(engine, 
+						listFoundGames, 
+						jTextArea, 
+						jProgressBar));
 			}
 		}
 		
