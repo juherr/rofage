@@ -17,6 +17,7 @@ public class MenuLanguage extends JMenu {
 	
 	private JRadioButtonMenuItem mItemLnFr 	= null;
 	private JRadioButtonMenuItem mItemLnEn 	= null;
+	private JRadioButtonMenuItem mItemLnDe 	= null;
 
 	public MenuLanguage (Engine engine) {
 		this.engine = engine;
@@ -24,16 +25,18 @@ public class MenuLanguage extends JMenu {
 		setText(Messages.getString("MainWindow.1"));
 		add(getMItemLnEn());
 		add(getMItemLnFr());
+		add(getMItemLnDe());
 		ButtonGroup languageGroup = new ButtonGroup();
 		languageGroup.add(getMItemLnEn());
 		languageGroup.add(getMItemLnFr());
+		languageGroup.add(getMItemLnDe());
 		
 	}
 
 	public JRadioButtonMenuItem getMItemLnEn() {
 		if (mItemLnEn==null) {
 			mItemLnEn = new JRadioButtonMenuItem();
-			mItemLnEn.setText(Messages.getString("MainWindow.12"));
+			mItemLnEn.setText(Messages.getString("Consts.76"));
 			if (engine.getGlobalConf().getSelectedLocale()==Locale.ENGLISH) mItemLnEn.setSelected(true);
 			mItemLnEn.addItemListener(new ChangeLanguageListener(engine));
 			mItemLnEn.setVisible(true);
@@ -44,11 +47,22 @@ public class MenuLanguage extends JMenu {
 	public JRadioButtonMenuItem getMItemLnFr() {
 		if (mItemLnFr==null) {
 			mItemLnFr = new JRadioButtonMenuItem ();
-			mItemLnFr.setText(Messages.getString("MainWindow.11")); //$NON-NLS-1$
+			mItemLnFr.setText(Messages.getString("Consts.75")); //$NON-NLS-1$
 			if (engine.getGlobalConf().getSelectedLocale()==Locale.FRENCH) mItemLnFr.setSelected(true);
 			mItemLnFr.addItemListener(new ChangeLanguageListener(engine));
 			mItemLnFr.setVisible(true);
 		}
 		return mItemLnFr;
+	}
+	
+	public JRadioButtonMenuItem getMItemLnDe() {
+		if (mItemLnDe==null) {
+			mItemLnDe = new JRadioButtonMenuItem ();
+			mItemLnDe.setText(Messages.getString("Consts.81")); //$NON-NLS-1$
+			if (engine.getGlobalConf().getSelectedLocale()==Locale.GERMAN) mItemLnDe.setSelected(true);
+			mItemLnDe.addItemListener(new ChangeLanguageListener(engine));
+			mItemLnDe.setVisible(true);
+		}
+		return mItemLnDe;
 	}
 }
