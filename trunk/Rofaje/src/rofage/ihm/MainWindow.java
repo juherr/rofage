@@ -71,6 +71,7 @@ public class MainWindow extends JFrame {
 	private PanelGameInfos panelGameInfos = null;
 
 	private JScrollPane jScrollPane = null;
+	private JScrollPane scrollImages = null;
 
 	private JComboBox comboRomSize = null;
 	private JComboBox comboLocation = null;
@@ -205,6 +206,14 @@ public class MainWindow extends JFrame {
 		}
 		return jScrollPane;
 	}
+	
+	public JScrollPane getScrollImages() {
+		if (scrollImages == null) {
+			scrollImages = new JScrollPane(getJPanelImages());
+			scrollImages.setAutoscrolls(true);
+		}
+		return scrollImages;
+	}
 
 	/**
 	 * This method initializes jPanel	
@@ -219,7 +228,7 @@ public class MainWindow extends JFrame {
 			hBox.add(getPanelGameInfos());
 			hBox.add(getPanelFilter());
 			jPanel.add(hBox, BorderLayout.SOUTH);
-			jPanel.add(getJPanelImages(), BorderLayout.NORTH);
+			jPanel.add(getScrollImages(), BorderLayout.CENTER);
 		}
 		return jPanel;
 	}
