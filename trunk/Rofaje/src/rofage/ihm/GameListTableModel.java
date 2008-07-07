@@ -62,7 +62,7 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 			} else if (col==3) {
 				return IconHelper.getCleanDumpIcon(game);
 			} else if (col==4) {
-				return GameDisplayHelper.buildTitle(game, titlePattern);
+				return GameDisplayHelper.buildTitle(game, titlePattern, engine.getGlobalConf().getSelectedConf());
 			}
 		}
 		return 0;

@@ -183,7 +183,7 @@ public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 		
 		// We also check the name
 		String fileName = FileToolkit.removeFileExtension(file.getName());
-		String goodRomName = GameDisplayHelper.buildTitle(currGame, selConf.getTitlePattern());
+		String goodRomName = GameDisplayHelper.buildTitle(currGame, selConf.getTitlePattern(), selConf);
 		if (fileName.equals(goodRomName)) {
 			currGame.setGoodName(true);
 		} else {

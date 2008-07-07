@@ -1,7 +1,9 @@
 package rofage.common.helper;
 
 import rofage.common.Consts;
+import rofage.common.object.Configuration;
 import rofage.common.object.Game;
+import rofage.common.parser.DatParser;
 import rofage.common.url.URLToolkit;
 
 public abstract class GameDisplayHelper {
@@ -45,10 +47,18 @@ public abstract class GameDisplayHelper {
 	 * %c CRC
 	 * @param game
 	 * @param pattern
+	 * @param conf : We need the configuration to know which field is used for the release nb
 	 * @return new Title
 	 */
-	public static String buildTitle (Game game, String pattern) {
-		pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getReleaseNb()));
+	public static String buildTitle (Game game, String pattern, Configuration conf) {
+		// The release nb may be based on different fields
+		if (DatParser.XML_NODE_COMMENT.equals(conf.getReleaseNbField())) {
+			pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getComment()));
+		} else { // We always keep this as the "default value" (ie the configuration has no value for this attribute)
+			pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getReleaseNb()));
+		}
+		
+		// Other fields
 		if (game.getTitle()!=null) pattern = pattern.replace("%t", game.getTitle());
 		if (game.getRomSize()!=null) pattern = pattern.replace("%s", game.getRomSize());
 		if (game.getLocation()!=null) pattern = pattern.replace("%l", getLocation(game));
@@ -67,6 +77,9 @@ public abstract class GameDisplayHelper {
 	}
 	
 	private static String buildFormattedReleaseNb (String rawReleaseNb) {
+		if (rawReleaseNb==null) {
+			return "?";
+		}
 		int RelNblength = 4; // Length of a release number
 		StringBuffer strBuffer = new StringBuffer();
 		for (int i=0; i<RelNblength-rawReleaseNb.length(); i++) {

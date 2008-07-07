@@ -3,6 +3,8 @@ package rofage.common.object;
 import java.io.Serializable;
 import java.util.List;
 
+import rofage.common.parser.DatParser;
+
 /**
  * User shall be able to modify the default configuration
  * and save his preferences
@@ -16,6 +18,7 @@ public class Configuration implements Serializable {
 	private String romFolder = "";
 	private String romFolderMove = "";
 	private String titlePattern = DEFAULT_TITLEPATTERN;
+	private String releaseNbField = DatParser.XML_NODE_RELEASENB;
 	private boolean moveUnknownRoms = false;
 	private boolean updateAtStartup = false;
 	private boolean renameInside = false;
@@ -185,6 +188,12 @@ public class Configuration implements Serializable {
 	}
 	public void setImportCompress(boolean importCompress) {
 		this.importCompress = importCompress;
+	}
+	public String getReleaseNbField() {
+		return releaseNbField;
+	}
+	public void setReleaseNbField(String releaseNbField) {
+		this.releaseNbField = releaseNbField;
 	}
 	
 }

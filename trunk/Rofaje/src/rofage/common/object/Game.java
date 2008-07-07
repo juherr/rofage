@@ -28,6 +28,7 @@ public class Game implements Serializable {
 	private String internalName = "";
 	private String serial = "";
 	private String duplicateId = "";
+	private String comment = "";
 	private Boolean wifi = null;
 	private boolean scannedFromSerial = false;
 	
@@ -175,5 +176,11 @@ public class Game implements Serializable {
 	}
 	public void setDuplicateId(String duplicateId) {
 		this.duplicateId = duplicateId;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }

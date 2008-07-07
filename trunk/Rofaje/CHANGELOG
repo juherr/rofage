@@ -3,6 +3,18 @@ It's written in Java and aims to be run on any system (windows, linux or mac).
 
 This program runs with Java 1.6 or later
 
+Changelog in 1.3.2 :
+Added functionality : The release nb can now either be located in the comment field or the releaseNb field. The configuration must be deleted then readded or the dat must be updated
+for this modification to take effect
+Filtering has been updated accordingly
+Added functionality : German language available
+Added functionality : Compress roms while importing (if the "delete source files check box is not checked, original files will still be in the directory)
+
+Bugfix : English is now the default language if no language file has been found (or a text is not translated)
+Bugfix : (issue 12) images are now scrollable if they are too big
+Bugfix : Some texts in some windows were not updated when we changed the language
+Bugfix : The warning test if there is no configuration was not displayed properly on non english / french platforms.
+
 Changelog in 1.3.1 : 
 Added the missing flags
 
