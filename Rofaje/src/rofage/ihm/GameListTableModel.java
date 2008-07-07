@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -69,7 +70,11 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	}
 	
 	public Class<?> getColumnClass(int col) {
-		if (col==0 || col==1 || col==2 || col==3) return ImageIcon.class;
+		if (col==0 || col==2) {
+			return ImageIcon.class;
+		} else if (col==1 || col==3) {
+			return JLabel.class;
+		}
 		else return String.class;
     }
 
