@@ -1,5 +1,6 @@
 package rofage.ihm;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
@@ -14,6 +15,7 @@ public class GameListTable extends JTable {
 		setVisible(true);
 		setFillsViewportHeight(true);
 		setModel(new GameListTableModel(titlePattern, engine));
+		setDefaultRenderer(JLabel.class, new GameListTableDefaultJLabelRenderer());
 		setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		setRowHeight(32);
 		getColumnModel().getColumn(0).setMaxWidth(25);

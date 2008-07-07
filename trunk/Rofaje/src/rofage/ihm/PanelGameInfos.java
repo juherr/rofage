@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class PanelGameInfos extends JPanel {
 
 	private JLabel labelReleaseNb 	= null;
@@ -23,7 +23,7 @@ public class PanelGameInfos extends JPanel {
 	
 	public PanelGameInfos () {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
-		setBorder(BorderFactory.createTitledBorder(Messages.getString("MainWindow.5")));
+		setBorder(BorderFactory.createTitledBorder(Messages.getString("MainWindow.5"))); //$NON-NLS-1$
 		Box vBox = Box.createVerticalBox();
 		vBox.add(getLabelReleaseNb());
 		vBox.add(getLabelSize());
@@ -31,6 +31,7 @@ public class PanelGameInfos extends JPanel {
 		vBox.add(getLabelOrigin());
 		vBox.add(getLabelLanguage());
 		vBox.add(getLabelPublisher());
+		vBox.add(getLabelGroup());
 		vBox.add(getLabelGenre());
 		vBox.add(getLabelWifi());
 		
@@ -40,7 +41,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelGroup() {
 		if (labelGroup==null) {
 			labelGroup = new JLabel();
-			labelGroup.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/group.png")));
+			labelGroup.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/group.png"))); //$NON-NLS-1$
+			labelGroup.setToolTipText(Messages.getString("PanelGameInfos.3")); //$NON-NLS-1$
 		}
 		return labelGroup;
 	}
@@ -48,7 +50,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelCRC() {
 		if (labelCRC==null) {
 			labelCRC = new JLabel();
-			labelCRC.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/crc.png")));
+			labelCRC.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/crc.png"))); //$NON-NLS-1$
+			labelCRC.setToolTipText(Messages.getString("PanelGameInfos.5")); //$NON-NLS-1$
 		}
 		return labelCRC;
 	}
@@ -56,7 +59,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelGenre() {
 		if (labelGenre==null) {
 			labelGenre = new JLabel();
-			labelGenre.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/genre.png")));
+			labelGenre.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/genre.png"))); //$NON-NLS-1$
+			labelGenre.setToolTipText(Messages.getString("PanelGameInfos.7")); //$NON-NLS-1$
 		}
 		return labelGenre;
 	}
@@ -64,7 +68,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelLanguage() {
 		if (labelLanguage==null) {
 			labelLanguage = new JLabel();
-			labelLanguage.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/language.png")));
+			labelLanguage.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/language.png"))); //$NON-NLS-1$
+			labelLanguage.setToolTipText(Messages.getString("PanelGameInfos.9")); //$NON-NLS-1$
 		}
 		return labelLanguage;
 	}
@@ -72,7 +77,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelOrigin() {
 		if (labelOrigin==null) {
 			labelOrigin = new JLabel();
-			labelOrigin.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/location.png")));
+			labelOrigin.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/location.png"))); //$NON-NLS-1$
+			labelOrigin.setToolTipText(Messages.getString("PanelGameInfos.11")); //$NON-NLS-1$
 		}
 		return labelOrigin;
 	}
@@ -80,7 +86,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelPublisher() {
 		if (labelPublisher==null) {
 			labelPublisher = new JLabel();
-			labelPublisher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/publisher.png")));
+			labelPublisher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/publisher.png"))); //$NON-NLS-1$
+			labelPublisher.setToolTipText(Messages.getString("PanelGameInfos.13")); //$NON-NLS-1$
 		}
 		return labelPublisher;
 	}
@@ -88,7 +95,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelReleaseNb() {
 		if (labelReleaseNb==null) {
 			labelReleaseNb = new JLabel();
-			labelReleaseNb.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/releasenb.png")));
+			labelReleaseNb.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/releasenb.png"))); //$NON-NLS-1$
+			labelReleaseNb.setToolTipText(Messages.getString("PanelGameInfos.15")); //$NON-NLS-1$
 		}
 		return labelReleaseNb;
 	}
@@ -96,7 +104,8 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelSize() {
 		if (labelSize==null) {
 			labelSize = new JLabel();
-			labelSize.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/size.png")));
+			labelSize.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/size.png"))); //$NON-NLS-1$
+			labelSize.setToolTipText(Messages.getString("PanelGameInfos.17")); //$NON-NLS-1$
 		}
 		return labelSize;
 	}
@@ -104,8 +113,9 @@ public class PanelGameInfos extends JPanel {
 	public JLabel getLabelWifi() {
 		if (labelWifi==null) {
 			labelWifi = new JLabel();
-			labelWifi.setText("Wifi");
-			labelWifi.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/unknown_wifi24.png")));
+			labelWifi.setText("Wifi"); //$NON-NLS-1$
+			labelWifi.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/unknown_wifi24.png"))); //$NON-NLS-1$
+			labelWifi.setToolTipText(Messages.getString("PanelGameInfos.20")); //$NON-NLS-1$
 		}
 		return labelWifi;
 	}

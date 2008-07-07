@@ -9,6 +9,9 @@ for this modification to take effect
 Filtering has been updated accordingly
 Added functionality : German language available
 Added functionality : Compress roms while importing (if the "delete source files check box is not checked, original files will still be in the directory)
+Added functionality : The release group is now showed in the rom info panel
+Added functionality : Tooltips were added in the rom infos panel
+Added functionality : Tooltips were added in the game list on icons
 
 Bugfix : English is now the default language if no language file has been found (or a text is not translated)
 Bugfix : (issue 12) images are now scrollable if they are too big
