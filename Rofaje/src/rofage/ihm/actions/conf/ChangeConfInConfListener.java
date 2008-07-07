@@ -36,6 +36,7 @@ public class ChangeConfInConfListener implements ItemListener {
 			// Rom Title panel
 			confWindow.getFieldTitlePattern().setText(newConf.getTitlePattern());
 			confWindow.getCBRenameInside().setSelected(newConf.isRenameInside());
+			confWindow.getComboReleaseNbField().setSelectedItem(newConf.getReleaseNbField());
 			// Update panel
 			confWindow.getCBAutoUpdate().setSelected(newConf.isUpdateAtStartup());
 			confWindow.getCBInAppUpdate().setSelected(newConf.isInAppUpdate());

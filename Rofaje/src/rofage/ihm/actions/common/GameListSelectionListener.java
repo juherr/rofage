@@ -90,7 +90,7 @@ public class GameListSelectionListener implements ListSelectionListener {
 				
 				// We update the rom header panel
 				PanelRomHeader header = engine.getMainWindow().getPanelRomHeader();
-				header.getLabelTitle().setText(GameDisplayHelper.buildTitle(game, conf.getTitlePattern()));
+				header.getLabelTitle().setText(GameDisplayHelper.buildTitle(game, conf.getTitlePattern(), conf));
 				header.getLabelTitle().setIcon(IconHelper.getRomIcon(game, conf));
 				header.getLabelIconCleanDump().setIcon(IconHelper.getCleanDumpIcon(game));
 				header.getLabelIconWifi().setIcon(IconHelper.getWifiIcon(game));

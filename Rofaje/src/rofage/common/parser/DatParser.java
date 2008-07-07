@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -15,39 +16,48 @@ import org.jdom.input.SAXBuilder;
 import rofage.common.object.Game;
 
 public class DatParser {
-	private final static String XML_NODE_DATVERSION 	= "datVersion";
-	private final static String XML_NODE_DATNAME 		= "datName";
-	private final static String XML_NODE_IMFOLDER		= "imFolder";
-	private final static String XML_NODE_NEWDATURL		= "datURL";
-	private final static String XML_NODE_IMAGEURL		= "imURL";
-	private final static String XML_NODE_ICONURL		= "icURL";
-	private final static String XML_NODE_DATVERSIONURL	= "datVersionURL";
+	// Please keep this in natural order (the value, not the variable name) !
 	private final static String XML_NODE_CONFIGURATION	= "configuration";
-	private final static String XML_NODE_NEWDAT			= "newDat";
-	private final static String XML_NODE_GAMES			= "games";
-	private final static String XML_NODE_GAME			= "game";
-	private final static String XML_NODE_IMAGENB		= "imageNumber";
-	private final static String XML_NODE_RELEASENB		= "releaseNumber";
-	private final static String XML_NODE_TITLE			= "title";
-	private final static String XML_NODE_ROMSIZE		= "romSize";
-	private final static String XML_NODE_PUBLISHER		= "publisher";
-	private final static String XML_NODE_LOCATION		= "location";
-	private final static String XML_NODE_SOURCEROM		= "sourceRom";
-	private final static String XML_NODE_LANGUAGE		= "language";
+	private final static String XML_NODE_CANOPEN		= "canOpen";
+	public final static String XML_NODE_COMMENT			= "comment";
+	private final static String XML_NODE_DATNAME 		= "datName";
+	private final static String XML_NODE_NEWDATURL		= "datURL";
+	private final static String XML_NODE_DATVERSION 	= "datVersion";
+	private final static String XML_NODE_DATVERSIONURL	= "datVersionURL";
+	private final static String XML_NODE_DUPLICATEID	= "duplicateid";
+	private final static String XML_NODE_EXTENSION		= "extension";
+	private final static String XML_ATTR_FILENAME		= "fileName";
 	private final static String XML_NODE_FILES			= "files";
-	private final static String XML_NODE_ROMCRC			= "romCRC";
+	private final static String XML_NODE_GAME			= "game";
+	private final static String XML_NODE_GAMES			= "games";
+	private final static String XML_NODE_GENRE			= "genre";
+	private final static String XML_NODE_ICONCRC		= "icoCRC";
+	private final static String XML_NODE_ICONURL		= "icURL";
 	private final static String XML_NODE_IMAGE1CRC		= "im1CRC";
 	private final static String XML_NODE_IMAGE2CRC		= "im2CRC";
-	private final static String XML_NODE_ICONCRC		= "icoCRC";
-	private final static String XML_NODE_GENRE			= "genre";
+	private final static String XML_NODE_IMAGENB		= "imageNumber";
+	private final static String XML_NODE_IMFOLDER		= "imFolder";
+	private final static String XML_NODE_IMAGEURL		= "imURL";
 	private final static String XML_NODE_INTERNALNAME	= "internalname";
+	private final static String XML_NODE_LANGUAGE		= "language";
+	private final static String XML_NODE_LOCATION		= "location";
+	private final static String XML_NODE_NEWDAT			= "newDat";
+	private final static String XML_NODE_PUBLISHER		= "publisher";
+	public final static String XML_NODE_RELEASENB		= "releaseNumber";
+	private final static String XML_NODE_ROMCRC			= "romCRC";
+	private final static String XML_NODE_ROMSIZE		= "romSize";
 	private final static String XML_NODE_SERIAL			= "serial";
+	private final static String XML_NODE_SOURCEROM		= "sourceRom";
+	private final static String XML_NODE_TITLE			= "title";
 	private final static String XML_NODE_WIFI			= "wifi";
-	private final static String XML_NODE_CANOPEN		= "canOpen";
-	private final static String XML_NODE_EXTENSION		= "extension";
-	private final static String XML_NODE_DUPLICATEID	= "duplicateid";
 	
-	private final static String XML_ATTR_FILENAME		= "fileName";
+	// Fields that may be used to determine the release nb
+	public final static TreeSet<String> availableReleaseNbFields = new TreeSet<String>();
+	
+	static {
+		availableReleaseNbFields.add(XML_NODE_RELEASENB);
+		availableReleaseNbFields.add(XML_NODE_COMMENT);
+	}
 	
 	Element racine;
 	Element confNode;
@@ -174,6 +184,7 @@ public class DatParser {
 			game.setGenre(gameNode.getChildText(XML_NODE_GENRE));
 			game.setInternalName(gameNode.getChildText(XML_NODE_INTERNALNAME));
 			game.setSerial(gameNode.getChildText(XML_NODE_SERIAL));
+			game.setComment(gameNode.getChildText(XML_NODE_COMMENT));
 			if (gameNode.getChildText(XML_NODE_WIFI)!=null) {
 				if ("Yes".equals(gameNode.getChildText(XML_NODE_WIFI))) {
 					game.setWifi(true);

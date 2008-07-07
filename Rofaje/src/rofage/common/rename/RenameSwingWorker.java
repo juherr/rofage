@@ -125,7 +125,7 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 			} else {
 				// Let's rename it
 				String oldFileName = gameFile.getName();
-				String newFileName = GameDisplayHelper.buildTitle(game, selConf.getTitlePattern());
+				String newFileName = GameDisplayHelper.buildTitle(game, selConf.getTitlePattern(), selConf);
 				String destPath = gameFile.getParent()+File.separator+newFileName+FileToolkit.getFileExtension(oldFileName);
 				// If we have to update inside the archive, we will have to update this value
 				String newEntryFullPath = null;
