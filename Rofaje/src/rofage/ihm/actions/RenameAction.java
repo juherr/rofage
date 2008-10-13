@@ -1,4 +1,4 @@
-package rofage.ihm.actions.rename;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 

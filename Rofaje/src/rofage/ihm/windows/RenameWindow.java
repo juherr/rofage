@@ -1,4 +1,4 @@
-package rofage.ihm.duplicate;
+package rofage.ihm.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,11 +15,11 @@ import javax.swing.WindowConstants;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.RenameAction;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.common.StopAction;
-import rofage.ihm.actions.duplicate.DuplicateAction;
 
-public class DuplicateWindow extends JFrame {
+public class RenameWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class DuplicateWindow extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public DuplicateWindow(Engine engine) {
+	public RenameWindow(Engine engine) {
 		super();
 		this.engine = engine;
 		initialize();
@@ -56,11 +56,11 @@ public class DuplicateWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(500, 300);
-		this.setName("duplicateWindow"); //$NON-NLS-1$
+		this.setName("renameWindow"); //$NON-NLS-1$
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("DuplicateWindowTitle"));
+		this.setTitle(Messages.getString("RenameWindowTitle"));
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -139,8 +139,8 @@ public class DuplicateWindow extends JFrame {
 	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setAction(new DuplicateAction(engine));
-			jButton.setText(Messages.getString("DuplicateAction")); //$NON-NLS-1$
+			jButton.setAction(new RenameAction(engine));
+			jButton.setText(Messages.getString("RenameWindow.0")); //$NON-NLS-1$
 			jButton.setName("jButton"); //$NON-NLS-1$
 			jButton.setPreferredSize(new Dimension(100, 23));
 			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
@@ -173,7 +173,7 @@ public class DuplicateWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine, StopAction.SW_DUPLICATE));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_RENAME));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));

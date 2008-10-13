@@ -1,4 +1,4 @@
-package rofage.ihm.actions.importroms;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -12,14 +12,14 @@ import rofage.common.Engine;
 import rofage.common.object.Configuration;
 import rofage.common.update.ImportSwingWorker;
 import rofage.ihm.Messages;
-import rofage.ihm.conf.FileChooserFilter;
+import rofage.ihm.windows.conf.FileChooserFilter;
 
 @SuppressWarnings("serial")
-public class ImportAction extends AbstractAction {
+public class ExportListAction extends AbstractAction {
 	
 	private Engine engine	= null;
 	
-	public ImportAction (Engine engine) {
+	public ExportListAction (Engine engine) {
 		this.engine = engine;
 	}
 

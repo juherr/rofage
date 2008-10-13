@@ -1,4 +1,4 @@
-package rofage.ihm.actions.duplicate;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 

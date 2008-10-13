@@ -1,4 +1,4 @@
-package rofage.ihm.actions.compress;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import rofage.common.Engine;
 import rofage.common.compress.CompressSwingWorker;
 import rofage.common.object.Game;
 import rofage.ihm.GameListTableModel;
-import rofage.ihm.compress.CompressWindow;
+import rofage.ihm.windows.CompressWindow;
 
 /**
  * Class to trigger the update

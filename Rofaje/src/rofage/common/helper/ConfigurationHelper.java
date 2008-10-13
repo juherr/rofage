@@ -9,7 +9,7 @@ import rofage.common.Engine;
 import rofage.common.object.Configuration;
 import rofage.common.object.GenericDropDownEntry;
 import rofage.common.parser.DatParser;
-import rofage.ihm.conf.ConfWindow;
+import rofage.ihm.windows.conf.ConfWindow;
 
 public abstract class ConfigurationHelper {
 

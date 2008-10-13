@@ -1,4 +1,4 @@
-package rofage.ihm.conf;
+package rofage.ihm.windows.conf;
 
 import java.io.File;
 

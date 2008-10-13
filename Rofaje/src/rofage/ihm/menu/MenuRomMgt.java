@@ -2,27 +2,35 @@ package rofage.ihm.menu;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.ImportAction;
 import rofage.ihm.actions.common.ShowCleanAction;
 import rofage.ihm.actions.common.ShowCompressAction;
 import rofage.ihm.actions.common.ShowDuplicateAction;
 import rofage.ihm.actions.common.ShowRenameAction;
 import rofage.ihm.actions.common.ShowScanAction;
-import rofage.ihm.actions.importroms.ImportAction;
 
 @SuppressWarnings("serial")
 public class MenuRomMgt extends JMenu {
 	
 	private Engine engine	= null;
 	
-	private JMenuItem mItemScan 	= null;
-	private JMenuItem mItemRename 	= null;
-	private JMenuItem mItemClean 	= null;
-	private JMenuItem mItemCompress	= null;
-	private JMenuItem mItemImport	= null;
-	private JMenuItem mItemDuplicate= null;
+	private JMenuItem mItemScan 		= null;
+	private JMenuItem mItemRename 		= null;
+	private JMenuItem mItemClean 		= null;
+	private JMenuItem mItemCompress		= null;
+	private JMenuItem mItemImport		= null;
+	private JMenuItem mItemDuplicate	= null;
+	private JMenu mExportList 			= null;
+	
+	// Menu items for the export lists
+	private JMenuItem mItemExportAll		= null;
+	private JMenuItem mItemExportGoodNamed	= null;
+	private JMenuItem mItemExportBadNamed	= null;
+	private JMenuItem mItemExportMissing	= null;
 
 	public MenuRomMgt (Engine engine) {
 		this.engine = engine;
@@ -34,6 +42,8 @@ public class MenuRomMgt extends JMenu {
 		add(getMItemCompress());
 		add(getMItemImport());
 		add(getMItemDuplicate());
+		add(new JSeparator(JSeparator.HORIZONTAL));
+		add(getMItemExportList());
 	}
 
 	public JMenuItem getMItemClean() {
@@ -70,6 +80,45 @@ public class MenuRomMgt extends JMenu {
 			mItemDuplicate.addActionListener(new ShowDuplicateAction(engine));
 		}
 		return mItemDuplicate;
+	}
+	
+	public JMenu getMItemExportList() {
+		if (mExportList==null) {
+			mExportList = new JMenu(Messages.getString("ExportList"));
+			mExportList.add(getMItemExportAll());
+			mExportList.add(getMItemExportGoodNamed());
+			mExportList.add(getMItemExportBadNamed());
+			mExportList.add(getMItemExportMissing());
+		}
+		return mExportList;
+	}
+	
+	public JMenuItem getMItemExportAll() {
+		if (mItemExportAll==null) {
+			mItemExportAll = new JMenuItem(Messages.getString("ExportListAll"));
+		}
+		return mItemExportAll;
+	}
+	
+	public JMenuItem getMItemExportGoodNamed() {
+		if (mItemExportGoodNamed==null) {
+			mItemExportGoodNamed = new JMenuItem(Messages.getString("ExportListGoodNamed"));
+		}
+		return mItemExportGoodNamed;
+	}
+	
+	public JMenuItem getMItemExportBadNamed() {
+		if (mItemExportBadNamed==null) {
+			mItemExportBadNamed = new JMenuItem(Messages.getString("ExportListBadNamed"));
+		}
+		return mItemExportBadNamed;
+	}
+	
+	public JMenuItem getMItemExportMissing() {
+		if (mItemExportMissing==null) {
+			mItemExportMissing = new JMenuItem(Messages.getString("ExportListMissing"));
+		}
+		return mItemExportMissing;
 	}
 
 	public JMenuItem getMItemRename() {

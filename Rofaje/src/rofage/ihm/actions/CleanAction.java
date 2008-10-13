@@ -1,4 +1,4 @@
-package rofage.ihm.actions.clean;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 

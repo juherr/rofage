@@ -1,4 +1,4 @@
-package rofage.ihm.compress;
+package rofage.ihm.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,11 +15,11 @@ import javax.swing.WindowConstants;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.ScanAction;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.common.StopAction;
-import rofage.ihm.actions.compress.CompressAction;
 
-public class CompressWindow extends JFrame {
+public class ScanWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,7 @@ public class CompressWindow extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public CompressWindow(Engine engine) {
+	public ScanWindow(Engine engine) {
 		super();
 		this.engine = engine;
 		initialize();
@@ -56,11 +56,11 @@ public class CompressWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(500, 300);
-		this.setName("compressWindow"); //$NON-NLS-1$
+		this.setName("scanWindow"); //$NON-NLS-1$
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("CompressWindow.1"));
+		this.setTitle("Scan des roms"); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -109,7 +109,7 @@ public class CompressWindow extends JFrame {
 			jTextArea.setLineWrap(true);
 			jTextArea.setEditable(false);
 			jTextArea.setWrapStyleWord(true);
-			jTextArea.setName("compressText"); //$NON-NLS-1$
+			jTextArea.setName("updateText"); //$NON-NLS-1$
 		}
 		return jTextArea;
 	}
@@ -139,8 +139,8 @@ public class CompressWindow extends JFrame {
 	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setAction(new CompressAction(engine));
-			jButton.setText(Messages.getString("CompressWindow.0")); //$NON-NLS-1$
+			jButton.setAction(new ScanAction(engine));
+			jButton.setText(Messages.getString("ScanWindow.0")); //$NON-NLS-1$
 			jButton.setName("jButton"); //$NON-NLS-1$
 			jButton.setPreferredSize(new Dimension(100, 23));
 			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
@@ -153,14 +153,14 @@ public class CompressWindow extends JFrame {
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	public JButton getJButton1() {
+	private JButton getJButton1() {
 		if (jButton1 == null) {
 			jButton1 = new JButton();
 			jButton1.setAction(new HideAction(this));
 			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			jButton1.setName("jButton1"); //$NON-NLS-1$
 			jButton1.setPreferredSize(new Dimension(100, 23));
-			jButton1.setText(Messages.getString("CompressWindow.5")); //$NON-NLS-1$
+			jButton1.setText(Messages.getString("ScanWindow.5")); //$NON-NLS-1$
 		}
 		return jButton1;
 	}
@@ -173,11 +173,11 @@ public class CompressWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine, StopAction.SW_CLEAN));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_SCAN));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));
-			buttonStop.setText(Messages.getString("CompressWindow.8")); //$NON-NLS-1$
+			buttonStop.setText(Messages.getString("ScanWindow.8")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
 			buttonStop.setEnabled(false);
 		}

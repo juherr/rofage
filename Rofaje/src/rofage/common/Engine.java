@@ -20,15 +20,15 @@ import rofage.common.update.ImportSwingWorker;
 import rofage.common.update.UpdateSwingWorker;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
-import rofage.ihm.clean.CleanWindow;
-import rofage.ihm.compress.CompressWindow;
-import rofage.ihm.conf.ConfWindow;
-import rofage.ihm.duplicate.DuplicateWindow;
-import rofage.ihm.export.ExportWindow;
-import rofage.ihm.importroms.ImportWindow;
-import rofage.ihm.rename.RenameWindow;
-import rofage.ihm.scan.ScanWindow;
-import rofage.ihm.update.UpdateWindow;
+import rofage.ihm.windows.CleanWindow;
+import rofage.ihm.windows.CompressWindow;
+import rofage.ihm.windows.DuplicateWindow;
+import rofage.ihm.windows.ExportWindow;
+import rofage.ihm.windows.ImportWindow;
+import rofage.ihm.windows.RenameWindow;
+import rofage.ihm.windows.ScanWindow;
+import rofage.ihm.windows.UpdateWindow;
+import rofage.ihm.windows.conf.ConfWindow;
 
 public class Engine {
 	private UpdateWindow updateWindow 	= null;

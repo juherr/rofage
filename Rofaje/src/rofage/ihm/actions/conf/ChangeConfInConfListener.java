@@ -9,7 +9,7 @@ import rofage.common.Engine;
 import rofage.common.helper.ConfigurationHelper;
 import rofage.common.object.Configuration;
 import rofage.ihm.Messages;
-import rofage.ihm.conf.ConfWindow;
+import rofage.ihm.windows.conf.ConfWindow;
 
 public class ChangeConfInConfListener implements ItemListener {
 	

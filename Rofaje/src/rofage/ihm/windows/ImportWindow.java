@@ -1,4 +1,4 @@
-package rofage.ihm.update;
+package rofage.ihm.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,13 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
-import rofage.ihm.actions.common.StopAction;
-import rofage.ihm.actions.update.UpdateAction;
 
-public class UpdateWindow extends JFrame {
+public class ImportWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -31,22 +28,17 @@ public class UpdateWindow extends JFrame {
 
 	private JPanel jPanel = null;
 
-	private JButton jButton = null;
-
 	private JButton jButton1 = null;
-	private JButton buttonStop = null;
-
+	
 	private JScrollPane jScrollPane = null;
 	
-	private Engine engine = null;
-
 	/**
 	 * This is the default constructor
 	 */
-	public UpdateWindow(Engine engine) {
+	public ImportWindow() {
 		super();
-		this.engine = engine;
-		initialize();	}
+		initialize();
+	}
 
 	/**
 	 * This method initializes this
@@ -55,11 +47,11 @@ public class UpdateWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(500, 300);
-		this.setName("updateWindow"); //$NON-NLS-1$
+		this.setName("importWindow"); //$NON-NLS-1$
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("UpdateWindow.1")); //$NON-NLS-1$
+		this.setTitle(Messages.getString("ImportWindowTitle"));
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -123,28 +115,9 @@ public class UpdateWindow extends JFrame {
 			jPanel = new JPanel();
 			jPanel.setLayout(new FlowLayout());
 			jPanel.setPreferredSize(new Dimension(100, 50));
-			jPanel.add(getJButton(), null);
 			jPanel.add(getJButton1(), null);
-			jPanel.add(getButtonStop(), null);
 		}
 		return jPanel;
-	}
-
-	/**
-	 * This method initializes jButton	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	public JButton getJButton() {
-		if (jButton == null) {
-			jButton = new JButton();
-			jButton.setAction(new UpdateAction(engine));
-			jButton.setText(Messages.getString("UpdateWindow.0")); //$NON-NLS-1$
-			jButton.setName("jButton"); //$NON-NLS-1$
-			jButton.setPreferredSize(new Dimension(100, 23));
-			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
-		}
-		return jButton;
 	}
 
 	/**
@@ -159,30 +132,11 @@ public class UpdateWindow extends JFrame {
 			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			jButton1.setName("jButton1"); //$NON-NLS-1$
 			jButton1.setPreferredSize(new Dimension(100, 23));
-			jButton1.setText(Messages.getString("UpdateWindow.6")); //$NON-NLS-1$
+			jButton1.setText(Messages.getString("RenameWindow.5")); //$NON-NLS-1$
 		}
 		return jButton1;
 	}
 	
-	/**
-	 * This method initializes buttonStop	
-	 * 	
-	 * @return javax.swing.JButton	
-	 */
-	public JButton getButtonStop() {
-		if (buttonStop == null) {
-			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine, StopAction.SW_UPDATE));
-			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
-			buttonStop.setName("buttonStop"); //$NON-NLS-1$
-			buttonStop.setPreferredSize(new Dimension(100, 23));
-			buttonStop.setText(Messages.getString("UpdateWindow.9")); //$NON-NLS-1$
-			buttonStop.setVisible(true);
-			buttonStop.setEnabled(false);
-		}
-		return buttonStop;
-	}
-
 	/**
 	 * This method initializes jScrollPane	
 	 * 	
