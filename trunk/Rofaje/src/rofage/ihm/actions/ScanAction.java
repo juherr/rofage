@@ -1,4 +1,4 @@
-package rofage.ihm.actions.scan;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 

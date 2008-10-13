@@ -9,7 +9,7 @@ import net.iharder.dnd.FileDrop.Listener;
 import rofage.common.Engine;
 import rofage.common.object.Configuration;
 import rofage.common.update.ImportSwingWorker;
-import rofage.ihm.importroms.ImportWindow;
+import rofage.ihm.windows.ImportWindow;
 
 public class RomListener implements Listener {
 	private Engine engine;

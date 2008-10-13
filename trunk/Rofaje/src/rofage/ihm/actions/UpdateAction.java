@@ -1,4 +1,4 @@
-package rofage.ihm.actions.update;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;

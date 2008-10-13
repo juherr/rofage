@@ -3,7 +3,7 @@ package rofage.ihm.actions.conf;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import rofage.ihm.conf.PanelImport;
+import rofage.ihm.windows.conf.PanelImport;
 
 /**
  * Manages the UI changes on the import panel for the Scan Check box

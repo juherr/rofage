@@ -1,4 +1,4 @@
-package rofage.ihm.rename;
+package rofage.ihm.windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -15,11 +15,11 @@ import javax.swing.WindowConstants;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.UpdateAction;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.common.StopAction;
-import rofage.ihm.actions.rename.RenameAction;
 
-public class RenameWindow extends JFrame {
+public class UpdateWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -43,11 +43,10 @@ public class RenameWindow extends JFrame {
 	/**
 	 * This is the default constructor
 	 */
-	public RenameWindow(Engine engine) {
+	public UpdateWindow(Engine engine) {
 		super();
 		this.engine = engine;
-		initialize();
-	}
+		initialize();	}
 
 	/**
 	 * This method initializes this
@@ -56,11 +55,11 @@ public class RenameWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(500, 300);
-		this.setName("renameWindow"); //$NON-NLS-1$
+		this.setName("updateWindow"); //$NON-NLS-1$
 		this.setPreferredSize(new Dimension(500, 300));
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("RenameWindowTitle"));
+		this.setTitle(Messages.getString("UpdateWindow.1")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
@@ -139,8 +138,8 @@ public class RenameWindow extends JFrame {
 	public JButton getJButton() {
 		if (jButton == null) {
 			jButton = new JButton();
-			jButton.setAction(new RenameAction(engine));
-			jButton.setText(Messages.getString("RenameWindow.0")); //$NON-NLS-1$
+			jButton.setAction(new UpdateAction(engine));
+			jButton.setText(Messages.getString("UpdateWindow.0")); //$NON-NLS-1$
 			jButton.setName("jButton"); //$NON-NLS-1$
 			jButton.setPreferredSize(new Dimension(100, 23));
 			jButton.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
@@ -160,7 +159,7 @@ public class RenameWindow extends JFrame {
 			jButton1.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			jButton1.setName("jButton1"); //$NON-NLS-1$
 			jButton1.setPreferredSize(new Dimension(100, 23));
-			jButton1.setText(Messages.getString("RenameWindow.5")); //$NON-NLS-1$
+			jButton1.setText(Messages.getString("UpdateWindow.6")); //$NON-NLS-1$
 		}
 		return jButton1;
 	}
@@ -173,11 +172,11 @@ public class RenameWindow extends JFrame {
 	public JButton getButtonStop() {
 		if (buttonStop == null) {
 			buttonStop = new JButton();
-			buttonStop.setAction(new StopAction(engine, StopAction.SW_RENAME));
+			buttonStop.setAction(new StopAction(engine, StopAction.SW_UPDATE));
 			buttonStop.setFont(new Font("Dialog", Font.PLAIN, 10)); //$NON-NLS-1$
 			buttonStop.setName("buttonStop"); //$NON-NLS-1$
 			buttonStop.setPreferredSize(new Dimension(100, 23));
-			buttonStop.setText(Messages.getString("RenameWindow.8")); //$NON-NLS-1$
+			buttonStop.setText(Messages.getString("UpdateWindow.9")); //$NON-NLS-1$
 			buttonStop.setVisible(true);
 			buttonStop.setEnabled(false);
 		}

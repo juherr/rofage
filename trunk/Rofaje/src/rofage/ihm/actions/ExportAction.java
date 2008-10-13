@@ -1,4 +1,4 @@
-package rofage.ihm.actions.export;
+package rofage.ihm.actions;
 
 import java.awt.event.ActionEvent;
 
