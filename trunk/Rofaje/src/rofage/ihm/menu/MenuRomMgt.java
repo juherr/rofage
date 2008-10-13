@@ -6,6 +6,7 @@ import javax.swing.JSeparator;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.ExportListAction;
 import rofage.ihm.actions.ImportAction;
 import rofage.ihm.actions.common.ShowCleanAction;
 import rofage.ihm.actions.common.ShowCompressAction;
@@ -96,6 +97,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemExportAll() {
 		if (mItemExportAll==null) {
 			mItemExportAll = new JMenuItem(Messages.getString("ExportListAll"));
+			mItemExportAll.addActionListener(new ExportListAction(engine, ExportListAction.EXPORT_ALL));
 		}
 		return mItemExportAll;
 	}
@@ -103,6 +105,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemExportGoodNamed() {
 		if (mItemExportGoodNamed==null) {
 			mItemExportGoodNamed = new JMenuItem(Messages.getString("ExportListGoodNamed"));
+			mItemExportGoodNamed.addActionListener(new ExportListAction(engine, ExportListAction.EXPORT_GOODNAMED));
 		}
 		return mItemExportGoodNamed;
 	}
@@ -110,6 +113,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemExportBadNamed() {
 		if (mItemExportBadNamed==null) {
 			mItemExportBadNamed = new JMenuItem(Messages.getString("ExportListBadNamed"));
+			mItemExportBadNamed.addActionListener(new ExportListAction(engine, ExportListAction.EXPORT_BADNAMED));
 		}
 		return mItemExportBadNamed;
 	}
@@ -117,6 +121,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemExportMissing() {
 		if (mItemExportMissing==null) {
 			mItemExportMissing = new JMenuItem(Messages.getString("ExportListMissing"));
+			mItemExportMissing.addActionListener(new ExportListAction(engine, ExportListAction.EXPORT_MISSING));
 		}
 		return mItemExportMissing;
 	}
