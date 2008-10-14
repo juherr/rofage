@@ -4,6 +4,7 @@ It's written in Java and aims to be run on any system (windows, linux or mac).
 This program runs with Java 1.6 or later
 
 Changelog in 1.3.2 :
+Added functionality : Send an e-mail to the author
 Added functionality : Report a bug button opens a browser to the relevant web page
 Added functionality : Export list to a file
 Added functionality : Credits for german translation
