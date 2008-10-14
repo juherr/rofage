@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.util.Iterator;
 
 import javax.swing.BorderFactory;
@@ -113,6 +115,8 @@ public class ConfWindow extends JFrame {
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
+		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
+		this.setIconImage(image);
 	}
 
 	/**

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -133,10 +135,14 @@ public class MainWindow extends JFrame {
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("AppTitle") +" "+ Messages.getString("Version")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
+		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
+		this.setIconImage(image);
 		this.setVisible(false);
 		
 		// We add the drop file support
 		new FileDrop(this, true, new RomListener(engine));
+		
+		
 	}
 
 	/**

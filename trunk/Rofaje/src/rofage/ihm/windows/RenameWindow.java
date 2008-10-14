@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -64,6 +66,8 @@ public class RenameWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
 		this.setAlwaysOnTop(true);
+		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
+		this.setIconImage(image);
 	}
 
 	/**
