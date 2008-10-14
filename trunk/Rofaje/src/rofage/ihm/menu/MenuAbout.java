@@ -6,13 +6,15 @@ import javax.swing.JMenuItem;
 import rofage.common.Engine;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.common.ReportBugAction;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowUpdateAction;
 
 @SuppressWarnings("serial")
 public class MenuAbout extends JMenu {
-	private JMenuItem mItemAbout 	= null;
 	private JMenuItem mItemUpdate 	= null;
+	private JMenuItem mItemReportBug= null;
+	private JMenuItem mItemAbout 	= null;
 	
 	private Engine engine;
 	private MainWindow mainWindow	= null;
@@ -24,8 +26,19 @@ public class MenuAbout extends JMenu {
 		setText("?");
 		add(getMItemUpdate());
 		add(getMItemAbout());
+		add(getMItemReportBug());
 	}
 
+	public JMenuItem getMItemReportBug() {
+		if (mItemReportBug==null) {
+			mItemReportBug = new JMenuItem();
+			mItemReportBug.addActionListener(new ReportBugAction());
+			mItemReportBug.setText(Messages.getString("ReportBug")); //$NON-NLS-1$
+			mItemReportBug.setVisible(true);
+		}
+		return mItemReportBug;
+	}
+	
 	public JMenuItem getMItemAbout() {
 		if (mItemAbout==null) {
 			mItemAbout = new JMenuItem();
