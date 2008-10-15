@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 import rofage.ihm.Messages;
@@ -22,6 +23,8 @@ public abstract class Consts {
 	public final static HashMap<String,String> FLAG_NAMES			= new HashMap<String,String>();
 	public static List <String> LANG_NAMES					= new ArrayList<String>();
 	public final static HashMap<String, String> COUNTRY_CODES		= new HashMap<String, String>();
+	
+	public final static Locale localeNL = new Locale("nl", "NL");
 	
 	static {
 		COUNTRY_CODES.put("0", "EU"); 

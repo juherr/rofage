@@ -4,6 +4,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Locale;
 
+import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.common.SerializationHelper;
 
@@ -24,6 +25,8 @@ public class ChangeLanguageListener implements ItemListener {
 				engine.getGlobalConf().setSelectedLocale(Locale.FRENCH);
 			} else if (engine.getMainWindow().getMainMenuBar().getMenuConf().getMLanguage().getMItemLnDe().isSelected()) {
 				engine.getGlobalConf().setSelectedLocale(Locale.GERMAN);
+			} else if (engine.getMainWindow().getMainMenuBar().getMenuConf().getMLanguage().getMItemLnNe().isSelected()) {
+				engine.getGlobalConf().setSelectedLocale(Consts.localeNL);
 			}
 			Locale.setDefault(engine.getGlobalConf().getSelectedLocale());
 			SerializationHelper.saveGlobalConfiguration(engine.getGlobalConf());
