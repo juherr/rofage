@@ -6,6 +6,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JRadioButtonMenuItem;
 
+import rofage.common.Consts;
 import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.ChangeLanguageListener;
@@ -18,6 +19,7 @@ public class MenuLanguage extends JMenu {
 	private JRadioButtonMenuItem mItemLnFr 	= null;
 	private JRadioButtonMenuItem mItemLnEn 	= null;
 	private JRadioButtonMenuItem mItemLnDe 	= null;
+	private JRadioButtonMenuItem mItemLnNe	= null;
 
 	public MenuLanguage (Engine engine) {
 		this.engine = engine;
@@ -26,11 +28,12 @@ public class MenuLanguage extends JMenu {
 		add(getMItemLnEn());
 		add(getMItemLnFr());
 		add(getMItemLnDe());
+		add(getMItemLnNe());
 		ButtonGroup languageGroup = new ButtonGroup();
 		languageGroup.add(getMItemLnEn());
 		languageGroup.add(getMItemLnFr());
 		languageGroup.add(getMItemLnDe());
-		
+		languageGroup.add(getMItemLnNe());
 	}
 
 	public JRadioButtonMenuItem getMItemLnEn() {
@@ -64,5 +67,16 @@ public class MenuLanguage extends JMenu {
 			mItemLnDe.setVisible(true);
 		}
 		return mItemLnDe;
+	}
+	
+	public JRadioButtonMenuItem getMItemLnNe() {
+		if (mItemLnNe==null) {
+			mItemLnNe = new JRadioButtonMenuItem ();
+			mItemLnNe.setText(Messages.getString("Consts.79")); //$NON-NLS-1$
+			if (engine.getGlobalConf().getSelectedLocale()==Consts.localeNL) mItemLnNe.setSelected(true);
+			mItemLnNe.addItemListener(new ChangeLanguageListener(engine));
+			mItemLnNe.setVisible(true);
+		}
+		return mItemLnNe;
 	}
 }
