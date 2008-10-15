@@ -4,6 +4,8 @@ It's written in Java and aims to be run on any system (windows, linux or mac).
 This program runs with Java 1.6 or later
 
 Changelog in 1.3.2 :
+Added functionality : Add an overall indicator while checking images
+Added functionality : Add version number to the log file (start line)
 Added functionality : Redirecting standard output to RoFage.log 
 Added functionality : Dutch translation by Maikel Steneker
 Added functionality : Changing of the default Java icon

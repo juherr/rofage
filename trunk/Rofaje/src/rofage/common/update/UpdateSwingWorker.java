@@ -83,8 +83,9 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 		Collection<Game> colGames = engine.getGameDB().getGameCollections().get(conf.getConfName()).values();
 		Iterator<Game> iterGames = colGames.iterator();
 
+		int overallProgress = 0;
 		while (iterGames.hasNext() && !stopAction) {
-			setProgress(0);
+			setProgress(overallProgress*100/colGames.size());
 			Game currentGame = iterGames.next();
 			
 			checkAndDownloadFile(imageFolder, GameDisplayHelper.constructFileName(currentGame, URLToolkit.TYPE_IMAGE_1), 
@@ -96,7 +97,10 @@ public class UpdateSwingWorker extends DownloadSwingWorker {
 				checkAndDownloadFile(iconFolder, GameDisplayHelper.constructFileName(currentGame, URLToolkit.TYPE_ICON), 
 						currentGame, URLToolkit.TYPE_ICON, conf.getIcoUrl());
 			}
+			overallProgress++;
 		}
+		setProgress(100);
+		publish("OK");
 	}
 	
 	/**

@@ -30,6 +30,8 @@ public abstract class DownloadSwingWorker extends StoppableSwingWorker<Integer, 
 	private JProgressBar jProgressBar;
 	/** JTextArea where the publish text will be displayed */
 	private JTextArea jTextArea;
+	/** Internal constant used to indicate whether we have to check the CRC for images */
+	private static boolean checkCRC = true;
 	
 	public DownloadSwingWorker (Engine engine, JProgressBar jProgressBar, JTextArea jTextArea) {
 		super();
@@ -75,26 +77,30 @@ public abstract class DownloadSwingWorker extends StoppableSwingWorker<Integer, 
 		if (!file.exists()) {
 			downloadFile = true;
 		} else {
-			// The file doesn't exist, we check its CRC
-			// First we calculate the CRC of the file located on the filesystel
-			String physicalCRC = FileToolkit.getCRC32(fullPath);
-			// Then we retrieve the crc in the game
-			String dBCRC = "";
-			switch (type) {
-				case URLToolkit.TYPE_ICON : 
-					dBCRC = game.getIcoCrc();
-					break;
-				case URLToolkit.TYPE_IMAGE_1 :
-					dBCRC = game.getImage1crc();
-					break;
-				case URLToolkit.TYPE_IMAGE_2 :
-					dBCRC = game.getImage2crc();
-					break;
-			}
-			
-			// We check whether we have the good file locally
-			if (!physicalCRC.equalsIgnoreCase(dBCRC)) {
-				downloadFile = true;
+			if (checkCRC) {
+				// The file doesn't exist, we check its CRC
+				// First we calculate the CRC of the file located on the file system
+				String physicalCRC = FileToolkit.getCRC32(fullPath);
+				// Then we retrieve the CRC in the game
+				String dBCRC = "";
+				switch (type) {
+					case URLToolkit.TYPE_ICON : 
+						dBCRC = game.getIcoCrc();
+						break;
+					case URLToolkit.TYPE_IMAGE_1 :
+						dBCRC = game.getImage1crc();
+						break;
+					case URLToolkit.TYPE_IMAGE_2 :
+						dBCRC = game.getImage2crc();
+						break;
+				}
+				
+				// We check whether we have the good file locally
+				if (!physicalCRC.equalsIgnoreCase(dBCRC)) {
+					downloadFile = true;
+				}
+			} else {
+				downloadFile = false;
 			}
 		}
 		
