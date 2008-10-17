@@ -127,9 +127,9 @@ public abstract class FileToolkit {
 	 */
 	public static void moveFile (File source, String destPath) {
 		File destination = new File (destPath);
+        // We try with renameTo
+        boolean result = source.renameTo(destination);
         if( !destination.exists() ) {
-            // We try with renameTo
-            boolean result = source.renameTo(destination);
             if( !result ) {
                 // We try to copy
                 result = true;
