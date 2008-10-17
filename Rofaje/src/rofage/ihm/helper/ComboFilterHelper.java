@@ -26,9 +26,12 @@ public abstract class ComboFilterHelper {
 						
 			while (iterGames.hasNext()) {
 				Game game = iterGames.next();
-				int size = Integer.parseInt(game.getRomSize());
-				if (!treeSizes.contains(size)) {
-					treeSizes.add(size);
+				String romSize = game.getRomSize();
+				if (romSize!=null) {
+					int size = Integer.parseInt(romSize);
+					if (!treeSizes.contains(size)) {
+						treeSizes.add(size);
+					}
 				}
 			}
 			// Now we display the treeset
