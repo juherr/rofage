@@ -68,6 +68,7 @@ public abstract class GameDisplayHelper {
 		if (game.getCrc()!=null) pattern = pattern.replace("%c", game.getCrc());
 		if (game.getLanguage()!=null) pattern = pattern.replace("%m", getMulti(game));
 		if (game.getLocation()!=null) pattern = pattern.replace("%o", getCountryCode(game));
+		if (game.getComment()!=null) pattern = pattern.replace("%e", game.getComment());
 		
 		return pattern.trim();
 	}
