@@ -14,6 +14,7 @@ import rofage.common.object.Game;
 import rofage.common.update.UpdateSingleImageSwingWorker;
 import rofage.common.url.URLToolkit;
 import rofage.ihm.GameListTableModel;
+import rofage.ihm.Messages;
 import rofage.ihm.PanelGameInfos;
 import rofage.ihm.PanelRomHeader;
 import rofage.ihm.helper.IconHelper;
@@ -70,7 +71,13 @@ public class GameListSelectionListener implements ListSelectionListener {
 				// We update the game infos
 				PanelGameInfos p = engine.getMainWindow().getPanelGameInfos();
 				p.getLabelReleaseNb().setText(game.getReleaseNb());
-				p.getLabelSize().setText( Integer.parseInt(game.getRomSize())/(1024*1024)+ " MB");
+				// The rom size may not be filled
+				String romSize = game.getRomSize();
+				if (romSize!=null) {
+					p.getLabelSize().setText( Integer.parseInt(game.getRomSize())/(1024*1024)+ " MB");
+				} else {
+					p.getLabelSize().setText(Messages.getString("Unknown"));
+				}
 				p.getLabelCRC().setText(game.getCrc().toUpperCase());
 				p.getLabelOrigin().setText(GameDisplayHelper.getLocation(game));
 				p.getLabelLanguage().setText(GameDisplayHelper.getLanguage(game));
