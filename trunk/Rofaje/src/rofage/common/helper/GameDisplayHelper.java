@@ -53,21 +53,21 @@ public abstract class GameDisplayHelper {
 	public static String buildTitle (Game game, String pattern, Configuration conf) {
 		// The release nb may be based on different fields
 		if (DatParser.XML_NODE_COMMENT.equals(conf.getReleaseNbField())) {
-			pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getComment()));
+			pattern = pattern.replace("%u", buildFormattedReleaseNb(game.getComment()));
 		} else { // We always keep this as the "default value" (ie the configuration has no value for this attribute)
-			pattern = pattern.replace("%n", buildFormattedReleaseNb(game.getReleaseNb()));
+			pattern = pattern.replace("%u", buildFormattedReleaseNb(game.getReleaseNb()));
 		}
 		
 		// Other fields
-		if (game.getTitle()!=null) pattern = pattern.replace("%t", game.getTitle());
+		if (game.getTitle()!=null) pattern = pattern.replace("%n", game.getTitle());
 		if (game.getRomSize()!=null) pattern = pattern.replace("%s", game.getRomSize());
-		if (game.getLocation()!=null) pattern = pattern.replace("%l", getLocation(game));
+		if (game.getLocation()!=null) pattern = pattern.replace("%o", getLocation(game));
 		if (game.getPublisher()!=null) pattern = pattern.replace("%p", game.getPublisher());
-		if (game.getSourceRom()!=null) pattern = pattern.replace("%S", game.getSourceRom());
-		if (game.getLanguage()!=null) pattern = pattern.replace("%L", getLanguage(game));
+		if (game.getSourceRom()!=null) pattern = pattern.replace("%g", game.getSourceRom());
+		if (game.getLanguage()!=null) pattern = pattern.replace("%a", getLanguage(game));
 		if (game.getCrc()!=null) pattern = pattern.replace("%c", game.getCrc());
-		if (game.getLanguage()!=null) pattern = pattern.replace("%M", getMulti(game));
-		if (game.getLocation()!=null) pattern = pattern.replace("%C", getCountryCode(game));
+		if (game.getLanguage()!=null) pattern = pattern.replace("%m", getMulti(game));
+		if (game.getLocation()!=null) pattern = pattern.replace("%o", getCountryCode(game));
 		
 		return pattern.trim();
 	}
@@ -146,6 +146,12 @@ public abstract class GameDisplayHelper {
 	 * @return
 	 */
 	public static String getLocation (String locationCode) {
-		return Consts.COUNTRY_NAMES.get(locationCode);
+		// TODO check that filering still works
+		// TODO check the population of romsize too !
+		String loc = Consts.COUNTRY_NAMES.get(locationCode);
+		if (loc==null || "".equals(loc.trim())) {
+			loc = "-";
+		}
+		return loc;
 	}
 }

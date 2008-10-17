@@ -68,6 +68,11 @@ public abstract class ConfigurationHelper {
 		conf.setAllowedExtensions(datParser.getAllowedExtensions());
 		conf.setFileName(datParser.getFileName());
 		conf.setIcoUrl(datParser.getIcoUrl());
+		// if a title pattern is mentionned in the dat file, we add it to the conf
+		String datRomTitle = datParser.getRomTitle();
+		if (datRomTitle!=null && !"".equals(datRomTitle)) { 
+			conf.setTitlePattern(datRomTitle);
+		}
 	}
 	
 	/**

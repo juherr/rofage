@@ -50,6 +50,7 @@ public class DatParser {
 	private final static String XML_NODE_SOURCEROM		= "sourceRom";
 	private final static String XML_NODE_TITLE			= "title";
 	private final static String XML_NODE_WIFI			= "wifi";
+	private final static String XML_NODE_ROMTITLE		= "romTitle"; // Default title pattern
 	
 	// Fields that may be used to determine the release nb
 	public final static TreeSet<String> availableReleaseNbFields = new TreeSet<String>();
@@ -134,6 +135,10 @@ public class DatParser {
 		return newDatNode.getChild(XML_NODE_NEWDATURL).getAttributeValue(XML_ATTR_FILENAME);
 	}
 	
+	public String getRomTitle () {
+		return confNode.getChildText(XML_NODE_ROMTITLE);
+	}
+	
 	public List<String> getAllowedExtensions () {
 		List<String> listExtensions = new ArrayList<String>();
 		
@@ -194,7 +199,12 @@ public class DatParser {
 			}
 			game.setDuplicateId(gameNode.getChildText(XML_NODE_DUPLICATEID));
 			
-			gameCollection.put(Integer.parseInt(game.getReleaseNb()), game);
+			int releaseNb = Integer.parseInt(game.getReleaseNb());
+			while (gameCollection.get(releaseNb)!=null) {
+				releaseNb++;
+			}
+			
+			gameCollection.put(releaseNb, game);
 		}
 		
 		return gameCollection;
