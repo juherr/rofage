@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import rofage.common.object.CommunityDB;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
 import rofage.ihm.Messages;
@@ -16,6 +17,10 @@ public abstract class SerializationHelper {
 	
 	public static void saveGlobalConfiguration (GlobalConfiguration conf) {
 		save (conf, GlobalConfiguration.GLOBAL_CONFIG_FILE_NAME);
+	}
+	
+	public static void saveCommunityDB (CommunityDB db) {
+		save (db, CommunityDB.DB_FILENAME);
 	}
 	
 	/**
@@ -38,6 +43,10 @@ public abstract class SerializationHelper {
 	 */
 	public static GameDB loadGameDB () {
 		return (GameDB) load(GameDB.GAMEDB_FILE_NAME);
+	}
+	
+	public static CommunityDB loadCommunityDB () {
+		return (CommunityDB) load(CommunityDB.DB_FILENAME);
 	}
 	
 	/**

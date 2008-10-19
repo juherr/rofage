@@ -8,12 +8,17 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 
 import rofage.common.clean.CleanSwingWorker;
+import rofage.common.community.SiteConnector;
 import rofage.common.compress.CompressSwingWorker;
 import rofage.common.duplicate.DuplicateSwingWorker;
 import rofage.common.export.ExportSwingWorker;
+import rofage.common.helper.SessionHelper;
+import rofage.common.object.Comment;
+import rofage.common.object.CommunityDB;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
+import rofage.common.object.SiteCommentMessage;
 import rofage.common.rename.RenameSwingWorker;
 import rofage.common.scan.ScanSwingWorker;
 import rofage.common.update.ImportSwingWorker;
@@ -28,6 +33,8 @@ import rofage.ihm.windows.ImportWindow;
 import rofage.ihm.windows.RenameWindow;
 import rofage.ihm.windows.ScanWindow;
 import rofage.ihm.windows.UpdateWindow;
+import rofage.ihm.windows.community.CreateAccntWindow;
+import rofage.ihm.windows.community.LoginWindow;
 import rofage.ihm.windows.conf.ConfWindow;
 
 public class Engine {
@@ -41,9 +48,12 @@ public class Engine {
 	private CompressWindow compressWindow = null;
 	private ImportWindow importWindow 	= null;
 	private DuplicateWindow duplicateWindow = null;
+	private LoginWindow loginWindow		= null;
+	private CreateAccntWindow accntWindow = null;
 	
 	private GlobalConfiguration globalConf = null;
 	private GameDB gameDB = null;
+	private CommunityDB communityDB	= null;
 	
 	private UpdateSwingWorker updateSW 	= null;
 	private ScanSwingWorker scanSW 		= null;
@@ -55,13 +65,18 @@ public class Engine {
 	private DuplicateSwingWorker duplicateSW = null;
 		
 	private boolean confSaved = false;
-	
+		
 	public Engine () {
 		// We try to load the gameDatabase
 		gameDB = SerializationHelper.loadGameDB();
 		if (gameDB == null) {
 			// If the gameDatabase does not exist, we create it
 			gameDB = new GameDB();
+		}
+		// We try to load the communityDB
+		communityDB = SerializationHelper.loadCommunityDB();
+		if (communityDB == null) {
+			communityDB = new CommunityDB();
 		}
 		
 		startupConf();
@@ -114,6 +129,14 @@ public class Engine {
 			compressWindow.dispose();
 			compressWindow = null;
 		}
+		if (loginWindow!=null) {
+			loginWindow.dispose();
+			loginWindow = null;
+		}
+		if (accntWindow!=null) {
+			accntWindow.dispose();
+			accntWindow = null;
+		}
 		Consts.reloadConsts();
 		getMainWindow().setVisible(true);
 		
@@ -124,6 +147,32 @@ public class Engine {
 	 *
 	 */
 	private void startupUpdate () {
+		// We start by synchronising the Average notes
+		if (SessionHelper.isLogged(this)) {
+			// We sync the Average notes
+			SiteCommentMessage siteCommentMsg = SiteConnector.syncAvgNotes(getGlobalConf().getCreds());
+			List<Comment> listComments = siteCommentMsg.getListComments();
+			Iterator<Comment> iterComments = listComments.iterator();
+			communityDB.getAvgNotes().clear();
+			while (iterComments.hasNext()) {
+				Comment comment = iterComments.next();
+				communityDB.getAvgNotes().put(comment.getCrc(), comment.getNote());
+			}
+			
+			// We sync mynotes
+			siteCommentMsg = SiteConnector.syncMyNotes(getGlobalConf().getCreds());
+			listComments = siteCommentMsg.getListComments();
+			iterComments = listComments.iterator();
+			communityDB.getMyNotes().clear();
+			while (iterComments.hasNext()) {
+				Comment comment = iterComments.next();
+				communityDB.getMyNotes().put(comment.getCrc(), comment.getNote());
+			}
+			
+			SerializationHelper.saveCommunityDB(communityDB);
+			siteCommentMsg.display();
+		}
+		
 		// We browse each config file to see if we have to update it
 		// We store each configuration to be update in the List listConfToUpdate
 		List<Configuration> listConfToUpdate = new ArrayList<Configuration>();
@@ -325,5 +374,23 @@ public class Engine {
 			duplicateWindow = new DuplicateWindow(this);
 		}
 		return duplicateWindow;
+	}
+	
+	public LoginWindow getLoginWindow() {
+		if (loginWindow==null) {
+			loginWindow = new LoginWindow(this);
+		}
+		return loginWindow;
+	}
+	
+	public CreateAccntWindow getAccntWindow() {
+		if (accntWindow==null) {
+			accntWindow = new CreateAccntWindow(this);
+		}
+		return accntWindow;
+	}
+
+	public CommunityDB getCommunityDB() {
+		return communityDB;
 	}
 }

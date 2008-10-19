@@ -7,7 +7,7 @@ import javax.swing.JSeparator;
 import rofage.common.Engine;
 import rofage.ihm.MainWindow;
 import rofage.ihm.Messages;
-import rofage.ihm.actions.common.ReportBugAction;
+import rofage.ihm.actions.common.OpenWebLinkAction;
 import rofage.ihm.actions.common.SendMailAction;
 import rofage.ihm.actions.common.ShowAboutAction;
 import rofage.ihm.actions.common.ShowUpdateAction;
@@ -18,6 +18,7 @@ public class MenuAbout extends JMenu {
 	private JMenuItem mItemReportBug= null;
 	private JMenuItem mItemSendMail	= null;
 	private JMenuItem mItemAbout 	= null;
+	private JMenuItem mItemDonate 	= null;
 	
 	private Engine engine;
 	private MainWindow mainWindow	= null;
@@ -30,6 +31,7 @@ public class MenuAbout extends JMenu {
 		add(getMItemUpdate());
 		add(new JSeparator(JSeparator.HORIZONTAL));
 		add(getMItemAbout());
+		add(getMItemDonate());
 		add(new JSeparator(JSeparator.HORIZONTAL));
 		add(getMItemReportBug());
 		add(getMItemSendMail());
@@ -48,11 +50,21 @@ public class MenuAbout extends JMenu {
 	public JMenuItem getMItemReportBug() {
 		if (mItemReportBug==null) {
 			mItemReportBug = new JMenuItem();
-			mItemReportBug.addActionListener(new ReportBugAction());
+			mItemReportBug.addActionListener(new OpenWebLinkAction(OpenWebLinkAction.urlBugReport));
 			mItemReportBug.setText(Messages.getString("ReportBug")); //$NON-NLS-1$
 			mItemReportBug.setVisible(true);
 		}
 		return mItemReportBug;
+	}
+	
+	public JMenuItem getMItemDonate() {
+		if (mItemDonate==null) {
+			mItemDonate = new JMenuItem();
+			mItemDonate.addActionListener(new OpenWebLinkAction(OpenWebLinkAction.urlDonate));
+			mItemDonate.setText(Messages.getString("Donate")); //$NON-NLS-1$
+			mItemDonate.setVisible(true);
+		}
+		return mItemDonate;
 	}
 	
 	public JMenuItem getMItemAbout() {

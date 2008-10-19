@@ -9,7 +9,6 @@ import javax.swing.ListCellRenderer;
 
 import rofage.common.object.GenericDropDownEntry;
 
-@SuppressWarnings("serial")
 public class GenericDropDownEntryRenderer implements ListCellRenderer {
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 	

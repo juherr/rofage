@@ -40,8 +40,7 @@ public abstract class ConfigurationHelper {
 		conf.setImportScan(confWindow.getPanelImport().getCBScan().isSelected());
 		conf.setImportClean(confWindow.getPanelImport().getCBClean().isSelected());
 		conf.setImportCompress(confWindow.getPanelImport().getCBCompress().isSelected());
-		conf.setReleaseNbField((String) confWindow.getComboReleaseNbField().getSelectedItem());
-		
+				
 		// We save the locations code in order
 		ListModel listModel = confWindow.getPanelDuplicate().getJListLocation().getModel();
 		List<String> listLocations = new ArrayList<String>();
@@ -68,6 +67,14 @@ public abstract class ConfigurationHelper {
 		conf.setAllowedExtensions(datParser.getAllowedExtensions());
 		conf.setFileName(datParser.getFileName());
 		conf.setIcoUrl(datParser.getIcoUrl());
+		String size = datParser.getScreenshotHeight();
+		if (size!=null && !"".equals(size)) {
+			conf.setScreenshotHeight(Integer.parseInt(size));
+		}
+		size = datParser.getScreenshotWidth();
+		if (size!=null && !"".equals(size)) {
+			conf.setScreenshotWidth(Integer.parseInt(size));
+		}
 		// if a title pattern is mentionned in the dat file, we add it to the conf
 		String datRomTitle = datParser.getRomTitle();
 		if (datRomTitle!=null && !"".equals(datRomTitle)) { 

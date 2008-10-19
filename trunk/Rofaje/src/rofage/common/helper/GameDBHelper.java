@@ -17,8 +17,6 @@ public abstract class GameDBHelper {
 		// the datParser.retrieveGameCollection returns a hashmap which is converted later
 		// into a TreeMap so the sort is done only once.
 		TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game> (datParser.retrieveGameCollection());
-		// TODO checks if a game is already marked as owned if this is replaced
-		// if so find a good way to keep those datas !
 		engine.getGameDB().getGameCollections().put(datFileName, gameCollection);
 		return gameCollection;
 	}

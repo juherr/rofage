@@ -14,7 +14,6 @@ import rofage.common.object.Game;
 import rofage.common.update.UpdateSingleImageSwingWorker;
 import rofage.common.url.URLToolkit;
 import rofage.ihm.GameListTableModel;
-import rofage.ihm.Messages;
 import rofage.ihm.PanelGameInfos;
 import rofage.ihm.PanelRomHeader;
 import rofage.ihm.helper.IconHelper;
@@ -37,8 +36,8 @@ public class GameListSelectionListener implements ListSelectionListener {
 			if (conf.isInAppUpdate() && index!=-1) {
 				// Does the image files exist ?
 				String folderPath = Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator;
-				File image1 = new File (folderPath+game.getReleaseNb()+"a.png");
-				File image2 = new File (folderPath+game.getReleaseNb()+"b.png");
+				File image1 = new File (folderPath+game.getImageNb()+"a.png");
+				File image2 = new File (folderPath+game.getImageNb()+"b.png");
 				File icon = new File (folderPath+Consts.ICO_FOLDER+File.separator+GameDisplayHelper.constructFileName(game, URLToolkit.TYPE_ICON));
 				
 				if (!image1.exists()) {
@@ -65,19 +64,13 @@ public class GameListSelectionListener implements ListSelectionListener {
 			if (index!=-1) {
 			
 				// We update the images
-				engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"a.png"); //$NON-NLS-1$
-				engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"b.png"); //$NON-NLS-1$
+				engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getImageNb()+"a.png"); //$NON-NLS-1$
+				engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getImageNb()+"b.png"); //$NON-NLS-1$
 				
 				// We update the game infos
 				PanelGameInfos p = engine.getMainWindow().getPanelGameInfos();
 				p.getLabelReleaseNb().setText(game.getReleaseNb());
-				// The rom size may not be filled
-				String romSize = game.getRomSize();
-				if (romSize!=null) {
-					p.getLabelSize().setText( Integer.parseInt(game.getRomSize())/(1024*1024)+ " MB");
-				} else {
-					p.getLabelSize().setText(Messages.getString("Unknown"));
-				}
+				p.getLabelSize().setText(GameDisplayHelper.buildRomSize(game.getRomSize()));
 				p.getLabelCRC().setText(game.getCrc().toUpperCase());
 				p.getLabelOrigin().setText(GameDisplayHelper.getLocation(game));
 				p.getLabelLanguage().setText(GameDisplayHelper.getLanguage(game));
@@ -93,6 +86,7 @@ public class GameListSelectionListener implements ListSelectionListener {
 						p.getLabelWifi().setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_wifi24.png")));
 					}
 				}
+				p.getLabelComment().setText(game.getComment());
 				p.updateUI();			
 				
 				// We update the rom header panel
@@ -101,6 +95,8 @@ public class GameListSelectionListener implements ListSelectionListener {
 				header.getLabelTitle().setIcon(IconHelper.getRomIcon(game, conf));
 				header.setLabelIconCleanDump(IconHelper.getCleanDumpIcon(game));
 				header.getLabelIconWifi().setIcon(IconHelper.getWifiIcon(game));
+				header.getPanelAvgNote().setAvgNote(engine.getCommunityDB().getAvgNotes().get(game.getCrc()));
+				header.getPanelMyNote().setAvgNote(engine.getCommunityDB().getMyNotes().get(game.getCrc()));
 				header.updateUI();
 			}
 		}

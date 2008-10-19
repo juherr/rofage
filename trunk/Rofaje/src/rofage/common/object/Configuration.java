@@ -3,8 +3,6 @@ package rofage.common.object;
 import java.io.Serializable;
 import java.util.List;
 
-import rofage.common.parser.DatParser;
-
 /**
  * User shall be able to modify the default configuration
  * and save his preferences
@@ -18,7 +16,6 @@ public class Configuration implements Serializable {
 	private String romFolder = "";
 	private String romFolderMove = "";
 	private String titlePattern = DEFAULT_TITLEPATTERN;
-	private String releaseNbField = DatParser.XML_NODE_RELEASENB;
 	private boolean moveUnknownRoms = false;
 	private boolean updateAtStartup = false;
 	private boolean renameInside = false;
@@ -42,6 +39,8 @@ public class Configuration implements Serializable {
 	private String newVersionUrl; // URL to check the latest version
 	private String fileName; // Filename of the dat file
 	private String icoUrl; // URL to download the icons
+	private int screenshotHeight = 384; // Height of the screenshot (default value)
+	private int screenshotWidth = 256; // Width of the screenshot (default value)
 	
 	private List<String> allowedExtensions;
 
@@ -189,11 +188,17 @@ public class Configuration implements Serializable {
 	public void setImportCompress(boolean importCompress) {
 		this.importCompress = importCompress;
 	}
-	public String getReleaseNbField() {
-		return releaseNbField;
+	public int getScreenshotHeight() {
+		return screenshotHeight;
 	}
-	public void setReleaseNbField(String releaseNbField) {
-		this.releaseNbField = releaseNbField;
+	public int getScreenshotWidth() {
+		return screenshotWidth;
+	}
+	public void setScreenshotHeight(int screenshotHeight) {
+		this.screenshotHeight = screenshotHeight;
+	}
+	public void setScreenshotWidth(int screenshotWidth) {
+		this.screenshotWidth = screenshotWidth;
 	}
 	
 }

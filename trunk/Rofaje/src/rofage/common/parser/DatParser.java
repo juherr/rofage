@@ -51,6 +51,8 @@ public class DatParser {
 	private final static String XML_NODE_TITLE			= "title";
 	private final static String XML_NODE_WIFI			= "wifi";
 	private final static String XML_NODE_ROMTITLE		= "romTitle"; // Default title pattern
+	private final static String XML_NODE_SCREENSHOTW	= "screenshotsWidth";
+	private final static String XML_NODE_SCREENSHOTH	= "screenshotsHeight";
 	
 	// Fields that may be used to determine the release nb
 	public final static TreeSet<String> availableReleaseNbFields = new TreeSet<String>();
@@ -125,6 +127,15 @@ public class DatParser {
 	
 	public String getIcoUrl () {
 		return newDatNode.getChildText(XML_NODE_ICONURL);
+	}
+	
+	public String getScreenshotHeight () {
+		return confNode.getChildText(XML_NODE_SCREENSHOTH);
+	}
+	
+	public String getScreenshotWidth () {
+		
+		return confNode.getChildText(XML_NODE_SCREENSHOTW);
 	}
 	
 	public String getNewDatVersionUrl () {

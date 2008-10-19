@@ -319,7 +319,14 @@ public class MainWindow extends JFrame {
 	public JPanelImage getJPanelImage1() {
 		if (jPanelImage1 == null) {
 			jPanelImage1 = new JPanelImage();
-			jPanelImage1.setPreferredSize(new Dimension(256, 384));
+			Configuration conf = engine.getGlobalConf().getSelectedConf();
+			int width = 0;
+			int height = 0;
+			if (conf!=null) {
+				width = conf.getScreenshotWidth();
+				height = conf.getScreenshotHeight();
+			} 
+			jPanelImage1.setPreferredSize(new Dimension(width, height));
 		}
 		return jPanelImage1;
 	}
@@ -327,7 +334,14 @@ public class MainWindow extends JFrame {
 	public JPanelImage getJPanelImage2() {
 		if (jPanelImage2 == null) {
 			jPanelImage2 = new JPanelImage();
-			jPanelImage2.setPreferredSize(new Dimension(256, 384));
+			Configuration conf = engine.getGlobalConf().getSelectedConf();
+			int width = 0;
+			int height = 0;
+			if (conf!=null) {
+				width = conf.getScreenshotWidth();
+				height = conf.getScreenshotHeight();
+			} 
+			jPanelImage2.setPreferredSize(new Dimension(width, height));
 		}
 		return jPanelImage2;
 	}
@@ -509,6 +523,7 @@ public class MainWindow extends JFrame {
 			labelStatusIconNotOwned = new JLabel();
 			labelStatusIconNotOwned.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/no_rom.png")));
 			labelStatusIconNotOwned.setText("0");
+			labelStatusIconNotOwned.setToolTipText(Messages.getString("IconHelper.11"));
 			labelStatusIconNotOwned.setVisible(true);
 		}
 		return labelStatusIconNotOwned;
@@ -518,6 +533,7 @@ public class MainWindow extends JFrame {
 		if (labelStatusIconClean==null) {
 			labelStatusIconClean = new JLabel();
 			labelStatusIconClean.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_clean.png")));
+			labelStatusIconClean.setToolTipText(Messages.getString("IconHelper.17"));
 			labelStatusIconClean.setText("0");
 			labelStatusIconClean.setVisible(true);
 		}
@@ -528,6 +544,7 @@ public class MainWindow extends JFrame {
 		if (labelStatusIconNotClean==null) {
 			labelStatusIconNotClean = new JLabel();
 			labelStatusIconNotClean.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_notclean.png")));
+			labelStatusIconNotClean.setToolTipText(Messages.getString("IconHelper.15"));
 			labelStatusIconNotClean.setText("0");
 			labelStatusIconNotClean.setVisible(true);
 		}
@@ -541,6 +558,7 @@ public class MainWindow extends JFrame {
 			labelStatusIconOwned = new JLabel();
 			labelStatusIconOwned.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom.png")));
 			labelStatusIconOwned.setText("0");
+			labelStatusIconOwned.setToolTipText(Messages.getString("IconHelper.7"));
 			labelStatusIconOwned.setVisible(true);
 		}
 		return labelStatusIconOwned;
@@ -551,6 +569,7 @@ public class MainWindow extends JFrame {
 			labelStatusIconBadNamed = new JLabel();
 			labelStatusIconBadNamed.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/rom_badname.png")));
 			labelStatusIconBadNamed.setText("0");
+			labelStatusIconBadNamed.setToolTipText(Messages.getString("IconHelper.9"));
 			labelStatusIconBadNamed.setVisible(true);
 		}
 		return labelStatusIconBadNamed;
@@ -633,7 +652,7 @@ public class MainWindow extends JFrame {
 
 	public PanelRomHeader getPanelRomHeader() {
 		if (panelRomHeader==null) {
-			panelRomHeader = new PanelRomHeader();
+			panelRomHeader = new PanelRomHeader(engine);
 			panelRomHeader.setMaximumSize(new Dimension(jContentPane.getWidth(), 50));
 			panelRomHeader.setMinimumSize(new Dimension(jContentPane.getWidth(), 50));
 			panelRomHeader.setVisible(true);

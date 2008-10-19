@@ -1,10 +1,12 @@
 package rofage.common.helper;
 
+import java.text.DecimalFormat;
+
 import rofage.common.Consts;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
-import rofage.common.parser.DatParser;
 import rofage.common.url.URLToolkit;
+import rofage.ihm.Messages;
 
 public abstract class GameDisplayHelper {
 
@@ -15,7 +17,7 @@ public abstract class GameDisplayHelper {
 	 * @return
 	 */
 	public static String constructFileName (Game game, int type) {
-		StringBuffer str = new StringBuffer(game.getReleaseNb());
+		StringBuffer str = new StringBuffer(game.getImageNb());
 		switch (type) {
 			case URLToolkit.TYPE_ICON : 
 				// The icon name has 4 digits
@@ -51,12 +53,7 @@ public abstract class GameDisplayHelper {
 	 * @return new Title
 	 */
 	public static String buildTitle (Game game, String pattern, Configuration conf) {
-		// The release nb may be based on different fields
-		if (DatParser.XML_NODE_COMMENT.equals(conf.getReleaseNbField())) {
-			pattern = pattern.replace("%u", buildFormattedReleaseNb(game.getComment()));
-		} else { // We always keep this as the "default value" (ie the configuration has no value for this attribute)
-			pattern = pattern.replace("%u", buildFormattedReleaseNb(game.getReleaseNb()));
-		}
+		pattern = pattern.replace("%u", buildFormattedReleaseNb(game.getReleaseNb()));
 		
 		// Other fields
 		if (game.getTitle()!=null) pattern = pattern.replace("%n", game.getTitle());
@@ -74,7 +71,11 @@ public abstract class GameDisplayHelper {
 	}
 	
 	private static String getCountryCode (Game game) {
-		return Consts.COUNTRY_CODES.get(game.getLocation());
+		String countryCode = Consts.COUNTRY_CODES.get(game.getLocation());
+		if (countryCode==null) {
+			countryCode = "XX";
+		}
+		return countryCode;
 	}
 	
 	private static String buildFormattedReleaseNb (String rawReleaseNb) {
@@ -147,12 +148,33 @@ public abstract class GameDisplayHelper {
 	 * @return
 	 */
 	public static String getLocation (String locationCode) {
-		// TODO check that filering still works
-		// TODO check the population of romsize too !
 		String loc = Consts.COUNTRY_NAMES.get(locationCode);
 		if (loc==null || "".equals(loc.trim())) {
-			loc = "-";
+			loc = Messages.getString("Unknown");
 		}
 		return loc;
+	}
+	
+	/**
+	 * Construct the full size String in a human understandable language
+	 * It is either returned in KB or MB depending on the size
+	 * If a romSize is null, we return the string "unknown" (localized)
+	 * @param romSize
+	 * @return
+	 */
+	public static String buildRomSize (String romSize) {
+		if (romSize!=null) {
+			DecimalFormat df = (DecimalFormat)DecimalFormat.getNumberInstance();
+			df.applyPattern("0.#");
+			Float realSize = new Float(romSize);
+			realSize = realSize/1024; // Some older dat with old roms have very small values
+			if (realSize.intValue()<1024) {
+				return df.format(realSize)+ " KB";
+			} else {
+				return df.format(realSize/1024)+ " MB";
+			}
+		} else {
+			return Messages.getString("Unknown");
+		}
 	}
 }

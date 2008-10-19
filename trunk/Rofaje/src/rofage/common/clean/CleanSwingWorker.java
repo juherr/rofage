@@ -62,7 +62,6 @@ public class CleanSwingWorker extends StoppableSwingWorker<Integer, String> {
 		
 		// if the list is not defined, it means we perform a full clean up
 		// for this configuration
-		// TODO fix import 
 		if (listArchivesToCleanUp==null) {
 			generateCleanList(gameCollection.values()); // We perform a full clean up
 		} else {

@@ -325,7 +325,7 @@ public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 		File topDirectory = new File(selConf.getRomFolder());
 		
 		if (!topDirectory.isDirectory()) {
-			JOptionPane.showMessageDialog(engine.getScanWindow(), Messages.getString("ScanSwingWorker.4"), Messages.getString("ScanSwingWorker.5"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+			JOptionPane.showMessageDialog(engine.getScanWindow(), Messages.getString("ScanSwingWorker.4"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			publish (Messages.getString("ScanSwingWorker.6")); //$NON-NLS-1$
 		} else {
 			// We count the total number of files

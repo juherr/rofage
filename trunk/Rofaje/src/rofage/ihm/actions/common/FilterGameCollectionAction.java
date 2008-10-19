@@ -11,7 +11,6 @@ import rofage.common.Engine;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Game;
 import rofage.common.object.GenericDropDownEntry;
-import rofage.common.parser.DatParser;
 import rofage.ihm.GameListTableModel;
 import rofage.ihm.MainWindow;
 
@@ -103,14 +102,8 @@ public class FilterGameCollectionAction extends AbstractAction {
 			if (!showDemo) {
 				// A demo can be known as demo if its genre is Demo if release numbers are base on the releaseNb field
 				// Otherwise (comment field) we test "xxxx"
-				if (DatParser.XML_NODE_COMMENT.equals(engine.getGlobalConf().getSelectedConf().getReleaseNbField())) {
-					if ("xxxx".equals(game.getComment())) {
-						mayAdd = false;
-					}
-				} else {
-					if (game.getGenre().equals("Demo")) {
-						mayAdd = false;
-					}
+				if (game.getGenre().equals("Demo")) {
+					mayAdd = false;
 				}
 			}
 			if (!showUnclean) {

@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import rofage.common.Consts;
+import rofage.common.Engine;
 import rofage.common.helper.GameDisplayHelper;
 import rofage.common.object.Configuration;
 import rofage.common.object.Game;
@@ -34,6 +35,14 @@ public abstract class IconHelper {
 		if (Consts.FLAG_NAMES.containsValue(location))
 			return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/"+location.toLowerCase()+".png")); //$NON-NLS-1$ //$NON-NLS-2$
 		return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/flags/xx.png")); //$NON-NLS-1$
+	}
+	
+	public static ImageIcon getOnlineIcon (Engine engine) {
+		if (engine.getGlobalConf().getCreds()!=null) { 
+			return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/online.png"));
+		} else {
+			return new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/offline.png"));
+		}
 	}
 	
 	public static JLabel getGotRomIcon (Game game) {
