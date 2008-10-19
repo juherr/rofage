@@ -3,6 +3,21 @@ It's written in Java and aims to be run on any system (windows, linux or mac).
 
 This program runs with Java 1.6 or later
 
+Changelog in 2.0 :
+WARNING : If upgrading from a previous version, the file gameDB and globalConf must be deleted
+
+Added functionality : Community
+Added functionality : Add tooltips on the status bar
+Added functionality : The dropdown which allows to choose the "releasenumber" field has been removed. Used the classic title pattern instead
+Added functionality : use standard naming rules. Import default title pattern of the dat. The comment field has been added
+
+Bugfix : Improved compatibility with DATS!!
+Bugfix : import the screenshots size and take the size into consideration while displaying screenshots => Screenshots shouldn't be truncated now
+Bugfix : Displays the romsize in KB for it's less than 1MB and displays it as a float and not an int
+Bugfix : Import correctly a dat even if there is no rom size mentionned
+Bugfix : Bugfix in renaming file from "Foo" to "foo"
+
+
 Changelog in 1.3.2 :
 Added functionality : Add an overall indicator while checking images
 Added functionality : Add version number to the log file (start line)

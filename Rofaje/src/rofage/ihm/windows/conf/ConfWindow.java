@@ -27,7 +27,6 @@ import javax.swing.JTextPane;
 
 import rofage.common.Engine;
 import rofage.common.object.Configuration;
-import rofage.common.parser.DatParser;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.HideAction;
 import rofage.ihm.actions.conf.AddConfAction;
@@ -61,7 +60,6 @@ public class ConfWindow extends JFrame {
 	private JLabel labelUnknownRomFolder = null;
 	private JLabel labelTitlePattern = null;
 	private JLabel labelRenameInside = null;
-	private JLabel labelReleaseNbField = null;
 		
 	private JTextField fieldRomFolder = null;
 	private JTextField fieldUnknownRomFolder = null;
@@ -84,7 +82,6 @@ public class ConfWindow extends JFrame {
 	private JTextPane textPaneTitlePattern = null;
 	
 	private JComboBox comboConf = null;
-	private JComboBox comboReleaseNbField = null;
 	
 	private JSlider sliderCompress = null;
 	
@@ -232,13 +229,8 @@ public class ConfWindow extends JFrame {
 			hBox2.add(getCBRenameInside());
 			hBox2.add(getLabelRenameInside());
 			
-			Box hBoxReleaseNb = Box.createHorizontalBox();
-			hBoxReleaseNb.add(getLabelReleaseNbField());
-			hBoxReleaseNb.add(getComboReleaseNbField());
-			
 			vBox.add(hBox);
 			vBox.add(getTextPaneTitlePattern());
-			vBox.add(hBoxReleaseNb);
 			vBox.add(hBox2);
 			panelTitlePattern.add(vBox);
 			panelTitlePattern.setVisible(true);
@@ -337,14 +329,6 @@ public class ConfWindow extends JFrame {
 		return labelRenameInside;
 	}
 	
-	private JLabel getLabelReleaseNbField () {
-		if (labelReleaseNbField==null) {
-			labelReleaseNbField = new JLabel();
-			labelReleaseNbField.setText(Messages.getString("ConfWindow.19"));
-		}
-		return labelReleaseNbField;
-	}
-	
 	public JTextField getFieldRomFolder() {
 		if (fieldRomFolder==null) {
 			fieldRomFolder = new JTextField();
@@ -422,7 +406,7 @@ public class ConfWindow extends JFrame {
 		if (buttonCancel==null) {
 			buttonCancel = new JButton();
 			buttonCancel.addActionListener(new HideAction(this));
-			buttonCancel.setText(Messages.getString("ConfWindow.14")); //$NON-NLS-1$
+			buttonCancel.setText(Messages.getString("Cancel")); //$NON-NLS-1$
 			buttonCancel.setVisible(true);
 		}
 		return buttonCancel;
@@ -542,23 +526,6 @@ public class ConfWindow extends JFrame {
 			comboConf.setVisible(true);
 		}
 		return comboConf;
-	}
-	
-	public JComboBox getComboReleaseNbField () {
-		if (comboReleaseNbField==null) {
-			comboReleaseNbField = new JComboBox();
-			// We add the items into the list
-			Iterator<String> iterFieldNames = DatParser.availableReleaseNbFields.iterator();
-			while (iterFieldNames.hasNext()) {
-				comboReleaseNbField.addItem(iterFieldNames.next());
-			}
-			// We select the good item
-			if (engine.getGlobalConf().getSelectedConf()!=null) {
-				comboReleaseNbField.setSelectedItem(engine.getGlobalConf().getSelectedConf().getReleaseNbField());
-			}
-			comboReleaseNbField.setVisible(true);
-		}
-		return comboReleaseNbField;
 	}
 	
 	public JSlider getCompressSlider () {

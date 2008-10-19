@@ -18,7 +18,7 @@ import rofage.ihm.helper.IconHelper;
 public class GameListTableModel extends AbstractTableModel implements TableModel {
 	private TreeMap<Integer, Game> gameCollection = new TreeMap<Integer, Game>();
 	private List<Game> tableDatas = new ArrayList<Game>(gameCollection.values());
-	private String[] columnNames = {"L", "R", "I", "C", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	private String[] columnNames = {"L", "O", "M", "R", "I", "C", Messages.getString("GameListTableModel.3")}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	private String titlePattern;
 	private Engine engine;
 	
@@ -56,13 +56,19 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 				// Location
 				return IconHelper.getLocationIcon(game.getLocation());
 			} else if (col==1) {
-				return IconHelper.getGotRomIcon(game);
+				// Average Note
+				return engine.getCommunityDB().getAvgNotes().get(game.getCrc());
 			} else if (col==2) {
+				//My note
+				return engine.getCommunityDB().getMyNotes().get(game.getCrc());
+			} else if (col==3) {
+				return IconHelper.getGotRomIcon(game);
+			} else if (col==4) {
 				// We show the icon if available
 				return IconHelper.getRomIcon(game, engine.getGlobalConf().getSelectedConf());
-			} else if (col==3) {
+			} else if (col==5) {
 				return IconHelper.getCleanDumpIcon(game);
-			} else if (col==4) {
+			} else if (col==6) {
 				return GameDisplayHelper.buildTitle(game, titlePattern, engine.getGlobalConf().getSelectedConf());
 			}
 		}
@@ -70,12 +76,15 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	}
 	
 	public Class<?> getColumnClass(int col) {
-		if (col==0 || col==2) {
-			return ImageIcon.class;
-		} else if (col==1 || col==3) {
-			return JLabel.class;
+		switch (col) {
+			case 0 : return ImageIcon.class;
+			//case 1 : return Float.class;
+			//case 2 : return Float.class;
+			case 3 : return JLabel.class;
+			case 4 : return ImageIcon.class;
+			case 5 : return JLabel.class;
+			default : return String.class;
 		}
-		else return String.class;
     }
 
 	

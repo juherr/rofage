@@ -19,10 +19,12 @@ public class PanelGameInfos extends JPanel {
 	private JLabel labelPublisher	= null;
 	private JLabel labelGenre 		= null;
 	private JLabel labelGroup 		= null;
-	private JLabel labelWifi 	= null;
+	private JLabel labelWifi 		= null;
+	private JLabel labelComment		= null;
 	
 	public PanelGameInfos () {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
+		// Infos Box
 		setBorder(BorderFactory.createTitledBorder(Messages.getString("MainWindow.5"))); //$NON-NLS-1$
 		Box vBox = Box.createVerticalBox();
 		vBox.add(getLabelReleaseNb());
@@ -34,6 +36,7 @@ public class PanelGameInfos extends JPanel {
 		vBox.add(getLabelGroup());
 		vBox.add(getLabelGenre());
 		vBox.add(getLabelWifi());
+		vBox.add(getLabelComment());
 		
 		this.add(vBox);
 	}
@@ -108,6 +111,15 @@ public class PanelGameInfos extends JPanel {
 			labelSize.setToolTipText(Messages.getString("PanelGameInfos.17")); //$NON-NLS-1$
 		}
 		return labelSize;
+	}
+	
+	public JLabel getLabelComment() {
+		if (labelComment==null) {
+			labelComment = new JLabel();
+			labelComment.setIcon(new ImageIcon(getClass().getClassLoader().getResource("rofage/ihm/images/comment.png"))); //$NON-NLS-1$
+			labelComment.setToolTipText(Messages.getString("PanelGameInfos.21")); //$NON-NLS-1$
+		}
+		return labelComment;
 	}
 
 	public JLabel getLabelWifi() {

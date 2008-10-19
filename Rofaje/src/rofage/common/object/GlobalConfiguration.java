@@ -27,6 +27,7 @@ public class GlobalConfiguration implements Serializable {
 	 */
 	private HashMap<String, Configuration> mapDatConfigs = null;
 	private Configuration selectedConf = null;
+	private Credentials creds = null;
 	
 	
 	static {
@@ -55,6 +56,14 @@ public class GlobalConfiguration implements Serializable {
 
 	public void setSelectedLocale(Locale selectedLocale) {
 		this.selectedLocale = selectedLocale;
+	}
+
+	public Credentials getCreds() {
+		return creds;
+	}
+
+	public void setCreds(Credentials creds) {
+		this.creds = creds;
 	}
 
 }

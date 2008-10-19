@@ -39,12 +39,8 @@ public abstract class ComboFilterHelper {
 			Iterator<Integer> iterSizes = treeSizes.iterator();
 			while (iterSizes.hasNext()) {
 				int size = iterSizes.next();
-				Float realSize = new Float(size/1024); // Some older dat with old roms have very small values
-				if (realSize.intValue()<1024) {
-					combo.addItem(new GenericDropDownEntry(String.valueOf(size), String.valueOf(realSize)+ " KB"));
-				} else {
-					combo.addItem(new GenericDropDownEntry(String.valueOf(size), String.valueOf(realSize/1024)+ " MB"));
-				}
+				String strRomSize = GameDisplayHelper.buildRomSize(String.valueOf(size));
+				combo.addItem(new GenericDropDownEntry(String.valueOf(size), strRomSize));
 			}
 		}
 	}

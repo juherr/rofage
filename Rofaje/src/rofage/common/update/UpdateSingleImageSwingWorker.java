@@ -63,9 +63,9 @@ public class UpdateSingleImageSwingWorker extends DownloadSwingWorker {
 		Game selGame = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
 		if (game.getTitle().equals(selGame.getTitle())) {
 			if (type==URLToolkit.TYPE_IMAGE_1) {
-				engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"a.png"); //$NON-NLS-1$
+				engine.getMainWindow().getJPanelImage1().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getImageNb()+"a.png"); //$NON-NLS-1$
 			} else if (type==URLToolkit.TYPE_IMAGE_2) {
-				engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getReleaseNb()+"b.png"); //$NON-NLS-1$
+				engine.getMainWindow().getJPanelImage2().loadImage(Consts.HOME_FOLDER+File.separator+conf.getImageFolder()+File.separator+game.getImageNb()+"b.png"); //$NON-NLS-1$
 			}
 			if (type==URLToolkit.TYPE_ICON) {
 				engine.getMainWindow().getPanelRomHeader().getLabelTitle().setIcon(IconHelper.getRomIcon(game, conf));

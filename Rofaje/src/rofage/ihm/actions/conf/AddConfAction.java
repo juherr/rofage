@@ -44,7 +44,7 @@ public class AddConfAction extends AbstractAction {
 			String datFileName = datParser.getDatName();
 			
 			if (engine.getGlobalConf().getMapDatConfigs().containsKey(datFileName)) {
-				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("AddConfAction.4"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
 				// We update the selected conf of the engine
 				Configuration newConfig = ConfigurationHelper.createConfFromDatParser(engine, datParser);
