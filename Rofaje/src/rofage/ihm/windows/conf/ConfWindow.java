@@ -25,6 +25,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import net.java.swingfx.waitwithstyle.InfiniteProgressPanel;
+
 import rofage.common.Engine;
 import rofage.common.object.Configuration;
 import rofage.ihm.Messages;
@@ -87,6 +89,8 @@ public class ConfWindow extends JFrame {
 	
 	private FileChooserFilter xmlFilter = null;
 	
+	private InfiniteProgressPanel progressPanel = new InfiniteProgressPanel();
+	
 	private Engine engine = null;
 
 	/**
@@ -106,6 +110,7 @@ public class ConfWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(550, 400);
+		this.setGlassPane(progressPanel);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("ConfWindow.2")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
@@ -542,5 +547,9 @@ public class ConfWindow extends JFrame {
 			sliderCompress.setVisible(true);
 		}
 		return sliderCompress;
+	}
+
+	public InfiniteProgressPanel getProgressPanel() {
+		return progressPanel;
 	}
 }

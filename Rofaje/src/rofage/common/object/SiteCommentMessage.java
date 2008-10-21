@@ -31,6 +31,9 @@ public class SiteCommentMessage extends SiteMessage {
 		} else {
 			error = true;
 		}
+		if (strs[1].endsWith("\n")) {
+			strs[1] = strs[1].substring(0, strs[1].length()-1);
+		}
 		messageKey = strs [1];
 		
 		// Now we have to deal with the potential comments

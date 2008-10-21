@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import net.iharder.dnd.FileDrop;
+import net.java.swingfx.waitwithstyle.InfiniteProgressPanel;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
 import rofage.common.dnd.RomListener;
@@ -106,6 +107,7 @@ public class MainWindow extends JFrame {
 	
 	private JProgressBar progressBarImage = null;
 	
+	private InfiniteProgressPanel progressPanel = new InfiniteProgressPanel();
 	
 	private JButton buttonFilter = null;
 		
@@ -129,6 +131,7 @@ public class MainWindow extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(1024, 800);
+		this.setGlassPane(progressPanel);
 		this.setJMenuBar(getMainMenuBar());
 		this.setPreferredSize(new Dimension(1024, 800));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -673,5 +676,9 @@ public class MainWindow extends JFrame {
 			mainMenuBar = new MainMenuBar(engine, this);
 		}
 		return mainMenuBar;
+	}
+
+	public InfiniteProgressPanel getProgressPanel() {
+		return progressPanel;
 	}
 }

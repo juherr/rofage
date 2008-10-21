@@ -13,11 +13,14 @@ public class SiteSimpleMessage extends SiteMessage {
 	private String additionalParam = "";
 	
 	public SiteSimpleMessage (String message) {
-		String [] strs = message.split("\\|");
+		String [] strs = message.split(":;:");
 		if (KEY_OK.equals(strs[0])) {
 			error = false;
 		} else {
 			error = true;
+		}
+		if (strs[1].endsWith("\n")) {
+			strs[1] = strs[1].substring(0, strs[1].length()-1);
 		}
 		messageKey = strs [1];
 		

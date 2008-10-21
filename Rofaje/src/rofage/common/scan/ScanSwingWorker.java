@@ -157,8 +157,8 @@ public class ScanSwingWorker extends StoppableSwingWorker<List<Game>, String> {
 		// If it's not a rom we may move this file
 		if (selConf.isMoveUnknownRoms()) {
 			String moveRomFolder = selConf.getRomFolderMove();
-			if (moveRomFolder!=null && !selConf.getRomFolderMove().trim().isEmpty()) {
-				FileToolkit.moveFile(file, moveRomFolder+File.separator+file.getName());
+			if (moveRomFolder!=null && !moveRomFolder.trim().isEmpty()) {
+				FileToolkit.moveFile(file, moveRomFolder+File.separator+file.getName(), engine.getScanWindow());
 			}
 		}
 	}

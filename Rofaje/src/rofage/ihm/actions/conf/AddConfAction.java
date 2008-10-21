@@ -37,43 +37,53 @@ public class AddConfAction extends AbstractAction {
 		int returnVal = engine.getConfWindow().getXMLChooser().showOpenDialog(engine.getConfWindow());
 		
 		if (returnVal==JFileChooser.APPROVE_OPTION) {
-			// When a NEW xml file (dat file) is added we add its configuration to the global conf
-			// First we check whether this config already exist
+			// We have to check that the file exists 
 			File datFile = engine.getConfWindow().getXMLChooser().getSelectedFile();
-			DatParser datParser = new DatParser(datFile.getAbsolutePath());
-			String datFileName = datParser.getDatName();
-			
-			if (engine.getGlobalConf().getMapDatConfigs().containsKey(datFileName)) {
-				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+			if (!datFile.exists()) {
+				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("FileDoesNotExist"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				// We update the selected conf of the engine
-				Configuration newConfig = ConfigurationHelper.createConfFromDatParser(engine, datParser);
-				engine.getGlobalConf().setSelectedConf(newConfig);
-
-//				 We also have to create the related gameDB for this configuration
-				GameDBHelper.createGameCollectionInEngine(engine, datFileName, datParser);				
-				// We add this conf in the combo
-				engine.getConfWindow().getComboConf().addItem(datFileName);
-				// We add this conf in the combo in the main window
-				engine.getMainWindow().getMainMenuBar().getComboConf().addItem(datFileName);
+				engine.getConfWindow().getProgressPanel().start();
 				
-				// We also add this datas in the Jtable of the main window
-				//((GameListTableModel) engine.getMainWindow().getJTable().getModel()).setGameCollectionAndDatas(gameCollection);
+				// When a NEW xml file (dat file) is added we add its configuration to the global conf
+				// First we check whether this config already exist
 				
-				// We show the additional panes (if necessary)
-				engine.getConfWindow().getJTabbedPane().setVisible(true);
-				engine.getConfWindow().getPanelGlobalButtons().setVisible(true);
+				DatParser datParser = new DatParser(datFile.getAbsolutePath());
+				String datFileName = datParser.getDatName();
 				
-				// We also have to show the remove button in any cases
-				engine.getConfWindow().getButtonRemoveConf().setVisible(true);
-				
-				// We select the newly created conf in the combo box
-				engine.getConfWindow().getComboConf().setSelectedItem(datFileName);
-				engine.getMainWindow().getMainMenuBar().getComboConf().setSelectedItem(datFileName);
-				
-				// We update the UI
-				engine.getConfWindow().update(engine.getConfWindow().getGraphics());
-				engine.getMainWindow().update(engine.getMainWindow().getGraphics());
+				if (engine.getGlobalConf().getMapDatConfigs().containsKey(datFileName)) {
+					engine.getConfWindow().getProgressPanel().stop();
+					JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+				} else {
+					// We update the selected conf of the engine
+					Configuration newConfig = ConfigurationHelper.createConfFromDatParser(engine, datParser);
+					engine.getGlobalConf().setSelectedConf(newConfig);
+	
+	//				 We also have to create the related gameDB for this configuration
+					GameDBHelper.createGameCollectionInEngine(engine, datFileName, datParser);				
+					// We add this conf in the combo
+					engine.getConfWindow().getComboConf().addItem(datFileName);
+					// We add this conf in the combo in the main window
+					engine.getMainWindow().getMainMenuBar().getComboConf().addItem(datFileName);
+					
+					// We also add this datas in the Jtable of the main window
+					//((GameListTableModel) engine.getMainWindow().getJTable().getModel()).setGameCollectionAndDatas(gameCollection);
+					
+					// We show the additional panes (if necessary)
+					engine.getConfWindow().getJTabbedPane().setVisible(true);
+					engine.getConfWindow().getPanelGlobalButtons().setVisible(true);
+					
+					// We also have to show the remove button in any cases
+					engine.getConfWindow().getButtonRemoveConf().setVisible(true);
+					
+					// We select the newly created conf in the combo box
+					engine.getConfWindow().getComboConf().setSelectedItem(datFileName);
+					engine.getMainWindow().getMainMenuBar().getComboConf().setSelectedItem(datFileName);
+					
+					// We update the UI
+					engine.getConfWindow().update(engine.getConfWindow().getGraphics());
+					engine.getMainWindow().update(engine.getMainWindow().getGraphics());
+					engine.getConfWindow().getProgressPanel().stop();
+				}
 			}
 		}
 	}

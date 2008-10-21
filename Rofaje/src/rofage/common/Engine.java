@@ -1,6 +1,10 @@
 package rofage.common;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -65,8 +69,18 @@ public class Engine {
 	private DuplicateSwingWorker duplicateSW = null;
 		
 	private boolean confSaved = false;
-		
+			
 	public Engine () {
+		try {
+			FileOutputStream fos = new FileOutputStream("RoFage.log",true);
+			System.setOut(new PrintStream(fos,true));
+			System.out.println("Starting "+Messages.getString("AppTitle")+"..."+Messages.getString("Version")+" at "+new Date());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		startupConf();
+				
 		// We try to load the gameDatabase
 		gameDB = SerializationHelper.loadGameDB();
 		if (gameDB == null) {
@@ -78,14 +92,15 @@ public class Engine {
 		if (communityDB == null) {
 			communityDB = new CommunityDB();
 		}
-		
-		startupConf();
-		
 		// Then we initialize the UI
 		getMainWindow().setVisible(true);
+		// We update the ui before updating 
+		getMainWindow().getProgressPanel().start();
+		getMainWindow().update(getMainWindow().getGraphics());
 		
 		// Let's see whether we should launch an update
 		startupUpdate();
+		getMainWindow().getProgressPanel().stop();
 	}
 	
 	public void changeLanguage() {
@@ -151,25 +166,29 @@ public class Engine {
 		if (SessionHelper.isLogged(this)) {
 			// We sync the Average notes
 			SiteCommentMessage siteCommentMsg = SiteConnector.syncAvgNotes(getGlobalConf().getCreds());
-			List<Comment> listComments = siteCommentMsg.getListComments();
-			Iterator<Comment> iterComments = listComments.iterator();
-			communityDB.getAvgNotes().clear();
-			while (iterComments.hasNext()) {
-				Comment comment = iterComments.next();
-				communityDB.getAvgNotes().put(comment.getCrc(), comment.getNote());
+			if (siteCommentMsg.isError()) {
+				SessionHelper.logout(this);
+			} else {
+				List<Comment> listComments = siteCommentMsg.getListComments();
+				Iterator<Comment> iterComments = listComments.iterator();
+				communityDB.getAvgNotes().clear();
+				while (iterComments.hasNext()) {
+					Comment comment = iterComments.next();
+					communityDB.getAvgNotes().put(comment.getCrc(), comment.getNote());
+				}
+				
+				// We sync mynotes
+				siteCommentMsg = SiteConnector.syncMyNotes(getGlobalConf().getCreds());
+				listComments = siteCommentMsg.getListComments();
+				iterComments = listComments.iterator();
+				communityDB.getMyNotes().clear();
+				while (iterComments.hasNext()) {
+					Comment comment = iterComments.next();
+					communityDB.getMyNotes().put(comment.getCrc(), comment.getNote());
+				}
+				
+				SerializationHelper.saveCommunityDB(communityDB);
 			}
-			
-			// We sync mynotes
-			siteCommentMsg = SiteConnector.syncMyNotes(getGlobalConf().getCreds());
-			listComments = siteCommentMsg.getListComments();
-			iterComments = listComments.iterator();
-			communityDB.getMyNotes().clear();
-			while (iterComments.hasNext()) {
-				Comment comment = iterComments.next();
-				communityDB.getMyNotes().put(comment.getCrc(), comment.getNote());
-			}
-			
-			SerializationHelper.saveCommunityDB(communityDB);
 			siteCommentMsg.display();
 		}
 		

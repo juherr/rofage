@@ -26,6 +26,7 @@ public class ShowAddVoteAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		int index = engine.getMainWindow().getJTable().getSelectedRow();
 		if (index!=-1) { // We check that a row is selected !!
+			engine.getMainWindow().getProgressPanel().start();
 			Game game = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
 			// We have to retrieve the existing comment (and we check if it exists)
 			SiteCommentMessage siteCommentMsg = SiteConnector.getSingleVote(engine.getGlobalConf().getCreds(), game.getCrc());
@@ -33,6 +34,7 @@ public class ShowAddVoteAction extends AbstractAction {
 			// Since we get the note, we save it in the local DB (in case it is out of sync)
 			engine.getCommunityDB().getMyNotes().put(game.getCrc(), comment.getNote());
 			SerializationHelper.saveCommunityDB(engine.getCommunityDB());
+			engine.getMainWindow().getProgressPanel().stop();
 			new AddVoteWindow(engine, game, comment);
 		} else {
 			JOptionPane.showMessageDialog(engine.getMainWindow(), Messages.getString("SelectGame"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE);

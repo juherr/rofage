@@ -2,15 +2,15 @@ package rofage.ihm;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import rofage.common.images.ImageToolkit;
 
 
 @SuppressWarnings("serial")
@@ -52,11 +52,11 @@ public class NoteDisplay extends JPanel {
 			if (avgNote>0) {
 				// We resize the internal part of the jauge
 				int newWidth = new Float(MAXWIDTH * avgNote / 10).intValue();
-				Image newImgJaugeIn = scale(imgJaugeIn, newWidth, imgJaugeIn.getHeight(null));
+				Image newImgJaugeIn = ImageToolkit.scale(imgJaugeIn, newWidth, imgJaugeIn.getHeight(null));
 				// Then we merge the jaugeStart and the newJaugeIn
-				BufferedImage bufIn = toBufferedImage(newImgJaugeIn);
-				BufferedImage bufJauge = toBufferedImage(imgJaugeStart);
-				BufferedImage jauge = addImage(bufJauge, bufIn);
+				BufferedImage bufIn = ImageToolkit.toBufferedImage(newImgJaugeIn);
+				BufferedImage bufJauge = ImageToolkit.toBufferedImage(imgJaugeStart);
+				BufferedImage jauge = ImageToolkit.addImage(bufJauge, bufIn, START_X, START_Y);
 				img = jauge;
 			}
 		} else {
@@ -80,64 +80,6 @@ public class NoteDisplay extends JPanel {
 		g.drawImage(img, (getWidth()-w)/2, (getHeight()-h)/2, this);
 	}
 	
-	public BufferedImage toBufferedImage(Image image) {
-        /** On test si l'image n'est pas déja une instance de BufferedImage */
-        if( image instanceof BufferedImage ) {
-                /** cool, rien à faire */
-                return( (BufferedImage)image );
-        } else {
-                /** On s'assure que l'image est complètement chargée */
-                image = new ImageIcon(image).getImage();
-                
-                /** On crée la nouvelle image */
-                BufferedImage bufferedImage = new BufferedImage(
-                                                      image.getWidth(null),
-                                                      image.getHeight(null),
-                                                      BufferedImage.TYPE_INT_ARGB);
-                Graphics g = bufferedImage.createGraphics();
-                g.drawImage(image,0,0,null);
-                g.dispose();
-                
-                return( bufferedImage );
-        } 
-	}
-	
-	public static BufferedImage addImage(BufferedImage image1, BufferedImage image2){
-		Graphics2D g2d = image1.createGraphics();
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-		                RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
-		                RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
-		 
-		g2d.drawImage(image2, START_X, START_Y, null);
-				
-		g2d.dispose();
-		
-		return image1 ;
-	}
-	
-	/** 
-	 * Redimensionne une image.
-	 * 
-	 * @param source Image à redimensionner.
-	 * @param width Largeur de l'image cible.
-	 * @param height Hauteur de l'image cible.
-	 * @return Image redimensionnée.
-	 */
-	public static Image scale(Image source, int width, int height) {
-	    /* On crée une nouvelle image aux bonnes dimensions. */
-	    BufferedImage buf = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-
-	    /* On dessine sur le Graphics de l'image bufferisée. */
-	    Graphics2D g = buf.createGraphics();
-	    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g.drawImage(source, 0, 0, width, height, null);
-	    g.dispose();
-
-	    /* On retourne l'image bufferisée, qui est une image. */
-	    return buf;
-	}
-
 	public Float getNote() {
 		return avgNote;
 	}

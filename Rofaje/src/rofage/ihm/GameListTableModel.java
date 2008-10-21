@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
@@ -52,24 +52,21 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	public Object getValueAt(int row, int col) {
 		Game game = tableDatas.get(row);
 		if (game!=null) {
-			if (col==0) {
-				// Location
-				return IconHelper.getLocationIcon(game.getLocation());
-			} else if (col==1) {
-				// Average Note
-				return engine.getCommunityDB().getAvgNotes().get(game.getCrc());
-			} else if (col==2) {
-				//My note
-				return engine.getCommunityDB().getMyNotes().get(game.getCrc());
-			} else if (col==3) {
-				return IconHelper.getGotRomIcon(game);
-			} else if (col==4) {
-				// We show the icon if available
-				return IconHelper.getRomIcon(game, engine.getGlobalConf().getSelectedConf());
-			} else if (col==5) {
-				return IconHelper.getCleanDumpIcon(game);
-			} else if (col==6) {
-				return GameDisplayHelper.buildTitle(game, titlePattern, engine.getGlobalConf().getSelectedConf());
+			switch (col) {
+			case 0 : return game.getLocation();
+			case 1 : return engine.getCommunityDB().getAvgNotes().get(game.getCrc()); // Average Note
+			case 2 : return engine.getCommunityDB().getMyNotes().get(game.getCrc()); //My note
+			case 3 : return game;
+			case 4 : return IconHelper.getRomIcon(game, engine.getGlobalConf().getSelectedConf());
+			case 5 : return game;
+			case 6 : return GameDisplayHelper.buildTitle(game, titlePattern, engine.getGlobalConf().getSelectedConf());
+				/*case 0 : return IconHelper.getLocationIcon(game.getLocation()); // Location
+				case 1 : return engine.getCommunityDB().getAvgNotes().get(game.getCrc()); // Average Note
+				case 2 : return engine.getCommunityDB().getMyNotes().get(game.getCrc()); //My note
+				case 3 : return IconHelper.getGotRomIcon(game);
+				case 4 : return IconHelper.getRomIcon(game, engine.getGlobalConf().getSelectedConf());
+				case 5 : return IconHelper.getCleanDumpIcon(game);
+				case 6 : return GameDisplayHelper.buildTitle(game, titlePattern, engine.getGlobalConf().getSelectedConf());*/
 			}
 		}
 		return 0;
@@ -77,14 +74,20 @@ public class GameListTableModel extends AbstractTableModel implements TableModel
 	
 	public Class<?> getColumnClass(int col) {
 		switch (col) {
+			case 1 : return JPanel.class;
+			case 2 : return JPanel.class;
+			case 4 : return ImageIcon.class; // For this column we need the engine, so we render it here...
+			default : return getValueAt(0, col).getClass();
+		}
+		
+/*		switch (col) {
+			
 			case 0 : return ImageIcon.class;
-			//case 1 : return Float.class;
-			//case 2 : return Float.class;
 			case 3 : return JLabel.class;
 			case 4 : return ImageIcon.class;
 			case 5 : return JLabel.class;
 			default : return String.class;
-		}
+		}*/
     }
 
 	

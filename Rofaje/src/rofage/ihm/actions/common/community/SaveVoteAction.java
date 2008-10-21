@@ -22,6 +22,7 @@ public class SaveVoteAction extends AbstractAction {
 		this.engine = engine;
 	}
 	public void actionPerformed(ActionEvent e) {
+		win.getProgressPanel().start();
 		String crc = win.getGame().getCrc();
 		Float myNote = new Float(win.getSliderNote().getValue());
 		Comment comment = new Comment(myNote, win.getTextComment().getText().replaceAll("\n", System.getProperty("line.separator")));
@@ -40,6 +41,7 @@ public class SaveVoteAction extends AbstractAction {
 			engine.getMainWindow().getPanelRomHeader().getPanelMyNote().setAvgNote(myNote);
 			win.dispose();
 		}
+		win.getProgressPanel().stop();
 	}
 
 }

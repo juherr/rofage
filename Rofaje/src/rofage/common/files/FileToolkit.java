@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import rofage.common.object.Configuration;
@@ -125,7 +126,7 @@ public abstract class FileToolkit {
 	 * @param filepath
 	 * @param destPath
 	 */
-	public static void moveFile (File source, String destPath) {
+	public static void moveFile (File source, String destPath, JFrame callingWindow) {
 		File destination = new File (destPath);
         // We try with renameTo
         boolean result = source.renameTo(destination);
@@ -137,7 +138,7 @@ public abstract class FileToolkit {
                 if(result) source.delete();
             }
         } else {
-                JOptionPane.showMessageDialog(null, Messages.getString("FileToolkit.1"), Messages.getString("FileToolkit.2"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
+                JOptionPane.showMessageDialog(callingWindow, Messages.getString("FileToolkit.1"), Messages.getString("FileToolkit.2"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
         }  
 	}
 	

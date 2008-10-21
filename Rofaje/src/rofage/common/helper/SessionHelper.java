@@ -57,5 +57,6 @@ public abstract class SessionHelper {
 		// We enable the buttons for voting
 		engine.getMainWindow().getPanelRomHeader().getButtonAvgNote().setEnabled(true);
 		engine.getMainWindow().getPanelRomHeader().getButtonMyNote().setEnabled(true);
+		engine.getMainWindow().update(engine.getMainWindow().getGraphics());
 	}
 }

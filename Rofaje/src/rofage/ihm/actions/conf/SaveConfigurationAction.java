@@ -22,6 +22,7 @@ public class SaveConfigurationAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		engine.getConfWindow().getProgressPanel().start();
 		// We save the current value of the rom folder
 		// We use this value at a later time to trigger a scan if needed
 		String oldRomFolder = engine.getGlobalConf().getSelectedConf().getRomFolder();
@@ -58,7 +59,7 @@ public class SaveConfigurationAction extends AbstractAction {
 			engine.getScanWindow().setVisible(true);
 			scanSW.execute();
 		}
-		
+		engine.getConfWindow().getProgressPanel().stop();
 		MainSwingWorker mainSW = new MainSwingWorker(engine);
 		mainSW.execute();
 	}
