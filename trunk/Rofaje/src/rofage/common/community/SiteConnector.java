@@ -179,7 +179,7 @@ public abstract class SiteConnector {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-			result = "E|Community.siteDown";
+			result = "E:;:Community.siteDown";
 		} finally {
 			try{writer.close();}catch(Exception e){}
 		    try{reader.close();}catch(Exception e){}

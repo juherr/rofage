@@ -57,8 +57,8 @@ public abstract class GameDisplayHelper {
 		
 		// Other fields
 		if (game.getTitle()!=null) pattern = pattern.replace("%n", game.getTitle());
-		if (game.getRomSize()!=null) pattern = pattern.replace("%s", game.getRomSize());
-		if (game.getLocation()!=null) pattern = pattern.replace("%o", getLocation(game));
+		if (game.getRomSize()!=null) pattern = pattern.replace("%s", buildRomSize(game.getRomSize()));
+		if (game.getLocation()!=null) pattern = pattern.replace("%l", getLocation(game));
 		if (game.getPublisher()!=null) pattern = pattern.replace("%p", game.getPublisher());
 		if (game.getSourceRom()!=null) pattern = pattern.replace("%g", game.getSourceRom());
 		if (game.getLanguage()!=null) pattern = pattern.replace("%a", getLanguage(game));

@@ -1,39 +1,28 @@
 package rofage.ihm;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JWindow;
 
 @SuppressWarnings("serial")
 public class SplashScreen extends JWindow {
-	private BufferedImage imageSplash;
+	private Gif gif;
 	
-	public SplashScreen() {
+	public SplashScreen(String pathToImage) {
 		// Affichage du splashScreen
-	
-		try {
-			// On charge l'image
-			imageSplash = ImageIO.read(SplashScreen.class.getResourceAsStream("images/splash.png"));
-	        setSize(imageSplash.getWidth(), imageSplash.getHeight());
-	        setLocationRelativeTo(null);
-	        setVisible(true);
-	        update(getGraphics());
-	        // On gère l'attente
-	        waitEndSplash();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		gif = new Gif(pathToImage);
+		setSize(gif.getWidth()+20, gif.getHeight()+20);
+        
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setAlwaysOnTop(true);
+        //update(getGraphics());
 	}
 
 	// On redéfinit paint pour afficher l'image
-	public void paint (Graphics g) {
+	/*public void paint (Graphics g) {
 		if (imageSplash!=null) {
 			g.drawImage(imageSplash, 0, 0, null);
 		}
-	}
+	}*/
 	
 	// Affiche le splash pendant un temps donné
 	private void waitEndSplash () {

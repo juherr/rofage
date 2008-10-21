@@ -14,6 +14,8 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 
+import net.java.swingfx.waitwithstyle.InfiniteProgressPanel;
+
 import rofage.common.Engine;
 import rofage.common.object.Comment;
 import rofage.common.object.Game;
@@ -40,6 +42,8 @@ public class AddVoteWindow extends JFrame {
 	
 	private Comment comment	= null; // The comment to be displayed
 	
+	private InfiniteProgressPanel progressPanel = new InfiniteProgressPanel();
+	
 
 	/**
 	 * This is the default constructor
@@ -61,6 +65,7 @@ public class AddVoteWindow extends JFrame {
 		if (comment==null) {
 			comment = new Comment();
 		}
+		this.setGlassPane(progressPanel);
 		this.setSize(400, 260);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("Community.addVoteTitle")+game.getTitle()); //$NON-NLS-1$
@@ -155,5 +160,9 @@ public class AddVoteWindow extends JFrame {
 
 	public Game getGame() {
 		return game;
+	}
+
+	public InfiniteProgressPanel getProgressPanel() {
+		return progressPanel;
 	}
 }

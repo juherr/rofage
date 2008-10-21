@@ -1,8 +1,10 @@
 package rofage.ihm.windows.community;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.text.DecimalFormat;
@@ -14,14 +16,11 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.JTextArea;
 
 import rofage.common.Engine;
 import rofage.common.object.Comment;
@@ -41,7 +40,8 @@ public class SeeVotesWindow extends JFrame {
 	
 	private JScrollPane scrollPane  = null;
 	
-	private JTextPane textPane		= null;
+	//private JTextPane textPane		= null;
+	private JPanel panelComments 	= null;
 	
 	private JButton buttonClose		= null;
 	
@@ -107,7 +107,7 @@ public class SeeVotesWindow extends JFrame {
 		return buttonClose;
 	}
 
-	public JTextPane getTextPane() {
+	/*public JTextPane getTextPane() {
 		if (textPane==null) {
 			textPane = new JTextPane();
 			textPane.setPreferredSize(new Dimension(375, 180));
@@ -151,11 +151,12 @@ public class SeeVotesWindow extends JFrame {
 			}
 		}
 		return textPane;
-	}
+	}*/
 
 	public JScrollPane getScrollPane() {
 		if (scrollPane==null) {
-			scrollPane = new JScrollPane(getTextPane());
+			scrollPane = new JScrollPane(getPanelComments());
+			scrollPane.setPreferredSize(new Dimension(375,180));
 			scrollPane.setAutoscrolls(true);
 			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -165,5 +166,33 @@ public class SeeVotesWindow extends JFrame {
 
 	public Game getGame() {
 		return game;
+	}
+
+	public JPanel getPanelComments() {
+		if (panelComments==null) {
+			panelComments = new JPanel(new GridLayout(listComments.size(), 1, 0, 0));
+			Iterator<Comment> iterComments = listComments.iterator();
+			while (iterComments.hasNext()) {
+				JPanel panelComment = new JPanel(new BorderLayout());
+				Comment comment = iterComments.next();
+				NoteDisplay noteDisplay = new NoteDisplay(comment.getNote());
+				DecimalFormat df = (DecimalFormat)DecimalFormat.getNumberInstance();
+				df.applyPattern("0.#");
+				
+				JLabel labelLogin = new JLabel(comment.getLogin()+"  ("+df.format(comment.getNote())+")");
+				labelLogin.setIcon(new ImageIcon(noteDisplay.getImg()));
+				panelComment.add(labelLogin, BorderLayout.WEST);
+				
+				JTextArea labelCommentText = new JTextArea(5,1);
+				labelCommentText.setBackground(Color.DARK_GRAY);
+				labelCommentText.setText(comment.getText());
+				labelCommentText.setEnabled(false);
+				labelCommentText.setLineWrap(true);
+				labelCommentText.setWrapStyleWord(true);
+				panelComment.add(labelCommentText, BorderLayout.SOUTH);
+				panelComments.add(panelComment);
+			}
+		}
+		return panelComments;
 	}
 }

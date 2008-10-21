@@ -141,7 +141,7 @@ public class RenameSwingWorker extends StoppableSwingWorker<Integer, String> {
 				}
 				
 				// We rename the file. It can either be an archive or a rom file
-				FileToolkit.moveFile(gameFile, destPath);
+				FileToolkit.moveFile(gameFile, destPath, engine.getRenameWindow());
 				
 				// We update the game object values
 				game.setContainerPath(destPath);
