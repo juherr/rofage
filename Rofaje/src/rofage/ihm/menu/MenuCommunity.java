@@ -7,14 +7,16 @@ import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.common.community.LogoutAction;
 import rofage.ihm.actions.common.community.ShowLoginAction;
+import rofage.ihm.actions.common.community.ShowResetPwdAction;
 
 @SuppressWarnings("serial")
 public class MenuCommunity extends JMenu {
 	
 	private Engine engine	= null;
 	
-	private JMenuItem mItemLogin 		= null;
+	private JMenuItem mItemLogin 	= null;
 	private JMenuItem mItemLogout	= null;
+	private JMenuItem mItemResetPwd = null;
 		
 	public MenuCommunity (Engine engine) {
 		this.engine = engine;
@@ -22,9 +24,20 @@ public class MenuCommunity extends JMenu {
 		
 		add(getMItemLogin());
 		add(getMItemLogout());
+		add(getMItemResetPwd());
 		
 	}
 
+	public JMenuItem getMItemResetPwd() {
+		if (mItemResetPwd==null) {
+			mItemResetPwd = new JMenuItem();
+			mItemResetPwd.addActionListener(new ShowResetPwdAction(engine));
+			mItemResetPwd.setText(Messages.getString("Community.resetPwd")); //$NON-NLS-1$
+			mItemResetPwd.setVisible(true);
+		}
+		return mItemResetPwd;
+	}
+	
 	public JMenuItem getMItemLogin() {
 		if (mItemLogin==null) {
 			mItemLogin = new JMenuItem();

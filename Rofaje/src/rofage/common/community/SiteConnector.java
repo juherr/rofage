@@ -29,6 +29,7 @@ public abstract class SiteConnector {
 	private final static String SYNC_AVG_NOTES		= "syncAvgNotes.php";
 	private final static String SYNC_MY_NOTES		= "syncMyNotes.php";
 	private final static String CHECK_VER			= "version.php";
+	private final static String RESET_PWD			= "resetPwd.php";
 	
 	private final static String PARAM_LOGIN		= "login";
 	private final static String PARAM_PWD		= "pwd";
@@ -36,7 +37,17 @@ public abstract class SiteConnector {
 	private final static String PARAM_NOTE		= "note";
 	private final static String PARAM_COMMENT	= "comment";
 	private final static String PARAM_CRC		= "crc";
+	private final static String PARAM_NEWPWD	= "newPwd";
 	
+	
+	public static SiteSimpleMessage resetPwd (Credentials creds, String newPwd) {
+		String params = new String();
+		String request = BASE_URL + RESET_PWD;
+		
+		params = addCredentialsToParams(params, creds);
+		params = addParameter(params, PARAM_NEWPWD, newPwd);
+		return sendRequestForSimpleMessage(request, params);
+	}
 	
 	public static SiteVersionMessage checkVersion () {
 		String params = new String();
