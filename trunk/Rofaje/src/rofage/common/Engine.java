@@ -1,8 +1,12 @@
 package rofage.common;
 
+import java.awt.Desktop;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -23,6 +27,7 @@ import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
 import rofage.common.object.SiteCommentMessage;
+import rofage.common.object.SiteVersionMessage;
 import rofage.common.rename.RenameSwingWorker;
 import rofage.common.scan.ScanSwingWorker;
 import rofage.common.update.ImportSwingWorker;
@@ -79,6 +84,9 @@ public class Engine {
 			e.printStackTrace();
 		}
 		
+		// The first thing to do is to check if we have a new version
+		checkVersion ();
+		
 		startupConf();
 				
 		// We try to load the gameDatabase
@@ -101,6 +109,35 @@ public class Engine {
 		// Let's see whether we should launch an update
 		startupUpdate();
 		getMainWindow().getProgressPanel().stop();
+	}
+	
+	private void checkVersion () {
+		Integer actualVersion = new Integer(Messages.getString("VNB"));
+		SiteVersionMessage verMessage = SiteConnector.checkVersion();
+		if (verMessage.getVersionNb()>actualVersion) {
+			JOptionPane.showMessageDialog(null, Messages.getString("Update.newVersionAvailable"), 
+					Messages.getString("Update.newVersionAvailableTitle"), JOptionPane.INFORMATION_MESSAGE);
+			if (Desktop.isDesktopSupported()) {
+				// We get the desktop
+				Desktop desktop = Desktop.getDesktop();
+				
+				// We check that the browse function is supported
+				if (desktop.isSupported(Desktop.Action.BROWSE)) {
+					try {
+						desktop.browse(new URI(verMessage.getRemotePath()));
+					} catch (URISyntaxException ex) {
+						ex.printStackTrace();
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+				} else {
+					System.out.println("Desktop.BROWSE is not supported, please report this manually");
+				}
+			} else {
+				System.out.println("Desktop is not supported, please report this manually");
+			}
+			System.exit(1);
+		}
 	}
 	
 	public void changeLanguage() {
