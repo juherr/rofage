@@ -14,6 +14,7 @@ import rofage.common.object.Comment;
 import rofage.common.object.Credentials;
 import rofage.common.object.SiteCommentMessage;
 import rofage.common.object.SiteSimpleMessage;
+import rofage.common.object.SiteVersionMessage;
 
 public abstract class SiteConnector {
 	private final static String UTF8 = "UTF-8";	
@@ -27,6 +28,7 @@ public abstract class SiteConnector {
 	private final static String GET_ALL_COMMENTS	= "getAllComments.php";
 	private final static String SYNC_AVG_NOTES		= "syncAvgNotes.php";
 	private final static String SYNC_MY_NOTES		= "syncMyNotes.php";
+	private final static String CHECK_VER			= "version.php";
 	
 	private final static String PARAM_LOGIN		= "login";
 	private final static String PARAM_PWD		= "pwd";
@@ -35,6 +37,12 @@ public abstract class SiteConnector {
 	private final static String PARAM_COMMENT	= "comment";
 	private final static String PARAM_CRC		= "crc";
 	
+	
+	public static SiteVersionMessage checkVersion () {
+		String params = new String();
+		String request = BASE_URL + CHECK_VER;
+		return sendRequestForVersion(request, params);
+	}
 	
 	/** 
 	 * Retrieve all crc/avgNotes couples from the database
@@ -193,6 +201,10 @@ public abstract class SiteConnector {
 	
 	private static SiteCommentMessage sendRequestForComments (String request, String params) {
 		return new SiteCommentMessage (sendRequest(request, params));
+	}
+	
+	private static SiteVersionMessage sendRequestForVersion (String request, String params) {
+		return new SiteVersionMessage (sendRequest(request, params));
 	}
 	
 	private static String addCredentialsToParams (String params, Credentials creds) {

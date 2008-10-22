@@ -6,6 +6,7 @@ This program runs with Java 1.6 or later
 Changelog in 2.0 :
 WARNING : If upgrading from a previous version, the file gameDB and globalConf must be deleted
 
+Added functionality : Mandatory check of new version
 Added functionality : Community
 Added functionality : Add tooltips on the status bar
 Added functionality : The dropdown which allows to choose the "releasenumber" field has been removed. Used the classic title pattern instead
