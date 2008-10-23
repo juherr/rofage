@@ -5,17 +5,21 @@ public class Comment {
 	private Float note;
 	private String login = "";
 	private String crc = "";
+	private boolean spoiler = false;
+	private long idComment;
 	
 	public Comment(float note, String text) {
 		this.note = new Float(note);
 		this.text = text;
 	}
 	
-	public Comment(String login, float note, String text, String crc) {
+	public Comment(String login, float note, String text, String crc, boolean spoiler, long idComment) {
 		this.login = login;
 		this.note = new Float(note);
 		this.text = text;
 		this.crc = crc;
+		this.spoiler = spoiler;
+		this.idComment = idComment;
 	}
 	
 	public Comment() {
@@ -50,6 +54,22 @@ public class Comment {
 
 	public void setCrc(String crc) {
 		this.crc = crc;
+	}
+
+	public boolean isSpoiler() {
+		return spoiler;
+	}
+
+	public void setSpoiler(boolean spoiler) {
+		this.spoiler = spoiler;
+	}
+
+	public long getIdComment() {
+		return idComment;
+	}
+
+	public void setIdComment(long idComment) {
+		this.idComment = idComment;
 	}
 	
 	

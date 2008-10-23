@@ -5,7 +5,7 @@ import javax.swing.JMenuItem;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
-import rofage.ihm.actions.common.ShowConfigurationAction;
+import rofage.ihm.actions.common.ShowAction;
 
 @SuppressWarnings("serial")
 public class MenuConf extends JMenu {
@@ -25,7 +25,7 @@ public class MenuConf extends JMenu {
 	public JMenuItem getMItemConf() {
 		if (mItemConf==null) {
 			mItemConf = new JMenuItem();
-			mItemConf.addActionListener(new ShowConfigurationAction(engine));
+			mItemConf.addActionListener(new ShowAction(engine.getConfWindow()));
 			mItemConf.setText(Messages.getString("MainWindow.7")); //$NON-NLS-1$
 			mItemConf.setVisible(true);
 		}

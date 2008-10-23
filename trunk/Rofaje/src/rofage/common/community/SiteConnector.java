@@ -30,6 +30,7 @@ public abstract class SiteConnector {
 	private final static String SYNC_MY_NOTES		= "syncMyNotes.php";
 	private final static String CHECK_VER			= "version.php";
 	private final static String RESET_PWD			= "resetPwd.php";
+	private final static String ADD_USEFUL_COMMENT	= "addUsefulComment.php";
 	
 	private final static String PARAM_LOGIN		= "login";
 	private final static String PARAM_PWD		= "pwd";
@@ -38,7 +39,18 @@ public abstract class SiteConnector {
 	private final static String PARAM_COMMENT	= "comment";
 	private final static String PARAM_CRC		= "crc";
 	private final static String PARAM_NEWPWD	= "newPwd";
+	private final static String PARAM_SPOILER	= "spoiler";
+	private final static String PARAM_IDCOMMENT = "idComment";
 	
+	
+	public static SiteSimpleMessage addUsefulComment (Credentials creds, double idComment) {
+		String params = new String();
+		String request = BASE_URL + ADD_USEFUL_COMMENT;
+		
+		params = addCredentialsToParams(params, creds);
+		params = addParameter(params, PARAM_IDCOMMENT, idComment);
+		return sendRequestForSimpleMessage(request, params);
+	}
 	
 	public static SiteSimpleMessage resetPwd (Credentials creds, String newPwd) {
 		String params = new String();
@@ -113,13 +125,14 @@ public abstract class SiteConnector {
 		return sendRequestForComments (request, params);
 	}
 	
-	public static SiteSimpleMessage addVote (Credentials creds, Comment comment, String crc) {
+	public static SiteSimpleMessage addVote (Credentials creds, Comment comment) {
 		String params = new String();
 		String request = BASE_URL + SAVE_COMMENT;
 		params = addCredentialsToParams(params, creds);
 		params = addParameter(params, PARAM_COMMENT, comment.getText());
 		params = addParameter(params, PARAM_NOTE, String.valueOf(comment.getNote()));
-		params = addParameter(params, PARAM_CRC, crc);
+		params = addParameter(params, PARAM_CRC, comment.getCrc());
+		params = addParameter(params, PARAM_SPOILER, comment.isSpoiler());
 		
 		return sendRequestForSimpleMessage(request, params);
 	}
@@ -170,6 +183,21 @@ public abstract class SiteConnector {
 		}
 		
 		return params;
+	}
+	
+	private static String addParameter (String params, String paramName, double paramValue) {
+		return addParameter(params, paramName, String.valueOf(paramValue));
+	}
+	
+	private static String addParameter (String params, String paramName, boolean paramValue) {
+		// We convert a boolean value to a string value
+		String newParamValue = "";
+		if (paramValue) {
+			newParamValue = "1";
+		} else {
+			newParamValue = "0";
+		}
+		return addParameter(params, paramName, newParamValue);
 	}
 	
 	private static String sendRequest (String request, String params) {

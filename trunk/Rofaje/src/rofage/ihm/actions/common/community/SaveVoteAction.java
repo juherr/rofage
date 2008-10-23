@@ -22,11 +22,16 @@ public class SaveVoteAction extends AbstractAction {
 		this.engine = engine;
 	}
 	public void actionPerformed(ActionEvent e) {
-		win.getProgressPanel().start();
+		win.getProgressPanel().setVisible(true);
+		
 		String crc = win.getGame().getCrc();
 		Float myNote = new Float(win.getSliderNote().getValue());
-		Comment comment = new Comment(myNote, win.getTextComment().getText().replaceAll("\n", System.getProperty("line.separator")));
-		SiteSimpleMessage siteMessage = SiteConnector.addVote(engine.getGlobalConf().getCreds(), comment, crc);
+		boolean spoiler = win.getcBSpoil().isSelected();
+		String commentText = win.getTextComment().getText().replaceAll("\n", System.getProperty("line.separator"));
+		String login = engine.getGlobalConf().getCreds().getUsername();
+		
+		Comment comment = new Comment(login, myNote, commentText, crc, spoiler, 0);
+		SiteSimpleMessage siteMessage = SiteConnector.addVote(engine.getGlobalConf().getCreds(), comment);
 		siteMessage.display();
 		if (!siteMessage.isError()) {
 			// We have to save the notes
@@ -36,12 +41,12 @@ public class SaveVoteAction extends AbstractAction {
 			SerializationHelper.saveCommunityDB(engine.getCommunityDB());
 			
 			// And update the current window 
-			engine.getMainWindow().update(engine.getMainWindow().getGraphics());
 			engine.getMainWindow().getPanelRomHeader().getPanelAvgNote().setAvgNote(avgNote);
 			engine.getMainWindow().getPanelRomHeader().getPanelMyNote().setAvgNote(myNote);
+			engine.getMainWindow().update(engine.getMainWindow().getGraphics());
 			win.dispose();
 		}
-		win.getProgressPanel().stop();
+		win.getProgressPanel().setVisible(false);
 	}
 
 }

@@ -103,12 +103,12 @@ public class Engine {
 		// Then we initialize the UI
 		getMainWindow().setVisible(true);
 		// We update the ui before updating 
-		getMainWindow().getProgressPanel().start();
+		getMainWindow().getProgressPanel().setVisible(true);
 		getMainWindow().update(getMainWindow().getGraphics());
 		
 		// Let's see whether we should launch an update
 		startupUpdate();
-		getMainWindow().getProgressPanel().stop();
+		getMainWindow().getProgressPanel().setVisible(false);
 	}
 	
 	private void checkVersion () {

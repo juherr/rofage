@@ -8,11 +8,7 @@ import rofage.common.Engine;
 import rofage.ihm.Messages;
 import rofage.ihm.actions.ExportListAction;
 import rofage.ihm.actions.ImportAction;
-import rofage.ihm.actions.common.ShowCleanAction;
-import rofage.ihm.actions.common.ShowCompressAction;
-import rofage.ihm.actions.common.ShowDuplicateAction;
-import rofage.ihm.actions.common.ShowRenameAction;
-import rofage.ihm.actions.common.ShowScanAction;
+import rofage.ihm.actions.common.ShowAction;
 
 @SuppressWarnings("serial")
 public class MenuRomMgt extends JMenu {
@@ -50,7 +46,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemClean() {
 		if (mItemClean==null) {
 			mItemClean = new JMenuItem();
-			mItemClean.addActionListener(new ShowCleanAction(engine));
+			mItemClean.addActionListener(new ShowAction(engine.getCleanWindow()));
 			mItemClean.setText(Messages.getString("MainWindow.10")); //$NON-NLS-1$
 			mItemClean.setVisible(true);
 		}
@@ -60,7 +56,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemCompress() {
 		if (mItemCompress==null) {
 			mItemCompress = new JMenuItem();
-			mItemCompress.addActionListener(new ShowCompressAction(engine));
+			mItemCompress.addActionListener(new ShowAction(engine.getCompressWindow()));
 			mItemCompress.setText(Messages.getString("MainWindow.14")); //$NON-NLS-1$
 			mItemCompress.setVisible(true);
 		}
@@ -78,7 +74,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemDuplicate() {
 		if (mItemDuplicate==null) {
 			mItemDuplicate = new JMenuItem(Messages.getString("DuplicateWindowTitle"));
-			mItemDuplicate.addActionListener(new ShowDuplicateAction(engine));
+			mItemDuplicate.addActionListener(new ShowAction(engine.getDuplicateWindow()));
 		}
 		return mItemDuplicate;
 	}
@@ -129,7 +125,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemRename() {
 		if (mItemRename==null) {
 			mItemRename = new JMenuItem();
-			mItemRename.addActionListener(new ShowRenameAction(engine));
+			mItemRename.addActionListener(new ShowAction(engine.getRenameWindow()));
 			mItemRename.setText(Messages.getString("MainWindow.9")); //$NON-NLS-1$
 			mItemRename.setVisible(true);
 		}
@@ -139,7 +135,7 @@ public class MenuRomMgt extends JMenu {
 	public JMenuItem getMItemScan() {
 		if (mItemScan==null) {
 			mItemScan = new JMenuItem();
-			mItemScan.addActionListener(new ShowScanAction(engine));
+			mItemScan.addActionListener(new ShowAction(engine.getScanWindow()));
 			mItemScan.setText(Messages.getString("MainWindow.8")); //$NON-NLS-1$
 			mItemScan.setVisible(true);
 		}
