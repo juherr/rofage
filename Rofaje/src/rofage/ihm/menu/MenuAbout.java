@@ -10,7 +10,7 @@ import rofage.ihm.Messages;
 import rofage.ihm.actions.common.OpenWebLinkAction;
 import rofage.ihm.actions.common.SendMailAction;
 import rofage.ihm.actions.common.ShowAboutAction;
-import rofage.ihm.actions.common.ShowUpdateAction;
+import rofage.ihm.actions.common.ShowAction;
 
 @SuppressWarnings("serial")
 public class MenuAbout extends JMenu {
@@ -80,7 +80,7 @@ public class MenuAbout extends JMenu {
 	public JMenuItem getMItemUpdate() {
 		if (mItemUpdate==null) {
 			mItemUpdate = new JMenuItem();
-			mItemUpdate.addActionListener(new ShowUpdateAction(engine));
+			mItemUpdate.addActionListener(new ShowAction(engine.getUpdateWindow()));
 			mItemUpdate.setText(Messages.getString("MainWindow.6")); //$NON-NLS-1$
 			mItemUpdate.setVisible(true);
 		}

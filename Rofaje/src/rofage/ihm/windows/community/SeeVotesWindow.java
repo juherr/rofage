@@ -22,12 +22,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
+import net.java.swingfx.waitwithstyle.PerformanceInfiniteProgressPanel;
+
 import rofage.common.Engine;
 import rofage.common.object.Comment;
 import rofage.common.object.Game;
 import rofage.ihm.Messages;
 import rofage.ihm.NoteDisplay;
 import rofage.ihm.actions.common.DisposeAction;
+import rofage.ihm.actions.common.ShowAction;
+import rofage.ihm.actions.common.community.AddUsefulCommentAction;
 
 public class SeeVotesWindow extends JFrame {
 
@@ -46,6 +50,8 @@ public class SeeVotesWindow extends JFrame {
 	private JButton buttonClose		= null;
 	
 	private List<Comment> listComments = new ArrayList<Comment>(); // The comments to be displayed
+	
+	private PerformanceInfiniteProgressPanel progressPane = new PerformanceInfiniteProgressPanel();
 	
 	/**
 	 * This is the default constructor
@@ -69,10 +75,11 @@ public class SeeVotesWindow extends JFrame {
 		this.setTitle(Messages.getString("Community.seeVotes")+game.getTitle());
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setAlwaysOnTop(false);
 		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
 		this.setIconImage(image);
+		this.setGlassPane(progressPane);
 		this.setVisible(true);
 	}
 
@@ -182,7 +189,7 @@ public class SeeVotesWindow extends JFrame {
 				JLabel labelLogin = new JLabel(comment.getLogin()+"  ("+df.format(comment.getNote())+")");
 				labelLogin.setIcon(new ImageIcon(noteDisplay.getImg()));
 				panelComment.add(labelLogin, BorderLayout.WEST);
-				
+								
 				JTextArea labelCommentText = new JTextArea(5,1);
 				labelCommentText.setBackground(Color.DARK_GRAY);
 				labelCommentText.setText(comment.getText());
@@ -190,9 +197,40 @@ public class SeeVotesWindow extends JFrame {
 				labelCommentText.setLineWrap(true);
 				labelCommentText.setWrapStyleWord(true);
 				panelComment.add(labelCommentText, BorderLayout.SOUTH);
+				
+				Box boxBttns = Box.createVerticalBox();
+				
+				JButton bSpoil = new JButton(Messages.getString("Community.spoiler"));
+				bSpoil.addActionListener(new ShowAction(labelCommentText));
+				bSpoil.setPreferredSize(new Dimension(130,20));
+				bSpoil.setSize(new Dimension(130,20));
+				bSpoil.setMinimumSize(new Dimension(130,20));
+				bSpoil.setMaximumSize(new Dimension(130,20));
+				boxBttns.add(bSpoil);
+				if (!comment.isSpoiler()) {
+					bSpoil.setEnabled(false);
+				} else {
+					labelCommentText.setVisible(false);
+				}
+
+				JButton bUseful = new JButton(Messages.getString("Community.usefulComment"));
+				bUseful.setPreferredSize(new Dimension(130,20));
+				bUseful.setSize(new Dimension(130,20));
+				bUseful.setMinimumSize(new Dimension(130,20));
+				bUseful.setMaximumSize(new Dimension(130,20));
+				bUseful.addActionListener(new AddUsefulCommentAction(this, comment.getIdComment(), engine));
+				boxBttns.add(bUseful);
+				boxBttns.setSize(new Dimension(130,40));
+				boxBttns.setPreferredSize(new Dimension(130,40));
+				panelComment.add(boxBttns, BorderLayout.EAST);
+				
 				panelComments.add(panelComment);
 			}
 		}
 		return panelComments;
+	}
+
+	public PerformanceInfiniteProgressPanel getProgressPane() {
+		return progressPane;
 	}
 }

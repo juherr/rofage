@@ -25,19 +25,20 @@ public class SiteCommentMessage extends SiteMessage {
 	 * @param message
 	 */
 	public SiteCommentMessage (String message) {
+		if (message.endsWith("\n")) {
+			message = message.substring(0, message.length()-1);
+		}
 		String [] strs = message.split(":;:");
 		if (KEY_OK.equals(strs[0])) {
 			error = false;
 		} else {
 			error = true;
 		}
-		if (strs[1].endsWith("\n")) {
-			strs[1] = strs[1].substring(0, strs[1].length()-1);
-		}
+		
 		messageKey = strs [1];
 		
 		// Now we have to deal with the potential comments
-		for (int i=2; i<strs.length && i+1<strs.length; i+=4) { // We also test the i+1 case because a separator is always added at the end of the message
+		for (int i=2; i<strs.length && i+1<strs.length; i+=6) { // We also test the i+1 case because a separator is always added at the end of the message
 			String login = strs[i];
 			Float note;
 			try {
@@ -46,11 +47,16 @@ public class SiteCommentMessage extends SiteMessage {
 				note = Float.valueOf(0);
 			}
 			String text = "";
-			if (i+2<strs.length) {// If no comment was entered we may reach the end of the table !!
-				text = new String (strs[i+2]);
+			text = new String (strs[i+2]);
+			// We always have a crc and a isSpoiler flag (strs[i+3] and strs[i+4] but we have to convert
+			// this string value to a boolean)
+			boolean isSpoiler = "1".equals(strs[i+4]);
+			
+			long idComment = 0;
+			if (i+5<strs.length && strs[i+5]!=null && !"".equals(strs[i+5].trim())) {
+				idComment = Long.valueOf(strs[i+5]);
 			}
-			// We always have a crc
-			Comment comment = new Comment(login, note, text, strs[i+3]);
+			Comment comment = new Comment(login, note, text, strs[i+3], isSpoiler, idComment);
 			listComments.add(comment);
 		}
 	}

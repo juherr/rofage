@@ -42,7 +42,7 @@ public class AddConfAction extends AbstractAction {
 			if (!datFile.exists()) {
 				JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("FileDoesNotExist"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				engine.getConfWindow().getProgressPanel().start();
+				engine.getConfWindow().getProgressPanel().setVisible(true);
 				
 				// When a NEW xml file (dat file) is added we add its configuration to the global conf
 				// First we check whether this config already exist
@@ -51,7 +51,7 @@ public class AddConfAction extends AbstractAction {
 				String datFileName = datParser.getDatName();
 				
 				if (engine.getGlobalConf().getMapDatConfigs().containsKey(datFileName)) {
-					engine.getConfWindow().getProgressPanel().stop();
+					engine.getConfWindow().getProgressPanel().setVisible(false);
 					JOptionPane.showMessageDialog(engine.getConfWindow(), Messages.getString("AddConfAction.3"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
 				} else {
 					// We update the selected conf of the engine
@@ -82,7 +82,7 @@ public class AddConfAction extends AbstractAction {
 					// We update the UI
 					engine.getConfWindow().update(engine.getConfWindow().getGraphics());
 					engine.getMainWindow().update(engine.getMainWindow().getGraphics());
-					engine.getConfWindow().getProgressPanel().stop();
+					engine.getConfWindow().getProgressPanel().setVisible(false);
 				}
 			}
 		}

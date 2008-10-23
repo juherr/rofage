@@ -24,12 +24,12 @@ public class ShowSeeVotesAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		int index = engine.getMainWindow().getJTable().getSelectedRow();
 		if (index!=-1) { // We check that a row is selected !!
-			engine.getMainWindow().getProgressPanel().start();
+			engine.getMainWindow().getProgressPanel().setVisible(true);
 			Game game = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
 			
 			// We have to retrieve the existing comments
 			SiteCommentMessage siteCommentMsg = SiteConnector.getAllVotes(engine.getGlobalConf().getCreds(), game.getCrc());
-			engine.getMainWindow().getProgressPanel().stop();
+			engine.getMainWindow().getProgressPanel().setVisible(false);
 			new SeeVotesWindow(engine, game, siteCommentMsg.getListComments());
 		} else {
 			JOptionPane.showMessageDialog(engine.getMainWindow(), Messages.getString("SelectGame"), Messages.getString("Error"), JOptionPane.ERROR_MESSAGE);

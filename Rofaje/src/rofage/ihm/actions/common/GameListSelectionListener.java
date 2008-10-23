@@ -3,6 +3,7 @@ package rofage.ihm.actions.common;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,8 +30,9 @@ public class GameListSelectionListener implements ListSelectionListener {
 		// We get the game
 		Configuration conf = engine.getGlobalConf().getSelectedConf();
 		if (!e.getValueIsAdjusting()) {
-			int index = engine.getMainWindow().getJTable().getSelectedRow();
-			Game game = ((GameListTableModel) engine.getMainWindow().getJTable().getModel()).getGameAt(index);
+			JTable jTable = engine.getMainWindow().getJTable();
+			int index = jTable.getSelectedRow();
+			Game game = ((GameListTableModel) jTable.getModel()).getGameAt(index);
 						
 			// If we asked for downloading images we have to do it here
 			if (conf.isInAppUpdate() && index!=-1) {

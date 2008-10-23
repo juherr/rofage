@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,8 +15,7 @@ import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 
-import net.java.swingfx.waitwithstyle.InfiniteProgressPanel;
-
+import net.java.swingfx.waitwithstyle.PerformanceInfiniteProgressPanel;
 import rofage.common.Engine;
 import rofage.common.object.Comment;
 import rofage.common.object.Game;
@@ -35,6 +35,8 @@ public class AddVoteWindow extends JFrame {
 	private JSlider sliderNote		= null;
 	private JScrollPane scrollPane  = null;
 	
+	private JCheckBox cBSpoil		= null;
+	
 	private JTextArea textComment	= null;
 	
 	private JButton buttonCancel	= null;
@@ -42,7 +44,7 @@ public class AddVoteWindow extends JFrame {
 	
 	private Comment comment	= null; // The comment to be displayed
 	
-	private InfiniteProgressPanel progressPanel = new InfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel();
 	
 
 	/**
@@ -66,7 +68,7 @@ public class AddVoteWindow extends JFrame {
 			comment = new Comment();
 		}
 		this.setGlassPane(progressPanel);
-		this.setSize(400, 260);
+		this.setSize(400, 270);
 		this.setContentPane(getJContentPane());
 		this.setTitle(Messages.getString("Community.addVoteTitle")+game.getTitle()); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
@@ -75,6 +77,7 @@ public class AddVoteWindow extends JFrame {
 		this.setAlwaysOnTop(false);
 		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
 		this.setIconImage(image);
+		this.pack();
 		this.setVisible(true);
 	}
 
@@ -91,6 +94,7 @@ public class AddVoteWindow extends JFrame {
 			Box vBox = Box.createVerticalBox();
 			vBox.add(getSliderNote());
 			vBox.add(getScrollPane());
+			vBox.add(getcBSpoil());
 			
 			Box buttonBox = Box.createHorizontalBox();
 			buttonBox.add(getButtonCancel());
@@ -105,6 +109,14 @@ public class AddVoteWindow extends JFrame {
 			
 		}
 		return contentPane;
+	}
+	
+	public JCheckBox getcBSpoil () {
+		if (cBSpoil==null) {
+			cBSpoil = new JCheckBox(Messages.getString("Community.commentWithSpoil"));
+			cBSpoil.setSelected(comment.isSpoiler());
+		}
+		return cBSpoil;
 	}
 
 	public JButton getButtonCancel() {
@@ -162,7 +174,7 @@ public class AddVoteWindow extends JFrame {
 		return game;
 	}
 
-	public InfiniteProgressPanel getProgressPanel() {
+	public PerformanceInfiniteProgressPanel getProgressPanel() {
 		return progressPanel;
 	}
 }

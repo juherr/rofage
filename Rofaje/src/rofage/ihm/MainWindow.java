@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -30,7 +32,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import net.iharder.dnd.FileDrop;
-import net.java.swingfx.waitwithstyle.InfiniteProgressPanel;
+import net.java.swingfx.waitwithstyle.PerformanceInfiniteProgressPanel;
 import rofage.common.Engine;
 import rofage.common.MainSwingWorker;
 import rofage.common.dnd.RomListener;
@@ -107,7 +109,7 @@ public class MainWindow extends JFrame {
 	
 	private JProgressBar progressBarImage = null;
 	
-	private InfiniteProgressPanel progressPanel = new InfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel();
 	
 	private JButton buttonFilter = null;
 		
@@ -183,7 +185,7 @@ public class MainWindow extends JFrame {
 			jSplitPane = new JSplitPane();
 			jSplitPane.setLeftComponent(getJScrollPane());
 			jSplitPane.setRightComponent(getJPanel());
-			jSplitPane.setDividerLocation(250);
+			jSplitPane.setDividerLocation(300);
 		}
 		return jSplitPane;
 	}
@@ -385,6 +387,13 @@ public class MainWindow extends JFrame {
 	public JTextField getFieldTitle () {
 		if (fieldTitle==null) {
 			fieldTitle = new JTextField();
+			fieldTitle.addKeyListener(new KeyAdapter () {
+				public void keyReleased(KeyEvent e) {
+					if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+						new FilterGameCollectionAction(engine).actionPerformed(null);
+					}
+				}
+			});
 			fieldTitle.setVisible(true);
 		}
 		return fieldTitle;
@@ -678,7 +687,7 @@ public class MainWindow extends JFrame {
 		return mainMenuBar;
 	}
 
-	public InfiniteProgressPanel getProgressPanel() {
+	public PerformanceInfiniteProgressPanel getProgressPanel() {
 		return progressPanel;
 	}
 }
