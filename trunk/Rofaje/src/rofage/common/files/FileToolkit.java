@@ -130,16 +130,16 @@ public abstract class FileToolkit {
 		File destination = new File (destPath);
         // We try with renameTo
         boolean result = source.renameTo(destination);
-        if( !destination.exists() ) {
-            if( !result ) {
-                // We try to copy
-                result = true;
-                result &= source.copyTo(destination);
-                if(result) source.delete();
-            }
-        } else {
+        if( !result ) {
+            // We try to copy
+            result = true;
+            result &= source.copyTo(destination);
+            if(result) {
+            	source.delete();
+            } else {
                 JOptionPane.showMessageDialog(callingWindow, Messages.getString("FileToolkit.1"), Messages.getString("FileToolkit.2"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$ //$NON-NLS-2$
-        }  
+            }
+        }
 	}
 	
 	/**
