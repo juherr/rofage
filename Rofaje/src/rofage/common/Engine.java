@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import rofage.common.clean.CleanSwingWorker;
 import rofage.common.community.SiteConnector;
@@ -26,8 +27,8 @@ import rofage.common.object.CommunityDB;
 import rofage.common.object.Configuration;
 import rofage.common.object.GameDB;
 import rofage.common.object.GlobalConfiguration;
-import rofage.common.object.SiteCommentMessage;
-import rofage.common.object.SiteVersionMessage;
+import rofage.common.object.sitemessage.SiteCommentMessage;
+import rofage.common.object.sitemessage.SiteVersionMessage;
 import rofage.common.rename.RenameSwingWorker;
 import rofage.common.scan.ScanSwingWorker;
 import rofage.common.update.ImportSwingWorker;
@@ -107,8 +108,12 @@ public class Engine {
 		getMainWindow().update(getMainWindow().getGraphics());
 		
 		// Let's see whether we should launch an update
-		startupUpdate();
-		getMainWindow().getProgressPanel().setVisible(false);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run() {
+				startupUpdate();
+				getMainWindow().getProgressPanel().setVisible(false);
+			}
+		});
 	}
 	
 	private void checkVersion () {

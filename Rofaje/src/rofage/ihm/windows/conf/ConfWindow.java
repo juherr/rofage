@@ -88,7 +88,7 @@ public class ConfWindow extends JFrame {
 	
 	private FileChooserFilter xmlFilter = null;
 	
-	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel(true);
 	
 	private Engine engine = null;
 
@@ -115,7 +115,7 @@ public class ConfWindow extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
-		this.setAlwaysOnTop(true);
+		
 		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
 		this.setIconImage(image);
 	}

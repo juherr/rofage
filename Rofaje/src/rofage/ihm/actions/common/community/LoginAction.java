@@ -9,7 +9,7 @@ import rofage.common.community.SiteConnector;
 import rofage.common.helper.MD5;
 import rofage.common.helper.SessionHelper;
 import rofage.common.object.Credentials;
-import rofage.common.object.SiteSimpleMessage;
+import rofage.common.object.sitemessage.SiteSimpleMessage;
 import rofage.ihm.windows.community.LoginWindow;
 
 @SuppressWarnings("serial") //$NON-NLS-1$

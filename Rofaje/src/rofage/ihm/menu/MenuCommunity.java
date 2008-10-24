@@ -2,12 +2,15 @@ package rofage.ihm.menu;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
 import rofage.common.Engine;
 import rofage.ihm.Messages;
+import rofage.ihm.actions.common.ShowAction;
 import rofage.ihm.actions.common.community.LogoutAction;
 import rofage.ihm.actions.common.community.ShowLoginAction;
 import rofage.ihm.actions.common.community.ShowResetPwdAction;
+import rofage.ihm.windows.community.BestOfWindow;
 
 @SuppressWarnings("serial")
 public class MenuCommunity extends JMenu {
@@ -17,6 +20,7 @@ public class MenuCommunity extends JMenu {
 	private JMenuItem mItemLogin 	= null;
 	private JMenuItem mItemLogout	= null;
 	private JMenuItem mItemResetPwd = null;
+	private JMenuItem mItemBestOf	= null;
 		
 	public MenuCommunity (Engine engine) {
 		this.engine = engine;
@@ -25,7 +29,18 @@ public class MenuCommunity extends JMenu {
 		add(getMItemLogin());
 		add(getMItemLogout());
 		add(getMItemResetPwd());
+		add(new JSeparator(JSeparator.HORIZONTAL));
+		add(getMItemBestOf());
 		
+	}
+	
+	public JMenuItem getMItemBestOf () {
+		if (mItemBestOf==null) {
+			mItemBestOf = new JMenuItem();
+			mItemBestOf.setText(Messages.getString("Community.bestOf"));
+			mItemBestOf.addActionListener(new ShowAction(new BestOfWindow(engine)));
+		}
+		return mItemBestOf;
 	}
 
 	public JMenuItem getMItemResetPwd() {

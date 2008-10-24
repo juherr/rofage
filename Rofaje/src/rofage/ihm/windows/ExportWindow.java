@@ -62,7 +62,7 @@ public class ExportWindow extends JFrame {
 		this.setTitle(Messages.getString("ExportWindowTitle")); //$NON-NLS-1$
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
-		this.setAlwaysOnTop(true);
+		
 		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
 		this.setIconImage(image);
 	}

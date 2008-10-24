@@ -1,4 +1,5 @@
-package rofage.common.object;
+package rofage.common.object.sitemessage;
+
 
 
 /**
