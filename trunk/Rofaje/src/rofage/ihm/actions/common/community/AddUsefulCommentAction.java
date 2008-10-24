@@ -3,10 +3,11 @@ package rofage.ihm.actions.common.community;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.SwingUtilities;
 
 import rofage.common.Engine;
 import rofage.common.community.SiteConnector;
-import rofage.common.object.SiteSimpleMessage;
+import rofage.common.object.sitemessage.SiteSimpleMessage;
 import rofage.ihm.windows.community.SeeVotesWindow;
 
 @SuppressWarnings("serial")
@@ -23,10 +24,13 @@ public class AddUsefulCommentAction extends AbstractAction {
 	}
 	public void actionPerformed(ActionEvent e) {
 		win.getProgressPane().setVisible(true);
-		
-		SiteSimpleMessage siteMsg = SiteConnector.addUsefulComment(engine.getGlobalConf().getCreds(), idComment);
-		siteMsg.display();
-		win.getProgressPane().setVisible(false);
+		SwingUtilities.invokeLater(new Runnable(){
+			public void run() {
+				SiteSimpleMessage siteMsg = SiteConnector.addUsefulComment(engine.getGlobalConf().getCreds(), idComment);
+				siteMsg.display();
+				win.getProgressPane().setVisible(false);
+			}
+		});
 	}
 
 }

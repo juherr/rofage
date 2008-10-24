@@ -65,7 +65,7 @@ public class CleanWindow extends JFrame {
 		this.setTitle(Messages.getString("CleanWindow.1"));
 		this.setLocationRelativeTo(null);
 		this.setVisible(false);
-		this.setAlwaysOnTop(true);
+		
 		Image image = Toolkit.getDefaultToolkit().getImage(this.getClass().getClassLoader().getResource("rofage/ihm/images/rom.png"));
 		this.setIconImage(image);
 	}

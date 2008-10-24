@@ -44,7 +44,7 @@ public class AddVoteWindow extends JFrame {
 	
 	private Comment comment	= null; // The comment to be displayed
 	
-	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel(true);
 	
 
 	/**

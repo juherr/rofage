@@ -1,10 +1,11 @@
-package rofage.common.object;
+package rofage.common.object.sitemessage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import rofage.common.object.Comment;
 import rofage.ihm.Messages;
 
 /**
@@ -61,30 +62,6 @@ public class SiteCommentMessage extends SiteMessage {
 		}
 	}
 	
-	/** 
-	 * Displays the content of the message in a JOptionPane
-	 */
-	public void display () {
-		String title;
-		int icon;
-		if (isError()) {
-			title = Messages.getString("Community.operationKO");
-			icon = JOptionPane.ERROR_MESSAGE;
-		} else {
-			title = Messages.getString("Community.operationOK");
-			icon = JOptionPane.INFORMATION_MESSAGE;
-		}
-		JOptionPane.showMessageDialog(null, Messages.getString(messageKey), title, icon);
-	}
-
-	public boolean isError() {
-		return error;
-	}
-
-	public String getMessageKey() {
-		return messageKey;
-	}
-
 	public List<Comment> getListComments() {
 		return listComments;
 	}

@@ -2,6 +2,7 @@ package rofage.common.object;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 public class GameDB implements Serializable {
@@ -24,5 +25,23 @@ public class GameDB implements Serializable {
 
 	public HashMap<String, TreeMap<Integer, Game>> getGameCollections() {
 		return gameCollections;
+	}
+	
+	/**
+	 * Find a game in the collection from its crc
+	 * returns the game if found, null otherwise
+	 * @param confName
+	 * @param crc
+	 */
+	public Game findGameInCollectionFromCRC (String confName, String crc) {
+		TreeMap<Integer, Game> treeColl = gameCollections.get(confName);
+		Iterator<Game> iterGames = treeColl.values().iterator();
+		while (iterGames.hasNext()) {
+			Game game = iterGames.next();
+			if (game.getCrc().equalsIgnoreCase(crc)) {
+				return game;
+			}
+		}
+		return null;
 	}
 }

@@ -11,7 +11,7 @@ import rofage.common.helper.MD5;
 import rofage.common.helper.SessionHelper;
 import rofage.common.helper.StringHelper;
 import rofage.common.object.Credentials;
-import rofage.common.object.SiteSimpleMessage;
+import rofage.common.object.sitemessage.SiteSimpleMessage;
 import rofage.ihm.Messages;
 import rofage.ihm.windows.community.CreateAccntWindow;
 

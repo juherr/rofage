@@ -23,10 +23,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 
 import net.java.swingfx.waitwithstyle.PerformanceInfiniteProgressPanel;
-
 import rofage.common.Engine;
 import rofage.common.object.Comment;
-import rofage.common.object.Game;
 import rofage.ihm.Messages;
 import rofage.ihm.NoteDisplay;
 import rofage.ihm.actions.common.DisposeAction;
@@ -38,7 +36,7 @@ public class SeeVotesWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private Engine engine 	= null;
-	private Game game		= null;
+	private String gameTitle		= null;
 	
 	private JPanel contentPane 		= null;
 	
@@ -51,16 +49,16 @@ public class SeeVotesWindow extends JFrame {
 	
 	private List<Comment> listComments = new ArrayList<Comment>(); // The comments to be displayed
 	
-	private PerformanceInfiniteProgressPanel progressPane = new PerformanceInfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPane = new PerformanceInfiniteProgressPanel(true);
 	
 	/**
 	 * This is the default constructor
 	 */
-	public SeeVotesWindow(Engine engine, Game game, List<Comment> listComments) {
+	public SeeVotesWindow(Engine engine, String gameTitle, List<Comment> listComments) {
 		super();
 		this.listComments = listComments;
 		this.engine = engine;
-		this.game = game;
+		this.gameTitle = gameTitle;
 		initialize();
 	}
 
@@ -72,7 +70,7 @@ public class SeeVotesWindow extends JFrame {
 	private void initialize() {
 		this.setSize(400, 260);
 		this.setContentPane(getJContentPane());
-		this.setTitle(Messages.getString("Community.seeVotes")+game.getTitle());
+		this.setTitle(Messages.getString("Community.seeVotes")+gameTitle);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setResizable(true);
@@ -171,8 +169,8 @@ public class SeeVotesWindow extends JFrame {
 		return scrollPane;
 	}
 
-	public Game getGame() {
-		return game;
+	public String getGameTitle() {
+		return gameTitle;
 	}
 
 	public JPanel getPanelComments() {

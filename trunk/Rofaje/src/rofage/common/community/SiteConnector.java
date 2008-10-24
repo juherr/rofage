@@ -10,11 +10,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import rofage.common.Engine;
 import rofage.common.object.Comment;
 import rofage.common.object.Credentials;
-import rofage.common.object.SiteCommentMessage;
-import rofage.common.object.SiteSimpleMessage;
-import rofage.common.object.SiteVersionMessage;
+import rofage.common.object.sitemessage.SiteBestOfMessage;
+import rofage.common.object.sitemessage.SiteCommentMessage;
+import rofage.common.object.sitemessage.SiteSimpleMessage;
+import rofage.common.object.sitemessage.SiteVersionMessage;
 
 public abstract class SiteConnector {
 	private final static String UTF8 = "UTF-8";	
@@ -31,6 +33,7 @@ public abstract class SiteConnector {
 	private final static String CHECK_VER			= "version.php";
 	private final static String RESET_PWD			= "resetPwd.php";
 	private final static String ADD_USEFUL_COMMENT	= "addUsefulComment.php";
+	private final static String GET_BESTOF			= "getBestOf.php";
 	
 	private final static String PARAM_LOGIN		= "login";
 	private final static String PARAM_PWD		= "pwd";
@@ -41,7 +44,27 @@ public abstract class SiteConnector {
 	private final static String PARAM_NEWPWD	= "newPwd";
 	private final static String PARAM_SPOILER	= "spoiler";
 	private final static String PARAM_IDCOMMENT = "idComment";
+	private final static String PARAM_CRCINLIST	= "crcInList";
 	
+	
+	/**
+	 * Retrieve the best games based on the community ratings
+	 * The param inList gives the CRC list of games we search in. It is important
+	 * to note that this list is already SQL formatted, ie : 'crc1','crc2' (note the quotes
+	 * and the ,)
+	 * @param creds
+	 * @param inList
+	 * @param engine
+	 * @return
+	 */
+	public static SiteBestOfMessage getBestOf (Credentials creds, String inList, Engine engine) {
+		String params = new String();
+		String request = BASE_URL + GET_BESTOF;
+		
+		params = addCredentialsToParams(params, creds);
+		params = addParameter(params, PARAM_CRCINLIST, inList);
+		return new SiteBestOfMessage(sendRequest(request, params), engine);
+	}
 	
 	public static SiteSimpleMessage addUsefulComment (Credentials creds, double idComment) {
 		String params = new String();
@@ -49,7 +72,7 @@ public abstract class SiteConnector {
 		
 		params = addCredentialsToParams(params, creds);
 		params = addParameter(params, PARAM_IDCOMMENT, idComment);
-		return sendRequestForSimpleMessage(request, params);
+		return new SiteSimpleMessage(sendRequest(request, params));
 	}
 	
 	public static SiteSimpleMessage resetPwd (Credentials creds, String newPwd) {
@@ -58,13 +81,13 @@ public abstract class SiteConnector {
 		
 		params = addCredentialsToParams(params, creds);
 		params = addParameter(params, PARAM_NEWPWD, newPwd);
-		return sendRequestForSimpleMessage(request, params);
+		return new SiteSimpleMessage(sendRequest(request, params));
 	}
 	
 	public static SiteVersionMessage checkVersion () {
 		String params = new String();
 		String request = BASE_URL + CHECK_VER;
-		return sendRequestForVersion(request, params);
+		return new SiteVersionMessage(sendRequest(request, params));
 	}
 	
 	/** 
@@ -78,7 +101,7 @@ public abstract class SiteConnector {
 		String request = BASE_URL + SYNC_AVG_NOTES;
 		params = addCredentialsToParams(params, creds);
 				
-		return sendRequestForComments (request, params);
+		return new SiteCommentMessage(sendRequest (request, params));
 	}
 	
 	/** 
@@ -92,7 +115,7 @@ public abstract class SiteConnector {
 		String request = BASE_URL + SYNC_MY_NOTES;
 		params = addCredentialsToParams(params, creds);
 				
-		return sendRequestForComments (request, params);
+		return new SiteCommentMessage(sendRequest(request, params));
 	}
 	
 	/** 
@@ -107,7 +130,7 @@ public abstract class SiteConnector {
 		params = addCredentialsToParams(params, creds);
 		params = addParameter(params, PARAM_CRC, crc);
 		
-		return sendRequestForComments (request, params);
+		return new SiteCommentMessage(sendRequest(request, params));
 	}
 	
 	/** 
@@ -122,7 +145,7 @@ public abstract class SiteConnector {
 		params = addCredentialsToParams(params, creds);
 		params = addParameter(params, PARAM_CRC, crc);
 		
-		return sendRequestForComments (request, params);
+		return new SiteCommentMessage(sendRequest(request, params));
 	}
 	
 	public static SiteSimpleMessage addVote (Credentials creds, Comment comment) {
@@ -134,7 +157,7 @@ public abstract class SiteConnector {
 		params = addParameter(params, PARAM_CRC, comment.getCrc());
 		params = addParameter(params, PARAM_SPOILER, comment.isSpoiler());
 		
-		return sendRequestForSimpleMessage(request, params);
+		return new SiteSimpleMessage(sendRequest(request, params));
 	}
 	
 	public static SiteSimpleMessage checkCredentials (Credentials creds) {
@@ -142,7 +165,7 @@ public abstract class SiteConnector {
 		String request = BASE_URL+CHECK_CREDS;
 		params = addCredentialsToParams(params, creds);
 		
-		return sendRequestForSimpleMessage(request, params);
+		return new SiteSimpleMessage (sendRequest(request, params));
 	}
 	
 	/**
@@ -160,7 +183,7 @@ public abstract class SiteConnector {
 		params = addParameter(params, PARAM_PWD, password);
 		params = addParameter(params, PARAM_EMAIL, email);
 		
-		return sendRequestForSimpleMessage(request, params);
+		return new SiteSimpleMessage(sendRequest(request, params));
 	}
 	
 	/**
@@ -232,18 +255,6 @@ public abstract class SiteConnector {
 		    try{reader.close();}catch(Exception e){}
 		}
 		return result;
-	}
-	
-	private static SiteSimpleMessage sendRequestForSimpleMessage (String request, String params) {
-		return new SiteSimpleMessage(sendRequest(request, params));
-	}
-	
-	private static SiteCommentMessage sendRequestForComments (String request, String params) {
-		return new SiteCommentMessage (sendRequest(request, params));
-	}
-	
-	private static SiteVersionMessage sendRequestForVersion (String request, String params) {
-		return new SiteVersionMessage (sendRequest(request, params));
 	}
 	
 	private static String addCredentialsToParams (String params, Credentials creds) {

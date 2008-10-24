@@ -109,7 +109,7 @@ public class MainWindow extends JFrame {
 	
 	private JProgressBar progressBarImage = null;
 	
-	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel();
+	private PerformanceInfiniteProgressPanel progressPanel = new PerformanceInfiniteProgressPanel(true);
 	
 	private JButton buttonFilter = null;
 		
