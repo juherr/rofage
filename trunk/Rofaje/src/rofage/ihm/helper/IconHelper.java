@@ -45,6 +45,16 @@ public abstract class IconHelper {
 		}
 	}
 	
+	public static JLabel getOwnedRomIcon (Game game) {
+		JLabel label = new JLabel();
+		if (game.isOwnedRom()) {
+			label.setIcon(new ImageIcon(IconHelper.class.getClassLoader().getResource("rofage/ihm/images/ownedRom.png"))); //$NON-NLS-1$
+			label.setToolTipText(Messages.getString("IconHelper.ownedRom"));
+			return label;
+		}
+		return label;
+	}
+	
 	public static JLabel getGotRomIcon (Game game) {
 		JLabel label = new JLabel();
 		if (game.isGotRom()) {

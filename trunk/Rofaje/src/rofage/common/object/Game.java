@@ -35,6 +35,7 @@ public class Game implements Serializable {
 	
 	private boolean gotRom = false;
 	private boolean goodName = false;
+	private boolean ownedRom = false;
 	
 	/** fullPath to the file containing the rom. It can either be the rom itself or a zip file */
 	private String containerPath;
@@ -182,5 +183,11 @@ public class Game implements Serializable {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public boolean isOwnedRom() {
+		return ownedRom;
+	}
+	public void setOwnedRom(boolean ownedRom) {
+		this.ownedRom = ownedRom;
 	}
 }
