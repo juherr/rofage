@@ -277,11 +277,11 @@ public class MainWindow extends JFrame {
 	public JPanel getJPanelImages() {
 		if (jPanelImages == null) {
 			jPanelImages = new JPanel();
-			jPanelImages.setPreferredSize(new Dimension(10, 400));
+			//jPanelImages.setPreferredSize(new Dimension(10, 400));
 			jPanelImages.setLayout(new FlowLayout());
 			jPanelImages.add(getJPanelImage1());
 			jPanelImages.add(getJPanelImage2());
-			jPanelImages.setMinimumSize(new Dimension(530, 10));
+			//jPanelImages.setMinimumSize(new Dimension(530, 10));
 		}
 		return jPanelImages;
 	}
