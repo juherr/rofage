@@ -125,7 +125,10 @@ public class FilterGameCollectionAction extends AbstractAction {
 				}
 			} else {
 				if (!showNotOwned) {
-					mayAdd = false;
+					// If we don't have the rom on the filesystem we may have marked it as owned manually
+					if (!game.isOwnedRom()) {
+						mayAdd = false;
+					}
 				}
 			}
 		

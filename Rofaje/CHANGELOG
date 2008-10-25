@@ -6,17 +6,22 @@ This program runs with Java 1.6 or later
 Changelog in 2.0 :
 WARNING : If upgrading from a previous version, the file gameDB and globalConf must be deleted
 
+Added functionality : Ability to mark a rom as "Owned" even if it's not on the local filesystem
+Added functionality : Best Of
 Added functionality : Mandatory check of new version
 Added functionality : Community
 Added functionality : Add tooltips on the status bar
 Added functionality : The dropdown which allows to choose the "releasenumber" field has been removed. Used the classic title pattern instead
 Added functionality : use standard naming rules. Import default title pattern of the dat. The comment field has been added
+Added functionality : Filtering can now be triggered by pressing enter in the title field
+
+NOTE : Windows are no longer in front of any other
 
 Bugfix : Improved compatibility with DATS!!
 Bugfix : import the screenshots size and take the size into consideration while displaying screenshots => Screenshots shouldn't be truncated now
 Bugfix : Displays the romsize in KB for it's less than 1MB and displays it as a float and not an int
 Bugfix : Import correctly a dat even if there is no rom size mentionned
-Bugfix : Bugfix in renaming file from "Foo" to "foo"
+Bugfix : Renaming triggered unerelevant errors: The game title is the one contained in the zip entry. Sometimes it tried to rename the zip itself whereas the zip name was correct. Then, you had the error that the file already exists and cannot be moved.
 
 
 Changelog in 1.3.2 :
@@ -28,7 +33,7 @@ Added functionality : Changing of the default Java icon
 Added functionality : Send an e-mail to the author
 Added functionality : Report a bug button opens a browser to the relevant web page
 Added functionality : Export list to a file
-Added functionality : Credits for german translation
+Added functionality : Credits for german translation by IsSue
 Added functionality : The release nb can now either be located in the comment field or the releaseNb field. The configuration must be deleted then readded or the dat must be updated
 for this modification to take effect
 Filtering has been updated accordingly

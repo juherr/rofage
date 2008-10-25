@@ -39,6 +39,7 @@ import rofage.common.dnd.RomListener;
 import rofage.common.object.Configuration;
 import rofage.ihm.actions.CompressAction;
 import rofage.ihm.actions.ExportAction;
+import rofage.ihm.actions.MarkAsOwnedAction;
 import rofage.ihm.actions.common.FilterGameCollectionAction;
 import rofage.ihm.actions.common.GameListSelectionListener;
 import rofage.ihm.actions.common.PopupListener;
@@ -60,6 +61,7 @@ public class MainWindow extends JFrame {
 	private JMenu popMenuExport = null;
 	private JMenuItem popMenuItemExportToFolder = null;
 	private JMenuItem popMenuItemCompress = null;
+	private JMenuItem popMenuItemMarkAsOwned = null;
 	
 	private JSplitPane jSplitPane = null;
 
@@ -171,6 +173,7 @@ public class MainWindow extends JFrame {
 			popMenu = new JPopupMenu();
 			popMenu.add(getPopMenuExport());
 			popMenu.add(getPopMenuItemCompress());
+			popMenu.add(getPopMenuItemMarkAsOwned());
 		}
 		return popMenu;
 	}
@@ -372,6 +375,16 @@ public class MainWindow extends JFrame {
 			popMenuItemExportToFolder.setVisible(true);
 		}
 		return popMenuItemExportToFolder;
+	}
+	
+	public JMenuItem getPopMenuItemMarkAsOwned() {
+		if (popMenuItemMarkAsOwned==null) {
+			popMenuItemMarkAsOwned = new JMenuItem();
+			popMenuItemMarkAsOwned.addActionListener(new MarkAsOwnedAction(engine));
+			popMenuItemMarkAsOwned.setText(Messages.getString("MainWindow.markAsOwned")); //$NON-NLS-1$
+			popMenuItemMarkAsOwned.setVisible(true);
+		}
+		return popMenuItemMarkAsOwned;
 	}
 	
 	private JMenuItem getPopMenuItemCompress() {
@@ -690,4 +703,6 @@ public class MainWindow extends JFrame {
 	public PerformanceInfiniteProgressPanel getProgressPanel() {
 		return progressPanel;
 	}
+
+	
 }

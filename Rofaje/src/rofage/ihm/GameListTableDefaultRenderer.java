@@ -31,9 +31,21 @@ public class GameListTableDefaultRenderer implements TableCellRenderer {
 		}
 	}
 	
+	/**
+	 * Displays an icon relevant to the current game
+	 * A game can be a clean dump or a bad dump
+	 * If a game is not in the database (which means we haven't found the game
+	 * on the filesystem, then we check if it has been marked as owned)
+	 * @param value
+	 * @return
+	 */
 	private JLabel showCleanDumpIcon (Object value) {
 		Game game = (Game) value;
-		return IconHelper.getCleanDumpIcon(game);
+		if (game.isGotRom()) {
+			return IconHelper.getCleanDumpIcon(game);
+		} else {
+			return IconHelper.getOwnedRomIcon(game);
+		}
 	}
 	
 	private JLabel showIconGotRom (Object value) {
