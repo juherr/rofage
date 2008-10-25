@@ -17,6 +17,7 @@ Added functionality : Filtering can now be triggered by pressing enter in the ti
 
 NOTE : Windows are no longer in front of any other
 
+Bugfix : images are now horizontally scrollable for better viewing
 Bugfix : Improved compatibility with DATS!!
 Bugfix : import the screenshots size and take the size into consideration while displaying screenshots => Screenshots shouldn't be truncated now
 Bugfix : Displays the romsize in KB for it's less than 1MB and displays it as a float and not an int
