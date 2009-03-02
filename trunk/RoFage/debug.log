@@ -1,0 +1,914 @@
+01 mars 2009 17:21:32,343 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:21:32,343 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:21:32,343 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:21:32,343 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:21:32,343 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:21:32,687 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:21:32,734 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskCreateDB  - Creates Database structure...
+01 mars 2009 17:21:32,734 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables DATS
+01 mars 2009 17:21:32,734 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:21:32,734 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:21:40,687 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:21:40,703 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : create table DATS (ID BIGINT not null primary key GENERATED ALWAYS AS IDENTITY,NAME VARCHAR(255) not null,VERSION INTEGER not null,SYSTEMNAME VARCHAR(255) not null,SCREENSHOTHEIGHT SMALLINT,SCREENSHOTWIDTH SMALLINT,DATVERSIONURL VARCHAR(1000) not null,DATURL VARCHAR(1000) not null,IMAGEURL VARCHAR(1000) not null,ICOURL VARCHAR(1000),IPSURL VARCHAR(1000),ROMTITLE VARCHAR(20),DEFAULTROMTITLE VARCHAR(20))
+01 mars 2009 17:21:41,125 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables CONFIG
+01 mars 2009 17:21:41,125 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:21:41,125 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:21:41,140 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:21:41,140 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : create table CONFIG (ID SMALLINT not null primary key GENERATED ALWAYS AS IDENTITY,ROFAGEVERSION INTEGER not null)
+01 mars 2009 17:21:41,359 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables SAVEDDATS
+01 mars 2009 17:21:41,359 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:21:41,359 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:21:41,375 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:21:41,375 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : create table SAVEDDATS (ID SMALLINT not null primary key GENERATED ALWAYS AS IDENTITY,NAME VARCHAR(300) not nullURL VARCHAR(500) not null)
+01 mars 2009 17:21:41,515 [SwingWorker-pool-1-thread-1] ERROR rofage.exceptions.CommonException  - An error occured while executing a statement... : java.sql.SQLException: Erreur de syntaxe : Encountered "nullURL" at line 1, column 109.
+01 mars 2009 17:21:41,515 [SwingWorker-pool-1-thread-1] ERROR rofage.exceptions.CommonException  - org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+org.apache.derby.impl.jdbc.TransactionResourceImpl.wrapInSQLException(Unknown Source)
+org.apache.derby.impl.jdbc.TransactionResourceImpl.handleException(Unknown Source)
+org.apache.derby.impl.jdbc.EmbedConnection.handleException(Unknown Source)
+org.apache.derby.impl.jdbc.ConnectionChild.handleException(Unknown Source)
+org.apache.derby.impl.jdbc.EmbedStatement.execute(Unknown Source)
+org.apache.derby.impl.jdbc.EmbedStatement.execute(Unknown Source)
+rofage.toolkits.DerbyDBToolkit.executeSQL(DerbyDBToolkit.java:107)
+rofage.tasks.TaskCreateDB.runTask(TaskCreateDB.java:48)
+rofage.swingworkers.SWinitializer.doInBackground(SWinitializer.java:60)
+rofage.swingworkers.SWinitializer.doInBackground(SWinitializer.java:21)
+javax.swing.SwingWorker$1.call(SwingWorker.java:278)
+java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)
+java.util.concurrent.FutureTask.run(FutureTask.java:138)
+javax.swing.SwingWorker.run(SwingWorker.java:317)
+java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:885)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:907)
+java.lang.Thread.run(Thread.java:619)
+
+01 mars 2009 17:21:43,968 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:21:43,968 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:21:43,984 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:21:43,984 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:21:43,984 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:21:44,875 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:22:32,796 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:22:32,796 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:22:32,796 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:22:32,796 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:22:32,796 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:22:33,109 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:22:33,140 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskCreateDB  - Creates Database structure...
+01 mars 2009 17:22:33,140 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables DATS
+01 mars 2009 17:22:33,140 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:22:33,140 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:22:41,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:22:41,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : create table DATS (ID BIGINT not null primary key GENERATED ALWAYS AS IDENTITY,NAME VARCHAR(255) not null,VERSION INTEGER not null,SYSTEMNAME VARCHAR(255) not null,SCREENSHOTHEIGHT SMALLINT,SCREENSHOTWIDTH SMALLINT,DATVERSIONURL VARCHAR(1000) not null,DATURL VARCHAR(1000) not null,IMAGEURL VARCHAR(1000) not null,ICOURL VARCHAR(1000),IPSURL VARCHAR(1000),ROMTITLE VARCHAR(20),DEFAULTROMTITLE VARCHAR(20))
+01 mars 2009 17:22:42,234 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables CONFIG
+01 mars 2009 17:22:42,234 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:22:42,234 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:22:42,250 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:22:42,250 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : create table CONFIG (ID SMALLINT not null primary key GENERATED ALWAYS AS IDENTITY,ROFAGEVERSION INTEGER not null)
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCreateDB  - Creating tables SAVEDDATS
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:22:42,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:22:42,703 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:24:18,515 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:24:18,515 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:24:18,515 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:24:18,515 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:24:18,515 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:24:18,828 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:24:20,671 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:24:21,031 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:25:20,015 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:25:20,015 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:25:20,015 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:25:20,015 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:25:20,015 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:25:20,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:25:20,937 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:25:21,312 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:26:17,296 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:26:17,312 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:26:17,312 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:26:17,312 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:26:17,312 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:26:17,625 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:26:18,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:26:18,468 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:27:27,546 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:27:27,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:27:27,546 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:27:27,562 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:27:27,562 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:27:27,859 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:27:28,421 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:27:28,421 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:27:28,421 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:27:28,421 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:27:28,437 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:27:28,437 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:27:28,796 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:28:00,484 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:28:00,500 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:28:00,500 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:28:00,500 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:28:00,500 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:28:00,812 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:28:01,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:28:01,328 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:28:01,328 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:28:01,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:28:01,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:28:01,343 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:28:01,687 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:28:28,515 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:28:28,515 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:28:28,515 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:28:28,531 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:28:28,531 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:28:28,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:28:29,328 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:28:29,687 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:29:26,078 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:29:26,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:29:26,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:29:26,093 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:29:26,093 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:29:26,421 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:29:26,921 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:29:26,921 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:29:26,921 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:29:26,921 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:29:26,921 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:29:26,937 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:29:27,312 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:30:18,875 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:30:18,875 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:30:18,875 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:30:18,875 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:30:18,875 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:30:19,187 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:30:19,765 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:30:20,171 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 17:30:33,968 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 17:30:33,968 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 17:30:33,968 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 17:30:33,968 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 17:30:33,968 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:30:34,265 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:30:34,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:30:34,843 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 17:30:34,843 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 17:30:34,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 17:30:34,843 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 17:30:34,859 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 17:30:35,234 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 20:25:23,128 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 20:25:23,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 20:25:23,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 20:25:23,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 20:25:23,143 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 20:25:23,659 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 20:25:24,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 20:25:24,362 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 20:25:24,362 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 20:25:24,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 20:25:24,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 20:25:24,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 20:25:24,831 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 20:59:33,549 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 20:59:33,549 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 20:59:33,549 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 20:59:33,549 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 20:59:33,549 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 20:59:33,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 20:59:34,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 20:59:34,378 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 20:59:34,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 20:59:34,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 20:59:34,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 20:59:34,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 20:59:34,737 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:00:12,190 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:00:12,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:00:12,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:00:12,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:00:12,206 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:00:12,534 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:00:13,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:00:13,065 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:00:13,065 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:00:13,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:00:13,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:00:13,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:00:13,456 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:01:17,909 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:01:17,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:01:17,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:01:17,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:01:17,924 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:01:18,221 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:01:18,737 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:01:18,737 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:01:18,737 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:01:18,737 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:01:18,737 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:01:18,753 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:01:19,112 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:02:11,706 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:02:11,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:02:11,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:02:11,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:02:11,706 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:02:12,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:02:12,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:02:12,596 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:02:12,596 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:02:12,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:02:12,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:02:12,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:02:12,971 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:02:42,440 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:02:42,456 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:02:42,456 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:02:42,456 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:02:42,456 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:02:42,768 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:02:43,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:02:43,378 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:02:43,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:02:43,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:02:43,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:02:43,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:02:43,862 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:03:53,799 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:03:53,815 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:03:54,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:03:54,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:03:54,971 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:12:28,378 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:12:28,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:12:28,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:12:28,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:12:28,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:12:28,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:12:29,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:12:29,206 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:12:29,206 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:12:29,221 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:12:29,221 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:12:29,221 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:12:29,581 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:36:09,909 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:36:09,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:36:09,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:36:09,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:36:09,924 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:36:10,424 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:36:11,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:36:11,081 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:36:11,081 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:36:11,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:36:11,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:36:11,096 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:36:11,612 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:36:57,378 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:36:57,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:36:57,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:36:57,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:36:57,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:36:57,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:36:58,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:36:58,659 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:39:11,409 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:39:11,424 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:39:11,424 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:39:11,424 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:39:11,424 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:39:11,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:39:12,471 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:39:12,471 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:39:12,471 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:39:12,471 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:39:12,471 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:39:12,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:39:12,956 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:41:32,706 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:41:32,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:41:32,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:41:32,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:41:32,706 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:41:33,049 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:41:33,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:41:33,581 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:41:33,581 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:41:33,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:41:33,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:41:33,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:41:33,956 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:42:40,284 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:42:40,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:42:40,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:42:40,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:42:40,284 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:42:40,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:42:41,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:42:41,503 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 21:47:05,190 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 21:47:05,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 21:47:05,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 21:47:05,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 21:47:05,206 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:47:05,518 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 21:47:06,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 21:47:06,596 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:38:49,628 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:38:49,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:38:49,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:38:49,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:38:49,643 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:38:50,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:38:50,706 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:38:50,706 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:38:50,721 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:38:50,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:38:50,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:38:50,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:38:51,190 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:38:56,893 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+01 mars 2009 23:38:58,534 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+01 mars 2009 23:38:58,534 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+01 mars 2009 23:38:58,534 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+01 mars 2009 23:38:58,549 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+01 mars 2009 23:40:13,924 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:40:13,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:40:13,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:40:13,924 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:40:13,924 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:40:14,440 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:40:14,987 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:40:15,362 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:47:52,331 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:47:52,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:47:52,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:47:52,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:47:52,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:47:52,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:47:53,237 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:47:53,237 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:47:53,237 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:47:53,237 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:47:53,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:47:53,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:47:53,612 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:47:56,159 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+01 mars 2009 23:47:56,799 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+01 mars 2009 23:47:56,799 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+01 mars 2009 23:47:56,799 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+01 mars 2009 23:47:56,799 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+01 mars 2009 23:50:58,581 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:50:58,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:50:58,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:50:58,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:50:58,596 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:50:58,940 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:50:59,518 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:50:59,909 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:52:17,768 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:52:17,768 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:52:17,768 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:52:17,768 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:52:17,768 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:52:18,096 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:52:18,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:52:18,612 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:52:18,612 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:52:18,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:52:18,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:52:18,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:52:18,987 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:52:21,737 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+01 mars 2009 23:52:22,721 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+01 mars 2009 23:52:22,721 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+01 mars 2009 23:52:22,721 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+01 mars 2009 23:52:22,721 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+01 mars 2009 23:52:58,315 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:52:58,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:52:58,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:52:58,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:52:58,315 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:52:58,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:52:59,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:52:59,518 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:54:30,487 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:54:30,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:54:30,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:54:30,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:54:30,487 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:54:30,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:54:31,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:54:31,737 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:54:57,799 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:54:57,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:54:57,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:54:57,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:54:57,799 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:54:58,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:54:58,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:54:59,049 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:57:09,409 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:57:09,409 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:57:09,409 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:57:09,409 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:57:09,409 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:09,753 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:10,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:10,253 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:57:10,253 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:10,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:10,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:10,268 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:57:10,628 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:57:20,799 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:57:20,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:57:20,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:57:20,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:57:20,799 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:21,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:21,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:21,643 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:57:21,643 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:21,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:21,643 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:21,659 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:57:22,018 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:57:51,503 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:57:51,503 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:57:51,503 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:57:51,503 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:57:51,503 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:51,784 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:52,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:52,674 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:57:52,674 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:57:52,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:57:52,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:57:52,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:57:53,049 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:58:57,815 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:58:57,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:58:57,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:58:57,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:58:57,831 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:58:58,143 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:58:58,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:58:58,674 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:58:58,674 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:58:58,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:58:58,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:58:58,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:58:59,049 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+01 mars 2009 23:59:20,909 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+01 mars 2009 23:59:20,909 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+01 mars 2009 23:59:20,909 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+01 mars 2009 23:59:20,909 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+01 mars 2009 23:59:20,909 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:59:21,237 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+01 mars 2009 23:59:21,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+01 mars 2009 23:59:22,206 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:00:10,315 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:00:10,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:00:10,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:00:10,315 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:00:10,315 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:00:10,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:00:11,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:00:11,878 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:00:11,878 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:00:11,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:00:11,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:00:11,893 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:00:12,253 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:00:50,284 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:00:50,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:00:50,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:00:50,284 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:00:50,284 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:00:50,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:00:51,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:00:51,518 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:01:36,956 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:01:36,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:01:36,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:01:36,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:01:36,956 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:01:37,268 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:01:37,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:01:38,174 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:02:12,534 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:02:12,534 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:02:12,534 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:02:12,534 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:02:12,534 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:02:12,846 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:02:13,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:02:13,362 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:02:13,362 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:02:13,362 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:02:13,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:02:13,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:02:13,737 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:03:01,831 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:03:01,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:03:01,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:03:01,831 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:03:01,831 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:03:02,159 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:03:03,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:03:03,753 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:03:08,346 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:03:09,674 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:03:09,674 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:03:09,674 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:03:09,674 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:03:10,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:03:10,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:03:10,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:03:10,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:03:11,487 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:03:11,487 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:03:11,487 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:03:11,487 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:03:14,596 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:03:52,956 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:03:52,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:03:52,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:03:52,956 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:03:52,956 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:03:53,268 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:03:53,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:03:54,174 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:03:55,909 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:06:49,393 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:06:49,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:06:49,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:06:49,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:06:49,393 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:06:49,721 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:06:50,237 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:06:50,237 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:06:50,237 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:06:50,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:06:50,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:06:50,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:06:50,628 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:06:54,128 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:06:55,503 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:06:55,503 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:06:55,503 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:06:55,503 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:08:14,690 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:08:14,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:08:14,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:08:14,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:08:14,690 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:08:14,987 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:08:15,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:08:15,487 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:08:15,487 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:08:15,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:08:15,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:08:15,503 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:08:15,862 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:08:20,831 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:08:21,846 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:08:21,846 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:08:21,846 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:08:21,862 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:08:28,362 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:08:30,518 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:08:30,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:08:30,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:08:30,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:08:30,753 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:10:01,018 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:10:01,018 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:10:01,018 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:10:01,018 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:10:01,018 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:10:01,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:10:01,940 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:10:02,299 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:10:08,581 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:10:09,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:10:09,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:10:09,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:10:09,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:10:49,346 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:10:49,346 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:10:49,346 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:10:49,346 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:10:49,346 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:10:49,659 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:10:50,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:10:50,549 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:12:06,237 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:12:06,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:12:06,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:12:06,253 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:12:06,253 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:12:06,565 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:12:07,049 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:12:07,049 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:12:07,049 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:12:07,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:12:07,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:12:07,065 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:12:07,424 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:12:54,596 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:12:54,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:12:54,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:12:54,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:12:54,596 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:12:54,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:12:55,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:12:55,378 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:12:55,378 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:12:55,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:12:55,378 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:12:55,393 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:12:55,753 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:13:08,128 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:13:08,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:13:08,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:13:08,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:13:08,143 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:13:08,424 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:13:09,003 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:13:09,362 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:13:56,862 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:13:56,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:13:56,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:13:56,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:13:56,862 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:13:57,159 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:13:57,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:13:57,674 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:13:57,674 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:13:57,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:13:57,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:13:57,690 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:13:58,081 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:14:01,846 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:14:02,471 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:14:02,471 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:14:02,471 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:14:02,471 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:15:10,768 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:15:10,784 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:15:10,784 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:15:10,784 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:15:10,784 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:15:11,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:15:11,581 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:15:11,956 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:16:42,799 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:16:42,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:16:42,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:16:42,815 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:16:42,815 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:16:43,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:16:43,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:16:43,596 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:16:43,596 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:16:43,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:16:43,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:16:43,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:16:43,987 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:21:28,112 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:21:28,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:21:28,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:21:28,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:21:28,128 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:21:28,456 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:21:29,081 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:21:29,456 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:21:34,690 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:21:35,940 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:21:35,940 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:21:35,940 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:21:35,940 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:22:22,174 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:22:22,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:22:22,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:22:22,190 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:22:22,206 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:22,487 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:23,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:23,034 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:22:23,034 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:23,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:23,049 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:23,049 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:22:23,409 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:22:28,331 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:22:28,331 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:22:28,331 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:22:28,331 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:22:28,331 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:28,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:29,159 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:29,159 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:22:29,159 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:29,159 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:29,159 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:29,174 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:22:29,534 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:22:35,846 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:22:35,846 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:22:35,846 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:22:35,846 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:22:35,862 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:36,128 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:36,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:36,612 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:22:36,628 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:22:36,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:22:36,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:22:36,628 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:22:36,971 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:24:30,878 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:24:30,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:24:30,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:24:30,878 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:24:30,878 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:24:31,206 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:24:33,034 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:24:33,409 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:24:41,862 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:24:41,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:24:41,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:24:41,862 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:24:41,878 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:24:42,174 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:24:42,659 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:24:42,659 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:24:42,659 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:24:42,659 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:24:42,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:24:42,674 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:24:43,034 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:24:48,206 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:24:49,112 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:24:49,112 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:24:49,112 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:24:49,112 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:28:31,784 [SwingWorker-pool-1-thread-1] INFO  rofage.swingworkers.SWinitializer  - Starting SWInitializer
+02 mars 2009 00:28:31,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Checking Java Version
+02 mars 2009 00:28:31,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskCheckJavaVersion  - Java Version is 1.6
+02 mars 2009 00:28:31,799 [SwingWorker-pool-1-thread-1] DEBUG rofage.tasks.TaskInitDB  - Initializes DB...
+02 mars 2009 00:28:31,799 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:28:32,112 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:28:32,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:28:32,596 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Testing first use...
+02 mars 2009 00:28:32,596 [SwingWorker-pool-1-thread-1] INFO  rofage.toolkits.DerbyDBToolkit  - Trying to connect to the database RoFageDB
+02 mars 2009 00:28:32,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Loaded the appropriate driver.
+02 mars 2009 00:28:32,596 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Connected to the DB
+02 mars 2009 00:28:32,612 [SwingWorker-pool-1-thread-1] DEBUG rofage.toolkits.DerbyDBToolkit  - Executing the sql statement : SELECT COUNT(*) FROM CONFIG
+02 mars 2009 00:28:32,956 [SwingWorker-pool-1-thread-1] INFO  rofage.tasks.TaskFirstLaunch  - Démarrage de l'assistant
+02 mars 2009 00:28:35,018 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:28:39,565 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 1
+02 mars 2009 00:28:41,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 2
+02 mars 2009 00:28:41,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the image folder is not valid.
+02 mars 2009 00:28:41,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the icons folder is not valid.
+02 mars 2009 00:28:41,331 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the nfo folder is not valid.
+02 mars 2009 00:28:42,971 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - Validating page 3
+02 mars 2009 00:28:42,971 [AWT-EventQueue-0] DEBUG rofage.wizards.WizardFirstUse  - The path provided for the dat file is not valid.
