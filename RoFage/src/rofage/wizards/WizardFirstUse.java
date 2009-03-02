@@ -10,6 +10,7 @@ import java.awt.CardLayout;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFileChooser;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import rofage.toolkits.PropertiesToolkit;
@@ -26,6 +27,7 @@ public class WizardFirstUse extends javax.swing.JDialog {
     private final static String SUMMARY_DAT     = "# Import of the first dat\n";
     private static String [] tabDatNames;
     private static List<String> listErrors = new ArrayList<String>();
+    private JFileChooser fc = new JFileChooser();
 
     private int currentPage = 1;
     private String[] tabSummary = new String[LAST_PAGE-1];
@@ -239,7 +241,7 @@ public class WizardFirstUse extends javax.swing.JDialog {
 
         jTextArea1.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 13));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setText("Welcome to RoFage !\n\nRoFage stands for ROm manager For Any Good Environment. And you're just a few steps away from using it !\n\nRoFage will help you manage your rom collections with the help of dat files available on the internet. Dat files (OL compatible) exist for a lot of system, so you should be able to manage all your collections with RoFage.");
@@ -247,7 +249,7 @@ public class WizardFirstUse extends javax.swing.JDialog {
         jTextArea1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 14));
         jLabel1.setText("Welcome !");
 
         javax.swing.GroupLayout pnlWelcomeLayout = new javax.swing.GroupLayout(pnlWelcome);
@@ -279,11 +281,6 @@ public class WizardFirstUse extends javax.swing.JDialog {
         buttonGroup1.add(rBtnLoadDat);
         rBtnLoadDat.setSelected(true);
         rBtnLoadDat.setText("Load a dat file (.dat) from the file system");
-        rBtnLoadDat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rBtnLoadDatActionPerformed(evt);
-            }
-        });
 
         buttonGroup1.add(rBtnDlDat);
         rBtnDlDat.setText("Automatically download this dat");
@@ -349,10 +346,25 @@ public class WizardFirstUse extends javax.swing.JDialog {
         jLabel7.setText("Nfo main folder");
 
         jButton2.setText("Browse...");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Browse...");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Browse...");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFoldersConfLayout = new javax.swing.GroupLayout(pnlFoldersConf);
         pnlFoldersConf.setLayout(pnlFoldersConfLayout);
@@ -418,7 +430,7 @@ public class WizardFirstUse extends javax.swing.JDialog {
         txPaneSummary.setBackground(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
         txPaneSummary.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txPaneSummary.setEditable(false);
-        txPaneSummary.setFont(new java.awt.Font("Monospaced", 0, 11)); // NOI18N
+        txPaneSummary.setFont(new java.awt.Font("Monospaced", 0, 11));
         jScrollPane2.setViewportView(txPaneSummary);
 
         javax.swing.GroupLayout pnlSummaryLayout = new javax.swing.GroupLayout(pnlSummary);
@@ -565,13 +577,36 @@ public class WizardFirstUse extends javax.swing.JDialog {
         System.exit(-1);
     }//GEN-LAST:event_formWindowClosed
 
-    private void rBtnLoadDatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBtnLoadDatActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_rBtnLoadDatActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        fc.setDialogTitle("Select your dat file");
+        if (fc.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+            fldImageFolder.setText(fc.getSelectedFile().getAbsolutePath());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.setDialogTitle("Select your image folder");
+        if (fc.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+            fldImageFolder.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.setDialogTitle("Select your icons folder");
+        if (fc.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+            fldIconsFolder.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.setDialogTitle("Select your nfo folder");
+        if (fc.showOpenDialog(this)==JFileChooser.APPROVE_OPTION) {
+            fldNfoFolder.setText(fc.getSelectedFile().getAbsolutePath());
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
     * @param args the command line arguments
