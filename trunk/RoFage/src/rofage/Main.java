@@ -1,8 +1,15 @@
 package rofage;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SwingUtilities;
-import rofage.swingworkers.SWinitializer;
+import rofage.swingworkers.SWTasks;
+import rofage.tasks.Task;
+import rofage.tasks.TaskCheckJavaVersion;
+import rofage.tasks.TaskFirstLaunch;
+import rofage.tasks.db.TaskInitDB;
 import rofage.ui.InitializerFrame;
+import rofage.ui.MainWindow;
 
 /**
  *
@@ -14,10 +21,18 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
 			public void run() {
-				InitializerFrame initFrame = new InitializerFrame();
+				/*InitializerFrame initFrame = new InitializerFrame();
                 initFrame.setVisible(true);
-                SWinitializer swInitializer = new SWinitializer(initFrame);
-                swInitializer.execute();
+
+                List<Task> listTasks = new ArrayList<Task>();
+                // We build the initialization tasks
+                listTasks.add(new TaskCheckJavaVersion());
+                listTasks.add(new TaskInitDB());
+                listTasks.add(new TaskFirstLaunch());
+                SWTasks swInitializer = new SWTasks(initFrame.pgrSplash, listTasks);
+                swInitializer.execute();*/
+                MainWindow mainW = new MainWindow();
+                mainW.setVisible(true);
 			}
 		});
         
